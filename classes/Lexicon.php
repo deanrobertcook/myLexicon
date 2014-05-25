@@ -6,7 +6,9 @@ class Lexicon {
 	
 	public function __construct($fileName) {
 		$doc = new DOMDocument();
-		$doc ->load($this->xmlPath . $fileName);
+		$doc->preserveWhiteSpace = false;
+		$doc->formatOutput = true;
+		$doc->load($this->xmlPath . $fileName);
 		
 		if ($doc->doctype->name != "lexicon" || $doc->doctype->systemId != "lexicon.dtd") {
 			throw new Exception("incorrect document type");
@@ -34,8 +36,8 @@ class Lexicon {
 		return $categoryNames;
 	}
 	
-	public function getWordList($categoryName) {
-		$terms = $this->xpath->evaluate("/lexicon/category[name='$categoryName']/term");
+	public function getWordList($category) {
+		$terms = $this->xpath->evaluate("/lexicon/category[name='$category']/term");
 		$termsArray = Array();
 		foreach ($terms as $term) {
 			$english = $term->getElementsByTagName("english")->item(0)->nodeValue;
@@ -51,6 +53,26 @@ class Lexicon {
 			array_push($termsArray, new Term($english, $german, $exampleArray));
 		}
 		return $termsArray;
+	}
+	
+	public function addWord($category, $term) {
+		$newTerm = $this->xmlDoc->createElement("term");
+		
+		$this->xpath->evaluate("/lexicon/category[name='$category']")
+			->item(0)->appendChild($newTerm);
+		
+		$englishTerm = $this->xmlDoc->createElement("english", $term->englishTerm);
+		$newTerm->appendChild($englishTerm);
+		
+		$germanTerm = $this->xmlDoc->createElement("german", $term->germanTerm);
+		$newTerm->appendChild($germanTerm);
+		
+		foreach ($term->examples as $example) {
+			$englishTerm = $this->xmlDoc->createElement("example", $example);
+			$newTerm->appendChild($englishTerm);
+		}
+		
+		$this->xmlDoc->save($this->xmlPath);
 	}
 	
 	public function __destruct() {

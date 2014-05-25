@@ -34,9 +34,14 @@
 	font-weight: bold;
 }
 
-#addTermForm .field {
+#addTermForm {
 	display: block;
 	width: 350px;
+}
+
+#addTermForm .field {
+	display: block;
+	width: 310px;
 	
 }
 
@@ -47,8 +52,13 @@
 	line-height: 22px;
 }
 
-#addTermForm input {
+#addTermForm .field input {
 	display: block;
 	float: left;
 	width: 200px;
+}
+
+#addTermForm input {
+	display: block;
+	float: left;
 }
