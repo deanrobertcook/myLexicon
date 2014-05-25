@@ -23,13 +23,17 @@ class View {
 			
 		foreach ($terms as $term) {
 			$html .= "<tr>";
-				$html .= "<td>$term->englishTerm</td>";
-				$html .= "<td>$term->germanTerm</td>";
-				$html .= "<td>";
-				foreach ($term->examples as $example) {
-					$html .= "$example<br>";
+				for ($i = 0; $i < sizeof($term->fields); $i++) {
+					$html .= "<td>";
+					if (sizeof($term->values[$i]) == 1) {
+						$html .= $term->values[$i];
+					} else {
+						for ($j = 0; $j < sizeof($term->values[$i]); $j++) {
+							$html .= $term->values[$i][$j]. "<br>";
+						}
+					}
+					$html .= "</td>";
 				}
-				$html .= "</td>";
 			$html .= "</tr>";
 		}
 		$html .= "</table>";

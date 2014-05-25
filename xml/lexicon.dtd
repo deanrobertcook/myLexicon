@@ -3,6 +3,7 @@
 <!ELEMENT category (name, term*)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT term (english, german, example*)>
+	<!ATTLIST term id ID #REQUIRED>
 <!ELEMENT english (#PCDATA)>
 <!ELEMENT german (#PCDATA)>
 <!ELEMENT example (#PCDATA)>

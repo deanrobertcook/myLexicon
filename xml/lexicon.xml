@@ -3,12 +3,13 @@
 <lexicon>
   <category>
     <name>Allgemeine Begriffe</name>
-    <term>
+    <term id="term0">
       <english>&lt;b&gt;trade&lt;/b&gt; sth. for sth.</english>
       <german>etw. gegen etw. &lt;b&gt;eintauschen&lt;/b&gt;</german>
       <example>Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</example>
+      <example>Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</example>
     </term>
-    <term>
+    <term id="term1">
       <english>to &lt;b&gt;affect&lt;/b&gt; so/sth.</english>
       <german>jmdn/etw &lt;b&gt;beeinflussen&lt;/b&gt;</german>
       <example/>
@@ -16,46 +17,46 @@
   </category>
   <category>
     <name>Flickwörter</name>
-    <term>
+    <term id="term2">
       <english>tomorrow morning</english>
       <german>morgen früh</german>
     </term>
-    <term>
+    <term id="term3">
       <english>core of the problem</english>
       <german>den Kern des Problems</german>
       <example/>
     </term>
-    <term>
+    <term id="term4">
       <english>until I can sth., I won't</english>
       <german>bis ich etw. machen kann, werde ich nicht</german>
       <example/>
     </term>
-    <term>
+    <term id="term5">
       <english>have you ever been...</english>
       <german>warst du jemals/schon (ein)mal ...</german>
       <example>Warst du schon mal in Zurich gewesen?</example>
     </term>
-    <term>
+    <term id="term6">
       <english>Have you ever tried ...</english>
       <german>Hast du jemals/schon (ein)mal etw. versucht</german>
       <example/>
     </term>
-    <term>
+    <term id="term7">
       <english>on second thought</english>
       <german>bei näherem Nachdenken</german>
       <example/>
     </term>
-    <term>
+    <term id="term8">
       <english>to stumble upon sth. by &lt;b&gt;accident&lt;/b&gt;</english>
       <german>&lt;b&gt;zufällig&lt;/b&gt; auf etw. stoßen</german>
       <example/>
     </term>
-    <term>
+    <term id="term9">
       <english>just so you know</english>
       <german>nur damit du weißt</german>
       <example/>
     </term>
-    <term>
+    <term id="term10">
       <english>just out of curiosity</english>
       <german>nur so aus Neugierde</german>
       <example/>
@@ -108,7 +109,7 @@
   </category>
   <category>
     <name>Sleep</name>
-    <term>
+    <term id="term11">
       <english>I'm almost asleep</english>
       <german>Ich schlafe schon fast</german>
       <example/>
@@ -116,7 +117,7 @@
   </category>
   <category>
     <name>Sprache</name>
-    <term>
+    <term id="term12">
       <english>correction</english>
       <german>die Korrektur-en</german>
       <example>Danke auch für die Korrektur</example>

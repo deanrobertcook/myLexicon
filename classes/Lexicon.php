@@ -1,58 +1,49 @@
 <?php
+/**
+ * The Lexicon class provides a representation of the data provided in the XML sheet. It generates/maintains
+ * a list of all of the categories added to myLexicon, and when requested, will also generate all of the
+ * terms associated with a given category.
+ * 
+ * Note, I should be attempting to REMOVE ALL TRACES of XML from this class, and use much more abstracted
+ * database terms instead. This way, I can quite easily port the application over to say a mySQL database
+ * or something else if I so decide. 
+ * @author Dean
+ *
+ */
+
 class Lexicon {
-	private $xmlPath = "lexicon/";
-	private $xmlDoc;
-	private $xpath;
+	private $xml;
+	private $categories;
 	
-	public function __construct($fileName) {
-		$doc = new DOMDocument();
-		$doc->preserveWhiteSpace = false;
-		$doc->formatOutput = true;
-		$doc->load($this->xmlPath . $fileName);
+	public function __construct() {
+		$this->xml = new XML("lexicon");
 		
-		if ($doc->doctype->name != "lexicon" || $doc->doctype->systemId != "lexicon.dtd") {
-			throw new Exception("incorrect document type");
-		}
-	
-		if ($doc->validate()) {
-			$this->xmlDoc = $doc;
-			$this->xmlPath = $this->xmlPath . $fileName;
-			$this->xpath = new DOMXPath($doc);
-		} else {
-			throw new Exception("Document did not validate");
-		}
-	}
-	
-	public function printXML() {
-		echo var_dump($this->xmlDoc);
+		$this->categories = $this->xml->getListOfNodes("/lexicon/category/name");
+		sort($this->categories, SORT_STRING);
+		
 	}
 	
 	public function getCategoryList() {
-		$categories = $this->xpath->evaluate("/lexicon/category/name");
-		$categoryNames = Array();
-		foreach ($categories as $category) {
-			array_push($categoryNames, $category->nodeValue);
-		}
-		return $categoryNames;
+		return $this->categories;
 	}
 	
 	public function getWordList($category) {
-		$terms = $this->xpath->evaluate("/lexicon/category[name='$category']/term");
-		$termsArray = Array();
-		foreach ($terms as $term) {
-			$english = $term->getElementsByTagName("english")->item(0)->nodeValue;
-			$german = $term->getElementsByTagName("german")->item(0)->nodeValue;
-			
-			$examples = $term->getElementsByTagName("example");
-			$exampleArray = array();
-			
-			foreach ($examples as $example) {
-				array_push($exampleArray, $example->nodeValue);
+		$termIds = $this->xml->getListOfNodes("//category[name='$category']/term/@id");
+		$terms = array();
+		
+		foreach ($termIds as $termId) {
+			$newTerm = new Term();
+			for ($i = 0; $i < sizeof($newTerm->fields); $i++) {
+				$nextValue = $this->xml->getChildValuesByParentID($termId, $newTerm->fields[$i]);
+				if (sizeof($nextValue) == 1) {
+					$newTerm->values[$i] = $nextValue[0];
+				} else {
+					$newTerm->values[$i] = $nextValue;
+				}
 			}
-			
-			array_push($termsArray, new Term($english, $german, $exampleArray));
+			array_push($terms, $newTerm);
 		}
-		return $termsArray;
+		return $terms;
 	}
 	
 	public function addWord($category, $term) {
