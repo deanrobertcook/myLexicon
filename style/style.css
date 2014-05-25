@@ -15,9 +15,19 @@
 	padding: 40px 0 0 40px;
 }
 
+#menu a {
+	display: block;
+	font-size: 20px;
+	padding: 4px;
+}
+
 .tableDiv {
 	display: block;
 	padding-bottom: 40px;
+}
+
+.tableDiv h2 {
+	font-size: 20px;
 }
 
 .tableDiv table, .tableDiv td, .tableDiv th {
@@ -27,7 +37,7 @@
 
 .tableDiv td, .tableDiv th {
 	padding: 4px;
-	width: 200px;
+	width: 300px;
 }
 
 .tableDiv th {
@@ -36,12 +46,12 @@
 
 #addTermForm {
 	display: block;
-	width: 350px;
+	width: 500px;
 }
 
 #addTermForm .field {
 	display: block;
-	width: 310px;
+	width: 500px;
 	
 }
 
@@ -55,7 +65,7 @@
 #addTermForm .field input {
 	display: block;
 	float: left;
-	width: 200px;
+	width: 350px;
 }
 
 #addTermForm input {

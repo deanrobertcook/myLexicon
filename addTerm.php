@@ -13,7 +13,7 @@ if (Input::exists()) {
 	if ($validation->passed()) {	
 		$term = new Term(Input::get("english"), 
 				Input::get("german"), 
-				array(Input::get("english")));
+				array(Input::get("example")));
 		
 		$lexicon->addWord(Input::get("category"), $term);
 		//Redirect::to("index.php");

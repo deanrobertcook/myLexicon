@@ -75,6 +75,16 @@ class Lexicon {
 		$this->xmlDoc->save($this->xmlPath);
 	}
 	
+	public function addCategory($categoryName) {
+		$newCategory = $this->xmlDoc->createElement("category");
+		$this->xmlDoc->documentElement->appendChild($newCategory);
+		
+		$name = $this->xmlDoc->createElement("name", $categoryName);
+		$newCategory->appendChild($name);
+		
+		$this->xmlDoc->save($this->xmlPath);
+	}
+	
 	public function __destruct() {
 		unset($this->xmlDoc);
 	}

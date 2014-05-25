@@ -5,8 +5,6 @@
  */
 require_once 'core/init.php';
 $display = new View();
-
-
 ?>
 <!DOCTYPE html>
 <head>
@@ -21,11 +19,12 @@ $display = new View();
 	<div id="header">
 		<h1>myLexicon</h1>
 		<h2>Home</h2>
-		<a href="addTerm.php">Add new term.</a>
+		<a href="addTerm.php">Add new term.</a><br>
+		<a href="tempCatAdder.php">Add new category.</a>
 	</div>
 	<div id="content">
 		<?php 
-		$display->output();
+			$display->outputContents();
 		?>
 	</div>
 	

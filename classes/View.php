@@ -37,9 +37,23 @@ class View {
 		return $html;
 	}
 	
-	public function output() {
+	private function constructContentsItem($categoryName) {
+		return "<a href='displayTerms.php?category=$categoryName'>$categoryName</a>";
+	}
+	
+	public function output($category) {
+		echo $this->constructTable($category);
+// 		foreach ($this->categories as $category) {
+// 			echo $this->constructTable($category);
+// 		}
+	}
+	
+	public function outputContents() {
+		$html = "<div id='menu'>";
 		foreach ($this->categories as $category) {
-			echo $this->constructTable($category);
+			$html.= $this->constructContentsItem($category);
 		}
+		$html .= "</div>";
+		echo $html;
 	}
 }
