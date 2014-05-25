@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+#header {
+	padding: 20px 0 0 20px;
+}
+
+#header h1 {
+	font-size: 32px;
+}
+
+#header h2 {
+	font-size: 20px;
+}
+
+#content {
+	padding: 40px 0 0 40px;
+}
+
+.tableDiv {
+	display: block;
+	padding-bottom: 40px;
+}
+
+.tableDiv table, .tableDiv td, .tableDiv th {
+	border: 1px solid black;
+	border-collapse: collapse; 
+}
+
+.tableDiv td, .tableDiv th {
+	padding: 4px;
+	width: 200px;
+}
+
+.tableDiv th {
+	font-weight: bold;
+}
+
+#addTermForm .field {
+	display: block;
+	width: 350px;
+	
+}
+
+#addTermForm label {
+	display: block;
+	float: left;
+	width: 100px;
+	line-height: 22px;
+}
+
+#addTermForm input {
+	display: block;
+	float: left;
+	width: 200px;
+}

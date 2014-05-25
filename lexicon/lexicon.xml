@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE lexicon SYSTEM "lexicon.dtd">
+<lexicon>
+	<category>
+		<name>Allgemeine Begriffe</name>
+	</category>
+	<category>
+		<name>Flickwörter</name>
+		<term>
+			<english>core of the problem</english>
+			<german>den Kern des Problems</german>
+			<example></example>
+		</term>
+		<term>
+			<english>tomorrow morning</english>
+			<german>morgen früh</german>
+			<example>test1</example>
+			<example>test2</example>
+		</term>
+		<term>
+			<english>core of the problem</english>
+			<german>den Kern des Problems</german>
+			<example></example>
+		</term>
+	</category>
+
+</lexicon>
