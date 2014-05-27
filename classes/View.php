@@ -10,7 +10,7 @@ class View {
 	}
 	
 	private function constructTable($categoryName) {
-		$terms = $this->lexicon->getWordList($categoryName);
+		$terms = $this->lexicon->getTerms($categoryName);
 		
 		$html = "<div class='tableDiv'>";
 		$html .= "<h2>$categoryName</h2>";

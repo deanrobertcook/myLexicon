@@ -15,7 +15,7 @@ if (Input::exists()) {
 				Input::get("german"), 
 				array(Input::get("example")));
 		
-		$lexicon->addWord(Input::get("category"), $term);
+		$lexicon->addTerm(Input::get("category"), $term);
 		//Redirect::to("index.php");
 		
 	} else {

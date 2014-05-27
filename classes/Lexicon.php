@@ -4,37 +4,62 @@
  * a list of all of the categories added to myLexicon, and when requested, will also generate all of the
  * terms associated with a given category.
  * 
- * Note, I should be attempting to REMOVE ALL TRACES of XML from this class, and use much more abstracted
- * database terms instead. This way, I can quite easily port the application over to say a mySQL database
- * or something else if I so decide. 
+ * I finally decided to put all of the XML stuff in the lexicon class, since I was effectively just making
+ * a copy of the XML class with the lexicon class; it didn't provide me with a clear separation of concerns.
+ * That said, this class is pretty big, so maybe I'll consdier chopping it up at some point
  * @author Dean
  *
  */
 
 class Lexicon {
-	private $xml;
-	private $categories;
+	private $xmlPath = "xml/";
+	private $xmlName = "lexicon";
+	private $xmlDoc;
+	private $xpath;
 	
 	public function __construct() {
-		$this->xml = new XML("lexicon");
+		$doc = new DOMDocument();
+		$doc->preserveWhiteSpace = false;
+		$doc->formatOutput = true;
+		$doc->load($this->xmlPath . $this->xmlName . ".xml");
 		
-		$this->categories = $this->xml->getListOfNodes("/lexicon/category/name");
-		sort($this->categories, SORT_STRING);
-		
+		if ($doc->doctype->name != $this->xmlName || $doc->doctype->systemId != $this->xmlName.".dtd") {
+			throw new Exception("incorrect document type");
+		}
+	
+		if ($doc->validate()) {
+			$this->xmlDoc = $doc;
+			$this->xmlPath = $this->xmlPath . $this->xmlName . ".xml";
+			$this->xpath = new DOMXPath($doc);
+		} else {
+			throw new Exception("Document did not validate");
+		}
+	}
+	
+	private function getList($xpathExpression) {
+		$nodes = $this->xpath->evaluate("/lexicon/category" . $xpathExpression);
+		$nodesArray = array();
+		foreach ($nodes as $node) {
+			array_push($nodesArray, $node->nodeValue);
+		}
+		return $nodesArray;
 	}
 	
 	public function getCategoryList() {
-		return $this->categories;
+		$categories = $this->getList("/@name");
+		sort($categories, SORT_STRING);
+		return $categories;
 	}
 	
-	public function getWordList($category) {
-		$termIds = $this->xml->getListOfNodes("//category[name='$category']/term/@id");
+	public function getTerms($categoryName) {
+		$termIds = $this->getList("[@name='$categoryName']/term/@termId");
 		$terms = array();
 		
 		foreach ($termIds as $termId) {
-			$newTerm = new Term();
+			$newTerm = new Term($termId);
 			for ($i = 0; $i < sizeof($newTerm->fields); $i++) {
-				$nextValue = $this->xml->getChildValuesByParentID($termId, $newTerm->fields[$i]);
+				$field = $newTerm->fields[$i];
+				$nextValue = $this->getList("/term[@termId='$termId']/field[@type='$field']");
 				if (sizeof($nextValue) == 1) {
 					$newTerm->values[$i] = $nextValue[0];
 				} else {
@@ -46,34 +71,110 @@ class Lexicon {
 		return $terms;
 	}
 	
-	public function addWord($category, $term) {
-		$newTerm = $this->xmlDoc->createElement("term");
+	public function addTerm($categoryName, $term) {
+		if ($this->termExists($term->id())) {
+			Throw new Exception("Term with id: '". $term->id() ."' already exists");
+		} else {
+			$categoryNode = $this->xpath->evaluate("//category[@name='$categoryName']")->item(0);
 		
-		$this->xpath->evaluate("/lexicon/category[name='$category']")
-			->item(0)->appendChild($newTerm);
-		
-		$englishTerm = $this->xmlDoc->createElement("english", $term->englishTerm);
-		$newTerm->appendChild($englishTerm);
-		
-		$germanTerm = $this->xmlDoc->createElement("german", $term->germanTerm);
-		$newTerm->appendChild($germanTerm);
-		
-		foreach ($term->examples as $example) {
-			$englishTerm = $this->xmlDoc->createElement("example", $example);
-			$newTerm->appendChild($englishTerm);
+			var_dump($categoryNode->nodeValue);
+			
+			$termNode = $this->xmlDoc->createElement("term");
+			$termNode->setAttribute("termId", $term->id());
+			$categoryNode->appendChild($termNode);
+			
+			foreach ($term->getFields() as $fieldType) {
+				$this->addField($term->id(), $fieldType, $term->getFieldValue($fieldType));
+			}
+			
+			$this->xmlDoc->save($this->xmlPath);
 		}
-		
-		$this->xmlDoc->save($this->xmlPath);
+	}
+	
+	private function addField($termId, $fieldType, $fieldValue){
+		$fieldNode = $this->xmlDoc->createElement("field", $fieldValue);
+		$fieldNode->setAttribute("type", $fieldType);
+		$this->xmlDoc->getElementById($termId)->appendChild($fieldNode);
+	}
+	
+	public function editTerm($categoryName, $term) {
+		if ($this->termExists($term->id())) {
+			//TODO edit the term
+		} else {
+			Throw new Exception("Term with id: '". $term->id() ."' does not exist.");
+		}
+	}
+	
+	private function editField($termId, $fieldType, $fieldValue){
+		//TODO edit a field
+	}
+	
+	private function termExists($id) {
+		$values = $this->getTermIds();
+		for ($i = 0; $i < sizeof($values); $i++) {
+			//$id comes of the form termX and $values only come as X
+			if ($id == "term" . $values[$i]) { 
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private function getTermIds() {
+		$termIds = $this->getList("/term/@termId");
+		$values = array();
+		for ($i = 0; $i < sizeof($termIds); $i++) {
+			$termId = $termIds[$i];
+			$termId = str_split($termId, 4);
+			$termId = intval($termId[1]);
+			array_push($values, $termId);
+		}
+		sort($values, SORT_ASC);
+		var_dump($values);
+		return $values;
 	}
 	
 	public function addCategory($categoryName) {
-		$newCategory = $this->xmlDoc->createElement("category");
-		$this->xmlDoc->documentElement->appendChild($newCategory);
-		
-		$name = $this->xmlDoc->createElement("name", $categoryName);
-		$newCategory->appendChild($name);
-		
-		$this->xmlDoc->save($this->xmlPath);
+		if ($this->categoryExists($categoryName)) {
+			throw new Exception("Category with name: '". $categoryName ."' already exists.");
+		} else {
+			$categoryNode = $this->xmlDoc->createElement("category");
+			$categoryNode->setAttribute("name", $categoryName);
+			$this->xmlDoc->documentElement->appendChild($categoryNode);
+			$this->xmlDoc->save($this->xmlPath);
+		}
+	}
+	
+	public function changeCategoryName($oldName, $newName) {
+		if ($this->categoryExists($oldName)) {
+			//TODO edit category name
+		} else {
+			Throw new Exception("Category with name: '". $oldName ."' does not exist.");
+		}
+	}
+	
+	private function categoryExists($name) {
+		$categories = $this->getCategoryList();
+		for ($i = 0; $i < sizeof($categories); $i++) {
+			if ($name == $categories[$i]) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public function nextTermId() {
+		$values = $this->getTermIds();
+		for ($i = 0; $i < sizeof($values); $i++) {
+			if ($i < $values[$i]) {
+				return $i;
+			}
+		}
+		return max($values);
+	}
+	
+	public function printXML() {
+		echo $this->xmlDoc->saveXML();
 	}
 	
 	public function __destruct() {
