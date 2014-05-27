@@ -22,6 +22,4 @@ spl_autoload_register(function($class) {
 	require_once 'classes/' . $class . '.php';
 });
 
-function escape($string) {
-	return htmlentities($string, ENT_QUOTES, 'UTF-8');
-}
+require_once 'functions.php';

@@ -1,6 +1,5 @@
 <?php
 class View {
-	private $categories;
 	private $lexicon;
 	
 	public function __construct() {
@@ -10,12 +9,20 @@ class View {
 	}
 	
 	private function constructTable($categoryName) {
-		$terms = $this->lexicon->getTerms($categoryName);
+		//TODO Allow the user to modify the display fields by submitting a form or something
+		$displayFields = array(
+			"english",
+			"german",
+			"example",
+		);
+		
+		$terms = $this->lexicon->getTerms($categoryName, $displayFields);
 		
 		$html = "<div class='tableDiv'>";
-		$html .= "<h2>$categoryName</h2>";
+		$html .= "<h2>" . tidyWord($categoryName) . "</h2>";
 		$html .= "<table>";
 			$html .= "<tr>";
+			//TODO, allow these titles to be more easily modifiable, say be a settings.xml sheet
 				$html .= "<th>Englischen Begriff</th>";
 				$html .= "<th>Deutschen Begriff</th>";
 				$html .= "<th>Examples</th>";
@@ -23,13 +30,15 @@ class View {
 			
 		foreach ($terms as $term) {
 			$html .= "<tr>";
-				for ($i = 0; $i < sizeof($term->fields); $i++) {
+				$fields = $term->getFields();
+				for ($i = 0; $i < sizeof($fields); $i++) {
 					$html .= "<td>";
-					if (sizeof($term->values[$i]) == 1) {
-						$html .= $term->values[$i];
+					$values = $term->getFieldValue($fields[$i]);
+					if (sizeof($values) == 1) {
+						$html .= $values;
 					} else {
-						for ($j = 0; $j < sizeof($term->values[$i]); $j++) {
-							$html .= $term->values[$i][$j]. "<br>";
+						for ($j = 0; $j < sizeof($values); $j++) {
+							$html .= $values[$j]. "<br>";
 						}
 					}
 					$html .= "</td>";
@@ -42,19 +51,17 @@ class View {
 	}
 	
 	private function constructContentsItem($categoryName) {
-		return "<a href='displayTerms.php?category=$categoryName'>$categoryName</a>";
+		return "<a href='displayTerms.php?category=$categoryName'>" . tidyWord($categoryName) . "</a>";
 	}
 	
-	public function output($category) {
+	public function outputCategory($category) {
 		echo $this->constructTable($category);
-// 		foreach ($this->categories as $category) {
-// 			echo $this->constructTable($category);
-// 		}
 	}
 	
 	public function outputContents() {
 		$html = "<div id='menu'>";
-		foreach ($this->categories as $category) {
+		$categories = $this->lexicon->getCategoryList();
+		foreach ($categories as $category) {
 			$html.= $this->constructContentsItem($category);
 		}
 		$html .= "</div>";

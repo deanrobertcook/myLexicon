@@ -21,8 +21,6 @@ class Term {
 	private $fields;
 	private $values;
 	
-	private $allFields;
-	
 	public function __construct($id, $specifiedFields = null) {
 		$this->id = "term" . $id;
 		

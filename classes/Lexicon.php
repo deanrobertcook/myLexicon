@@ -51,19 +51,20 @@ class Lexicon {
 		return $categories;
 	}
 	
-	public function getTerms($categoryName) {
+	public function getTerms($categoryName, $specifiedFields = null) {
 		$termIds = $this->getList("[@name='$categoryName']/term/@termId");
 		$terms = array();
 		
 		foreach ($termIds as $termId) {
-			$newTerm = new Term($termId);
-			for ($i = 0; $i < sizeof($newTerm->fields); $i++) {
-				$field = $newTerm->fields[$i];
-				$nextValue = $this->getList("/term[@termId='$termId']/field[@type='$field']");
-				if (sizeof($nextValue) == 1) {
-					$newTerm->values[$i] = $nextValue[0];
+			$newTerm = new Term($termId, $specifiedFields);
+			$fields = $newTerm->getFields();
+			for ($i = 0; $i < sizeof($fields); $i++) {
+				$fieldType = $fields[$i];
+				$fieldValue = $this->getList("/term[@termId='$termId']/field[@type='$fieldType']");
+				if (sizeof($fieldValue) == 1) {
+					$newTerm->addField($fieldType, $fieldValue[0]);
 				} else {
-					$newTerm->values[$i] = $nextValue;
+					$newTerm->addField($fieldType, $fieldValue);
 				}
 			}
 			array_push($terms, $newTerm);
@@ -76,8 +77,6 @@ class Lexicon {
 			Throw new Exception("Term with id: '". $term->id() ."' already exists");
 		} else {
 			$categoryNode = $this->xpath->evaluate("//category[@name='$categoryName']")->item(0);
-		
-			var_dump($categoryNode->nodeValue);
 			
 			$termNode = $this->xmlDoc->createElement("term");
 			$termNode->setAttribute("termId", $term->id());
@@ -130,7 +129,6 @@ class Lexicon {
 			array_push($values, $termId);
 		}
 		sort($values, SORT_ASC);
-		var_dump($values);
 		return $values;
 	}
 	
@@ -170,7 +168,7 @@ class Lexicon {
 				return $i;
 			}
 		}
-		return max($values);
+		return max($values) + 1;
 	}
 	
 	public function printXML() {
