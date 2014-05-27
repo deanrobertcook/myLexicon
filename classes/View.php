@@ -2,10 +2,32 @@
 class View {
 	private $lexicon;
 	
-	public function __construct() {
-		$this->lexicon = new Lexicon("lexicon.xml");
+	public function __construct(Lexicon $lexicon) {
+		$this->lexicon = $lexicon;
 		
 		$this->categories = $this->lexicon->getCategoryList();
+	}
+	
+	public function outputHeader($pageName) {
+		?>
+		<div id="header">
+			<h1>myLexicon</h1>
+			<h2><?php echo $pageName?></h2>
+			<a href="/myLexicon">Home</a><br>
+			<a href="/myLexicon/addTerm">Add new term.</a><br>
+			<a href="/myLexicon/addCategory">Add new category.</a>
+		</div>
+		<div id="content">
+		<?php
+	}
+	
+	public function outputFooter(){
+		?>
+		</div>
+		<div id="footer">
+			<p>Footer</p>
+		</div>
+		<?php
 	}
 	
 	private function constructTable($categoryName) {
@@ -18,7 +40,7 @@ class View {
 		
 		$terms = $this->lexicon->getTerms($categoryName, $displayFields);
 		
-		$html = "<div class='tableDiv'>";
+		$html = "<div class='catTableDiv'>";
 		$html .= "<h2>" . tidyWord($categoryName) . "</h2>";
 		$html .= "<table>";
 			$html .= "<tr>";
@@ -51,7 +73,8 @@ class View {
 	}
 	
 	private function constructContentsItem($categoryName) {
-		return "<a href='displayTerms.php?category=$categoryName'>" . tidyWord($categoryName) . "</a>";
+		return "<span class='menuItem'><a href='/myLexicon/displayCategory/$categoryName'>" . tidyWord($categoryName) .
+			" (" . $this->lexicon->getTermCount($categoryName) . ")</a></span>";
 	}
 	
 	public function outputCategory($category) {
@@ -67,4 +90,51 @@ class View {
 		$html .= "</div>";
 		echo $html;
 	}
+	
+	public function addTermForm($errorMessage) {
+		?>
+		<h3 id="errorMessage"><?php echo $errorMessage?></h3>
+		<form id="addTermForm" action="/myLexicon/addTerm/termAdded" method="post">
+		<div class='field'>
+			<label for="category">Category</label>
+			<select name="category">
+				<option value="">--Select Category--</option>
+				<?php 
+				foreach ($this->lexicon->getCategoryList() as $category) {
+					?>
+					<option value="<?php echo $category?>"><?php echo tidyWord($category)?></option>
+					<?php 
+				}
+				?>
+			</select>
+		</div>
+		<div class='field'>
+			<label for="english">English Term</label>
+			<input type="text" name="english" id="english" value="" autocomplete="off">
+		</div>
+		<div class='field'>
+			<label for="german">German Term</label>
+			<input type="text" name="german" value="" autocomplete="off">
+		</div>
+		<div class='field'>
+			<label for="example">Examples</label>
+			<input type="text" name="example" value="" autocomplete="off">
+		</div>
+		<input type="submit" value="Add Term">
+		</form>
+		<?php
+	}
+
+	public function addCategoryForm($errorMessage) {
+		?>
+		<h3 id="errorMessage"><?php echo $errorMessage?></h3>
+		<form id="addTermForm" action="/myLexicon/addCategory/categoryAdded" method="post">
+		<div class='field'>
+			<label for="category">Category</label>
+			<input type="text" name="category" value="" autocomplete="off">
+		</div>
+		<input type="submit" value="Add Category">
+		</form>
+		<?php
+	}	
 }
