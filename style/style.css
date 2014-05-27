@@ -12,7 +12,19 @@
 }
 
 #content {
+	display: block;
+	overflow: hidden;
 	padding: 40px 0 0 40px;
+}
+
+#menu {
+	display: block;
+	float: left;
+	width: 300px;
+}
+
+#menu .menuItem {
+	display: block;
 }
 
 #menu a {
@@ -21,27 +33,36 @@
 	padding: 4px;
 }
 
-.tableDiv {
+#menu a:HOVER {
+	background-color: #DFE0F2;
+}
+
+.catTableDiv {
 	display: block;
 	padding-bottom: 40px;
 }
 
-.tableDiv h2 {
+.catTableDiv h2 {
 	font-size: 20px;
 }
 
-.tableDiv table, .tableDiv td, .tableDiv th {
+.catTableDiv table, .catTableDiv td, .catTableDiv th {
 	border: 1px solid black;
 	border-collapse: collapse; 
 }
 
-.tableDiv td, .tableDiv th {
+.catTableDiv td, .catTableDiv th {
 	padding: 4px;
 	width: 300px;
 }
 
-.tableDiv th {
+.catTableDiv th {
 	font-weight: bold;
+	background-color: #828499;
+}
+
+.catTableDiv tr:nth-child(even) {
+    background-color: #DFE0F2;
 }
 
 #addTermForm {
@@ -71,4 +92,9 @@
 #addTermForm input {
 	display: block;
 	float: left;
+}
+
+#footer {
+	display: block;
+	padding: 20px 0 0 20px;
 }

@@ -72,6 +72,11 @@ class Lexicon {
 		return $terms;
 	}
 	
+	public function getTermCount($categoryName) {
+		$termIds = $this->getList("[@name='$categoryName']/term/@termId");
+		return sizeof($termIds);
+	}
+	
 	public function addTerm($categoryName, $term) {
 		if ($this->termExists($term->id())) {
 			Throw new Exception("Term with id: '". $term->id() ."' already exists");
@@ -163,12 +168,16 @@ class Lexicon {
 	
 	public function nextTermId() {
 		$values = $this->getTermIds();
-		for ($i = 0; $i < sizeof($values); $i++) {
-			if ($i < $values[$i]) {
-				return $i;
+		if (sizeof($values) == 0) {
+			return 0;
+		} else {
+			for ($i = 0; $i < sizeof($values); $i++) {
+				if ($i < $values[$i]) {
+					return $i;
+				}
 			}
+			return max($values) + 1;
 		}
-		return max($values) + 1;
 	}
 	
 	public function printXML() {
