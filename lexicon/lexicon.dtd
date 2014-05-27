@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT lexicon (category*)>
-<!ELEMENT category (name, term*)>
-<!ELEMENT name (#PCDATA)>
-<!ELEMENT term (english, german, example*)>
-<!ELEMENT english (#PCDATA)>
-<!ELEMENT german (#PCDATA)>
-<!ELEMENT example (#PCDATA)>

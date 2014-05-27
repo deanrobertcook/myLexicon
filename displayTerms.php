@@ -26,7 +26,7 @@ $display = new View();
 	</div>
 	<div id="content">
 		<?php 
-		$display->output(Input::get('category'));
+		$display->outputCategory(Input::get('category'));
 		?>
 	</div>
 </body>

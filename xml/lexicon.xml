@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE lexicon SYSTEM "lexicon.dtd">
+<lexicon>
+  <category name="general">
+    <term termId="term0">
+      <field type="english">&lt;b&gt;trade&lt;/b&gt; sth. for sth.</field>
+      <field type="german">etw. gegen etw. &lt;b&gt;eintauschen&lt;/b&gt;</field>
+      <field type="example">Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</field>
+      <field type="example">Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</field>
+      <field type="extra">Testing hiding a field for whatever reason</field>
+    </term>
+    <term termId="term1">
+      <field type="english">&lt;b&gt;trade&lt;/b&gt; sth. for sth.</field>
+      <field type="german">etw. gegen etw. &lt;b&gt;eintauschen&lt;/b&gt;</field>
+      <field type="example">Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</field>
+      <field type="example">Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</field>
+      <field type="extra">Testing hiding a field for whatever reason</field>
+    </term>
+    <term termId="term8">
+      <field type="english">test</field>
+      <field type="german">test</field>
+      <field type="example">test</field>
+    </term>
+  </category>
+  <category name="phrases">
+    <term termId="term2">
+      <field type="english">&lt;b&gt;trade&lt;/b&gt; sth. for sth.</field>
+      <field type="german">etw. gegen etw. &lt;b&gt;eintauschen&lt;/b&gt;</field>
+      <field type="example">Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</field>
+      <field type="example">Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</field>
+    </term>
+    <term termId="term10">
+      <field type="english">&lt;b&gt;trade&lt;/b&gt; sth. for sth.</field>
+      <field type="german">etw. gegen etw. &lt;b&gt;eintauschen&lt;/b&gt;</field>
+      <field type="example">Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</field>
+      <field type="example">Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</field>
+    </term>
+    <term termId="term3">
+      <field type="english">testing new term</field>
+      <field type="german">testing new term</field>
+      <field type="example">testing new term</field>
+    </term>
+    <term termId="term11">
+      <field type="english">test</field>
+      <field type="german">test</field>
+      <field type="example">test</field>
+    </term>
+  </category>
+  <category name="test">
+    <term termId="term4">
+      <field type="english">testing new term</field>
+      <field type="german">testing new term</field>
+      <field type="example">testing new term</field>
+    </term>
+    <term termId="term5">
+      <field type="english">testing new term</field>
+      <field type="german">testing new term</field>
+      <field type="example">testing new term</field>
+    </term>
+  </category>
+  <category name="test2">
+    <term termId="term6">
+      <field type="english">testing editing a new term</field>
+      <field type="german">testing new term</field>
+      <field type="example">testing new term</field>
+    </term>
+    <term termId="term7">
+      <field type="english">testing editing a new term</field>
+      <field type="german">testing new term</field>
+      <field type="example">testing new term</field>
+    </term>
+  </category>
+  <category name="test3">
+    <term termId="term9">
+      <field type="english">test</field>
+      <field type="german">test</field>
+      <field type="example">test</field>
+    </term>
+  </category>
+</lexicon>

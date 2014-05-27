@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT lexicon (category*)>
+	<!ELEMENT category (term*)>
+	<!ATTLIST category name ID #REQUIRED>
+		<!ELEMENT term (field*)>
+		<!ATTLIST term termId ID #REQUIRED>
+			<!ELEMENT field (#PCDATA)>
+			<!ATTLIST field type CDATA #REQUIRED>

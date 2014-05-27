@@ -11,11 +11,12 @@ if (Input::exists()) {
 	));
 	
 	if ($validation->passed()) {	
-		$term = new Term(Input::get("english"), 
-				Input::get("german"), 
-				array(Input::get("example")));
+		$term = new Term($lexicon->nextTermId());
+		$term->addField("english", Input::get("english"));
+		$term->addField("german", Input::get("german"));
+		$term->addField("example", Input::get("example"));
 		
-		$lexicon->addWord(Input::get("category"), $term);
+		$lexicon->addTerm(Input::get("category"), $term);
 		//Redirect::to("index.php");
 		
 	} else {
