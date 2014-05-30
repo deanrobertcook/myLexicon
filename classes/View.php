@@ -52,8 +52,8 @@ class View {
 			<table>
 				<tr><?php 
 				//TODO, allow these titles to be more easily modifiable, say be a settings.xml sheet
-				foreach ($displayFields as $displayField) {
-					?><th class="<?php echo $displayField; ?>"><?php echo tidyWord($displayField); ?></th><?php
+				foreach ($displayFields as $displayFieldType => $displayFieldName) {
+					?><th class="<?php echo $displayFieldType; ?>"><?php echo $displayFieldName; ?></th><?php
 				}
 				?>
 					<th class="buttonColumn"></th>
@@ -62,9 +62,9 @@ class View {
 				foreach ($terms as $term) {
 					?><tr id="row<?php echo $rowCount;?>"><?php
 					$fields = $term->getFields();
-					for ($i = 0; $i < sizeof($fields); $i++) {
+					foreach ($fields as $fieldType => $fieldName) {
 						?><td><?php 
-						$values = $term->getFieldValue($fields[$i]);
+						$values = $term->getFieldValue($fieldType);
 						if (sizeof($values) == 1) {
 							echo $values;
 						} else {

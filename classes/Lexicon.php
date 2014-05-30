@@ -59,8 +59,7 @@ class Lexicon {
 			$termId = str_split($termId, 4)[1];
 			$newTerm = new Term($termId, $specifiedFields);
 			$fields = $newTerm->getFields();
-			for ($i = 0; $i < sizeof($fields); $i++) {
-				$fieldType = $fields[$i];
+			foreach ($fields as $fieldType => $fieldName) {
 				$fieldValue = $this->getList("/term[@termId='term$termId']/field[@type='$fieldType']");
 				if (sizeof($fieldValue) == 1) {
 					$newTerm->addField($fieldType, $fieldValue[0]);
@@ -68,7 +67,7 @@ class Lexicon {
 					$newTerm->addField($fieldType, $fieldValue);
 				}
 			}
-			$terms[] = $newTerm;
+			$terms[] = $newTerm;			
 		}
 		return $terms;
 	}
@@ -89,7 +88,7 @@ class Lexicon {
 			$termNode->setAttribute("termId", "term".$term->id());
 			$categoryNode->appendChild($termNode);
 			
-			foreach ($term->getFields() as $fieldType) {
+			foreach ($term->getFields() as $fieldType => $fieldName) {
 				$fieldNode = $this->xmlDoc->createElement("field", $term->getFieldValue($fieldType));
 				$fieldNode->setAttribute("type", $fieldType);
 				$termNode->appendChild($fieldNode);

@@ -2,18 +2,7 @@
 <!DOCTYPE lexicon SYSTEM "lexicon.dtd">
 <lexicon>
   <category name="animal_welfare"/>
-  <category name="alternative_beliefs">
-    <term termId="term15">
-      <field type="english">test</field>
-      <field type="german">test</field>
-      <field type="example">test</field>
-    </term>
-    <term termId="term16">
-      <field type="english">test</field>
-      <field type="german">test</field>
-      <field type="example">est</field>
-    </term>
-  </category>
+  <category name="alternative_beliefs"/>
   <category name="architecture"/>
   <category name="arts"/>
   <category name="anotomy"/>

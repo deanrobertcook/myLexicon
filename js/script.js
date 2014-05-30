@@ -72,6 +72,7 @@ $(document).ready(function() {
 			type: "POST",
 			data : data,
 			success: function (termId) {
+				//TODO sanitise the data coming back from javascript
 				addButtonsToRow(termId);
 			}
 		});
@@ -128,6 +129,7 @@ $(document).ready(function() {
 	
 	editTerm = function(rowCount, termId) {
 		alert(termId);
+		//TODO implement edit functionality
 	};
 	
 	/**

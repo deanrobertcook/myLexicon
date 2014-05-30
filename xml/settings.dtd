@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT settings (languages, categories, fields)>
+	<!ELEMENT languages (target, base, other*)>
+		<!ELEMENT target (#PCDATA)>
+		<!ELEMENT base (#PCDATA)>
+	
+	<!-- List languages here, they will be enforced in the XML-->
+	<!ELEMENT english (#PCDATA)>
+	<!ELEMENT german (#PCDATA)>
+	
+	<!ELEMENT categories (category*)>
+		<!ELEMENT category (name, english, german)>
+				<!ELEMENT name (#PCDATA)>
+				
+	<!ELEMENT fields (field*)>
+		<!ELEMENT field (type, english, german)>
+		<!ATTLIST field display CDATA "true">
+		<!ATTLIST field required CDATA "false">
+			<!ELEMENT type (#PCDATA)>
+			

@@ -1,9 +1,11 @@
 <?php
 class Controller {
 	private $view;
+	private $settings;
 	private $lexicon;
 	
 	public function __construct() {
+		$this->settings = new Settings();
 		$this->lexicon = new Lexicon();
 		$this->view = new View($this->lexicon);
 	}
@@ -16,15 +18,15 @@ class Controller {
 	
 	public function displayCategory($categoryName) {
 		//TODO Allow the user to modify the display fields by submitting a form or something
-		$displayFields = array(
-			"english",
-			"german",
-			"example",
-		);
+		$displayFields = $this->settings->getFieldsToDisplay();
 		
 		$this->view->outputHeader("Terms");
 		$this->view->outputCategory($categoryName[0], $displayFields);
 		$this->view->outputFooter();
+	}
+	
+	public function getSettings() {
+		var_dump($this->settings->getFieldsToDisplay());
 	}
 	
 	public function addTerm($input = null) {
@@ -36,18 +38,18 @@ class Controller {
 				$validate = new Validate();
 				$validation = $validate->check($_POST, array(
 					'category' => array('required' => true),
-					'english' => array('required' => true),
-					'german' => array('required' => true),
 				));
 				if ($validation->passed()) {
 					$termId = $this->lexicon->nextTermId();
-					$term = new Term($termId);
-					//TODO automate all of this using arrays/loops...
-						$term->addField("english", Input::get("english"));
-						$term->addField("german", Input::get("german"));
-						$term->addField("example", Input::get("example"));
+					$values = Input::getAll($ignore = array(
+						//ignore these entries when retrieving input
+						"ajax",
+						"termId", 
+						"category",
+					));
+					$term = new Term($termId, $values);
 					$term->setCategory(Input::get("category"));
-					$this->lexicon->addTerm($term);
+					$this->lexicon->addTerm($term, $this->settings->getFieldsToDisplay());
 					$output = true;
 				} else {
 					$errorMessages = $validation->errors();
@@ -144,8 +146,6 @@ class Controller {
 				$validate = new Validate();
 				$validation = $validate->check($_POST, array(
 					'termId' => array('required' => true),
-					'english' => array('required' => true),
-					'german' => array('required' => true),
 				));
 				if ($validation->passed()) {
 					$termId = Input::get("termId");
@@ -190,6 +190,5 @@ class Controller {
 				Redirect::to("/myLexicon");
 			}
 		}
-		
 	}
 }
