@@ -144,55 +144,40 @@ class View {
 		}
 		if (empty($presetValues)) {
 			?>
-			<form id="addTermForm" action="/myLexicon/editTerm/find" method="post">
+			<form id="addTermForm" action="/myLexicon/editTerm/true" method="post">
 			<div class='field'>
-				<label for="termId">termId</label>
+				<label for="termId">Term ID:</label>
 				<input type="text" name="termId" id="termId" value="" autocomplete="off">
 			</div>
-			<input type="submit" value="Find Term">
+			<input type="submit" name="find" value="Find Term">
+			</form>
 			<?php 
 		} else {
 			foreach ($presetValues as $key => $value) {
 				?>
-				<form id="addTermForm" action="/myLexicon/editTerm/save" method="post">
+				<form id="addTermForm" action="/myLexicon/editTerm/true" method="post">
 				<?php 
-				if ($key == "termId") {
+				if ($key == "termId" || $key == "category") {
 					?>
 					<div class='field'>
-						<label for="<?php echo $key?>"><?php echo $key?></label>
-						<input type="text" readonly="readonly" name="<?php echo $key?>" value="<?php echo $value?>" autocomplete="off">
+						<label for="<?php echo $key?>"><?php echo tidyWord($key)?></label>
+						<input type="text" readonly="readonly" name="<?php echo $key?>" value="<?php echo tidyWord($value)?>" autocomplete="off">
 					</div>
 					<?php 
 				} else {
-				
 				?>
 				<div class='field'>
-					<label for="<?php echo $key?>"><?php echo $key?></label>
+					<label for="<?php echo $key?>"><?php echo tidyWord($key)?></label>
 					<input type="text" name="<?php echo $key?>" value="<?php echo $value?>" autocomplete="off">
 				</div>
-				
 				<?php 
 				}	
 			}
 			?>
-			<input type="submit" value="Save Term">
+			<input type="submit" name="save" value="Save Term">
+			<input type="submit" name="delete" value="Delete Term">
+			</form>
 			<?php 
 		}
-		?>
-		<!--<div class='field'>
-			<label for="english">English Term</label>
-			<input type="text" name="english" id="english" value="" autocomplete="off">
-		</div>
-		<div class='field'>
-			<label for="german">German Term</label>
-			<input type="text" name="german" value="" autocomplete="off">
-		</div>
-		<div class='field'>
-			<label for="example">Examples</label>
-			<input type="text" name="example" value="" autocomplete="off">
-		</div>  -->
-		
-		</form>
-		<?php
 	}
 }

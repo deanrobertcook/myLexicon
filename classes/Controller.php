@@ -100,74 +100,72 @@ class Controller {
 		$presetValues = array();
 		
 		$output = false;
-		if ($input != null) { 
-			if ($input[0] == "find") {
-				if (Input::exists()) {
-					$validate = new Validate();
-					$validation = $validate->check($_POST, array(
-						'termId' => array('required' => true),
-						//'english' => array('required' => true),
-						//'german' => array('required' => true),
-					));
-					if ($validation->passed()) {
-						$termId = Input::get("termId");
-						if ($this->lexicon->termExists($termId)) {
-							$term = $this->lexicon->findTerm($termId);
-							$fields = $term->getFields();
-							
-							$presetValues["termId"] = $termId;
-							$presetValues["category"] = $term->getCategory();
-							foreach($fields as $field) {
-								$presetValues[$field] = $term->getFieldValue($field);
-							}
-							
-						} else {
-							$errorMessages[] = "Term does not exist!";
+		if ($input != null && $input[0] == "true") { 
+
+			if (Input::get("find")) {
+				$validate = new Validate();
+				$validation = $validate->check($_POST, array(
+					'termId' => array('required' => true),
+					//'english' => array('required' => true),
+					//'german' => array('required' => true),
+				));
+				if ($validation->passed()) {
+					$termId = Input::get("termId");
+					if ($this->lexicon->termExists($termId)) {
+						$term = $this->lexicon->findTerm($termId);
+						$fields = $term->getFields();
+						
+						$presetValues["termId"] = $termId;
+						$presetValues["category"] = $term->getCategory();
+						foreach($fields as $field) {
+							$presetValues[$field] = $term->getFieldValue($field);
 						}
 						
-						$output = true;
 					} else {
-						$errorMessages = $validation->errors();
-						$output = true;
+						$errorMessages[] = "Term does not exist!";
 					}
+					
+					$output = true;
 				} else {
+					$errorMessages = $validation->errors();
 					$output = true;
 				}
-			} else if ($input[0] == "save") {
-				if (Input::exists()) {
-					$validate = new Validate();
-					$validation = $validate->check($_POST, array(
-						'termId' => array('required' => true),
-						'english' => array('required' => true),
-						'german' => array('required' => true),
-					));
-					if ($validation->passed()) {
-						$termId = Input::get("termId");
-						if ($this->lexicon->termExists($termId)) {
-							$term = $this->lexicon->findTerm($termId);
-							$fields = $term->getFields();
-							
-							$values = Input::getAll(array(
-								"termId", //ignore these entries
-							));
-							foreach ($values as $inputName => $value) {
-								if ($inputName == "category") {
-									$term->setCategory($value);
-								}
-								$term->addField($inputName, $value);
+				
+			} else if (Input::get("save")) {
+				$validate = new Validate();
+				$validation = $validate->check($_POST, array(
+					'termId' => array('required' => true),
+					'english' => array('required' => true),
+					'german' => array('required' => true),
+				));
+				if ($validation->passed()) {
+					$termId = Input::get("termId");
+					if ($this->lexicon->termExists($termId)) {
+						$term = $this->lexicon->findTerm($termId);
+						
+						$values = Input::getAll($ignore = array(
+							//ignore these entries when retrieving input
+							"save",
+							"termId", 
+						));
+						foreach ($values as $inputName => $value) {
+							if ($inputName == "category") {
+								$term->setCategory($value);
 							}
-							$this->lexicon->saveTerm($term);
-						} else {
-							$errorMessages[] = "Term does not exist!";
+							$term->addField($inputName, $value);
 						}
-						$output = true;
+						$this->lexicon->updateTerm($term);
 					} else {
-						$errorMessages = $validation->errors();
-						$output = true;
+						$errorMessages[] = "Term does not exist!";
 					}
+					$output = true;
 				} else {
+					$errorMessages = $validation->errors();
 					$output = true;
 				}
+				
+			} else if (Input::get("delete")) {
+				$this->lexicon->deleteTerm(Input::get("termId"));
 			}
 		} else {
 			$output = true;

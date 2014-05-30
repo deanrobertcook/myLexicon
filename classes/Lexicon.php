@@ -116,9 +116,7 @@ class Lexicon {
 		return $term;
 	}
 	
-	public function saveTerm(Term $term) {
-		//TODO, move the term from one category to another if the category specified in the 
-		//the term object is different from the one in the XML
+	public function updateTerm(Term $term) {
 		if ($this->termExists($term->id())) {
 			$termNode = $this->xmlDoc->getElementById("term" . $term->id());
 			$fieldNodes = $termNode->getElementsByTagName("field");
@@ -130,6 +128,18 @@ class Lexicon {
 			$this->xmlDoc->save($this->xmlPath);
 		} else {
 			Throw new Exception("Term with id: '". $term->id() ."' does not exist.");
+		}
+	}
+	
+	public function deleteTerm($termId) {
+		if ($this->termExists($termId)) {
+			$categoryNode = $this->xpath->evaluate("//category[term[@termId='term$termId']]")->item(0);
+			$termNode = $this->xmlDoc->getElementById("term".$termId);
+			
+			$categoryNode->removeChild($termNode);
+			$this->xmlDoc->save($this->xmlPath);
+		} else {
+			Throw new Exception("Term with id: '". $termId ."' does not exist.");
 		}
 	}
 	
@@ -167,7 +177,7 @@ class Lexicon {
 		}
 	}
 	
-	public function changeCategoryName($oldName, $newName) {
+	public function editCategoryName($oldName, $newName) {
 		if ($this->categoryExists($oldName)) {
 			//TODO edit category name
 		} else {
