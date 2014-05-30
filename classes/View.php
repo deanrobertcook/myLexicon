@@ -94,7 +94,7 @@ class View {
 	
 	private function addTableConsole($category) {
 		?>
-		<div id="tableConsole">
+		<div class="tableConsole">
 			<button id="newRowButton" onclick="newRow('<?php echo $category?>')">Quick Add</button>	
 		</div>
 		<?php 

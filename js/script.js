@@ -62,14 +62,11 @@ $(document).ready(function() {
 				"ajax" : true,
 				"category" : categoryName,
 		};
-		var cells = [];
 		for (var i = 0; i < fields.length; i++) {
 			data[fields[i]] = $("td > ."+fields[i]).val();
-			cells[i] = $("td > ."+fields[i]).val();
 		}
-		createNewRow(cells);
+		createNewRow();
 		cancelAddTerm(categoryName);
-		
 		$.ajax({
 			url: "/myLexicon/addTerm/true",
 			type: "POST",
@@ -78,30 +75,30 @@ $(document).ready(function() {
 				addButtonsToRow(termId);
 			}
 		});
+		
 	};
 	
 	/**
-	 * Function createNewRow takes in an array of data and appends a new row to the table, filling
-	 * out each cell with that data, in the order the array was filled.
+	 * Function createNewRow fills out each cell with input data
 	 */
-	function createNewRow(cells) {
+	createNewRow = function() {
 		var rowCount = $("tr").length-2;
-		$("tbody").append("<tr class='latestRow' id='row"+rowCount+"'></tr>");
+		$("#newTerm").attr("class", "latestRow");
+		$("#newTerm").attr("id", "row"+rowCount);
 		
-		for (var i = 0; i < cells.length; i++) {
-			$("#row"+rowCount).append(
-				"<td>" + cells[i] + "</td>"
-			);
-		}
-	}
+		$("#row"+rowCount).children().each(function() {
+			var input = $($(this).children()[0]);
+			var val = input.val();
+			input.replaceWith(val);
+		});
+	};
 	
 	/**
 	 * Finally, add the two buttons back to the end of the row once we have received what the new termID
 	 * is from the server (necessary to load up the Edit and Delete buttons).
 	 */
-	function addButtonsToRow(termId) {
+	addButtonsToRow = function(termId) {
 		rowCount = $(".latestRow").attr("id").slice(3);
-		console.log(rowCount);
 		
 		$(".latestRow").append(
 			"<td class='buttonColumn'>" +
@@ -115,7 +112,7 @@ $(document).ready(function() {
 		);
 		
 		$(".latestRow").removeAttr("class");
-	}
+	};
 	
 	/**
 	 * Cancel button resets the table, clearing the new row and returning buttons back to their original state.
