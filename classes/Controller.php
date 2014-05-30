@@ -30,6 +30,7 @@ class Controller {
 	public function addTerm($input = null) {
 		$errorMessages = array();
 		$output = false;
+		$termId;
 		if ($input != null && $input[0] == "true") {
 			if (Input::exists()) {
 				$validate = new Validate();
@@ -39,7 +40,8 @@ class Controller {
 					'german' => array('required' => true),
 				));
 				if ($validation->passed()) {
-					$term = new Term($this->lexicon->nextTermId());
+					$termId = $this->lexicon->nextTermId();
+					$term = new Term($termId);
 					//TODO automate all of this using arrays/loops...
 						$term->addField("english", Input::get("english"));
 						$term->addField("german", Input::get("german"));
@@ -57,12 +59,19 @@ class Controller {
 		} else {
 			$output = true;
 		}
-
-		if ($output) {
-			$this->view->outputHeader("Add Term");
-			$this->view->addTermForm($errorMessages);
-			$this->view->outputFooter();
+		
+		if (!Input::get("ajax")) {
+			if ($output) {
+				$this->view->outputHeader("Add Term");
+				$this->view->addTermForm($errorMessages);
+				$this->view->outputFooter();
+			} else {
+				Redirect::to("/myLexicon");
+			}
+		} else {
+			echo $termId;
 		}
+		
 	}
 	
 	public function addCategory($input = null) {
@@ -145,6 +154,7 @@ class Controller {
 						
 						$values = Input::getAll($ignore = array(
 							//ignore these entries when retrieving input
+							"ajax",
 							"save",
 							"termId", 
 						));
@@ -171,12 +181,15 @@ class Controller {
 			$output = true;
 		}
 
-		if ($output) {
-			$this->view->outputHeader("Edit Term");
-			$this->view->editTermForm($errorMessages, $presetValues);
-			$this->view->outputFooter();
-		} else {
-			Redirect::to("/myLexicon");
+		if (!Input::get("ajax")) {
+			if ($output) {
+				$this->view->outputHeader("Edit Term");
+				$this->view->editTermForm($errorMessages, $presetValues);
+				$this->view->outputFooter();
+			} else {
+				Redirect::to("/myLexicon");
+			}
 		}
+		
 	}
 }

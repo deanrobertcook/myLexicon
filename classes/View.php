@@ -11,9 +11,19 @@ class View {
 	public function outputHeader($pageName) {
 		//TODO, think of a neater way to put out this header and have dynamically generated links??
 		?>
+		<!DOCTYPE html>
+		<head>
+			<meta http-equiv="content-type" content="charset=utf-8">
+			<script src="/myLexicon/js/jquery-2.1.0.js"></script>
+			<script src="/myLexicon/js/script.js"></script>
+			<link rel="stylesheet" href="/myLexicon/style/blankStyles.css" type="text/css" />
+			<link rel="stylesheet" href="/myLexicon/style/style.css" type="text/css" />
+		</head>
+		
+		<body>
 		<div id="header">
 			<h1>myLexicon</h1>
-			<h2><?php echo $pageName?></h2>
+			<h2><?php echo $pageName;?></h2>
 			<a href="/myLexicon">Home</a><br>
 			<a href="/myLexicon/addTerm">Add new term.</a><br>
 			<a href="/myLexicon/editTerm">Edit a term.</a><br>
@@ -30,42 +40,64 @@ class View {
 		<div id="footer">
 			<p>Footer</p>
 		</div>
+		</body>
+		</html>
 		<?php
 	}
 	
 	private function constructTable($categoryName, $displayFields) {
 		$terms = $this->lexicon->getTerms($categoryName, $displayFields);
-		
-		$html = "<div class='catTableDiv'>";
-		$html .= "<h2>" . tidyWord($categoryName) . "</h2>";
-		$html .= "<table>";
-			$html .= "<tr>";
-			//TODO, allow these titles to be more easily modifiable, say be a settings.xml sheet
-			foreach ($displayFields as $displayField) {
-				$html .= "<th>" . tidyWord($displayField) . "</th>";
-			}
-			$html .= "</tr>";
-			
-		foreach ($terms as $term) {
-			$html .= "<tr>";
-				$fields = $term->getFields();
-				for ($i = 0; $i < sizeof($fields); $i++) {
-					$html .= "<td>";
-					$values = $term->getFieldValue($fields[$i]);
-					if (sizeof($values) == 1) {
-						$html .= $values;
-					} else {
-						for ($j = 0; $j < sizeof($values); $j++) {
-							$html .= $values[$j]. "<br>";
-						}
-					}
-					$html .= "</td>";
+		?><div class='catTableDiv'>
+			<h2><?php echo tidyWord($categoryName);?></h2>
+			<table>
+				<tr><?php 
+				//TODO, allow these titles to be more easily modifiable, say be a settings.xml sheet
+				foreach ($displayFields as $displayField) {
+					?><th class="<?php echo $displayField; ?>"><?php echo tidyWord($displayField); ?></th><?php
 				}
-			$html .= "</tr>";
-		}
-		$html .= "</table>";
-		$html .= "</div>";
-		return $html;
+				?>
+					<th class="buttonColumn"></th>
+				</tr><?php 
+				$rowCount = 0;
+				foreach ($terms as $term) {
+					?><tr id="row<?php echo $rowCount;?>"><?php
+					$fields = $term->getFields();
+					for ($i = 0; $i < sizeof($fields); $i++) {
+						?><td><?php 
+						$values = $term->getFieldValue($fields[$i]);
+						if (sizeof($values) == 1) {
+							echo $values;
+						} else {
+							for ($j = 0; $j < sizeof($values); $j++) {
+								echo $values[$j]. "<br>";
+							}
+						}
+						?></td><?php 				
+					}
+					?>
+						<td class="buttonColumn">
+							<button	onclick="editTerm(<?php echo $rowCount;?>, <?php echo $term->id();?>)">
+								<img width="20px" src="/myLexicon/resources/images/edit.png" >
+							</button>
+							<button	onclick="deleteTerm(<?php echo $rowCount;?>, <?php echo $term->id();?>)">
+								<img width="20px" src="/myLexicon/resources/images/delete.png" >
+							</button>
+						</td>
+					</tr><?php
+					$rowCount++;
+				}				
+				?>		
+			</table>
+		</div>
+		<?php 
+	}
+	
+	private function addTableConsole($category) {
+		?>
+		<div id="tableConsole">
+			<button id="newRowButton" onclick="newRow('<?php echo $category?>')">Quick Add</button>	
+		</div>
+		<?php 
 	}
 	
 	private function constructContentsItem($categoryName) {
@@ -75,7 +107,8 @@ class View {
 	
 	public function outputCategory($category, $displayFields) {
 		
-		echo $this->constructTable($category, $displayFields);
+		$this->constructTable($category, $displayFields);
+		$this->addTableConsole($category);
 	}
 	
 	public function outputContents() {

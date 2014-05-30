@@ -39,7 +39,6 @@
 
 .catTableDiv {
 	display: block;
-	padding-bottom: 40px;
 }
 
 .catTableDiv h2 {
@@ -54,6 +53,17 @@
 .catTableDiv td, .catTableDiv th {
 	padding: 4px;
 	width: 300px;
+}
+
+.catTableDiv .buttonColumn{
+	width: 44px;
+}
+
+.catTableDiv .buttonColumn button {
+	margin: 0;
+	padding: 0;
+	border: none;
+	background-color: transparent;
 }
 
 .catTableDiv th {
