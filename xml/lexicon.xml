@@ -2,7 +2,23 @@
 <!DOCTYPE lexicon SYSTEM "lexicon.dtd">
 <lexicon>
   <category name="animal_welfare"/>
-  <category name="alternative_beliefs"/>
+  <category name="alternative_beliefs">
+    <term termId="term15">
+      <field type="english">&lt;b&gt;test&lt;/b&gt;</field>
+      <field type="german">test</field>
+      <field type="example"></field>
+    </term>
+    <term termId="term16">
+      <field type="english">atest</field>
+      <field type="german">test</field>
+      <field type="example">test</field>
+    </term>
+    <term termId="term17">
+      <field type="english">test</field>
+      <field type="german">test</field>
+      <field type="example">test</field>
+    </term>
+  </category>
   <category name="architecture"/>
   <category name="arts"/>
   <category name="anotomy"/>
@@ -53,7 +69,7 @@
     <term termId="term14">
       <field type="english">I'm almost asleep</field>
       <field type="german">Ich schlafe schon fast</field>
-      <field type="example"></field>
+      <field type="example"/>
     </term>
   </category>
   <category name="society"/>

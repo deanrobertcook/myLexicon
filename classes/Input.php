@@ -22,4 +22,14 @@ class Input {
 		}
 		return '';
 	}
+	
+	public static function getAll($ignore = array()) {
+		$values = array();
+		foreach($_POST as $key=>$input) {
+			if (!in_array($key, $ignore)) {
+				$values[$key] = $input;
+			}
+		}
+		return $values;
+	}
 }
