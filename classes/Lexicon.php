@@ -40,7 +40,7 @@ class Lexicon {
 		$nodes = $this->xpath->evaluate("/lexicon/category" . $xpathExpression);
 		$nodesArray = array();
 		foreach ($nodes as $node) {
-			array_push($nodesArray, $node->nodeValue);
+			$nodesArray[] = $node->nodeValue;
 		}
 		return $nodesArray;
 	}
@@ -56,18 +56,19 @@ class Lexicon {
 		$terms = array();
 		
 		foreach ($termIds as $termId) {
+			$termId = str_split($termId, 4)[1];
 			$newTerm = new Term($termId, $specifiedFields);
 			$fields = $newTerm->getFields();
 			for ($i = 0; $i < sizeof($fields); $i++) {
 				$fieldType = $fields[$i];
-				$fieldValue = $this->getList("/term[@termId='$termId']/field[@type='$fieldType']");
+				$fieldValue = $this->getList("/term[@termId='term$termId']/field[@type='$fieldType']");
 				if (sizeof($fieldValue) == 1) {
 					$newTerm->addField($fieldType, $fieldValue[0]);
 				} else {
 					$newTerm->addField($fieldType, $fieldValue);
 				}
 			}
-			array_push($terms, $newTerm);
+			$terms[] = $newTerm;
 		}
 		return $terms;
 	}
@@ -77,47 +78,65 @@ class Lexicon {
 		return sizeof($termIds);
 	}
 	
-	public function addTerm($categoryName, $term) {
+	public function addTerm(Term $term) {
 		if ($this->termExists($term->id())) {
 			Throw new Exception("Term with id: '". $term->id() ."' already exists");
 		} else {
-			$categoryNode = $this->xpath->evaluate("//category[@name='$categoryName']")->item(0);
+			$category = $term->getCategory();
+			$categoryNode = $this->xpath->evaluate("//category[@name='$category']")->item(0);
 			
 			$termNode = $this->xmlDoc->createElement("term");
-			$termNode->setAttribute("termId", $term->id());
+			$termNode->setAttribute("termId", "term".$term->id());
 			$categoryNode->appendChild($termNode);
 			
 			foreach ($term->getFields() as $fieldType) {
-				$this->addField($term->id(), $fieldType, $term->getFieldValue($fieldType));
+				$fieldNode = $this->xmlDoc->createElement("field", $term->getFieldValue($fieldType));
+				$fieldNode->setAttribute("type", $fieldType);
+				$termNode->appendChild($fieldNode);
 			}
 			
 			$this->xmlDoc->save($this->xmlPath);
 		}
 	}
 	
-	private function addField($termId, $fieldType, $fieldValue){
-		$fieldNode = $this->xmlDoc->createElement("field", $fieldValue);
-		$fieldNode->setAttribute("type", $fieldType);
-		$this->xmlDoc->getElementById($termId)->appendChild($fieldNode);
+	public function findTerm($termId) {
+		$termNode = $this->xmlDoc->getElementById("term" . $termId);
+		$fieldNodes = $termNode->getElementsByTagName("field");
+		
+		//fill out a term object using the XML informations
+		$term = new Term($termId);
+		foreach ($fieldNodes as $fieldNode) {
+			$term->addField($fieldNode->getAttribute("type"), $fieldNode->nodeValue);
+		}
+		
+		//find the Term's parent category, save to the term
+		$category = $termNode->parentNode->getAttribute("name");
+		$term->setCategory($category);
+		
+		return $term;
 	}
 	
-	public function editTerm($categoryName, $term) {
+	public function saveTerm(Term $term) {
+		//TODO, move the term from one category to another if the category specified in the 
+		//the term object is different from the one in the XML
 		if ($this->termExists($term->id())) {
-			//TODO edit the term
+			$termNode = $this->xmlDoc->getElementById("term" . $term->id());
+			$fieldNodes = $termNode->getElementsByTagName("field");
+			foreach ($fieldNodes as $fieldNode) {
+				$fieldType = $fieldNode->getAttribute("type");
+				$fieldNode->nodeValue = $term->getFieldValue($fieldType);
+			}
+			
+			$this->xmlDoc->save($this->xmlPath);
 		} else {
 			Throw new Exception("Term with id: '". $term->id() ."' does not exist.");
 		}
 	}
 	
-	private function editField($termId, $fieldType, $fieldValue){
-		//TODO edit a field
-	}
-	
-	private function termExists($id) {
+	public function termExists($id) {
 		$values = $this->getTermIds();
 		for ($i = 0; $i < sizeof($values); $i++) {
-			//$id comes of the form termX and $values only come as X
-			if ($id == "term" . $values[$i]) { 
+			if ($id == $values[$i]) { 
 				return true;
 			}
 		}
@@ -131,7 +150,7 @@ class Lexicon {
 			$termId = $termIds[$i];
 			$termId = str_split($termId, 4);
 			$termId = intval($termId[1]);
-			array_push($values, $termId);
+			$values[] = $termId;
 		}
 		sort($values, SORT_ASC);
 		return $values;

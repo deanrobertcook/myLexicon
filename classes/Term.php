@@ -20,9 +20,13 @@ class Term {
 	private $id;
 	private $fields;
 	private $values;
+	private $category;
+	//private $requiredFields;
+	//TODO consider making a 'requiredFields' array which follows the $fields array
+	//around and tells validators whether or not a field is necessary
 	
 	public function __construct($id, $specifiedFields = null) {
-		$this->id = "term" . $id;
+		$this->id = $id;
 		
 		if ($specifiedFields == null) {
 			//list the default fields for the Term object
@@ -38,6 +42,14 @@ class Term {
 	
 	private function index($fieldType) {
 		return array_search($fieldType, $this->fields);
+	}
+	
+	public function setCategory($categoryName) {
+		$this->category = $categoryName;
+	}
+	
+	public function getCategory() {
+		return $this->category;
 	}
 	
 	public function id() {
@@ -57,9 +69,11 @@ class Term {
 	}
 	
 	public function printTerm () {
-		echo "id: " . $this->id(), "<br>";
+		echo "Category: " . $this->getCategory(), "<br>";
+		echo "Id: " . $this->id(), "<br>";
+		echo "Fields: ", "<br>";
 		for ($i = 0; $i < sizeof($this->fields); $i++) {
-			echo $this->fields[$i] . ": " . $this->values[$i], "<br>";
+			echo "\t" . $this->fields[$i] . ": " . $this->values[$i], "<br>";
 		}
 	}
 }
