@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE lexicon SYSTEM "lexicon.dtd">
 <lexicon>
-  <category name="animal_welfare"/>
-  <category name="alternative_beliefs"/>
-  <category name="architecture"/>
-  <category name="arts"/>
-  <category name="anotomy"/>
-  <category name="crime_and_punishment"/>
-  <category name="cultural_differences"/>
-  <category name="dating"/>
-  <category name="drugs"/>
-  <category name="economics"/>
-  <category name="education"/>
-  <category name="emotion"/>
-  <category name="entertainment"/>
-  <category name="environment"/>
-  <category name="fashion_and_clothing"/>
-  <category name="general">
+  <category>
+    <name>animal_welfare</name>
+    <english>Animal Welfare</english>
+    <german>Die Tierschutz</german>
+  </category>
+  <category>
+    <name>alternative_beliefs</name>
+    <english>Alternative Beliefs</english>
+    <german>Alternative Überzeugungen</german>
+  </category>
+  <category>
+    <name>general</name>
+    <english>General Terms</english>
+    <german>Allgemeine Begriffe</german>
     <term termId="term11">
       <field type="english">&lt;b&gt;trade&lt;/b&gt; sth. for sth.</field>
       <field type="german">etw. gegen etw. &lt;b&gt;eintauschen&lt;/b&gt;</field>
@@ -28,46 +26,30 @@
       <field type="example"/>
     </term>
   </category>
-  <category name="food"/>
-  <category name="health"/>
-  <category name="houses_and_architecture"/>
-  <category name="language">
+  <category>
+    <name>speech</name>
+    <english>Speech</english>
+    <german>Sprache</german>
     <term termId="term13">
       <field type="english">correction</field>
       <field type="german">die Korrektur - en</field>
       <field type="example">Danke auch für die Korrektur</field>
     </term>
   </category>
-  <category name="gender_roles"/>
-  <category name="marriage"/>
-  <category name="the_media"/>
-  <category name="medicine"/>
-  <category name="movies"/>
-  <category name="music"/>
-  <category name="political_systems"/>
-  <category name="religion"/>
-  <category name="rich_and_poor_world"/>
-  <category name="science_and_technology"/>
-  <category name="sex"/>
-  <category name="sleep_and_dreams">
+  <category>
+    <name>sleep_and_dreams</name>
+    <english>Sleep and Dreams</english>
+    <german>Schlaf und Träumen</german>
     <term termId="term14">
       <field type="english">I'm almost asleep</field>
       <field type="german">Ich schlafe schon fast</field>
       <field type="example"/>
     </term>
   </category>
-  <category name="society"/>
-  <category name="socialising_and_friendship"/>
-  <category name="space"/>
-  <category name="sport"/>
-  <category name="tradition"/>
-  <category name="transport"/>
-  <category name="travel"/>
-  <category name="violence"/>
-  <category name="work"/>
-  <category name="weather"/>
-  <category name="youth_and_old_age."/>
-  <category name="phrases">
+  <category>
+    <name>phrases</name>
+    <english>Phrases</english>
+    <german>Phrasen</german>
     <term termId="term0">
       <field type="english">core of the problem</field>
       <field type="german">den Kern des Problems</field>

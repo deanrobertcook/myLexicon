@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!ELEMENT lexicon (category*)>
-	<!ELEMENT category (term*)>
-	<!ATTLIST category name ID #REQUIRED>
+	<!ELEMENT category (name, english, german, term*)>
+		<!ELEMENT name (#PCDATA)>
+		<!ELEMENT english (#PCDATA)>
+		<!ELEMENT german (#PCDATA)>
 		<!ELEMENT term (field*)>
 		<!ATTLIST term termId ID #REQUIRED>
 			<!ELEMENT field (#PCDATA)>

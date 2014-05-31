@@ -5,66 +5,74 @@
 		<target>german</target>
 		<base>english</base>
 	</languages>
-	<categories>
-		<category>
-			<name>animal_welfare</name>
-			<english>Animal Welfare</english>
-			<german>Die Tierschutz</german>
-		</category>
-		<category>
-			<name>alternative_beliefs</name>
-			<english>Alternative Beliefs</english>
-			<german>Alternative Überzeugungen</german>
-		</category>
-	</categories>
 	<fields>
 		<field display="true" required="true">
 			<type>english</type>
-			<english>English</english>
-			<german>Englisch</german>
+			<order>2</order>
+			<size></size>
+			<english>English Term</english>
+			<german>Englischer Begriff</german>
 		</field>
 		<field display="true" required="true">
 			<type>german</type>
-			<english>German</english>
-			<german>Deutsch</german>
+			<order>3</order>
+			<size></size>
+			<english>German Term</english>
+			<german>Deutscher Begriff</german>
 		</field>
 		<field display="true" required="false">
 			<type>example</type>
+			<order>4</order>
+			<size></size>
 			<english>Example</english>
 			<german>Beispiel</german>
 		</field>
-		<field display="false" required="true">
+		<field display="true" required="true">
 			<type>part_of_speech</type>
+			<order></order>
+			<size>1</size>
 			<english>Part of Speech</english>
 			<german>Wortart</german>
 		</field>
 		<field display="false" required="true">
 			<type>article</type>
+			<order></order>
+			<size></size>
 			<english>Article</english>
 			<german>Artikel</german>
 		</field>
 		<field display="false" required="false">
 			<type>plural</type>
+			<order></order>
+			<size></size>
 			<english>Plural</english>
 			<german>Plural</german>
 		</field>
 		<field display="false" required="false">
 			<type>past_participle</type>
+			<order></order>
+			<size></size>
 			<english>Past Participle</english>
 			<german>Partizip Perfekt</german>
 		</field>
 		<field display="false" required="false">
 			<type>past_participle</type>
+			<order></order>
+			<size></size>
 			<english>Past Participle</english>
 			<german>Partizip Perfekt</german>
 		</field>
 		<field display="false" required="false">
 			<type>simple_past</type>
+			<order></order>
+			<size></size>
 			<english>Simple Past</english>
 			<german>Präteritum</german>
 		</field>
 		<field display="false" required="false">
 			<type>auxiliary_verb</type>
+			<order></order>
+			<size></size>
 			<english>Auxiliary Verb</english>
 			<german>Hilfsverb</german>
 		</field>

@@ -9,6 +9,8 @@ class Settings {
 	private $allFields; //contains a list of all fields
 	private $fieldsToDisplay;
 	
+	private $categoryNames;
+	
 	public function __construct() {
 		$doc = new DOMDocument();
 		$doc->preserveWhiteSpace = false;
@@ -30,6 +32,8 @@ class Settings {
 		$this->setDefaultLanguage();
 		$this->setAllFields();
 		$this->setFieldsToDisplay();
+		
+		$this->setCategoryNames();
 	}
 	
 	public function setDefaultLanguage($language = null) {
@@ -81,5 +85,22 @@ class Settings {
 	
 	public function getFieldsToDisplay() {
 		return $this->fieldsToDisplay;
+	}
+	
+	private function setCategoryNames() {
+		$categoryNodes = $this->xpath->evaluate("//category");
+		$categories = array();
+		foreach ($categoryNodes as $categoryNode) {
+			$category = $categoryNode->getElementsByTagName("name")->item(0)->nodeValue;
+			$categoryName = $categoryNode->getElementsByTagName($this->defaultLanguage)
+				->item(0)->nodeValue;
+			$categories[$category] = $categoryName;
+		}
+		//sort($categories, SORT_STRING);
+		$this->categoryNames = $categories;
+	}
+	
+	public function getCategoryNames() {
+		return $this->categoryNames;
 	}
 }

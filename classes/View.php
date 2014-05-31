@@ -48,7 +48,7 @@ class View {
 	private function constructTable($categoryName, $displayFields) {
 		$terms = $this->lexicon->getTerms($categoryName, $displayFields);
 		?><div class='catTableDiv'>
-			<h2><?php echo tidyWord($categoryName);?></h2>
+			<h2><?php echo $this->lexicon->getCategoryDisplay($categoryName);?></h2>
 			<table>
 				<tr><?php 
 				//TODO, allow these titles to be more easily modifiable, say be a settings.xml sheet
@@ -92,30 +92,30 @@ class View {
 		<?php 
 	}
 	
-	private function addTableConsole($category) {
+	private function addTableConsole($categoryName) {
 		?>
 		<div class="tableConsole">
-			<button id="newRowButton" onclick="newRow('<?php echo $category?>')">Quick Add</button>	
+			<button id="newRowButton" onclick="newRow('<?php echo $categoryName?>')">Quick Add</button>	
 		</div>
 		<?php 
 	}
 	
-	private function constructContentsItem($categoryName) {
-		return "<span class='menuItem'><a href='/myLexicon/displayCategory/$categoryName'>" . tidyWord($categoryName) .
+	private function constructContentsItem($categoryName, $categoryDisplay) {
+		return "<span class='menuItem'><a href='/myLexicon/displayCategory/$categoryName'>" . $categoryDisplay .
 			" (" . $this->lexicon->getTermCount($categoryName) . ")</a></span>";
 	}
 	
-	public function outputCategory($category, $displayFields) {
+	public function outputCategory($categoryName, $displayFields) {
 		
-		$this->constructTable($category, $displayFields);
-		$this->addTableConsole($category);
+		$this->constructTable($categoryName, $displayFields);
+		$this->addTableConsole($categoryName);
 	}
 	
 	public function outputContents() {
 		$html = "<div id='menu'>";
 		$categories = $this->lexicon->getCategoryList();
-		foreach ($categories as $category) {
-			$html.= $this->constructContentsItem($category);
+		foreach ($categories as $categoryName => $categoryDisplay) {
+			$html.= $this->constructContentsItem($categoryName, $categoryDisplay);
 		}
 		$html .= "</div>";
 		echo $html;

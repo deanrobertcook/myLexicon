@@ -17,6 +17,13 @@ class Lexicon {
 	private $xmlDoc;
 	private $xpath;
 	
+	private $settings;
+	private $defaultLanguage;
+	
+	//TODO, decide whether this class should hold onto a list of settings/categories etc. when intially 
+	//constructed so as to avoid constant looking up of the XML, or whether it will be too tricky to 
+	//keep the class synced with the underlying XML
+	
 	public function __construct() {
 		$doc = new DOMDocument();
 		$doc->preserveWhiteSpace = false;
@@ -34,6 +41,9 @@ class Lexicon {
 		} else {
 			throw new Exception("Document did not validate");
 		}
+		
+		$this->settings = new Settings();
+		$this->defaultLanguage = $this->settings->getDefaultLanguage();
 	}
 	
 	private function getList($xpathExpression) {
@@ -46,13 +56,23 @@ class Lexicon {
 	}
 	
 	public function getCategoryList() {
-		$categories = $this->getList("/@name");
+		$categories = $this->getList("/name");
 		sort($categories, SORT_STRING);
+		foreach ($categories as $categoryName) {
+			unset($categories[array_search($categoryName, $categories)]);
+			$categories[$categoryName] = $this->getCategoryDisplay($categoryName);
+		}
 		return $categories;
 	}
 	
+	public function getCategoryDisplay($categoryName) {
+		$categoryDisplay = $this->xpath->evaluate(
+					"//category[name='$categoryName']/$this->defaultLanguage")->item(0)->nodeValue;
+		return $categoryDisplay;
+	}
+	
 	public function getTerms($categoryName, $specifiedFields = null) {
-		$termIds = $this->getList("[@name='$categoryName']/term/@termId");
+		$termIds = $this->getList("[name='$categoryName']/term/@termId");
 		$terms = array();
 		
 		foreach ($termIds as $termId) {
@@ -73,7 +93,7 @@ class Lexicon {
 	}
 	
 	public function getTermCount($categoryName) {
-		$termIds = $this->getList("[@name='$categoryName']/term/@termId");
+		$termIds = $this->getList("[name='$categoryName']/term/@termId");
 		return sizeof($termIds);
 	}
 	
@@ -82,7 +102,7 @@ class Lexicon {
 			Throw new Exception("Term with id: '". $term->id() ."' already exists");
 		} else {
 			$category = $term->getCategory();
-			$categoryNode = $this->xpath->evaluate("//category[@name='$category']")->item(0);
+			$categoryNode = $this->xpath->evaluate("//category[name='$category']")->item(0);
 			
 			$termNode = $this->xmlDoc->createElement("term");
 			$termNode->setAttribute("termId", "term".$term->id());

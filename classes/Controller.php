@@ -12,16 +12,16 @@ class Controller {
 	
 	public function defaultAction($params = null) {
 		$this->view->outputHeader("Home");
-		$this->view->outputContents();
+		$this->view->outputContents($this->settings->getCategoryNames());
 		$this->view->outputFooter();
 	}
 	
-	public function displayCategory($categoryName) {
+	public function displayCategory($params) {
 		//TODO Allow the user to modify the display fields by submitting a form or something
 		$displayFields = $this->settings->getFieldsToDisplay();
 		
 		$this->view->outputHeader("Terms");
-		$this->view->outputCategory($categoryName[0], $displayFields);
+		$this->view->outputCategory($params[0], $displayFields);
 		$this->view->outputFooter();
 	}
 	
