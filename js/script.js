@@ -1,5 +1,5 @@
 /**
- * 
+ *  
  */
 
 $(document).ready(function() {
@@ -14,7 +14,7 @@ $(document).ready(function() {
 			//Change the AddTerm button to Save Term and Cancel
 			$("#newRowButton").replaceWith(
 				"<button id='addTermButton' onclick='addTerm("+'"'+ categoryName +'"'+ ")'>Add Term</button>" + 
-				"<button id='cancelButton' onclick='cancelAddTerm("+'"'+ categoryName +'"'+")'>Cancel</button>"
+				"<button id='cancelAddButton' onclick='cancelAddTerm("+'"'+ categoryName +'"'+")'>Cancel</button>"
 			);
 			
 			//Get the list of fields used in this table.
@@ -32,6 +32,24 @@ $(document).ready(function() {
 				);
 			}
 		}
+	};
+	
+	changeRowToInputs = function(rowCount, termId, categoryName) {
+		$("#newRowButton").replaceWith(
+			"<button id='saveTermButton' onclick='saveTerm("+'"'+ categoryName +'"'+ "," + '"'+ termId +'"'+ ")'>Save Term</button>" + 
+			"<button id='cancelEditButton' onclick='cancelEditTerm("+'"'+ categoryName +'"'+")'>Cancel</button>"
+		);
+		fields = findFields();
+		$("#row"+rowCount).children().each(function(i) {
+			if ($(this).attr("class") != "buttonColumn") {
+				//store value in the cell
+				var val = $(this).html();
+				//clear the value
+				$(this).empty();
+				//replace with input, containing value
+				$(this).append("<input class='" + fields[i] + "' class='newTermInput' type='text' value='"+ val +"'>");
+			}
+		});
 	};
 	
 	/**
@@ -65,18 +83,14 @@ $(document).ready(function() {
 		for (var i = 0; i < fields.length; i++) {
 			data[fields[i]] = $("td > ."+fields[i]).val();
 		}
-		createNewRow();
-		cancelAddTerm(categoryName);
+//		createNewRow();
+//		cancelAddTerm(categoryName);
 		$.ajax({
 			url: "/myLexicon/addTerm/true",
 			type: "POST",
 			data : data,
-			success: function (termId) {
-				//TODO sanitise the data coming back from javascript
-				addButtonsToRow(termId);
-			}
 		});
-		
+		location.reload();
 	};
 	
 	/**
@@ -120,16 +134,39 @@ $(document).ready(function() {
 	 * @param categoryName requires the name of the category to reload the "Quick Add" button
 	 */
 	cancelAddTerm = function(categoryName) {
-		$("#addTermButton").replaceWith(
-				"<button id='newRowButton' onclick='newRow("+ '"' + categoryName + '"' +  ")'>Quick Add</button>"
-		);
-		$("#cancelButton").remove();
-		$("#newTerm").remove();
+		location.reload();
+//		$("#addTermButton").replaceWith(
+//				"<button id='newRowButton' onclick='newRow("+ '"' + categoryName + '"' +  ")'>Quick Add</button>"
+//		);
+//		$("#cancelAddButton").remove();
+//		$("#newTerm").remove();
 	};
 	
-	editTerm = function(rowCount, termId) {
-		alert(termId);
-		//TODO implement edit functionality
+	cancelEditTerm = function(categoryName) {
+		location.reload();
+	};
+	
+	saveTerm = function(categoryName, termId) {
+		var fields = findFields();
+		var data = {
+				"ajax" : true,
+				"category" : categoryName,
+				"save" : "true",
+				"termId" : termId,
+		};
+		for (var i = 0; i < fields.length; i++) {
+			data[fields[i]] = $("td > ."+fields[i]).val();
+		}
+		console.log(data);
+		$.ajax({
+			url: "/myLexicon/editTerm/true",
+			type: "POST",
+			data : data,
+			success : function(content) {
+				$("#content").append(content);
+			}
+		});
+		location.reload();
 	};
 	
 	/**
@@ -152,6 +189,7 @@ $(document).ready(function() {
 					"termId" : termId,
 				},
 			});
+			location.reload();
 		}
 	};
 });

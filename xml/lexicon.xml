@@ -1,109 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE lexicon SYSTEM "lexicon.dtd">
-<lexicon>
-  <category>
-    <name>animal_welfare</name>
-    <english>Animal Welfare</english>
-    <german>Die Tierschutz</german>
-  </category>
-  <category>
-    <name>alternative_beliefs</name>
-    <english>Alternative Beliefs</english>
-    <german>Alternative Überzeugungen</german>
-  </category>
+<!DOCTYPE lexicon>
+<lexicon xmlns="http://localhost/myLexicon/xml/lexicon" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://localhost/myLexicon/xml lexicon.xsd">
+  <targetLanguage>german</targetLanguage>
+  <baseLanguage>english</baseLanguage>
   <category>
     <name>general</name>
-    <english>General Terms</english>
-    <german>Allgemeine Begriffe</german>
-    <term termId="term11">
-      <field type="english">&lt;b&gt;trade&lt;/b&gt; sth. for sth.</field>
-      <field type="german">etw. gegen etw. &lt;b&gt;eintauschen&lt;/b&gt;</field>
-      <field type="example">Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</field>
-    </term>
-    <term termId="term12">
-      <field type="english">to &lt;b&gt;affect&lt;/b&gt; so./sth.</field>
-      <field type="german">jmdn/etw &lt;b&gt;beeinflussen&lt;/b&gt;</field>
-      <field type="example"/>
-    </term>
-  </category>
-  <category>
-    <name>speech</name>
-    <english>Speech</english>
-    <german>Sprache</german>
-    <term termId="term13">
-      <field type="english">correction</field>
-      <field type="german">die Korrektur - en</field>
-      <field type="example">Danke auch für die Korrektur</field>
-    </term>
-  </category>
-  <category>
-    <name>sleep_and_dreams</name>
-    <english>Sleep and Dreams</english>
-    <german>Schlaf und Träumen</german>
-    <term termId="term14">
-      <field type="english">I'm almost asleep</field>
-      <field type="german">Ich schlafe schon fast</field>
-      <field type="example"/>
-    </term>
-  </category>
-  <category>
-    <name>phrases</name>
-    <english>Phrases</english>
-    <german>Phrasen</german>
     <term termId="term0">
-      <field type="english">core of the problem</field>
-      <field type="german">den Kern des Problems</field>
-      <field type="example"/>
+      <field>
+        <type>english</type>
+        <value>&lt;b&gt;trade&lt;/b&gt; sth. for sth. test</value>
+      </field>
+      <field>
+        <type>german</type>
+        <value>etw. gegen etw. &lt;b&gt;eintauschen&lt;/b&gt;</value>
+      </field>
+      <field>
+        <type>example</type>
+        <value>Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</value>
+      </field>
+      <field>
+        <type>part_of_speech</type>
+        <value></value>
+      </field>
+      <field>
+        <type>frequency</type>
+        <value></value>
+      </field>
+      <field>
+        <type>article</type>
+        <value></value>
+      </field>
+      <field>
+        <type>plural</type>
+        <value></value>
+      </field>
+      <field>
+        <type>past_participle</type>
+        <value></value>
+      </field>
+      <field>
+        <type>simple_past</type>
+        <value></value>
+      </field>
+      <field>
+        <type>auxiliary_verb</type>
+        <value></value>
+      </field>
     </term>
     <term termId="term1">
-      <field type="english">tomorrow morning</field>
-      <field type="german">morgen früh</field>
-      <field type="example">Ich hole dich morgen früh ab</field>
-    </term>
-    <term termId="term2">
-      <field type="english">until I can sth., I won't</field>
-      <field type="german">bis ich etw. machen kann, werde ich nicht</field>
-      <field type="example"/>
-    </term>
-    <term termId="term3">
-      <field type="english">have you ever been …</field>
-      <field type="german">Warst du jemals/schon (ein)mal …</field>
-      <field type="example">Warst du schon mal in Zurich gewesen?</field>
-    </term>
-    <term termId="term4">
-      <field type="english">have you ever tried …</field>
-      <field type="german">Hast du jemals/schon (ein)mal etw. versucht</field>
-      <field type="example"/>
-    </term>
-    <term termId="term5">
-      <field type="english">have you ever wished you could do sth.</field>
-      <field type="german">Wolltest du auch schon, dass du etw. machen könntest</field>
-      <field type="example"/>
-    </term>
-    <term termId="term6">
-      <field type="english">on second thought</field>
-      <field type="german">bei näherem Nachdenken</field>
-      <field type="example"/>
-    </term>
-    <term termId="term7">
-      <field type="english">out of habit</field>
-      <field type="german">aus Gewohnheit</field>
-      <field type="example"/>
-    </term>
-    <term termId="term8">
-      <field type="english">to stumble upon sth. by &lt;b&gt;accident&lt;/b&gt;</field>
-      <field type="german">&lt;b&gt;zufällig&lt;/b&gt; auf etw. stoßen</field>
-      <field type="example"/>
-    </term>
-    <term termId="term9">
-      <field type="english">just so you know</field>
-      <field type="german">nur damit du weißt</field>
-      <field type="example"/>
-    </term>
-    <term termId="term10">
-      <field type="english">just out of curiosity</field>
-      <field type="german">nur so aus Neugierde</field>
-      <field type="example"/>
+      <field>
+        <type>english</type>
+        <value>&lt;b&gt;trade&lt;/b&gt; sth. for sth. test</value>
+      </field>
+      <field>
+        <type>german</type>
+        <value>etw. gegen etw. &lt;b&gt;eintauschen&lt;/b&gt;</value>
+      </field>
+      <field>
+        <type>example</type>
+        <value>Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</value>
+      </field>
     </term>
   </category>
 </lexicon>

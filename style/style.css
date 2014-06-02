@@ -13,6 +13,11 @@ SITE HEADER
 	#header h2 {
 		font-size: 20px;
 	}
+	
+	.siteLinks {
+		display: block;
+		width: 200px;
+	}
 
 /*************************************************
 CENTER CONTENT
@@ -64,7 +69,6 @@ CENTER CONTENT
 		
 		.catTableDiv table {
 			table-layout: fixed;
-			width: 100%;
 		}
 	
 		.catTableDiv table, .catTableDiv td, .catTableDiv th {
@@ -94,7 +98,7 @@ CENTER CONTENT
 			width: 100%;
 			font-family: Arial, Helvetica, sans-serif;
 			font: inherit;
-			
+			white-space:pre-wrap";
 		}
 	
 		.catTableDiv .buttonColumn {
@@ -163,28 +167,34 @@ CENTER CONTENT
 		
 		#addTermForm .field {
 			display: block;
-			width: 500px;
+			width: 100%;
 			
 		}
 		
 		#addTermForm label {
 			display: block;
 			float: left;
-			width: 100px;
+			width: 150px;
 			line-height: 22px;
 		}
 		
 		#addTermForm .field input {
 			display: block;
 			float: left;
-			width: 350px;
+			width: 300px;
 		}
 		
-		#addTermForm input {
+		#addTermForm input[type="text"]} {
 			display: block;
 			float: left;
 		}
-		
+/*************************************************
+	CHANGE SETTINGS FORM
+	*/	
+	.fieldTypes {
+		float: left;
+		width: 150px;
+	}
 /*************************************************
 FOOTER
 */

@@ -1,15 +1,16 @@
 <?php
 class View {
 	private $lexicon;
+	private $settings;
 	
-	public function __construct(Lexicon $lexicon) {
+	public function __construct(Lexicon $lexicon, Settings $settings) {
 		$this->lexicon = $lexicon;
-		
-		$this->categories = $this->lexicon->getCategoryList();
+		$this->settings = $settings;
 	}
 	
 	public function outputHeader($pageName) {
 		//TODO, think of a neater way to put out this header and have dynamically generated links??
+		$siteLinks = $this->settings->getLinks();
 		?>
 		<!DOCTYPE html>
 		<head>
@@ -23,11 +24,13 @@ class View {
 		<body>
 		<div id="header">
 			<h1>myLexicon</h1>
-			<h2><?php echo $pageName;?></h2>
-			<a href="/myLexicon">Home</a><br>
-			<a href="/myLexicon/addTerm">Add new term.</a><br>
-			<a href="/myLexicon/editTerm">Edit a term.</a><br>
-			<a href="/myLexicon/addCategory">Add new category.</a>
+			<h2><?php echo $this->settings->getLinkDisplay($pageName);?></h2>
+			<?php 
+			//TODO, allow these titles to be more easily modifiable, say be a settings.xml sheet
+			foreach ($siteLinks as $linkDisplay => $linkPath) {
+				?><a class="siteLinks" href="<?php echo $linkPath; ?>"><?php echo $linkDisplay; ?></a><?php
+			}
+			?>
 		</div>
 		<div id="content">
 		<?php
@@ -38,22 +41,24 @@ class View {
 		?>
 		</div>
 		<div id="footer">
-			<p>Footer</p>
+			<p></p>
 		</div>
 		</body>
 		</html>
 		<?php
 	}
 	
-	private function constructTable($categoryName, $displayFields) {
+	private function constructTable($categoryName) {
+		$displayFields = $this->settings->getFieldsToDisplay();
 		$terms = $this->lexicon->getTerms($categoryName, $displayFields);
 		?><div class='catTableDiv'>
-			<h2><?php echo $this->lexicon->getCategoryDisplay($categoryName);?></h2>
+			<h2><?php echo $this->settings->getCategoryDisplay($categoryName);?></h2>
 			<table>
 				<tr><?php 
 				//TODO, allow these titles to be more easily modifiable, say be a settings.xml sheet
 				foreach ($displayFields as $displayFieldType => $displayFieldName) {
-					?><th class="<?php echo $displayFieldType; ?>"><?php echo $displayFieldName; ?></th><?php
+					?><th width="<?php echo $this->settings->getFieldSize($displayFieldType); ?>px"
+						class="<?php echo $displayFieldType; ?>"><?php echo $displayFieldName; ?></th><?php
 				}
 				?>
 					<th class="buttonColumn"></th>
@@ -76,7 +81,7 @@ class View {
 					}
 					?>
 						<td class="buttonColumn">
-							<button	onclick="editTerm(<?php echo $rowCount;?>, <?php echo $term->id();?>)">
+							<button	onclick="changeRowToInputs(<?php echo $rowCount;?>, <?php echo $term->id();?>, '<?php echo $categoryName;?>')">
 								<img width="20px" src="/myLexicon/resources/images/edit.png" >
 							</button>
 							<button	onclick="deleteTerm(<?php echo $rowCount;?>, <?php echo $term->id();?>)">
@@ -105,16 +110,18 @@ class View {
 			" (" . $this->lexicon->getTermCount($categoryName) . ")</a></span>";
 	}
 	
-	public function outputCategory($categoryName, $displayFields) {
+	public function outputCategory($categoryName) {
 		
-		$this->constructTable($categoryName, $displayFields);
+		$this->constructTable($categoryName);
 		$this->addTableConsole($categoryName);
 	}
 	
 	public function outputContents() {
 		$html = "<div id='menu'>";
 		$categories = $this->lexicon->getCategoryList();
-		foreach ($categories as $categoryName => $categoryDisplay) {
+		foreach ($categories as $categoryName) {
+			//TODO figure out how to best display the titles
+			$categoryDisplay = $this->settings->getCategoryDisplay($categoryName);
 			$html.= $this->constructContentsItem($categoryName, $categoryDisplay);
 		}
 		$html .= "</div>";
@@ -194,7 +201,8 @@ class View {
 					?>
 					<div class='field'>
 						<label for="<?php echo $key?>"><?php echo tidyWord($key)?></label>
-						<input type="text" readonly="readonly" name="<?php echo $key?>" value="<?php echo tidyWord($value)?>" autocomplete="off">
+						<input type="text" readonly="readonly" name="<?php echo $key?>" 
+						value="<?php echo tidyWord($value)?>" autocomplete="off">
 					</div>
 					<?php 
 				} else {
@@ -212,5 +220,80 @@ class View {
 			</form>
 			<?php 
 		}
+	}
+	public function changeSettingsForm($errorMessages) {
+		
+		foreach ($errorMessages as $error) {
+			?><h3 id="errorMessage"><?php echo $error?></h3> <?php 
+		}
+		?>
+		<form id="addTermForm" action="/myLexicon/changeSettings/true" method="post">
+		<div class='field'>
+			<label for="targetLanguage">Target Language</label>
+			<select name="targetLanguage">
+				<?php 
+				$targetLanguage = $this->settings->getTargetLanguage();
+				$languages = $this->settings->getLanguagesAvailable();
+				foreach ($languages as $language) {
+					?>
+					<option 
+					<?php 
+					if ($language == $targetLanguage) {
+						echo 'selected="selected"';
+					}
+					?>
+					value="<?php echo $language;?>"><?php echo tidyWord($language);?></option>
+					<?php 
+				}
+				?>
+			</select>
+		</div>
+			<div class='field'>
+			<label for="baseLanguage">Base Language</label>
+			<select name="baseLanguage">
+				<?php 
+				$baseLanguage = $this->settings->getBaseLanguage();
+				$languages = $this->settings->getLanguagesAvailable();
+				foreach ($languages as $language) {
+					?>
+					<option 
+					<?php 
+					if ($language == $baseLanguage) {
+						echo 'selected="selected"';
+					}
+					?>
+					value="<?php echo $language;?>"><?php echo tidyWord($language);?></option>
+					<?php 
+				}
+				?>
+			</select>
+			
+		</div>
+		<div>
+			<h3 style="font-size: 20px; ">Select fields to display</h3>
+			<ul>
+			<?php
+			$displayFields = $this->settings->getFieldsToDisplay(); 		
+			foreach ($this->settings->getAllFields() as $fieldType => $fieldDisplay) {
+				?>
+				<li>
+				<p class="fieldTypes"><?php echo $fieldDisplay;?></p>
+				<input type="checkbox" multiple="multiple" name="fieldsToDisplay[]" value="<?php echo $fieldType;?>" <?php 
+				if (isset($displayFields[$fieldType])) {
+					echo 'checked="checked"';
+				}
+				?>>
+				</li>
+				<?php
+			}
+			?></ul> 
+		</div>
+		<div class='field'>
+			<label for="addField">Add Field</label>
+			<input type="text" name="addField" value="" autocomplete="off">
+		</div>
+		<input type="submit" value="Change Settings">
+		</form>
+		<?php
 	}
 }

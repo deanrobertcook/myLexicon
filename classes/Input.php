@@ -20,7 +20,7 @@ class Input {
 		} else if (isset($_GET[$item])) {
 			return $_GET[$item];
 		}
-		return '';
+		return false;
 	}
 	
 	public static function getAll($ignore = array()) {

@@ -52,6 +52,10 @@ class Term {
 		$this->values[$fieldType] = $fieldValue;
 	}
 	
+	public function setValues($values){
+		$this->values = $values;
+	}
+	
 	public function getFields() {
 		return $this->values;
 	}
@@ -60,8 +64,8 @@ class Term {
 		echo "Category: " . $this->getCategory(), "<br>";
 		echo "Id: " . $this->id(), "<br>";
 		echo "Fields: ", "<br>";
-		for ($i = 0; $i < sizeof($this->fields); $i++) {
-			echo "\t" . $this->fields[$i] . ": " . $this->values[$i], "<br>";
+		foreach ($this->values as $fieldType => $fieldValue) {
+			echo "\t" . $fieldType . ": " . $fieldValue, "<br>";
 		}
 	}
 }
