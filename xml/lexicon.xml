@@ -5,49 +5,5 @@
   <baseLanguage>english</baseLanguage>
   <category>
     <name>general</name>
-    <term termId="term0">
-      <field>
-        <type>english</type>
-        <value>&lt;b&gt;trade&lt;/b&gt; sth. for sth. test</value>
-      </field>
-      <field>
-        <type>german</type>
-        <value>etw. gegen etw. &lt;b&gt;eintauschen&lt;/b&gt;</value>
-      </field>
-      <field>
-        <type>example</type>
-        <value>Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</value>
-      </field>
-      <field>
-        <type>article</type>
-        <value>test</value>
-      </field>
-      <field>
-        <type>past_participle</type>
-        <value>test</value>
-      </field>
-    </term>
-    <term termId="term1">
-      <field>
-        <type>english</type>
-        <value>&lt;b&gt;trade&lt;/b&gt; sth. for sth. test</value>
-      </field>
-      <field>
-        <type>german</type>
-        <value>etw. gegen etw. &lt;b&gt;eintauschen&lt;/b&gt;</value>
-      </field>
-      <field>
-        <type>example</type>
-        <value>Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</value>
-      </field>
-      <field>
-        <type>article</type>
-        <value>test</value>
-      </field>
-      <field>
-        <type>part_of_speech</type>
-        <value>test</value>
-      </field>
-    </term>
   </category>
 </lexicon>

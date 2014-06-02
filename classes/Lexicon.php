@@ -132,25 +132,23 @@ class Lexicon {
 	
 	public function updateTerm(Term $term) {
 		$termId = $term->id();
-		echo $termId;
 		if ($this->termExists($termId)) {
 			$termNode = $this->xmlDoc->getElementById("term" . $term->id());
 			$newValues = $term->getFields();
-			var_dump($newValues);
 			
+			//TODO check to see if the term is being edited and then only add new fields if needed, and
+			//also remove any that have been changed to a blank space by the user, to keep the lexicon.xml 
+			//tidy
 			foreach ($newValues as $fieldType => $fieldValue) {
 				$fieldNode = $this->xpath->evaluate(
-						"//xs:term[@termId='term$termId']/xs:field[xs:type='$fieldType']")->item(0);
-				var_dump($this->xmlDoc->saveXML($fieldNode));
-				if (strlen($fieldValue) != 0) {
-					if ($fieldNode == null) {
-						$fieldNode = $this->createField($fieldType, $fieldValue);
-						$termNode->appendChild($fieldNode);
-					} else {
-						$valueNode = $this->xpath->evaluate(
-								"//xs:term[@termId='term$termId']/xs:field[xs:type='$fieldType']/xs:value")->item(0);
-						$valueNode->nodeValue = $fieldValue;
-					}
+					"//xs:term[@termId='term$termId']/xs:field[xs:type='$fieldType']")->item(0);
+				if ($fieldNode == null) {
+					$fieldNode = $this->createField($fieldType, $fieldValue);
+					$termNode->appendChild($fieldNode);
+				} else {
+					$valueNode = $this->xpath->evaluate(
+						"//xs:term[@termId='term$termId']/xs:field[xs:type='$fieldType']/xs:value")->item(0);
+					$valueNode->nodeValue = $fieldValue;
 				}
 			}
 			$this->xmlDoc->save($this->xmlPath);
