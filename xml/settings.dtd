@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT settings (languages, fields)>
+	<!ELEMENT languages (target, base, other*)>
+		<!ELEMENT target (#PCDATA)>
+		<!ELEMENT base (#PCDATA)>
+	
+	<!-- List languages here, they will be enforced in the XML-->
+	<!ELEMENT english (#PCDATA)>
+	<!ELEMENT german (#PCDATA)>
+				
+	<!ELEMENT fields (field*)>
+		<!ELEMENT field (type, order, size, english, german)>
+		<!ATTLIST field display CDATA "true">
+		<!ATTLIST field required CDATA "false">
+			<!ELEMENT type (#PCDATA)>
+			<!ELEMENT order (#PCDATA)>
+			<!ELEMENT size (#PCDATA)>
+			

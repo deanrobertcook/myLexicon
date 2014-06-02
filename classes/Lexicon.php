@@ -12,32 +12,33 @@
  */
 
 class Lexicon {
-	private $xmlPath = "xml/";
-	private $xmlName = "lexicon";
+	private $xmlPath = "xml/lexicon";
+	private $xsdNameSpace = "http://localhost/myLexicon/xml/lexicon";
 	private $xmlDoc;
 	private $xpath;
+	
+	//TODO, decide whether this class should hold onto a list of settings/categories etc. when intially 
+	//constructed so as to avoid constant looking up of the XML, or whether it will be too tricky to 
+	//keep the class synced with the underlying XML
 	
 	public function __construct() {
 		$doc = new DOMDocument();
 		$doc->preserveWhiteSpace = false;
 		$doc->formatOutput = true;
-		$doc->load($this->xmlPath . $this->xmlName . ".xml");
-		
-		if ($doc->doctype->name != $this->xmlName || $doc->doctype->systemId != $this->xmlName.".dtd") {
-			throw new Exception("incorrect document type");
-		}
-	
-		if ($doc->validate()) {
+		$doc->load($this->xmlPath . ".xml");
+
+		if ($doc->schemaValidate($this->xmlPath . ".xsd")) {
 			$this->xmlDoc = $doc;
-			$this->xmlPath = $this->xmlPath . $this->xmlName . ".xml";
+			$this->xmlPath = $this->xmlPath . ".xml";
 			$this->xpath = new DOMXPath($doc);
+			$this->xpath->registerNamespace("xs", $this->xsdNameSpace);
 		} else {
 			throw new Exception("Document did not validate");
 		}
 	}
 	
 	private function getList($xpathExpression) {
-		$nodes = $this->xpath->evaluate("/lexicon/category" . $xpathExpression);
+		$nodes = $this->xpath->evaluate("/xs:lexicon/xs:category" . $xpathExpression);
 		$nodesArray = array();
 		foreach ($nodes as $node) {
 			$nodesArray[] = $node->nodeValue;
@@ -46,35 +47,35 @@ class Lexicon {
 	}
 	
 	public function getCategoryList() {
-		$categories = $this->getList("/@name");
+		$categories = $this->getList("/xs:name");
 		sort($categories, SORT_STRING);
 		return $categories;
 	}
 	
 	public function getTerms($categoryName, $specifiedFields = null) {
-		$termIds = $this->getList("[@name='$categoryName']/term/@termId");
+		$termIds = $this->getList("[xs:name='$categoryName']/xs:term/@termId");
 		$terms = array();
 		
 		foreach ($termIds as $termId) {
 			$termId = str_split($termId, 4)[1];
 			$newTerm = new Term($termId, $specifiedFields);
 			$fields = $newTerm->getFields();
-			for ($i = 0; $i < sizeof($fields); $i++) {
-				$fieldType = $fields[$i];
-				$fieldValue = $this->getList("/term[@termId='term$termId']/field[@type='$fieldType']");
+			foreach ($fields as $fieldType => $fieldName) {
+				$fieldValue = $this->getList(
+						"/xs:term[@termId='term$termId']/xs:field[xs:type='$fieldType']/xs:value");
 				if (sizeof($fieldValue) == 1) {
 					$newTerm->addField($fieldType, $fieldValue[0]);
 				} else {
 					$newTerm->addField($fieldType, $fieldValue);
 				}
 			}
-			$terms[] = $newTerm;
+			$terms[] = $newTerm;			
 		}
 		return $terms;
 	}
 	
 	public function getTermCount($categoryName) {
-		$termIds = $this->getList("[@name='$categoryName']/term/@termId");
+		$termIds = $this->getList("[xs:name='$categoryName']/xs:term/@termId");
 		return sizeof($termIds);
 	}
 	
@@ -82,21 +83,32 @@ class Lexicon {
 		if ($this->termExists($term->id())) {
 			Throw new Exception("Term with id: '". $term->id() ."' already exists");
 		} else {
-			$category = $term->getCategory();
-			$categoryNode = $this->xpath->evaluate("//category[@name='$category']")->item(0);
+			$categoryName = $term->getCategory();
+			$categoryNode = $this->xpath->evaluate("//xs:category[xs:name='$categoryName']")->item(0);
 			
 			$termNode = $this->xmlDoc->createElement("term");
 			$termNode->setAttribute("termId", "term".$term->id());
 			$categoryNode->appendChild($termNode);
 			
-			foreach ($term->getFields() as $fieldType) {
-				$fieldNode = $this->xmlDoc->createElement("field", $term->getFieldValue($fieldType));
-				$fieldNode->setAttribute("type", $fieldType);
+			foreach ($term->getFields() as $fieldType => $fieldValue) {
+				$fieldNode = $this->createField($fieldType, $fieldValue);
 				$termNode->appendChild($fieldNode);
 			}
 			
 			$this->xmlDoc->save($this->xmlPath);
 		}
+	}
+	
+	private function createField($fieldType, $fieldValue) {
+		$fieldNode = $this->xmlDoc->createElement("field");
+		$typeNode =  $this->xmlDoc->createElement("type", $fieldType);
+		$fieldNode->appendChild($typeNode);
+		
+		$valueNode = $this->xmlDoc->createElement("value", $fieldValue);
+		$fieldNode->appendChild($valueNode);
+		
+		return $fieldNode;
+		 
 	}
 	
 	public function findTerm($termId) {
@@ -106,30 +118,48 @@ class Lexicon {
 		//fill out a term object using the XML informations
 		$term = new Term($termId);
 		foreach ($fieldNodes as $fieldNode) {
-			$term->addField($fieldNode->getAttribute("type"), $fieldNode->nodeValue);
+			$type = $fieldNode->getElementsByTagName("type")->item(0)->nodeValue;
+			$value = $fieldNode->getElementsByTagName("value")->item(0)->nodeValue;
+			
+			$term->addField($type, $value);
 		}
 		
 		//find the Term's parent category, save to the term
-		$category = $termNode->parentNode->getAttribute("name");
+		$category = $termNode->parentNode->getElementsByTagName("name")->item(0)->nodeValue;
 		$term->setCategory($category);
-		
 		return $term;
 	}
 	
-	public function saveTerm(Term $term) {
-		//TODO, move the term from one category to another if the category specified in the 
-		//the term object is different from the one in the XML
+	public function updateTerm(Term $term) {
 		if ($this->termExists($term->id())) {
 			$termNode = $this->xmlDoc->getElementById("term" . $term->id());
-			$fieldNodes = $termNode->getElementsByTagName("field");
-			foreach ($fieldNodes as $fieldNode) {
-				$fieldType = $fieldNode->getAttribute("type");
-				$fieldNode->nodeValue = $term->getFieldValue($fieldType);
-			}
+			$newValues = $term->getFields();
 			
+			foreach ($newValues as $fieldType => $fieldValue) {
+				$fieldNode = $this->xpath->evaluate("//xs:field[xs:type='$fieldType']")->item(0);
+				if ($fieldNode == null) {
+					$fieldNode = $this->createField($fieldType, $fieldValue);
+					$termNode->appendChild($fieldNode);
+				} else {
+					$valueNode = $this->xpath->evaluate("//xs:field[xs:type='$fieldType']/xs:value")->item(0);
+					$valueNode->nodeValue = $fieldValue;
+				}
+			}
 			$this->xmlDoc->save($this->xmlPath);
 		} else {
 			Throw new Exception("Term with id: '". $term->id() ."' does not exist.");
+		}
+	}
+	
+	public function deleteTerm($termId) {
+		if ($this->termExists($termId)) {
+			$categoryNode = $this->xpath->evaluate("//xs:category[xs:term[@termId='term$termId']]")->item(0);
+			$termNode = $this->xmlDoc->getElementById("term".$termId);
+			
+			$categoryNode->removeChild($termNode);
+			$this->xmlDoc->save($this->xmlPath);
+		} else {
+			Throw new Exception("Term with id: '". $termId ."' does not exist.");
 		}
 	}
 	
@@ -144,7 +174,7 @@ class Lexicon {
 	}
 	
 	private function getTermIds() {
-		$termIds = $this->getList("/term/@termId");
+		$termIds = $this->getList("/xs:term/@termId");
 		$values = array();
 		for ($i = 0; $i < sizeof($termIds); $i++) {
 			$termId = $termIds[$i];
@@ -161,13 +191,16 @@ class Lexicon {
 			throw new Exception("Category with name: '". $categoryName ."' already exists.");
 		} else {
 			$categoryNode = $this->xmlDoc->createElement("category");
-			$categoryNode->setAttribute("name", $categoryName);
+			
+			$nameNode = $this->xmlDoc->createElement("name", $categoryName);
+			$categoryNode->appendChild($nameNode);
+			
 			$this->xmlDoc->documentElement->appendChild($categoryNode);
 			$this->xmlDoc->save($this->xmlPath);
 		}
 	}
 	
-	public function changeCategoryName($oldName, $newName) {
+	public function editCategoryName($oldName, $newName) {
 		if ($this->categoryExists($oldName)) {
 			//TODO edit category name
 		} else {
@@ -177,6 +210,7 @@ class Lexicon {
 	
 	private function categoryExists($name) {
 		$categories = $this->getCategoryList();
+		var_dump($categories);
 		for ($i = 0; $i < sizeof($categories); $i++) {
 			if ($name == $categories[$i]) {
 				return true;

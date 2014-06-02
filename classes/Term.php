@@ -18,25 +18,13 @@
  */
 class Term {
 	private $id;
-	private $fields;
 	private $values;
 	private $category;
-	//private $requiredFields;
-	//TODO consider making a 'requiredFields' array which follows the $fields array
-	//around and tells validators whether or not a field is necessary
 	
-	public function __construct($id, $specifiedFields = null) {
+	public function __construct($id, $values = null) {
 		$this->id = $id;
-		
-		if ($specifiedFields == null) {
-			//list the default fields for the Term object
-			$this->fields = array(
-				"english",
-				"german",
-				"example",
-			);
-		} else {
-			$this->fields = $specifiedFields;
+		if ($values != null) {
+			$this->values = $values;
 		}
 	}
 	
@@ -57,23 +45,27 @@ class Term {
 	}
 	
 	public function getFieldValue($fieldType) {
-		return $this->values[$this->index($fieldType)];
+		return $this->values[$fieldType];
 	}
 	
 	public function addField($fieldType, $fieldValue) {
-		$this->values[$this->index($fieldType)] = $fieldValue;
+		$this->values[$fieldType] = $fieldValue;
+	}
+	
+	public function setValues($values){
+		$this->values = $values;
 	}
 	
 	public function getFields() {
-		return $this->fields;
+		return $this->values;
 	}
 	
 	public function printTerm () {
 		echo "Category: " . $this->getCategory(), "<br>";
 		echo "Id: " . $this->id(), "<br>";
 		echo "Fields: ", "<br>";
-		for ($i = 0; $i < sizeof($this->fields); $i++) {
-			echo "\t" . $this->fields[$i] . ": " . $this->values[$i], "<br>";
+		foreach ($this->values as $fieldType => $fieldValue) {
+			echo "\t" . $fieldType . ": " . $fieldValue, "<br>";
 		}
 	}
 }

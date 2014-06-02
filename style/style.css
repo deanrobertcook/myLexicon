@@ -1,99 +1,203 @@
 @CHARSET "UTF-8";
+/*************************************************
+SITE HEADER
+*/
 #header {
-	padding: 20px 0 0 20px;
+	padding: 20px 20px 0 20px;
 }
 
-#header h1 {
-	font-size: 32px;
-}
+	#header h1 {
+		font-size: 32px;
+	}
+	
+	#header h2 {
+		font-size: 20px;
+	}
+	
+	.siteLinks {
+		display: block;
+		width: 200px;
+	}
 
-#header h2 {
-	font-size: 20px;
-}
+/*************************************************
+CENTER CONTENT
+*/
 
 #content {
 	display: block;
 	overflow: hidden;
-	padding: 40px 0 0 40px;
+	padding: 40px 20px 0 20px;
 }
 
-#menu {
-	display: block;
-	float: left;
-	width: 300px;
-}
-
-#menu .menuItem {
-	display: block;
-}
-
-#menu a {
-	display: block;
-	font-size: 20px;
-	padding: 4px;
-}
-
-#menu a:HOVER {
-	background-color: #DFE0F2;
-}
-
-.catTableDiv {
-	display: block;
-	padding-bottom: 40px;
-}
-
-.catTableDiv h2 {
-	font-size: 20px;
-}
-
-.catTableDiv table, .catTableDiv td, .catTableDiv th {
-	border: 1px solid black;
-	border-collapse: collapse; 
-}
-
-.catTableDiv td, .catTableDiv th {
-	padding: 4px;
-	width: 300px;
-}
-
-.catTableDiv th {
-	font-weight: bold;
-	background-color: #828499;
-}
-
-.catTableDiv tr:nth-child(even) {
-    background-color: #DFE0F2;
-}
-
-#addTermForm {
-	display: block;
-	width: 500px;
-}
-
-#addTermForm .field {
-	display: block;
-	width: 500px;
+/*************************************************
+	CONTENTS PAGE MENU
+	*/
+	#menu {
+		display: block;
+		float: left;
+		width: 300px;
+		
+		}
+		
+		#menu .menuItem {
+			display: block;
+		}
+		
+		#menu a {
+			display: block;
+			font-size: 20px;
+			padding: 4px;
+		}
+		
+		#menu a:HOVER {
+			background-color: #DFE0F2;
+		}
 	
-}
-
-#addTermForm label {
-	display: block;
-	float: left;
-	width: 100px;
-	line-height: 22px;
-}
-
-#addTermForm .field input {
-	display: block;
-	float: left;
-	width: 350px;
-}
-
-#addTermForm input {
-	display: block;
-	float: left;
-}
-
+/*************************************************
+	CATEGORY TABLE AND CONSOLE
+	*/
+	.catTableDiv {
+		display: block;
+	}
+	
+		.catTableDiv h2 {
+			font-size: 20px;
+			font-family: Arial, Helvetica, sans-serif;
+			letter-spacing: 1px;
+			margin: 2px;
+		}
+		
+		.catTableDiv table {
+			table-layout: fixed;
+		}
+	
+		.catTableDiv table, .catTableDiv td, .catTableDiv th {
+			border: 1px solid black;
+			border-collapse: collapse;
+			
+		}
+	
+		.catTableDiv td, .catTableDiv th {
+			padding: 4px;
+			vertical-align: middle;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 16px;
+		}
+	
+		.catTableDiv th {
+			font-weight: bold;
+			background-color: #828499;
+		}
+	
+		.catTableDiv td input[type="text"] {
+			border: none;
+			padding: 2px 0 2px 0;
+			margin: 0;
+			background: transparent;
+			height: 100%;
+			width: 100%;
+			font-family: Arial, Helvetica, sans-serif;
+			font: inherit;
+			white-space:pre-wrap";
+		}
+	
+		.catTableDiv .buttonColumn {
+			width: 40px;
+		}
+		
+		.catTableDiv .buttonColumn button {
+			margin: 0;
+			padding: 0;
+			border: none;
+			background-color: transparent;
+			float: left;
+		}
+		
+		.catTableDiv tr:nth-child(even) {
+		    background-color: #DFE0F2;
+		}
+	
+		.tableConsole button {
+			-moz-box-shadow: -4px 4px 7px -3px #8e9c9e;
+			-webkit-box-shadow: -4px 4px 7px -3px #8e9c9e;
+			box-shadow: -4px 4px 7px -3px #8e9c9e;
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #8a8da1), color-stop(1, #77798f));
+			background:-moz-linear-gradient(top, #8a8da1 5%, #77798f 100%);
+			background:-webkit-linear-gradient(top, #8a8da1 5%, #77798f 100%);
+			background:-o-linear-gradient(top, #8a8da1 5%, #77798f 100%);
+			background:-ms-linear-gradient(top, #8a8da1 5%, #77798f 100%);
+			background:linear-gradient(to bottom, #8a8da1 5%, #77798f 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8a8da1', endColorstr='#77798f',GradientType=0);
+			background-color:#8a8da1;
+			-moz-border-radius:3px;
+			-webkit-border-radius:3px;
+			border-radius:3px;
+			border:1px solid #888f94;
+			display:inline-block;
+			cursor:pointer;
+			color:#000000;
+			font-family:Arial;
+			font-weight: bold;
+			font-size:14px;
+			padding:4px 4px;
+			text-decoration:none;
+		}
+		.tableConsole button:hover {
+			background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77798f), color-stop(1, #8a8da1));
+			background:-moz-linear-gradient(top, #77798f 5%, #8a8da1 100%);
+			background:-webkit-linear-gradient(top, #77798f 5%, #8a8da1 100%);
+			background:-o-linear-gradient(top, #77798f 5%, #8a8da1 100%);
+			background:-ms-linear-gradient(top, #77798f 5%, #8a8da1 100%);
+			background:linear-gradient(to bottom, #77798f 5%, #8a8da1 100%);
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77798f', endColorstr='#8a8da1',GradientType=0);
+			background-color:#77798f;
+		}
+		.tableConsole button:active {
+			position:relative;
+			top:1px;
+		}
+			
+/*************************************************
+	STAND ALONE FORMS
+	*/
+	#addTermForm {
+		display: block;
+		width: 500px;
+	}
+		
+		#addTermForm .field {
+			display: block;
+			width: 100%;
+			
+		}
+		
+		#addTermForm label {
+			display: block;
+			float: left;
+			width: 150px;
+			line-height: 22px;
+		}
+		
+		#addTermForm .field input {
+			display: block;
+			float: left;
+			width: 300px;
+		}
+		
+		#addTermForm input[type="text"]} {
+			display: block;
+			float: left;
+		}
+/*************************************************
+	CHANGE SETTINGS FORM
+	*/	
+	.fieldTypes {
+		float: left;
+		width: 150px;
+	}
+/*************************************************
+FOOTER
+*/
 #footer {
 	display: block;
 	padding: 20px 0 0 20px;

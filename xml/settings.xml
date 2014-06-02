@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://localhost/myLexicon/xml/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://localhost/myLexicon/xml settings.xsd">
+  <languages>
+    <language target="target">german</language>
+    <language base="base">english</language>
+    <language>chinese</language>
+  </languages>
+  <links>
+    <link>
+      <name>home</name>
+      <path/>
+      <english>Home</english>
+      <german>Startseite</german>
+    </link>
+    <link>
+      <name>add_term</name>
+      <path>addTerm</path>
+      <english>New Term</english>
+      <german>Neuer Begriff</german>
+    </link>
+    <link>
+      <name>edit_term</name>
+      <path>editTerm</path>
+      <english>Edit a Term</english>
+    </link>
+    <link>
+      <name>add_category</name>
+      <path>addCategory</path>
+      <english>Add a Category</english>
+    </link>
+    <link>
+      <name>settings</name>
+      <path>changeSettings</path>
+      <english>Settings</english>
+      <german>Einstellungen</german>
+    </link>
+  </links>
+  <categories>
+    <category>
+      <name>general</name>
+      <english>General Terms</english>
+      <german>Allgemeine Begriffe</german>
+    </category>
+  </categories>
+  <fields>
+    <field>
+      <type>part_of_speech</type>
+      <required>true</required>
+      <display>true</display>
+      <order>0</order>
+      <size>50</size>
+      <english>Part of Speech</english>
+      <german>Wortart</german>
+    </field>
+    <field>
+      <type>english</type>
+      <required>true</required>
+      <display>true</display>
+      <order>1</order>
+      <size>200</size>
+      <english>English Term</english>
+      <german>Englischer Begriff</german>
+    </field>
+    <field>
+      <type>german</type>
+      <required>true</required>
+      <display>true</display>
+      <order>2</order>
+      <size>200</size>
+      <english>German Term</english>
+      <german>Deutscher Begriff</german>
+    </field>
+    <field>
+      <type>example</type>
+      <required>true</required>
+      <display>true</display>
+      <order>3</order>
+      <size>300</size>
+      <english>Example</english>
+      <german>Beispiel</german>
+    </field>
+    <field>
+      <type>frequency</type>
+      <required>false</required>
+      <display>false</display>
+      <order>4</order>
+      <size>50</size>
+      <english>Frequency Searched</english>
+    </field>
+    <field>
+      <type>article</type>
+      <required>false</required>
+      <display>false</display>
+      <order>5</order>
+      <size>50</size>
+      <english>Article</english>
+      <german>Artikel</german>
+    </field>
+    <field>
+      <type>plural</type>
+      <required>false</required>
+      <display>false</display>
+      <order>6</order>
+      <size>20</size>
+      <english>Plural</english>
+      <german>Plural</german>
+    </field>
+    <field>
+      <type>past_participle</type>
+      <required>false</required>
+      <display>false</display>
+      <order>7</order>
+      <size>50</size>
+      <english>Past Participle</english>
+      <german>Partizip Perfekt</german>
+    </field>
+    <field>
+      <type>simple_past</type>
+      <required>false</required>
+      <display>false</display>
+      <order>8</order>
+      <size>50</size>
+      <english>Simple Past</english>
+      <german>Präteritum</german>
+    </field>
+    <field>
+      <type>auxiliary_verb</type>
+      <required>false</required>
+      <display>false</display>
+      <order>9</order>
+      <size>50</size>
+      <english>Auxiliary Verb</english>
+      <german>Hilfsverb</german>
+    </field>
+  </fields>
+</settings>

@@ -1,51 +1,64 @@
 <?php
 class Controller {
 	private $view;
+	private $settings;
 	private $lexicon;
 	
 	public function __construct() {
+		$this->settings = new Settings();
 		$this->lexicon = new Lexicon();
-		$this->view = new View($this->lexicon);
+		$this->view = new View($this->lexicon, $this->settings);
+	}
+	
+	public function test() {
+		$this->settings->reorderField("english", 9);
 	}
 	
 	public function defaultAction($params = null) {
-		$this->view->outputHeader("Home");
+		$this->view->outputHeader("home");
 		$this->view->outputContents();
 		$this->view->outputFooter();
 	}
 	
-	public function displayCategory($categoryName) {
+	public function displayCategory($params) {
 		//TODO Allow the user to modify the display fields by submitting a form or something
-		$displayFields = array(
-			"english",
-			"german",
-			"example",
-		);
+		//$displayFields = $this->settings->getFieldsToDisplay();
 		
-		$this->view->outputHeader("Terms");
-		$this->view->outputCategory($categoryName[0], $displayFields);
+		$this->view->outputHeader("terms");
+		$this->view->outputCategory($params[0]);
 		$this->view->outputFooter();
 	}
 	
-	public function addTerm($input = null) {
+	public function changeSettings($params = null) {
 		$errorMessages = array();
 		$output = false;
-		if ($input != null && $input[0] == "true") {
+		if ($params != null && $params[0] == "true") {
 			if (Input::exists()) {
 				$validate = new Validate();
 				$validation = $validate->check($_POST, array(
-					'category' => array('required' => true),
-					'english' => array('required' => true),
-					'german' => array('required' => true),
+					
 				));
 				if ($validation->passed()) {
-					$term = new Term($this->lexicon->nextTermId());
-					//TODO automate all of this using arrays/loops...
-						$term->addField("english", Input::get("english"));
-						$term->addField("german", Input::get("german"));
-						$term->addField("example", Input::get("example"));
-					$term->setCategory(Input::get("category"));
-					$this->lexicon->addTerm($term);
+					$values = Input::getAll();
+					
+					if (Input::get("targetLanguage")) {
+						$this->settings->setTargetLanguage(Input::get("targetLanguage"));
+					}
+					if (Input::get("baseLanguage")) {
+						$this->settings->setBaseLanguage(Input::get("baseLanguage"));
+					}
+					if (Input::get("fieldsToDisplay")) {
+						$allFields = $this->settings->getAllFields();
+						$displayFields = Input::get("fieldsToDisplay");
+						foreach ($allFields as $fieldType => $fieldName) {
+							
+							if (array_search($fieldType, $displayFields) === false) {
+								$this->settings->setFieldDisplay($fieldType, "false");
+							} else {
+								$this->settings->setFieldDisplay($fieldType, "true");
+							}
+						}
+					}
 					$output = true;
 				} else {
 					$errorMessages = $validation->errors();
@@ -57,18 +70,71 @@ class Controller {
 		} else {
 			$output = true;
 		}
-
-		if ($output) {
-			$this->view->outputHeader("Add Term");
-			$this->view->addTermForm($errorMessages);
-			$this->view->outputFooter();
+		
+		if (!Input::get("ajax")) {
+			if ($output) {
+				$this->view->outputHeader("settings");
+				$this->view->changeSettingsForm($errorMessages);
+				$this->view->outputFooter();
+			} else {
+				Redirect::to("/myLexicon");
+			}
+		} else {
+			//TODO ajax call;
 		}
 	}
 	
-	public function addCategory($input = null) {
+	public function addTerm($params = null) {
 		$errorMessages = array();
 		$output = false;
-		if ($input != null && $input[0] == "true") {
+		$termId;
+		if ($params != null && $params[0] == "true") {
+			if (Input::exists()) {
+				$validate = new Validate();
+				$validation = $validate->check($_POST, array(
+					'category' => array('required' => true),
+				));
+				if ($validation->passed()) {
+					$termId = $this->lexicon->nextTermId();
+					$values = Input::getAll($ignore = array(
+						//ignore these entries when retrieving input
+						"ajax",
+						"termId", 
+						"category",
+					));
+					$term = new Term($termId, $values);
+					$term->setCategory(Input::get("category"));
+					$this->lexicon->addTerm($term, $this->settings->getFieldsToDisplay());
+					$output = true;
+				} else {
+					$errorMessages = $validation->errors();
+					$output = true;
+				}
+			} else {
+				$output = true;
+			}
+		} else {
+			$output = true;
+		}
+		
+		if (!Input::get("ajax")) {
+			if ($output) {
+				$this->view->outputHeader("add_term");
+				$this->view->addTermForm($errorMessages);
+				$this->view->outputFooter();
+			} else {
+				Redirect::to("/myLexicon");
+			}
+		} else {
+			echo $termId;
+		}
+		
+	}
+	
+	public function addCategory($params = null) {
+		$errorMessages = array();
+		$output = false;
+		if ($params != null && $params[0] == "true") {
 			if (Input::exists()) {
 				$validate = new Validate();
 				$validation = $validate->check($_POST, array(
@@ -89,96 +155,90 @@ class Controller {
 		}
 
 		if ($output) {
-			$this->view->outputHeader("Add Category");
+			$this->view->outputHeader("add_category");
 			$this->view->addCategoryForm($errorMessages);
 			$this->view->outputFooter();
 		}
 	}
 	
-	public function editTerm($input = null) {
+	public function editTerm($params = null) {
 		$errorMessages = array();
 		$presetValues = array();
-		
 		$output = false;
-		if ($input != null) { 
-			if ($input[0] == "find") {
-				if (Input::exists()) {
-					$validate = new Validate();
-					$validation = $validate->check($_POST, array(
-						'termId' => array('required' => true),
-						//'english' => array('required' => true),
-						//'german' => array('required' => true),
-					));
-					if ($validation->passed()) {
-						$termId = Input::get("termId");
-						if ($this->lexicon->termExists($termId)) {
-							$term = $this->lexicon->findTerm($termId);
-							$fields = $term->getFields();
-							
-							$presetValues["termId"] = $termId;
-							$presetValues["category"] = $term->getCategory();
-							foreach($fields as $field) {
-								$presetValues[$field] = $term->getFieldValue($field);
-							}
-							
-						} else {
-							$errorMessages[] = "Term does not exist!";
+		if ($params != null && $params[0] == "true") { 
+
+			if (Input::get("find")) {
+				$validate = new Validate();
+				$validation = $validate->check($_POST, array(
+					'termId' => array('required' => true),
+					//'english' => array('required' => true),
+					//'german' => array('required' => true),
+				));
+				if ($validation->passed()) {
+					$termId = Input::get("termId");
+					if ($this->lexicon->termExists($termId)) {
+						$term = $this->lexicon->findTerm($termId);
+						$fields = $term->getFields();
+						
+						$presetValues["termId"] = $termId;
+						$presetValues["category"] = $term->getCategory();
+						foreach($fields as $fieldType => $fieldName) {
+							$presetValues[$fieldType] = $term->getFieldValue($fieldType);
 						}
 						
-						$output = true;
 					} else {
-						$errorMessages = $validation->errors();
-						$output = true;
+						$errorMessages[] = "Term does not exist!";
 					}
+					
+					$output = true;
 				} else {
+					$errorMessages = $validation->errors();
 					$output = true;
 				}
-			} else if ($input[0] == "save") {
-				if (Input::exists()) {
-					$validate = new Validate();
-					$validation = $validate->check($_POST, array(
-						'termId' => array('required' => true),
-						'english' => array('required' => true),
-						'german' => array('required' => true),
-					));
-					if ($validation->passed()) {
-						$termId = Input::get("termId");
-						if ($this->lexicon->termExists($termId)) {
-							$term = $this->lexicon->findTerm($termId);
-							$fields = $term->getFields();
-							
-							$values = Input::getAll(array(
-								"termId", //ignore these entries
-							));
-							foreach ($values as $inputName => $value) {
-								if ($inputName == "category") {
-									$term->setCategory($value);
-								}
-								$term->addField($inputName, $value);
-							}
-							$this->lexicon->saveTerm($term);
-						} else {
-							$errorMessages[] = "Term does not exist!";
-						}
-						$output = true;
+				
+			} else if (Input::get("save")) {
+				$validate = new Validate();
+				$validation = $validate->check($_POST, array(
+					//'termId' => array('required' => true),
+				));
+				if ($validation->passed()) {
+					$termId = Input::get("termId");
+					if ($this->lexicon->termExists($termId)) {
+						$term = $this->lexicon->findTerm($termId);
+						
+						$values = Input::getAll($ignore = array(
+							//ignore these entries when retrieving input
+							"ajax",
+							"save",
+							"category",
+							"termId", 
+						));
+						$term->setValues($values);
+						$this->lexicon->updateTerm($term);
 					} else {
-						$errorMessages = $validation->errors();
-						$output = true;
+						$errorMessages[] = "Term does not exist!";
 					}
+					$output = true;
 				} else {
+					$errorMessages = $validation->errors();
 					$output = true;
 				}
+				
+			} else if (Input::get("delete")) {
+				$this->lexicon->deleteTerm(Input::get("termId"));
 			}
 		} else {
 			$output = true;
 		}
 
-		if ($output) {
-			$this->view->outputHeader("Edit Term");
-			$this->view->editTermForm($errorMessages, $presetValues);
-			$this->view->outputFooter();
-		} else {
-			Redirect::to("/myLexicon");
+		if (!Input::get("ajax")) {
+			if ($output) {
+				$this->view->outputHeader("edit_term");
+				$this->view->editTermForm($errorMessages, $presetValues);
+				$this->view->outputFooter();
+			} else {
+				
+			}
 		}
 	}
 }
