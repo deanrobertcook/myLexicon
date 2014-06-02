@@ -90,7 +90,7 @@
     <field>
       <type>article</type>
       <required>false</required>
-      <display>false</display>
+      <display>true</display>
       <order>5</order>
       <size>50</size>
       <english>Article</english>
@@ -99,7 +99,7 @@
     <field>
       <type>plural</type>
       <required>false</required>
-      <display>false</display>
+      <display>true</display>
       <order>6</order>
       <size>20</size>
       <english>Plural</english>
@@ -108,7 +108,7 @@
     <field>
       <type>past_participle</type>
       <required>false</required>
-      <display>false</display>
+      <display>true</display>
       <order>7</order>
       <size>50</size>
       <english>Past Participle</english>

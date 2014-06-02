@@ -19,32 +19,12 @@
         <value>Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</value>
       </field>
       <field>
-        <type>part_of_speech</type>
-        <value></value>
-      </field>
-      <field>
-        <type>frequency</type>
-        <value></value>
-      </field>
-      <field>
         <type>article</type>
-        <value></value>
-      </field>
-      <field>
-        <type>plural</type>
-        <value></value>
+        <value>test</value>
       </field>
       <field>
         <type>past_participle</type>
-        <value></value>
-      </field>
-      <field>
-        <type>simple_past</type>
-        <value></value>
-      </field>
-      <field>
-        <type>auxiliary_verb</type>
-        <value></value>
+        <value>test</value>
       </field>
     </term>
     <term termId="term1">
@@ -59,6 +39,14 @@
       <field>
         <type>example</type>
         <value>Sie muss ihre Wertsachen gegen Lebensmittel eintauschen</value>
+      </field>
+      <field>
+        <type>article</type>
+        <value>test</value>
+      </field>
+      <field>
+        <type>part_of_speech</type>
+        <value>test</value>
       </field>
     </term>
   </category>
