@@ -48,7 +48,8 @@ class Lexicon {
 	
 	public function getCategoryList() {
 		$categories = $this->getList("/xs:name");
-		sort($categories, SORT_STRING);
+		//TODO sort categories by display name, they are currently sorted by name
+		//sort($categories, SORT_STRING);
 		return $categories;
 	}
 	
@@ -74,8 +75,13 @@ class Lexicon {
 		return $terms;
 	}
 	
-	public function getTermCount($categoryName) {
-		$termIds = $this->getList("[xs:name='$categoryName']/xs:term/@termId");
+	public function getTermCount($categoryName = "all") {
+		$termIds;
+		if ($categoryName == "all") {
+			$termIds = $this->getList("/xs:term/@termId");
+		} else {
+			$termIds = $this->getList("[xs:name='$categoryName']/xs:term/@termId");
+		}
 		return sizeof($termIds);
 	}
 	

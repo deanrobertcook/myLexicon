@@ -121,7 +121,7 @@ class Settings {
 			$fieldOrder->nodeValue = array_search($fieldType, array_keys($fullArray));
 		}
 		
-		//$this->xmlDoc->save($this->xmlPath);
+		$this->xmlDoc->save($this->xmlPath);
 	}
 	
 	private function getFieldDisplay($fieldType) {

@@ -11,7 +11,7 @@ class Controller {
 	}
 	
 	public function test() {
-		$this->settings->reorderField("english", 9);
+		$this->settings->reorderField("plural", 4);
 	}
 	
 	public function defaultAction($params = null) {
