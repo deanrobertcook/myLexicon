@@ -2,19 +2,19 @@
 /*************************************************
 SITE HEADER
 */
-#header {
+header {
 	padding: 20px 20px 0 20px;
 }
 
-	#header h1 {
+	header h1 {
 		font-size: 32px;
 	}
 	
-	#header h2 {
+	header h2 {
 		font-size: 20px;
 	}
 	
-	.siteLinks {
+	header .siteLinks {
 		display: block;
 		width: 200px;
 	}
@@ -23,7 +23,7 @@ SITE HEADER
 CENTER CONTENT
 */
 
-#content {
+main {
 	display: block;
 	overflow: hidden;
 	padding: 40px 20px 0 20px;
@@ -81,9 +81,14 @@ CENTER CONTENT
 			padding: 4px;
 			vertical-align: middle;
 			font-family: Arial, Helvetica, sans-serif;
-			font-size: 16px;
+			font-size: 12px;
 		}
-	
+		
+		.catTableDiv td sup {
+			font-size: 10px;
+			vertical-align: text-top;
+		}
+		
 		.catTableDiv th {
 			font-weight: bold;
 			background-color: #828499;
@@ -102,7 +107,8 @@ CENTER CONTENT
 		}
 	
 		.catTableDiv .buttonColumn {
-			width: 40px;
+			overflow: hidden;
+			width: 50px;
 		}
 		
 		.catTableDiv .buttonColumn button {
@@ -198,7 +204,7 @@ CENTER CONTENT
 /*************************************************
 FOOTER
 */
-#footer {
+footer {
 	display: block;
 	padding: 20px 0 0 20px;
 }

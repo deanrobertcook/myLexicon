@@ -35,21 +35,26 @@ $(document).ready(function() {
 	};
 	
 	changeRowToInputs = function(rowCount, termId, categoryName) {
-		$("#newRowButton").replaceWith(
-			"<button id='saveTermButton' onclick='saveTerm("+'"'+ categoryName +'"'+ "," + '"'+ termId +'"'+ ")'>Save Term</button>" + 
-			"<button id='cancelEditButton' onclick='cancelEditTerm("+'"'+ categoryName +'"'+")'>Cancel</button>"
-		);
-		fields = findFields();
-		$("#row"+rowCount).children().each(function(i) {
-			if ($(this).attr("class") != "buttonColumn") {
-				//store value in the cell
-				var val = $(this).html();
-				//clear the value
-				$(this).empty();
-				//replace with input, containing value
-				$(this).append("<input class='" + fields[i] + "' class='newTermInput' type='text' value='"+ val +"'>");
-			}
-		});
+		if ($("#row"+rowCount + " input").length == 0) {
+			$("#newRowButton").replaceWith(
+				"<button id='saveTermButton' onclick='saveTerm("+
+					'"'+ categoryName +'"'+ "," + '"'+ termId +'"'+ ")'>Save Term</button>" + 
+				"<button id='cancelEditButton' onclick='cancelEditTerm("
+					+'"'+ categoryName +'"'+")'>Cancel</button>"
+			);
+			fields = findFields();
+			$("#row"+rowCount).children().each(function(i) {
+				if ($(this).attr("class") != "buttonColumn") {
+					//store value in the cell
+					var val = $(this).html();
+					//clear the value
+					$(this).empty();
+					//replace with input, containing value
+					$(this).append("<input class='" + fields[i] + 
+							"' class='newTermInput' type='text' value='"+ val +"'>");
+				}
+			});
+		}
 	};
 	
 	/**
@@ -89,8 +94,11 @@ $(document).ready(function() {
 			url: "/myLexicon/addTerm/true",
 			type: "POST",
 			data : data,
+			success: function() {
+				location.reload();
+
+			}
 		});
-		location.reload();
 	};
 	
 	/**
@@ -163,10 +171,10 @@ $(document).ready(function() {
 			type: "POST",
 			data : data,
 			success : function(content) {
-				$("#content").append(content);
+				//$("#content").append(content);
+				location.reload();
 			}
 		});
-		location.reload();
 	};
 	
 	/**
@@ -188,8 +196,12 @@ $(document).ready(function() {
 					"delete" : true,
 					"termId" : termId,
 				},
+				success: function(content) {
+					//$("#content").append(content);
+					location.reload();
+				}
 			});
-			location.reload();
+			
 		}
 	};
 });

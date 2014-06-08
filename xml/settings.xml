@@ -41,6 +41,81 @@
       <english>General Terms</english>
       <german>Allgemeine Begriffe</german>
     </category>
+    <category>
+      <name>phrases</name>
+      <english>Advanced Phrases</english>
+      <german>Forgeschrittene Ausdrucke</german>
+    </category>
+    <category>
+      <name>computers</name>
+      <english>Computers</english>
+      <german>Computers</german>
+    </category>
+    <category>
+      <name>language</name>
+      <english>Language and Speech</english>
+      <german>Sprache</german>
+    </category>
+    <category>
+      <name>sleep</name>
+      <english>sleep</english>
+      <german>Schlaf</german>
+    </category>
+    <category>
+      <name>maths</name>
+      <english>Mathematics and Measurement</english>
+      <german>Mathematik und Messung</german>
+    </category>
+    <category>
+      <name>study</name>
+      <english>Study and Learning</english>
+      <german>Studie und Lernen</german>
+    </category>
+	 <category>
+      <name>creating</name>
+      <english>Creating</english>
+      <german>Schaffung</german>
+    </category>
+	<category>
+      <name>economy</name>
+      <english>The Economy</english>
+      <german>Wirtschaft</german>
+    </category>
+	<category>
+      <name>work</name>
+      <english>Work Life</english>
+      <german>Berufsleben</german>
+    </category>
+	<category>
+      <name>war</name>
+      <english>War</english>
+      <german>Krieg</german>
+    </category>
+	<category>
+      <name>body</name>
+      <english>The Body</english>
+      <german>Körper</german>
+    </category>
+	<category>
+      <name>house</name>
+      <english>Around the House</english>
+      <german>Im Haushalt</german>
+    </category>
+	<category>
+      <name>emotion</name>
+      <english>Emotion</english>
+      <german>Gefühle</german>
+    </category>
+	<category>
+      <name>inheritance</name>
+      <english>Inheritance</english>
+      <german>Erbschaft</german>
+    </category>
+	<category>
+      <name>mind</name>
+      <english>Mind and Imagination</english>
+      <german>Geist und Einbildung</german>
+    </category>
   </categories>
   <fields>
     <field>
@@ -57,7 +132,7 @@
       <required>true</required>
       <display>true</display>
       <order>1</order>
-      <size>200</size>
+      <size>150</size>
       <english>English Term</english>
       <german>Englischer Begriff</german>
     </field>
@@ -65,8 +140,8 @@
       <type>german</type>
       <required>true</required>
       <display>true</display>
-      <order>2</order>
-      <size>200</size>
+      <order>3</order>
+      <size>150</size>
       <english>German Term</english>
       <german>Deutscher Begriff</german>
     </field>
@@ -74,7 +149,7 @@
       <type>example</type>
       <required>true</required>
       <display>true</display>
-      <order>3</order>
+      <order>5</order>
       <size>300</size>
       <english>Example</english>
       <german>Beispiel</german>
@@ -83,15 +158,15 @@
       <type>frequency</type>
       <required>false</required>
       <display>false</display>
-      <order>4</order>
+      <order>6</order>
       <size>50</size>
       <english>Frequency Searched</english>
     </field>
     <field>
       <type>article</type>
       <required>false</required>
-      <display>false</display>
-      <order>5</order>
+      <display>true</display>
+      <order>2</order>
       <size>50</size>
       <english>Article</english>
       <german>Artikel</german>
@@ -99,9 +174,9 @@
     <field>
       <type>plural</type>
       <required>false</required>
-      <display>false</display>
-      <order>6</order>
-      <size>20</size>
+      <display>true</display>
+      <order>4</order>
+      <size>150</size>
       <english>Plural</english>
       <german>Plural</german>
     </field>

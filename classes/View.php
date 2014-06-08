@@ -22,7 +22,7 @@ class View {
 		</head>
 		
 		<body>
-		<div id="header">
+		<header>
 			<h1>myLexicon</h1>
 			<h2><?php echo $this->settings->getLinkDisplay($pageName);?></h2>
 			<?php 
@@ -31,18 +31,18 @@ class View {
 				?><a class="siteLinks" href="<?php echo $linkPath; ?>"><?php echo $linkDisplay; ?></a><?php
 			}
 			?>
-		</div>
-		<div id="content">
+		</header>
+		<main>
 		<?php
 	}
 	
 	public function outputFooter(){
 		//TODO make a footer
 		?>
-		</div>
-		<div id="footer">
-			<p></p>
-		</div>
+		</main>
+		<footer>
+			<p>Footer</p>
+		</footer>
 		</body>
 		</html>
 		<?php
@@ -124,6 +124,7 @@ class View {
 			$categoryDisplay = $this->settings->getCategoryDisplay($categoryName);
 			$html.= $this->constructContentsItem($categoryName, $categoryDisplay);
 		}
+		$html .= "<p>Total term count: ". $this->lexicon->getTermCount() ."</p>";
 		$html .= "</div>";
 		echo $html;
 	}

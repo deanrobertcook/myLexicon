@@ -48,7 +48,8 @@ class Lexicon {
 	
 	public function getCategoryList() {
 		$categories = $this->getList("/xs:name");
-		sort($categories, SORT_STRING);
+		//TODO sort categories by display name, they are currently sorted by name
+		//sort($categories, SORT_STRING);
 		return $categories;
 	}
 	
@@ -74,8 +75,13 @@ class Lexicon {
 		return $terms;
 	}
 	
-	public function getTermCount($categoryName) {
-		$termIds = $this->getList("[xs:name='$categoryName']/xs:term/@termId");
+	public function getTermCount($categoryName = "all") {
+		$termIds;
+		if ($categoryName == "all") {
+			$termIds = $this->getList("/xs:term/@termId");
+		} else {
+			$termIds = $this->getList("[xs:name='$categoryName']/xs:term/@termId");
+		}
 		return sizeof($termIds);
 	}
 	
@@ -131,17 +137,23 @@ class Lexicon {
 	}
 	
 	public function updateTerm(Term $term) {
-		if ($this->termExists($term->id())) {
+		$termId = $term->id();
+		if ($this->termExists($termId)) {
 			$termNode = $this->xmlDoc->getElementById("term" . $term->id());
 			$newValues = $term->getFields();
 			
+			//TODO check to see if the term is being edited and then only add new fields if needed, and
+			//also remove any that have been changed to a blank space by the user, to keep the lexicon.xml 
+			//tidy
 			foreach ($newValues as $fieldType => $fieldValue) {
-				$fieldNode = $this->xpath->evaluate("//xs:field[xs:type='$fieldType']")->item(0);
+				$fieldNode = $this->xpath->evaluate(
+					"//xs:term[@termId='term$termId']/xs:field[xs:type='$fieldType']")->item(0);
 				if ($fieldNode == null) {
 					$fieldNode = $this->createField($fieldType, $fieldValue);
 					$termNode->appendChild($fieldNode);
 				} else {
-					$valueNode = $this->xpath->evaluate("//xs:field[xs:type='$fieldType']/xs:value")->item(0);
+					$valueNode = $this->xpath->evaluate(
+						"//xs:term[@termId='term$termId']/xs:field[xs:type='$fieldType']/xs:value")->item(0);
 					$valueNode->nodeValue = $fieldValue;
 				}
 			}
