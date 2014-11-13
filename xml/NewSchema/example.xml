@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lexicon>
+	<lexeme lang="de">
+		<type>noun</type>
+		<root>Anleitung</root>
+		<inflection>
+			<gender>f</gender>
+			<plural>Anleitungen</plural>
+		</inflection>
+		<meanings>
+			<meaning>
+				<description>guidance</description>
+				<description>direction</description>
+				<description>instruction</description>
+			</meaning>
+		</meanings>
+	</lexeme>
+	<lexeme lang="de">
+		<type>strong verb</type>
+		<root>schwimmen</root>
+		<inflection>
+			<past_simple>schwamm</past_simple>
+			<past_participle>geschwommen</past_participle>
+		</inflection>
+		<meanings>
+			<meaning>
+				<description>swim</description>
+			</meaning>
+		</meanings>
+	</lexeme>
+	<lexeme lang="de">
+		<type>separable-prefix verb</type>
+		<root>ableiten</root>
+		<inflection></inflection>
+		<meanings>
+			<meaning>
+				<description>deviate</description>
+				<description>divert</description>
+			</meaning>
+		</meanings>
+	</lexeme>
+	<lexeme lang="de">
+		<type>prepositional separable-prefix verb</type>
+		<root>etw von etw ableiten</root>
+		<inflection></inflection>
+		<meanings>
+			<meaning>
+				<description>to derive sth from sth</description>
+			</meaning>
+		</meanings>
+	</lexeme>
+	<lexeme lang="de">
+		<type>phrasal verb</type>
+		<root>etw in Ordnung bringen</root>
+		<inflection></inflection>
+		<meanings>
+			<meaning>
+				<description>to put in order</description>
+				<description>fix sth</description>
+				<description>adjust sth</description>
+			</meaning>
+		</meanings>
+	</lexeme>
+</lexicon>
