@@ -1,5 +1,0 @@
-1. $categoryName - the 'unclean' tag which is used by the underlying system to manipulate categories, so for example for the category Alternative Beliefs, the name of the category would be "alternative_beliefs". These names are used so as to allow the system to continue seaching/adding/editing, even though their might be several display names for a given category.
-
-2. $categoryDisplay - the value, specified for each target language, that will be displayed in the user interface. These display values are stored under each category for the given language, and depending on the default language, will be searched for when creating the list of categories.
-
-3. $params - always what is being passed to the controller's action by the URL, don't name this anything else, so that we can avoid confusion
