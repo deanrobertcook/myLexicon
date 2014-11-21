@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2014 at 01:28 PM
+-- Generation Time: Nov 21, 2014 at 06:36 AM
 -- Server version: 5.5.40-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.5
 
@@ -26,8 +26,9 @@ SET time_zone = "+00:00";
 -- Stand-in structure for view `base_lexemes`
 --
 CREATE TABLE IF NOT EXISTS `base_lexemes` (
-`userid` int(10)
-,`meaningid` int(10)
+`meaningid` int(10)
+,`targetid` int(10)
+,`userid` int(10)
 ,`id` int(10)
 ,`language` char(2)
 ,`entry` varchar(255)
@@ -235,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `lexemes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_lexeme` (`language`,`entry`,`type`),
   KEY `lexeme_language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=223 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=293 ;
 
 --
 -- Dumping data for table `lexemes`
@@ -247,26 +248,37 @@ INSERT INTO `lexemes` (`id`, `language`, `type`, `entry`) VALUES
 (194, 'de', 'adjective/adverb', 'auf Raten'),
 (54, 'de', 'verb', 'aufbrechen'),
 (112, 'de', 'verb', 'auflegen'),
+(242, 'de', 'verb', 'auftreten'),
 (173, 'de', 'adjective/adverb', 'ausführlich'),
+(260, 'de', 'verb', 'ausüben'),
 (104, 'de', 'verb', 'begeistern'),
 (129, 'de', 'verb', 'besitzen'),
 (165, 'de', 'verb', 'betrügen'),
 (78, 'de', 'verb', 'bewältigen'),
+(291, 'de', 'verb', 'bügeln'),
 (22, 'de', 'noun', 'das Anschreiben'),
 (88, 'de', 'noun', 'das Gericht'),
 (62, 'de', 'noun', 'das Gerücht'),
+(252, 'de', 'noun', 'das Mitleid'),
 (136, 'de', 'noun', 'das Sparschwein'),
 (51, 'de', 'noun', 'das Ufer'),
 (30, 'de', 'noun', 'das Verzeichnis'),
 (154, 'de', 'noun', 'der Anlass'),
 (191, 'de', 'noun', 'der Auftakt'),
+(273, 'de', 'noun', 'der Auftrag'),
 (138, 'de', 'noun', 'der Bankrott'),
 (214, 'de', 'noun', 'der Beamtenapparat'),
+(286, 'de', 'noun', 'der Begriff'),
+(250, 'de', 'noun', 'der Eigenname'),
 (143, 'de', 'noun', 'der Gegenstand'),
+(266, 'de', 'noun', 'der Gleichsetzungsnominativ'),
+(270, 'de', 'noun', 'der Gönner'),
 (49, 'de', 'noun', 'der Hafen'),
 (146, 'de', 'noun', 'der Hai'),
+(277, 'de', 'noun', 'der Hals'),
 (96, 'de', 'noun', 'der Hubschrauber'),
 (184, 'de', 'noun', 'der Kragen'),
+(268, 'de', 'noun', 'der Schreiner'),
 (90, 'de', 'noun', 'der Stift'),
 (198, 'de', 'noun', 'der Umgang'),
 (196, 'de', 'noun', 'der Veranstalter'),
@@ -286,66 +298,90 @@ INSERT INTO `lexemes` (`id`, `language`, `type`, `entry`) VALUES
 (140, 'de', 'noun', 'die Immobilien'),
 (210, 'de', 'noun', 'die Initiierung'),
 (132, 'de', 'noun', 'die Mütze'),
+(230, 'de', 'noun', 'die Probe'),
 (20, 'de', 'noun', 'die Rechnung'),
 (98, 'de', 'noun', 'die Sauftour'),
 (119, 'de', 'noun', 'die Scheibe'),
 (148, 'de', 'noun', 'die Sünde'),
 (188, 'de', 'noun', 'die Uraufführung'),
 (182, 'de', 'noun', 'die Vergnügung'),
+(227, 'de', 'noun', 'die Voraussetzung'),
 (116, 'de', 'verb', 'durchsetzen'),
+(265, 'de', 'verb', 'enthalten'),
 (14, 'de', 'verb', 'erfordern'),
 (127, 'de', 'verb', 'erklären'),
 (219, 'de', 'verb', 'erledigen'),
+(256, 'de', 'verb', 'feststellen'),
 (100, 'de', 'adjective/adverb', 'gelaunt'),
 (186, 'de', 'adjective/adverb', 'gelockert'),
 (152, 'de', 'adjective/adverb', 'im Namen von'),
 (69, 'de', 'verb', 'jmdm. etw. mitteilen'),
 (73, 'de', 'verb', 'jmdm. für etw. loben'),
 (110, 'de', 'adjective/adverb', 'jmdm. zu Ehren'),
-(42, 'de', 'phrasal verb', 'jmdm. zum Schweigen bringen'),
+(42, 'de', 'verb', 'jmdm. zum Schweigen bringen'),
 (102, 'de', 'verb', 'jubeln'),
+(223, 'de', 'verb', 'liefern'),
 (60, 'de', 'verb', 'losgehen'),
 (177, 'de', 'verb', 'lösen'),
 (85, 'de', 'verb', 'monieren'),
+(247, 'de', 'adjective/adverb', 'pflegeleicht'),
+(238, 'de', 'adjective/adverb', 'schlagartig'),
 (122, 'de', 'adjective/adverb', 'schnurstracks'),
 (134, 'de', 'verb', 'Schwein haben'),
 (108, 'de', 'verb', 'schütteln'),
+(283, 'de', 'verb', 'sich als etw. entpuppen'),
+(236, 'de', 'verb', 'sich auf etw. verlassen'),
 (114, 'de', 'verb', 'sich durchsetzen'),
 (106, 'de', 'verb', 'sich für etw. begeistern'),
 (160, 'de', 'verb', 'sich um etw. kümmern'),
 (1, 'de', 'verb', 'sich von jmdm. verabschieden'),
 (92, 'de', 'verb', 'sperren'),
 (75, 'de', 'adjective/adverb', 'stellvertretend'),
+(263, 'de', 'verb', 'umfassen'),
 (216, 'de', 'adjective/adverb', 'umfassend'),
+(280, 'de', 'adjective/adverb', 'unausführbar'),
 (212, 'de', 'adjective/adverb', 'undicht'),
+(279, 'de', 'adjective/adverb', 'unmöglich'),
 (45, 'de', 'verb', 'verdrängen'),
 (10, 'de', 'verb', 'verfassen'),
+(234, 'de', 'verb', 'verlassen'),
 (158, 'de', 'adjective/adverb', 'vermählt'),
-(41, 'de', 'phrasal verb', 'über eine Fertigkeit verfügen'),
-(39, 'de', 'phrasal verb', 'über eine Fähigkeit verfügen'),
+(41, 'de', 'verb', 'über eine Fertigkeit verfügen'),
+(39, 'de', 'verb', 'über eine Fähigkeit verfügen'),
 (82, 'de', 'verb', 'zerschlagen'),
 (156, 'de', 'adjective/adverb', 'zu besonderen Anlässen'),
 (124, 'de', 'verb', 'zu Gesicht bekommen'),
 (206, 'de', 'verb', 'zurückliegen'),
+(239, 'en', 'adjective/adverb', 'abrupt'),
 (26, 'en', 'noun', 'art'),
+(276, 'en', 'noun', 'assignment'),
 (77, 'en', 'adjective/adverb', 'assistant'),
 (201, 'en', 'noun', 'association'),
+(228, 'en', 'noun', 'assumption'),
 (204, 'en', 'noun', 'audience'),
 (53, 'en', 'noun', 'bank'),
 (139, 'en', 'noun', 'bankruptcy'),
+(271, 'en', 'noun', 'benefactor'),
 (21, 'en', 'noun', 'bill'),
 (215, 'en', 'noun', 'bureaucracy'),
 (133, 'en', 'noun', 'cap'),
+(269, 'en', 'noun', 'carpenter'),
 (66, 'en', 'noun', 'certainty'),
+(232, 'en', 'noun', 'challenge'),
+(255, 'en', 'noun', 'charity'),
 (185, 'en', 'noun', 'collar'),
 (217, 'en', 'adjective/adverb', 'comprehensive'),
+(289, 'en', 'noun', 'concept'),
+(229, 'en', 'noun', 'condition'),
 (199, 'en', 'noun', 'contact'),
 (23, 'en', 'noun', 'correspondence'),
 (89, 'en', 'noun', 'court'),
+(288, 'en', 'noun', 'definition'),
 (76, 'en', 'adjective/adverb', 'deputy'),
 (174, 'en', 'adjective/adverb', 'detailed'),
 (9, 'en', 'noun', 'direction'),
 (121, 'en', 'noun', 'disc'),
+(248, 'en', 'adjective/adverb', 'easy to clean'),
 (175, 'en', 'adjective/adverb', 'elaborate'),
 (200, 'en', 'noun', 'exposure'),
 (218, 'en', 'adjective/adverb', 'extensive'),
@@ -355,6 +391,8 @@ INSERT INTO `lexemes` (`id`, `language`, `type`, `entry`) VALUES
 (50, 'en', 'noun', 'harbour'),
 (97, 'en', 'noun', 'helicopter'),
 (101, 'en', 'adjective/adverb', 'humoured'),
+(290, 'en', 'noun', 'idea'),
+(281, 'en', 'adjective/adverb', 'impossible'),
 (176, 'en', 'adjective/adverb', 'in detail'),
 (195, 'en', 'adjective/adverb', 'in installments'),
 (111, 'en', 'adjective/adverb', 'in so.''s honour'),
@@ -367,21 +405,28 @@ INSERT INTO `lexemes` (`id`, `language`, `type`, `entry`) VALUES
 (213, 'en', 'adjective/adverb', 'leaky'),
 (168, 'en', 'noun', 'light bulb'),
 (31, 'en', 'noun', 'list'),
+(249, 'en', 'adjective/adverb', 'low-maintenance'),
 (68, 'en', 'noun', 'management'),
 (159, 'en', 'adjective/adverb', 'married'),
 (63, 'en', 'noun', 'myth'),
+(278, 'en', 'noun', 'neck'),
 (144, 'en', 'noun', 'object'),
 (155, 'en', 'noun', 'occasion'),
 (153, 'en', 'adjective/adverb', 'on behalf of'),
 (157, 'en', 'adjective/adverb', 'on special occasions'),
+(275, 'en', 'noun', 'order'),
 (197, 'en', 'noun', 'organiser'),
 (91, 'en', 'noun', 'pen'),
 (164, 'en', 'noun', 'penthouse'),
 (137, 'en', 'noun', 'piggy bank'),
+(253, 'en', 'noun', 'pity'),
 (183, 'en', 'noun', 'pleasure'),
+(267, 'en', 'noun', 'predicate nominative'),
 (190, 'en', 'noun', 'premiere'),
 (27, 'en', 'noun', 'procedure'),
 (25, 'en', 'noun', 'process'),
+(240, 'en', 'adjective/adverb', 'prompt'),
+(251, 'en', 'noun', 'proper noun'),
 (141, 'en', 'noun', 'property'),
 (99, 'en', 'noun', 'pub crawl'),
 (142, 'en', 'noun', 'real estate'),
@@ -389,6 +434,7 @@ INSERT INTO `lexemes` (`id`, `language`, `type`, `entry`) VALUES
 (187, 'en', 'adjective/adverb', 'relaxed'),
 (19, 'en', 'noun', 'requirement'),
 (64, 'en', 'noun', 'rumour'),
+(231, 'en', 'noun', 'sample'),
 (209, 'en', 'noun', 'seizure'),
 (147, 'en', 'noun', 'shark'),
 (52, 'en', 'noun', 'shore'),
@@ -396,27 +442,42 @@ INSERT INTO `lexemes` (`id`, `language`, `type`, `entry`) VALUES
 (120, 'en', 'noun', 'slice'),
 (35, 'en', 'noun', 'slip of the tongue'),
 (205, 'en', 'noun', 'spectator'),
+(272, 'en', 'noun', 'sponsor'),
 (192, 'en', 'noun', 'start'),
 (123, 'en', 'adjective/adverb', 'straightaway'),
+(241, 'en', 'adjective/adverb', 'sudden'),
+(254, 'en', 'noun', 'sympathy'),
+(274, 'en', 'noun', 'task'),
+(287, 'en', 'noun', 'term'),
+(233, 'en', 'noun', 'test'),
 (37, 'en', 'verb', 'to accept'),
 (83, 'en', 'verb', 'to annihilate'),
+(245, 'en', 'verb', 'to appear'),
+(243, 'en', 'verb', 'to arise'),
+(258, 'en', 'verb', 'to assert'),
 (12, 'en', 'verb', 'to author'),
 (170, 'en', 'verb', 'to be born'),
 (107, 'en', 'verb', 'to be crazy about sth.'),
 (135, 'en', 'verb', 'to be lucky'),
 (94, 'en', 'verb', 'to block out'),
+(262, 'en', 'verb', 'to carry out'),
 (125, 'en', 'verb', 'to catch sight of'),
 (166, 'en', 'verb', 'to cheat'),
 (103, 'en', 'verb', 'to cheer'),
-(40, 'en', 'phrasal verb', 'to command a skill'),
+(40, 'en', 'verb', 'to command a skill'),
 (86, 'en', 'verb', 'to complain'),
 (222, 'en', 'verb', 'to complete'),
 (74, 'en', 'verb', 'to compliment so. on sth.'),
 (13, 'en', 'verb', 'to compose'),
+(264, 'en', 'verb', 'to contain'),
 (87, 'en', 'verb', 'to criticise'),
 (207, 'en', 'verb', 'to date back'),
+(259, 'en', 'verb', 'to declare'),
 (15, 'en', 'verb', 'to demand'),
+(257, 'en', 'verb', 'to determine'),
+(246, 'en', 'verb', 'to develop'),
 (48, 'en', 'verb', 'to displace'),
+(284, 'en', 'verb', 'to emerge as sth.'),
 (117, 'en', 'verb', 'to enforce'),
 (221, 'en', 'verb', 'to execute'),
 (128, 'en', 'verb', 'to explain'),
@@ -424,17 +485,22 @@ INSERT INTO `lexemes` (`id`, `language`, `type`, `entry`) VALUES
 (178, 'en', 'verb', 'to free'),
 (72, 'en', 'verb', 'to inform so. about sth.'),
 (105, 'en', 'verb', 'to inspire'),
+(292, 'en', 'verb', 'to iron'),
 (55, 'en', 'verb', 'to leave'),
 (95, 'en', 'verb', 'to lock'),
 (162, 'en', 'verb', 'to look after sth.'),
 (80, 'en', 'verb', 'to manage'),
 (16, 'en', 'verb', 'to necessitate'),
+(244, 'en', 'verb', 'to occur'),
 (81, 'en', 'verb', 'to overcome'),
 (130, 'en', 'verb', 'to own'),
+(261, 'en', 'verb', 'to perform'),
 (113, 'en', 'verb', 'to play'),
 (131, 'en', 'verb', 'to possess'),
 (115, 'en', 'verb', 'to prevail'),
+(224, 'en', 'verb', 'to provide'),
 (118, 'en', 'verb', 'to push'),
+(237, 'en', 'verb', 'to rely on sth.'),
 (47, 'en', 'verb', 'to replace'),
 (17, 'en', 'verb', 'to require'),
 (180, 'en', 'verb', 'to resolve'),
@@ -453,7 +519,9 @@ INSERT INTO `lexemes` (`id`, `language`, `type`, `entry`) VALUES
 (161, 'en', 'verb', 'to take care of sth.'),
 (3, 'en', 'verb', 'to take one''s leave of so.'),
 (70, 'en', 'verb', 'to tell so. sth.'),
+(285, 'en', 'verb', 'to turn out to be sth.'),
 (11, 'en', 'verb', 'to write'),
+(282, 'en', 'adjective/adverb', 'unfeasible'),
 (4, 'fr', 'verb', 'congédier qn.');
 
 -- --------------------------------------------------------
@@ -474,7 +542,7 @@ CREATE TABLE IF NOT EXISTS `meanings` (
   KEY `base` (`targetid`),
   KEY `target` (`baseid`),
   KEY `user_meaning` (`userid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=147 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=195 ;
 
 --
 -- Dumping data for table `meanings`
@@ -610,7 +678,55 @@ INSERT INTO `meanings` (`id`, `userid`, `targetid`, `baseid`, `frequency`, `date
 (142, 1, 216, 218, 1, '2014-11-20 13:25:23'),
 (143, 1, 219, 220, 1, '2014-11-20 13:26:49'),
 (145, 1, 219, 221, 1, '2014-11-20 13:26:56'),
-(146, 1, 219, 222, 1, '2014-11-20 13:26:59');
+(146, 1, 219, 222, 1, '2014-11-20 13:26:59'),
+(147, 1, 223, 224, 1, '2014-11-21 02:39:21'),
+(148, 1, 227, 19, 1, '2014-11-21 02:41:58'),
+(149, 1, 227, 228, 1, '2014-11-21 02:43:03'),
+(150, 1, 227, 229, 1, '2014-11-21 02:43:05'),
+(151, 1, 230, 231, 1, '2014-11-21 03:10:26'),
+(152, 1, 230, 232, 1, '2014-11-21 03:10:30'),
+(153, 1, 230, 233, 1, '2014-11-21 03:10:34'),
+(154, 1, 234, 55, 1, '2014-11-21 03:15:13'),
+(155, 1, 236, 237, 1, '2014-11-21 03:16:13'),
+(156, 1, 238, 239, 1, '2014-11-21 03:20:19'),
+(157, 1, 238, 240, 1, '2014-11-21 03:20:21'),
+(158, 1, 238, 241, 1, '2014-11-21 03:20:26'),
+(159, 1, 242, 243, 1, '2014-11-21 03:22:04'),
+(160, 1, 242, 244, 1, '2014-11-21 03:22:08'),
+(161, 1, 242, 245, 1, '2014-11-21 03:22:12'),
+(162, 1, 242, 246, 1, '2014-11-21 03:22:15'),
+(163, 1, 247, 248, 1, '2014-11-21 03:24:28'),
+(164, 1, 247, 249, 1, '2014-11-21 03:24:31'),
+(165, 1, 250, 251, 1, '2014-11-21 03:25:30'),
+(166, 1, 252, 253, 1, '2014-11-21 03:26:51'),
+(167, 1, 252, 254, 1, '2014-11-21 03:26:55'),
+(168, 1, 252, 255, 1, '2014-11-21 03:26:59'),
+(169, 1, 256, 257, 1, '2014-11-21 03:28:39'),
+(170, 1, 256, 258, 1, '2014-11-21 03:28:42'),
+(171, 1, 256, 259, 1, '2014-11-21 03:28:45'),
+(172, 1, 260, 261, 1, '2014-11-21 03:33:55'),
+(173, 1, 260, 262, 1, '2014-11-21 03:33:57'),
+(174, 1, 263, 264, 1, '2014-11-21 04:14:21'),
+(175, 1, 265, 264, 1, '2014-11-21 04:14:54'),
+(176, 1, 266, 267, 1, '2014-11-21 04:59:24'),
+(177, 1, 268, 269, 1, '2014-11-21 05:00:18'),
+(178, 1, 270, 271, 1, '2014-11-21 05:01:02'),
+(179, 1, 270, 272, 1, '2014-11-21 05:01:04'),
+(180, 1, 273, 274, 1, '2014-11-21 05:01:52'),
+(181, 1, 273, 275, 1, '2014-11-21 05:01:54'),
+(182, 1, 273, 276, 1, '2014-11-21 05:01:57'),
+(183, 1, 277, 278, 1, '2014-11-21 05:02:42'),
+(184, 1, 279, 281, 1, '2014-11-21 05:04:26'),
+(185, 1, 279, 282, 1, '2014-11-21 05:04:28'),
+(186, 1, 280, 281, 1, '2014-11-21 05:05:00'),
+(187, 1, 280, 282, 1, '2014-11-21 05:05:08'),
+(188, 1, 283, 284, 1, '2014-11-21 05:07:02'),
+(189, 1, 283, 285, 1, '2014-11-21 05:07:53'),
+(190, 1, 286, 287, 1, '2014-11-21 05:11:24'),
+(191, 1, 286, 288, 1, '2014-11-21 05:11:30'),
+(192, 1, 286, 289, 1, '2014-11-21 05:11:37'),
+(193, 1, 286, 290, 1, '2014-11-21 05:11:41'),
+(194, 1, 291, 292, 1, '2014-11-21 05:12:38');
 
 -- --------------------------------------------------------
 
@@ -622,7 +738,6 @@ CREATE TABLE IF NOT EXISTS `target_lexemes` (
 ,`language` char(2)
 ,`type` varchar(30)
 ,`entry` varchar(255)
-,`baseid` int(10)
 ,`frequency` int(10)
 );
 -- --------------------------------------------------------
@@ -691,7 +806,7 @@ CREATE TABLE IF NOT EXISTS `word_list_verbose` (
 --
 DROP TABLE IF EXISTS `base_lexemes`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `base_lexemes` AS select distinct `meanings`.`userid` AS `userid`,`meanings`.`id` AS `meaningid`,`lexemes`.`id` AS `id`,`lexemes`.`language` AS `language`,`lexemes`.`entry` AS `entry`,`meanings`.`date_entered` AS `date_entered` from (`lexemes` join `meanings` on((`lexemes`.`id` = `meanings`.`baseid`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `base_lexemes` AS select distinct `meanings`.`id` AS `meaningid`,`meanings`.`targetid` AS `targetid`,`meanings`.`userid` AS `userid`,`lexemes`.`id` AS `id`,`lexemes`.`language` AS `language`,`lexemes`.`entry` AS `entry`,`meanings`.`date_entered` AS `date_entered` from (`lexemes` join `meanings` on((`lexemes`.`id` = `meanings`.`baseid`)));
 
 -- --------------------------------------------------------
 
@@ -700,7 +815,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `target_lexemes`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `target_lexemes` AS select `lexemes`.`id` AS `id`,`lexemes`.`language` AS `language`,`lexemes`.`type` AS `type`,`lexemes`.`entry` AS `entry`,`meanings`.`baseid` AS `baseid`,`meanings`.`frequency` AS `frequency` from (`lexemes` join `meanings` on((`lexemes`.`id` = `meanings`.`targetid`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `target_lexemes` AS select distinct `lexemes`.`id` AS `id`,`lexemes`.`language` AS `language`,`lexemes`.`type` AS `type`,`lexemes`.`entry` AS `entry`,`meanings`.`frequency` AS `frequency` from (`lexemes` join `meanings` on((`lexemes`.`id` = `meanings`.`targetid`)));
 
 -- --------------------------------------------------------
 
@@ -709,7 +824,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `word_list`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `word_list` AS select `base_lexemes`.`meaningid` AS `meaningid`,`target_lexemes`.`frequency` AS `frequency`,`target_lexemes`.`id` AS `target_id`,`target_lexemes`.`type` AS `target_entry_type`,`target_lexemes`.`entry` AS `target_entry`,`base_lexemes`.`id` AS `base_id`,`base_lexemes`.`entry` AS `base_entry` from (`target_lexemes` join `base_lexemes` on((`target_lexemes`.`baseid` = `base_lexemes`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `word_list` AS select `word_list_verbose`.`meaningid` AS `meaningid`,`word_list_verbose`.`frequency` AS `frequency`,`word_list_verbose`.`target_id` AS `target_id`,`word_list_verbose`.`target_entry_type` AS `target_entry_type`,`word_list_verbose`.`target_entry` AS `target_entry`,`word_list_verbose`.`base_id` AS `base_id`,`word_list_verbose`.`base_entry` AS `base_entry` from `word_list_verbose`;
 
 -- --------------------------------------------------------
 
@@ -718,7 +833,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `word_list_verbose`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `word_list_verbose` AS select `base_lexemes`.`userid` AS `userid`,`base_lexemes`.`meaningid` AS `meaningid`,`target_lexemes`.`frequency` AS `frequency`,`target_lexemes`.`id` AS `target_id`,`target_lexemes`.`language` AS `target_language`,`target_lexemes`.`type` AS `target_entry_type`,`target_lexemes`.`entry` AS `target_entry`,`base_lexemes`.`id` AS `base_id`,`base_lexemes`.`language` AS `base_language`,`base_lexemes`.`entry` AS `base_entry`,`base_lexemes`.`date_entered` AS `date_entered` from (`target_lexemes` join `base_lexemes` on((`target_lexemes`.`baseid` = `base_lexemes`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `word_list_verbose` AS select `base_lexemes`.`userid` AS `userid`,`base_lexemes`.`meaningid` AS `meaningid`,`target_lexemes`.`frequency` AS `frequency`,`target_lexemes`.`id` AS `target_id`,`target_lexemes`.`language` AS `target_language`,`target_lexemes`.`type` AS `target_entry_type`,`target_lexemes`.`entry` AS `target_entry`,`base_lexemes`.`id` AS `base_id`,`base_lexemes`.`language` AS `base_language`,`base_lexemes`.`entry` AS `base_entry`,`base_lexemes`.`date_entered` AS `date_entered` from (`target_lexemes` join `base_lexemes` on((`base_lexemes`.`targetid` = `target_lexemes`.`id`)));
 
 --
 -- Constraints for dumped tables
