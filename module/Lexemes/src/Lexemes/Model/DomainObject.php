@@ -1,5 +1,7 @@
 <?php
 
+namespace Lexemes\Model;
+
 class DomainObject {
 	protected $id;
 	
