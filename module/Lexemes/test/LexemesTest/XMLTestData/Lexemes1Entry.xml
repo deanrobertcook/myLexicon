@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="lexemes">
+        <column>language</column>
+        <column>type</column>
+        <column>entry</column>
+		<row>
+            <value>en</value>
+            <value>verb</value>
+            <value>to buy</value>
+        </row>
+    </table>
+</dataset>
