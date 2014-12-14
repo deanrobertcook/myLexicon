@@ -1,11 +1,27 @@
 <?php
+
 namespace Lexemes\Model;
 
-class Lexeme extends DomainObject implements LexemeInterface {
-	private		$language,
-				$type,
-				$entry;
+class Lexeme {
+	private $id;
+	private $language;
+	private $type;
+	private $entry;
 	
+	public function __construct($language, $type, $entry) {
+		$this->language = $language;
+		$this->type = $type;
+		$this->entry = $entry;
+	}
+	
+	public function setID($id) {
+		$this->id = $id;
+	}
+	
+	public function getID() {
+		return $this->id;
+	}
+
 	public function getLanguage() {
 		return $this->language;
 	}
@@ -16,17 +32,5 @@ class Lexeme extends DomainObject implements LexemeInterface {
 	
 	public function getEntry() {
 		return $this->entry;
-	}
-	
-	public function setLanguage($language) {
-		$this->language = $language;
-	}
-	
-	public function setType($type) {
-		$this->type = $type;
-	}
-	
-	public function setEntry($entry) {
-		$this->entry = $entry;
 	}
 }

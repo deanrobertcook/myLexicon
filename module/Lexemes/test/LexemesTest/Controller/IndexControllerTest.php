@@ -2,11 +2,12 @@
 
 namespace LexemesTest\Controller;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use PDO;
 
-
-class IndexControllerTest extends AbstractHttpControllerTestCase {
-	public function testTrueIsTrue() {
+class CollectionRestfulControllerTest extends \PHPUnit_Framework_TestCase {
+	
+	public function testSelectAllMeanings() {
 		$this->assertTrue(true);
 	}
+
 }

@@ -44,3 +44,8 @@ label span {
 	float: left;
 	width: 100px;
 }
+
+td, th {
+	padding-left: 10px;
+	padding-right: 10px;
+}

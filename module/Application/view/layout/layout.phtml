@@ -1,8 +1,10 @@
-<?php echo $this->doctype(); ?>
+<?php 
+echo $this->doctype(); 
+echo $this->headMeta()->setCharset('UTF-8');
+?>
 
 <html lang="en">
     <head>
-        <meta charset="utf-8">
         <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()

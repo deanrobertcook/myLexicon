@@ -1,3 +1,25 @@
-<strong>Module:</strong>        Lexemes &raquo;
-<strong>Controller:</strong>    Index &raquo;
-<strong>Action:</strong>        index
+<h3>All <?php echo sizeof($this->meanings); ?> Meanings</h3>
+<table>
+	<tr>
+		<th>Freq.</th>
+		<th>Tar. Lang</th>
+		<th>Tar. Type</th>
+		<th>Tar. Entry</th>
+		<th>Base Lang</th>
+		<th>Base Type</th>
+		<th>Base Entry</th>
+	</tr>
+	<?php
+	foreach ($this->meanings as $meaning):
+	?>
+	<tr>
+		<td><?php echo $meaning->getFrequency(); ?></td>
+		<td><?php echo $meaning->getTargetLexeme()->getLanguage(); ?></td>
+		<td><?php echo $meaning->getTargetLexeme()->getType(); ?></td>
+		<td><?php echo $meaning->getTargetLexeme()->getEntry(); ?></td>
+		<td><?php echo $meaning->getBaseLexeme()->getLanguage(); ?></td>
+		<td><?php echo $meaning->getBaseLexeme()->getType(); ?></td>
+		<td><?php echo $meaning->getBaseLexeme()->getEntry(); ?></td>
+	</tr>
+	<?php endforeach; ?>
+</table>
