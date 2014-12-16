@@ -4,11 +4,12 @@ namespace LexemesTest\Service;
 
 use Lexemes\Model\Lexeme;
 use Lexemes\Service\LexemeService;
+use LexemesTest\DBTestClass;
 
 class LexemeServiceTest extends DBTestClass {
 	
 	public function getDataSet() {
-		return $this->createMySQLXMLDataSet(dirname(__DIR__) . '/XMLTestData/Fixture.xml');
+		return $this->createMySQLXMLDataSet(__DIR__ . '/LexemeServiceFixture.xml');
 	}
 
 	public function testSaveLexeme() {
@@ -19,7 +20,7 @@ class LexemeServiceTest extends DBTestClass {
 		$queryTable = $this->getConnection()->createQueryTable(
 				'lexemes', "SELECT language, type, entry FROM lexemes WHERE id = " . $id
 		);
-		$expectedTable =  $this->createXMLDataSet(dirname(__DIR__) . '/XMLTestData/Lexemes1Entry.xml')->getTable('lexemes');
+		$expectedTable =  $this->createXMLDataSet(__DIR__ . '/Lexemes1Entry.xml')->getTable('lexemes');
 		
 		$this->assertTablesEqual($expectedTable, $queryTable);
 	}

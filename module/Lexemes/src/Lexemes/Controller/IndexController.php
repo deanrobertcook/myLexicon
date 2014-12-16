@@ -6,14 +6,13 @@ use Lexemes\Form\MeaningForm;
 use Lexemes\Mapper\MeaningMapper;
 use Lexemes\Model\Lexeme;
 use Lexemes\Model\Meaning;
+use Lexemes\Service\MeaningService;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController {
 
 	public function indexAction() {
-		$mapper = new MeaningMapper();
-		$meanings = $mapper->getAllMeanings();
-		return array('meanings' => $meanings);
+		$meaningService = new MeaningService();
 	}
 	
 	public function addunitAction() {

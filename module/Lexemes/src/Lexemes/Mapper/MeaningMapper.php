@@ -10,7 +10,7 @@ class MeaningMapper {
 	private $pdo = null;
 	
 	public function __construct() {
-		$this->pdo = new PDO("mysql:host=localhost;dbname=myLexiconTest;charset=UTF8", "root", "PASSWORD_HERE");
+		$this->pdo = new PDO("mysql:host=localhost;dbname=myLexiconTest;charset=UTF8", "root", "PW");
 	}
 	
 	public function getAllMeanings() {
@@ -18,14 +18,14 @@ class MeaningMapper {
 		$stmt->execute();
 		$meanings = array();
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$targetLexeme = new Lexeme(
+			$targetLexeme = (new Lexeme(
 					$row['target_language'],
 					$row['target_type'],
-					$row['target_entry']);
-			$baseLexeme = new Lexeme(
+					$row['target_entry']))->setID($row['targetid']);
+			$baseLexeme = (new Lexeme(
 					$row['base_language'],
 					$row['base_type'],
-					$row['base_entry']);
+					$row['base_entry']))->setID($row['baseid']);
 			$meaning = new Meaning($targetLexeme, $baseLexeme);
 			$meaning->setFrequency($row['frequency']);
 			$meanings[] = $meaning;
@@ -33,14 +33,32 @@ class MeaningMapper {
 		return $meanings;
 	}
 	
-	public function insertMeaning(Meaning $meaning) {
-		$targetid = $meaning->getTargetLexeme()->getID();
-		$baseid = $meaning->getBaseLexeme()->getID();
-		
+	public function insertMeaning($targetID, $baseID) {		
 		$stmt = $this->pdo->prepare("INSERT INTO meanings (userid, targetid, baseid) VALUES (1, ?, ?) ON DUPLICATE KEY UPDATE frequency = frequency + 1;");
-		$stmt->bindValue(1, $targetid);
-		$stmt->bindValue(2, $baseid);
+		$stmt->bindValue(1, $targetID);
+		$stmt->bindValue(2, $baseID);
 		
 		$stmt->execute();
+	}
+	
+	public function getMeaningsForLexemeID($lexemeID) {
+		$stmt = $this->pdo->prepare("SELECT * FROM word_list_verbose WHERE targetid = ?");
+		$stmt->bindValue(1, $lexemeID);
+		$stmt->execute();
+		$meanings = array();
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$targetLexeme = (new Lexeme(
+					$row['target_language'],
+					$row['target_type'],
+					$row['target_entry']))->setID($row['targetid']);
+			$baseLexeme = (new Lexeme(
+					$row['base_language'],
+					$row['base_type'],
+					$row['base_entry']))->setID($row['baseid']);
+			$meaning = new Meaning($targetLexeme, $baseLexeme);
+			$meaning->setFrequency($row['frequency']);
+			$meanings[] = $meaning;
+		}		
+		return $meanings;
 	}
 }

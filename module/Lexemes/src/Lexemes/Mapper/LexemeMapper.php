@@ -9,7 +9,7 @@ class LexemeMapper {
 	private $pdo = null;
 	
 	public function __construct() {
-		$this->pdo = new PDO("mysql:host=localhost;dbname=myLexiconTest;charset=UTF8", "root", "PASSWORD_HERE");
+		$this->pdo = new PDO("mysql:host=localhost;dbname=myLexiconTest;charset=UTF8", "root", "PW");
 	}
 	
 	public function insert(Lexeme $lexeme) {

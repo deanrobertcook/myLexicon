@@ -14,6 +14,7 @@ class Meaning {
 	
 	public function setFrequency($frequency) {
 		$this->frequency = $frequency;
+		return $this;
 	}
 	
 	public function getFrequency() {

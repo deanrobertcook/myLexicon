@@ -1,6 +1,6 @@
 <?php
 
-namespace LexemesTest\Service;
+namespace LexemesTest;
 
 use PDO;
 
