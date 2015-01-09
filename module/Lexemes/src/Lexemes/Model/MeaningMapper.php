@@ -1,15 +1,17 @@
 <?php
 
-namespace Lexemes\Mapper;
+namespace Lexemes\Model;
 
-use Lexemes\Model\Lexeme;
-use Lexemes\Model\Meaning;
+use Lexemes\Model\Entity\Lexeme;
+use Lexemes\Model\Entity\Meaning;
 use PDO;
+
 
 class MeaningMapper {
 	private $pdo = null;
 	
 	public function __construct() {
+		
 		$this->pdo = new PDO("mysql:host=localhost;dbname=myLexiconTest;charset=UTF8", "root", "PW");
 	}
 	

@@ -3,9 +3,9 @@
 namespace Lexemes\Controller;
 
 use Lexemes\Form\MeaningForm;
-use Lexemes\Mapper\MeaningMapper;
-use Lexemes\Model\Lexeme;
-use Lexemes\Model\Meaning;
+use Lexemes\Model\Entity\Lexeme;
+use Lexemes\Model\Entity\Meaning;
+use Lexemes\Model\MeaningMapper;
 use Lexemes\Service\MeaningService;
 use Zend\Mvc\Controller\AbstractActionController;
 

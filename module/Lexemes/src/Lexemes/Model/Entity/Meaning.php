@@ -1,6 +1,6 @@
 <?php
 
-namespace Lexemes\Model;
+namespace Lexemes\Model\Entity;
 
 class Meaning {
 	private $targetLexeme;

@@ -1,9 +1,10 @@
 <?php
 
-namespace Lexemes\Mapper;
+namespace Lexemes\Model;
 
-use Lexemes\Model\Lexeme;
+use Lexemes\Model\Entity\Lexeme;
 use PDO;
+
 
 class LexemeMapper {
 	private $pdo = null;

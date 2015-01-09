@@ -2,8 +2,9 @@
 
 namespace Lexemes\Service;
 
-use Lexemes\Mapper\MeaningMapper;
-use Lexemes\Model\Meaning;
+use Lexemes\Model\Entity\Meaning;
+use Lexemes\Model\MeaningMapper;
+
 
 class MeaningService {
 	
