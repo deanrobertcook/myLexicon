@@ -10,9 +10,8 @@ use PDO;
 class MeaningMapper {
 	private $pdo = null;
 	
-	public function __construct() {
-		
-		$this->pdo = new PDO("mysql:host=localhost;dbname=myLexiconTest;charset=UTF8", "root", "PW");
+	public function __construct($PDO) {
+		$this->pdo = $PDO;
 	}
 	
 	public function getAllMeanings() {
@@ -30,6 +29,7 @@ class MeaningMapper {
 					$row['base_entry']))->setID($row['baseid']);
 			$meaning = new Meaning($targetLexeme, $baseLexeme);
 			$meaning->setFrequency($row['frequency']);
+			$meaning->setId($row['meaningid']);
 			$meanings[] = $meaning;
 		}		
 		return $meanings;
@@ -59,6 +59,7 @@ class MeaningMapper {
 					$row['base_entry']))->setID($row['baseid']);
 			$meaning = new Meaning($targetLexeme, $baseLexeme);
 			$meaning->setFrequency($row['frequency']);
+			$meaning->setId($row['meaningid']);
 			$meanings[] = $meaning;
 		}		
 		return $meanings;

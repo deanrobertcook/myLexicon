@@ -9,8 +9,8 @@ use PDO;
 class LexemeMapper {
 	private $pdo = null;
 	
-	public function __construct() {
-		$this->pdo = new PDO("mysql:host=localhost;dbname=myLexiconTest;charset=UTF8", "root", "PW");
+	public function __construct($PDO) {
+		$this->pdo = $PDO;
 	}
 	
 	public function insert(Lexeme $lexeme) {

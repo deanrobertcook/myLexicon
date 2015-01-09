@@ -5,6 +5,14 @@ return array(
 			'Lexemes\Controller\Restful' => 'Lexemes\Controller\RestfulController',
 		),
 	),
+	'service_manager' => array(
+		'factories' => array(
+			'PDO' => 'Lexemes\Service\Factory\PDOFactory',
+			'meaningService' => 'Lexemes\Service\Factory\MeaningServiceFactory',
+			'lexemeService' => 'Lexemes\Service\Factory\LexemeServiceFactory',
+		),
+		'invokables' => array()
+	),
 	'router' => array(
 		'routes' => array(
 			'lexemes' => array(

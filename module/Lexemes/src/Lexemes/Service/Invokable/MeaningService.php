@@ -1,6 +1,6 @@
 <?php
 
-namespace Lexemes\Service;
+namespace Lexemes\Service\Invokable;
 
 use Lexemes\Model\Entity\Meaning;
 use Lexemes\Model\MeaningMapper;
@@ -11,9 +11,9 @@ class MeaningService {
 	private $meaningMapper;
 	private $lexemeService;
 	
-	public function __construct() {
-		$this->meaningMapper = new MeaningMapper();
-		$this->lexemeService = new LexemeService();
+	public function __construct($PDO) {
+		$this->meaningMapper = new MeaningMapper($PDO);
+		$this->lexemeService = new LexemeService($PDO);
 	}
 	
 	public function saveMeaning(Meaning $meaning) {
