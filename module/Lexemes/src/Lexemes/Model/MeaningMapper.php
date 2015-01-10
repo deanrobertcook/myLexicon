@@ -39,7 +39,7 @@ class MeaningMapper {
 		$stmt = $this->pdo->prepare("INSERT INTO meanings (userid, targetid, baseid) VALUES (1, ?, ?) ON DUPLICATE KEY UPDATE frequency = frequency + 1;");
 		$stmt->bindValue(1, $targetID);
 		$stmt->bindValue(2, $baseID);
-		
+			
 		$stmt->execute();
 	}
 	

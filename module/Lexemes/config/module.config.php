@@ -3,6 +3,7 @@ return array(
 	'controllers' => array(
 		'invokables' => array(
 			'Lexemes\Controller\Restful' => 'Lexemes\Controller\RestfulController',
+			'Lexemes\Controller\Index' => 'Lexemes\Controller\IndexController',
 		),
 	),
 	'service_manager' => array(
@@ -15,10 +16,20 @@ return array(
 	),
 	'router' => array(
 		'routes' => array(
-			'lexemes' => array(
+			'home' => array(
 				'type' => 'Literal',
 				'options' => array(
 					'route' => '/myLexicon',
+					'defaults' => array(
+                        'controller' => 'Lexemes\Controller\Index',
+						'action' => 'index'
+                    ),
+				),	
+			),
+			'lexemes' => array(
+				'type' => 'Literal',
+				'options' => array(
+					'route' => '/myLexicon/lexemes',
 					'defaults' => array(
                         'controller' => 'Lexemes\Controller\Restful',
                     ),
@@ -41,6 +52,9 @@ return array(
 		),
 	),
 	'view_manager' => array(
+		'template_path_stack' => array(
+            'User' => __DIR__ . '/../view',
+        ),
 		'strategies' => array(
             'ViewJsonStrategy',
         ),

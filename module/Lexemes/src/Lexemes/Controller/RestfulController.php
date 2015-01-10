@@ -34,10 +34,12 @@ class RestfulController extends AbstractRestfulController {
 		$lexeme = $lexemeService->retrieveLexemeByID($id);
 		
 		$output = array(
-			'id' => $lexeme->getId(),
-			'language' => $lexeme->getLanguage(),
-			'type' => $lexeme->getType(),
-			'entry' => $lexeme->getEntry(),
+			'targetLexeme' => array(
+				'id' => $lexeme->getId(),
+				'language' => $lexeme->getLanguage(),
+				'type' => $lexeme->getType(),
+				'entry' => $lexeme->getEntry(),
+			)
 		);
 		
 		$meaningService = $this->serviceLocator->get('meaningService');
