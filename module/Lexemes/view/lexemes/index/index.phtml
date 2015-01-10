@@ -1,6 +1,16 @@
-<h3>myLexicon</h3>
+<header id="">
+	<h3>myLexicon</h3>
+</header>
+<section id="lexicon">
+	
+</section>
+<footer></footer>
 
-<div id="lexicon"></div>
+<script type="text/template" id="lexiconInfo">
+	<div class="lexiconInfo">
+		Count: <%= meaningCount %>
+	</div>
+</script>
 
 <script type="text/template" id="meaningTemplate">
 	<ul class="meaningInfo">
@@ -10,8 +20,8 @@
 </script>
 
 <script type="text/template" id="lexemeTemplate">
-	<strong><%= targetOrBase %> Lexeme</strong>
-	<ul class="lexemeInfo">
+	<strong><%= target ? 'Target' : 'Base' %> Lexeme</strong>
+	<ul data-lexeme-id="<%= id %>" data-lexeme-language="<%= language %>" class="lexemeInfo">
 		<li>Lexeme ID: <%= id %></li>
 		<li>Lexeme Language: <%= language %></li>
 		<li>Lexeme Type: <%= type %></li>
@@ -29,5 +39,6 @@ echo $this->headScript()
 	->appendFile($this->basePath() . '/js/lexemes/views/lexeme.js')
 	->appendFile($this->basePath() . '/js/lexemes/views/meaning.js')
 	->appendFile($this->basePath() . '/js/lexemes/views/lexicon.js')
+	->appendFile($this->basePath() . '/js/lexemes/routers/router.js')
 	->appendFile($this->basePath() . '/js/lexemes/app.js')
 ; ?>

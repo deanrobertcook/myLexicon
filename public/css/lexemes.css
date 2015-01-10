@@ -1,15 +1,24 @@
+.lexiconInfo {
+	border: 1px solid black;
+	padding: 4px;
+}
+
 .meaningContainer {
+	padding: 4px;
+	margin: 4px 0;
 	display: block;
 	border: 1px solid black;
 	overflow: hidden;
 }
 
 .lexemeContainer {
+	margin: 4px;
 	display: block;
 	float: left;
 }
 
 .meaningInfo {
+	margin: 4px;
 	display: block;
 	float: left;
 	width: 100%;
