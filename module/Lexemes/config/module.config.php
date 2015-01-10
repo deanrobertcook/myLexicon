@@ -19,7 +19,7 @@ return array(
 			'home' => array(
 				'type' => 'Literal',
 				'options' => array(
-					'route' => '/myLexicon',
+					'route' => '/',
 					'defaults' => array(
                         'controller' => 'Lexemes\Controller\Index',
 						'action' => 'index'
@@ -29,7 +29,7 @@ return array(
 			'lexemes' => array(
 				'type' => 'Literal',
 				'options' => array(
-					'route' => '/myLexicon/lexemes',
+					'route' => '/lexemes',
 					'defaults' => array(
                         'controller' => 'Lexemes\Controller\Restful',
                     ),

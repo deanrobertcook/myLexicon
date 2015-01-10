@@ -1,0 +1,16 @@
+.meaningContainer {
+	display: block;
+	border: 1px solid black;
+	overflow: hidden;
+}
+
+.lexemeContainer {
+	display: block;
+	float: left;
+}
+
+.meaningInfo {
+	display: block;
+	float: left;
+	width: 100%;
+}

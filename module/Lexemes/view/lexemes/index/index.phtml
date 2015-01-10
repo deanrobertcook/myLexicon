@@ -1,22 +1,33 @@
-<h3>Index Index action</h3>
+<h3>myLexicon</h3>
 
-<div id="lexemes">
-	should be here
-</div>
+<div id="lexicon"></div>
 
-<script type="text/template" id="lexemeTemplate">
-	<ul>
-		<li><%= id %></li>
-		<li><%= language %></li>
-		<li><%= type %></li>
-		<li><%= entry %></li>
+<script type="text/template" id="meaningTemplate">
+	<ul class="meaningInfo">
+		<li>Meaning ID: <%= id %></li>
+		<li>Frequency: <%= frequency %></li>
 	</ul>
 </script>
 
-<?php echo $this->headScript()
+<script type="text/template" id="lexemeTemplate">
+	<strong><%= targetOrBase %> Lexeme</strong>
+	<ul class="lexemeInfo">
+		<li>Lexeme ID: <%= id %></li>
+		<li>Lexeme Language: <%= language %></li>
+		<li>Lexeme Type: <%= type %></li>
+		<li>Lexeme Entry: <%= entry %></li>
+	</ul>
+</script>
+
+<?php 
+echo $this->headLink()->prependStylesheet($this->basePath() . '/css/lexemes.css');
+
+echo $this->headScript()
 	->appendFile($this->basePath() . '/js/lexemes/models/lexeme.js')
+	->appendFile($this->basePath() . '/js/lexemes/models/meaning.js')
 	->appendFile($this->basePath() . '/js/lexemes/collections/lexicon.js')
 	->appendFile($this->basePath() . '/js/lexemes/views/lexeme.js')
+	->appendFile($this->basePath() . '/js/lexemes/views/meaning.js')
 	->appendFile($this->basePath() . '/js/lexemes/views/lexicon.js')
 	->appendFile($this->basePath() . '/js/lexemes/app.js')
 ; ?>

@@ -1,12 +1,11 @@
 var app = app || {};
 
 app.LexiconView = Backbone.View.extend({
-	el: '#lexemes',
+	el: '#lexicon',
 	
-	initialize: function(initialLexemes) {
-		console.log(app);
-		console.log(initialLexemes);
-		this.collection = new app.Lexicon(initialLexemes);
+	initialize: function(initialMeanings) {
+		console.log(initialMeanings);
+		this.collection = new app.Lexicon(initialMeanings);
 //		this.collection.fetch({
 //			reset: true,
 //		});
@@ -17,14 +16,21 @@ app.LexiconView = Backbone.View.extend({
 	},
 	
 	render: function() {
-		this.collection.each(function(item) {
-			this.renderLexeme(item);
+		this.collection.each(function(meaning) {
+			this.renderMeaning(meaning);
 		}, this);
 	},
 	
-	renderLexeme: function(item) {
+	renderMeaning: function(meaning) {
+		var meaningView = new app.MeaningView({
+			model: meaning,
+		});
+		this.$el.append(meaningView.render().el);
+	},
+	
+	renderLexeme: function(lexeme) {
 		var lexemeView = new app.LexemeView({
-			model: item,
+			model: lexeme,
 		});
 		this.$el.append(lexemeView.render().el);
 	}
