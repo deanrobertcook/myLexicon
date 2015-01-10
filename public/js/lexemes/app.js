@@ -60,5 +60,5 @@ $(function() {
 		},
 	];
 	
-	new app.LexiconView(meanings);
+	new app.LexiconView();
 });

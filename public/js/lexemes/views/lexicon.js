@@ -3,15 +3,14 @@ var app = app || {};
 app.LexiconView = Backbone.View.extend({
 	el: '#lexicon',
 	
-	initialize: function(initialMeanings) {
-		console.log(initialMeanings);
-		this.collection = new app.Lexicon(initialMeanings);
-//		this.collection.fetch({
-//			reset: true,
-//		});
+	initialize: function() {
+		this.collection = new app.Lexicon();
+		this.collection.fetch({
+			reset: true,
+		});
 		this.render();
 		
-//		this.listenTo(this.collection, 'add', this.renderLexeme);
+		this.listenTo(this.collection, 'add', this.renderLexeme);
 		this.listenTo(this.collection, 'reset', this.render);
 	},
 	
