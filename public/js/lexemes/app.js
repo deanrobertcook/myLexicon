@@ -60,5 +60,6 @@ $(function() {
 		},
 	];
 	
+	app.lexiconView = new app.LexiconView();
 	app.meaningsView = new app.MeaningsView();
 });

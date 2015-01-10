@@ -27,6 +27,7 @@ app.MeaningsView = Backbone.View.extend({
 	},
 	
 	render: function() {
+		$("#lexicon").empty();
 		this.$el.empty();
 		this.renderInfoBar();
 		this.collection.each(function(meaning) {

@@ -1,7 +1,7 @@
 var app = app || {};
 
 app.Lexicon = Backbone.Collection.extend({
-	model: app.Lexicon,
+	model: app.Lexeme,
 	url: 'lexemes'
 });
 
