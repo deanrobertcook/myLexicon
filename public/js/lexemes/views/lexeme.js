@@ -16,8 +16,9 @@ app.LexemeView = Backbone.View.extend({
 	
 	selectLexeme: function() {
 		var id = this.model.get('id');
-		var meanings = app.lexiconView.findMeanings(this.model);
+		var meanings = app.meaningsView.findMeanings(this.model);
 		app.Router.navigate('lexeme/' + id);
-		new app.LexiconView(meanings);
+		app.meaningsView.remove();
+		app.meaningsView = new app.MeaningsView(meanings);
 	}
 });
