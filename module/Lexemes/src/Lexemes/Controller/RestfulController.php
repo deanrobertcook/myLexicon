@@ -13,20 +13,25 @@ class RestfulController extends AbstractRestfulController {
 		$output = array();
 		foreach ($meanings as $meaning) {
 			$outputEntry = array (
+				'id' => $meaning->getId(),
 				'frequency' => $meaning->getFrequency(),
-				'targetid' => $meaning->getTargetLexeme()->getID(),
-				'targetLanguage' => $meaning->getTargetLexeme()->getLanguage(),
-				'targetType' => $meaning->getTargetLexeme()->getType(),
-				'targetEntry' => $meaning->getTargetLexeme()->getEntry(),
-				'baseid' => $meaning->getBaseLexeme()->getID(),
-				'baseLanguage' => $meaning->getBaseLexeme()->getLanguage(),
-				'baseType' => $meaning->getBaseLexeme()->getType(),
-				'baseEntry' => $meaning->getBaseLexeme()->getEntry(),
+				'targetLexeme' => $this->lexemeToArray($meaning->getTargetLexeme()),
+				'baseLexeme' => $this->lexemeToArray($meaning->getBaseLexeme()),
 			);
 			$output[] = $outputEntry;
 		}
 		
 		return new JsonModel($output);
+	}
+	
+	private function lexemeToArray($lexeme) {
+		$output = array(
+			"id" => $lexeme->getId(),
+			"language" => $lexeme->getLanguage(),
+			"type" => $lexeme->getType(),
+			"entry" => $lexeme->getEntry(),
+		);
+		return $output;
 	}
 	
 	public function get($id) {
