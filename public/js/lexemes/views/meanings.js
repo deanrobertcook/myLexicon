@@ -36,4 +36,34 @@ app.MeaningsView = Backbone.View.extend({
 		});
 		this.$el.append(meaningView.render().el);
 	},
+	
+	renderNewMeaningForm: function() {
+		$("#newMeaning").remove();
+		$("#meaningsInfo").after(this.newMeaningFormTemplate());
+	},
+	
+	createNewMeaning: function(e) {
+		e.preventDefault();
+		var formData = {};
+		$('#newMeaning div').children("input").each(function(index, element) {
+				formData[element.id] = element.value; 
+		});
+		
+		var targetData = {
+				"language": "de", //Change this to default to user's selection
+				"type": formData.targetType,
+				"entry": formData.targetEntry,
+		};
+
+		var baseData = {
+				"language": "en", //Change this to default to user's selection
+				"type": formData.baseType,
+				"entry": formData.baseEntry,
+		};
+		
+		app.lexemesView.createNewLexeme(targetData);
+		app.lexemesView.createNewLexeme(baseData);
+	},
+
+
 });
