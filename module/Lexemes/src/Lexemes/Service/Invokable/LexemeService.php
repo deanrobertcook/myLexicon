@@ -14,8 +14,8 @@ class LexemeService {
 		$this->lexemeMapper = new LexemeMapper($PDO); 
 	}
 	
-	public function saveLexeme(Lexeme $lexeme) {
-		$this->lexemeMapper->insert($lexeme);
+	public function saveLexeme($lexemeData) {
+		$lexemeId = $this->lexemeMapper->insert($lexemeData);
 		return $lexeme->getID();
 	}
 	

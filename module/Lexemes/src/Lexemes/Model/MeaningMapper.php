@@ -40,11 +40,16 @@ class MeaningMapper {
 		);
 	}
 	
-	public function insertMeaning($targetID, $baseID) {		
-		$stmt = $this->pdo->prepare("INSERT INTO meanings (userid, targetid, baseid) VALUES (1, ?, ?) ON DUPLICATE KEY UPDATE frequency = frequency + 1;");
-		$stmt->bindValue(1, $targetID);
-		$stmt->bindValue(2, $baseID);
+	public function saveMeaning($meaningData) {		
+		$stmt = $this->pdo->prepare("INSERT INTO meanings (userid, targetid, baseid, frequency, date_entered) VALUES (1, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE frequency = frequency + ?;");
+		$stmt->bindValue(1, $meaningData['targetid']);
+		$stmt->bindValue(2, $meaningData['baseid']);
+		$stmt->bindValue(3, $meaningData['frequency']);
+		$stmt->bindValue(4, $meaningData['dateEntered']);
+		$stmt->bindValue(5, $meaningData['frequency']);
 			
 		$stmt->execute();
+		$id = $this->pdo->lastInsertId("id"); //DOES THIS WORK IF ONLY FREQUENCY IS UPDATED???
+		return $id;
 	}
 }

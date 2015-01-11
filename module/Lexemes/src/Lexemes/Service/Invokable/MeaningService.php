@@ -16,13 +16,9 @@ class MeaningService {
 		$this->lexemeService = new LexemeService($PDO);
 	}
 	
-	public function saveMeaning(Meaning $meaning) {
-		$targetLexeme = $meaning->getTargetLexeme();
-		$baseLexeme = $meaning->getBaseLexeme();
-		
-		$targetID = $this->lexemeService->saveLexeme($targetLexeme);
-		$baseID = $this->lexemeService->saveLexeme($baseLexeme);
-		$this->meaningMapper->insertMeaning($targetID, $baseID);
+	public function saveMeaning($meaningData) {
+		$meaningId = $this->meaningMapper->saveMeaning($meaningData);
+		return $meaningId;
 	}
 	
 	public function getMeaning($id) {
