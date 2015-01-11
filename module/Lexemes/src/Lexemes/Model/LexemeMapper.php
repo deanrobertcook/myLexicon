@@ -46,7 +46,8 @@ class LexemeMapper
 
 	public function saveLexeme($lexemeData)
 	{
-		$id = $this->findWithTypeAndEntry($lexemeData['type'], $lexemeData['entry']);
+		
+		$id = $this->checkIfLexemeExists($lexemeData['language'], $lexemeData['type'], $lexemeData['entry']);
 		if ($id == NULL) {
 			$stmt = $this->pdo->prepare("INSERT INTO lexemes (language, type, entry) VALUES (?, ?, ?)");
 			$stmt->bindValue(1, $lexemeData['language']);
@@ -59,11 +60,12 @@ class LexemeMapper
 		return $id;
 	}
 
-	public function findWithTypeAndEntry($type, $entry)
+	public function checkIfLexemeExists($language, $type, $entry)
 	{
-		$stmt = $this->pdo->prepare("SELECT * FROM lexemes WHERE entry = ? AND type = ?");
-		$stmt->bindValue(1, $entry);
+		$stmt = $this->pdo->prepare("SELECT * FROM lexemes WHERE language = ? AND type = ? AND entry = ?");
+		$stmt->bindValue(1, $language);
 		$stmt->bindValue(2, $type);
+		$stmt->bindValue(3, $entry);
 		$stmt->execute();
 		$row = $stmt->fetch();
 		return $row['id'];
