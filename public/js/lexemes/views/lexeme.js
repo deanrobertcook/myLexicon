@@ -9,6 +9,15 @@ app.LexemeView = Backbone.View.extend({
 		'click' : 'selectLexeme',
 	},
 	
+	initialize: function() {
+		this.listenTo(this.model, 'sync', this.lexemeSynced);
+	},
+	
+	lexemeSynced: function(lexeme, response) {
+		this.model.set('id', response.id);
+		this.render();
+	},
+	
 	render: function() {
 		this.$el.html(this.template(this.model.attributes));
 		return this;

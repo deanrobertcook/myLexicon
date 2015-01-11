@@ -50,6 +50,7 @@ class MeaningMapper {
 			
 		$stmt->execute();
 		$id = $this->pdo->lastInsertId("id"); //DOES THIS WORK IF ONLY FREQUENCY IS UPDATED???
+		//Yes, yes it does
 		return $id;
 	}
 }

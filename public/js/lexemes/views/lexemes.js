@@ -5,10 +5,6 @@ app.LexemesView = Backbone.View.extend({
 	
 	tagName: 'div',
 	
-	events: {
-		
-	},
-	
 	initialize: function(initialLexemes) {
 		this.collection = new app.Lexemes(initialLexemes);
 	},
@@ -35,6 +31,7 @@ app.LexemesView = Backbone.View.extend({
 	
 	createNewLexeme: function(data) {
 		var lexeme = new app.Lexeme(data);
+		this.collection.create(lexeme);
 		lexeme.set('id', lexeme.cid);
 		this.collection.add(lexeme);
 		return lexeme.cid;

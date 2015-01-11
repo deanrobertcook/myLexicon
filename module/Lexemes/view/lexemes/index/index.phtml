@@ -53,6 +53,7 @@
 echo $this->headLink()->prependStylesheet($this->basePath() . '/css/lexemes.css');
 
 echo $this->headScript()
+	->appendFile($this->basePath() . '/js/lexemes/functions.js')
 	->appendFile($this->basePath() . '/js/lexemes/models/lexeme.js')
 	->appendFile($this->basePath() . '/js/lexemes/models/meaning.js')
 	->appendFile($this->basePath() . '/js/lexemes/collections/lexemes.js')

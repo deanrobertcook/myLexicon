@@ -14,6 +14,8 @@ app.MeaningsView = Backbone.View.extend({
 
 	initialize: function(initialMeanings) {
 		this.collection = new app.Meanings(initialMeanings);
+		
+		this.listenTo(this.collection, 'add', this.renderMeaning);
 	},
 	
 	render: function() {
@@ -26,7 +28,8 @@ app.MeaningsView = Backbone.View.extend({
 	},
 	
 	renderInfoBar: function() {
-		this.$el.append(this.infoTemplate({"meaningCount": this.collection.length}));
+		this.$el.remove("#meaningsInfo");
+		this.$el.prepend(this.infoTemplate({"meaningCount": this.collection.length}));
 		return this;
 	},
 
@@ -78,6 +81,4 @@ app.MeaningsView = Backbone.View.extend({
 		this.collection.add(meaning);
 		this.toggleMeaningForm();
 	},
-
-
 });

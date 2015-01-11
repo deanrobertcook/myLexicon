@@ -34,5 +34,13 @@ class LexemeController extends AbstractRestfulController
 
 		return new JsonModel($lexeme);
 	}
+	
+	public function create($data)
+	{
+		$lexemeService = $this->serviceLocator->get("lexemeService");
+		$id = $lexemeService->saveLexeme($data);
+
+		return new JsonModel(array("id" => $id));
+	}
 
 }
