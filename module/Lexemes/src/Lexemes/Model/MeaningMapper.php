@@ -16,28 +16,28 @@ class MeaningMapper {
 		$stmt->bindValue(1, $targetLanguage);
 		$stmt->bindValue(2, $baseLanguage);
 		$stmt->execute();
-		return $this->createMeaningsFromExecutedStatement($stmt);
+		$meanings = array();
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$meanings[] = $this->createMeaningsFromQueryRow($row);
+		}		
+		return $meanings;
 	}
 	
 	public function getMeaningById($id) {
 		$stmt = $this->pdo->prepare("SELECT * FROM word_list_verbose WHERE meaningid = ?");
 		$stmt->bindValue(1, $id);
 		$stmt->execute();
-		return $this->createMeaningsFromExecutedStatement($stmt);
+		return $this->createMeaningsFromQueryRow($stmt->fetch(PDO::FETCH_ASSOC));
 	}
 	
-	private function createMeaningsFromExecutedStatement($stmt) {
-		$meanings = array();
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$meanings[] = array(
-				'id' => $row['meaningid'],
-				'targetLexemeId' => $row['targetid'],
-				'baseLexemeId' => $row['baseid'],
-				'frequency' => $row['frequency'],
-				'dateEntered' => $row['date_entered']
-			);
-		}		
-		return $meanings;
+	private function createMeaningsFromQueryRow($row) {
+		return array(
+			'id' => $row['meaningid'],
+			'targetLexemeId' => $row['targetid'],
+			'baseLexemeId' => $row['baseid'],
+			'frequency' => $row['frequency'],
+			'dateEntered' => $row['date_entered']
+		);
 	}
 	
 	public function insertMeaning($targetID, $baseID) {		
