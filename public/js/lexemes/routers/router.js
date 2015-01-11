@@ -3,6 +3,7 @@ var app = app || {};
 var Workspace = Backbone.Router.extend({
 	routes: {
 		'lexemes': "getAllLexemes",
+		'meanings': "getAllMeanings",
 		'lexeme/:id': 'findLexeme',
 	},
 	findLexeme: function (id) {
@@ -10,8 +11,12 @@ var Workspace = Backbone.Router.extend({
 	},
 	
 	getAllLexemes: function() {
-		console.log(app.lexiconView);
+		app.lexiconView = new app.LexiconView();
 		app.lexiconView.render();
+	},
+	
+	getAllMeanings: function() {
+		
 	}
 });
 

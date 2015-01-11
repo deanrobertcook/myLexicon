@@ -35,7 +35,6 @@
 </script>
 
 <script type="text/template" id="lexemeTemplate">
-	<strong><%= target ? 'Target' : 'Base' %> Lexeme</strong>
 	<ul data-lexeme-id="<%= id %>" data-lexeme-language="<%= language %>" class="lexemeInfo">
 		<li>Lexeme ID: <%= id %></li>
 		<li>Lexeme Language: <%= language %></li>
@@ -57,5 +56,4 @@ echo $this->headScript()
 	->appendFile($this->basePath() . '/js/lexemes/views/meaning.js')
 	->appendFile($this->basePath() . '/js/lexemes/views/meanings.js')
 	->appendFile($this->basePath() . '/js/lexemes/routers/router.js')
-	->appendFile($this->basePath() . '/js/lexemes/app.js')
 ; ?>
