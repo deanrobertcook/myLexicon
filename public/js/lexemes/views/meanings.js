@@ -7,7 +7,7 @@ app.MeaningsView = Backbone.View.extend({
 	infoTemplate: _.template($('#meaningsInfo').html()),
 	
 	events: {
-		"click #addMeaning": "renderNewMeaningForm",
+		"click #toggleMeaningForm": "toggleMeaningForm",
 		"click #submitNewMeaning": "createNewMeaning",
 	},
 
@@ -37,9 +37,14 @@ app.MeaningsView = Backbone.View.extend({
 		this.$el.append(meaningView.render().el);
 	},
 	
-	renderNewMeaningForm: function() {
-		$("#newMeaning").remove();
-		$("#meaningsInfo").after(this.newMeaningFormTemplate());
+	toggleMeaningForm: function() {
+		if ($("#newMeaning").length) {
+			$("#newMeaning").remove();
+			$("#toggleMeaningForm").text("Add Meaning");
+		} else {
+			$("#toggleMeaningForm").text("Hide Form");
+			$("#meaningsInfo").after(this.newMeaningFormTemplate());
+		}
 	},
 	
 	createNewMeaning: function(e) {
@@ -71,6 +76,7 @@ app.MeaningsView = Backbone.View.extend({
 		meaning.set('id', meaning.cid);
 		
 		this.collection.add(meaning);
+		this.toggleMeaningForm();
 	},
 
 
