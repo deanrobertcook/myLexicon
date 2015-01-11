@@ -6,15 +6,17 @@ app.MeaningView = Backbone.View.extend({
 	template: _.template($('#meaningTemplate').html()),
 	
 	render: function() {
-		var targetLexeme = app.lexemesView.findLexeme(this.model.get('targetid'));
-		var baseLexeme = app.lexemesView.findLexeme(this.model.get('baseid'));
-		
-		var targetView = new app.LexemeView({model: targetLexeme});
-		var baseView = new app.LexemeView({model: baseLexeme});
-		
-		this.$el.html(targetView.render().el);
-		this.$el.append(baseView.render().el);
+		this.$el.empty();
+		this.renderLexeme(this.model.get('targetid'));
+		this.renderLexeme(this.model.get('baseid'));
 		this.$el.append(this.template(this.model.attributes));
+		return this;
+	},
+	
+	renderLexeme: function(lexemeId) {
+		var lexeme = app.lexemesView.findLexeme(lexemeId);
+		var lexemeView = new app.LexemeView({model: lexeme});
+		this.$el.append(lexemeView.render().el);
 		return this;
 	}
 });
