@@ -8,30 +8,9 @@ use Zend\View\Model\JsonModel;
 class MeaningController extends AbstractRestfulController {	
 	public function getList() {
 		$meaningService = $this->serviceLocator->get('meaningService');
-		$meanings = $meaningService->findAllMeanings();
+		$meanings = $meaningService->findAllMeanings('de', 'en'); //CHANGE WITH USER FNALITY
 		
-		$output = array();
-		foreach ($meanings as $meaning) {
-			$outputEntry = array (
-				'id' => $meaning->getId(),
-				'frequency' => $meaning->getFrequency(),
-				'targetLexeme' => $this->lexemeToArray($meaning->getTargetLexeme()),
-				'baseLexeme' => $this->lexemeToArray($meaning->getBaseLexeme()),
-			);
-			$output[] = $outputEntry;
-		}
-		
-		return new JsonModel($output);
-	}
-	
-	private function lexemeToArray($lexeme) {
-		$output = array(
-			"id" => $lexeme->getId(),
-			"language" => $lexeme->getLanguage(),
-			"type" => $lexeme->getType(),
-			"entry" => $lexeme->getEntry(),
-		);
-		return $output;
+		return new JsonModel($meanings);
 	}
 	
 	public function get($id) {
