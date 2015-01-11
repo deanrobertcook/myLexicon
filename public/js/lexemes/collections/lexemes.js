@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.Lexicon = Backbone.Collection.extend({
+app.Lexemes = Backbone.Collection.extend({
 	model: app.Lexeme,
 	url: 'lexemes'
 	

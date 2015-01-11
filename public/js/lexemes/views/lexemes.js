@@ -1,16 +1,16 @@
 var app = app || {};
 
-app.LexiconView = Backbone.View.extend({
+app.LexemesView = Backbone.View.extend({
 	tagName: 'div',
 	
 	events: {},
 	
 	initialize: function() {
-		this.collection = new app.Lexicon();
+		this.collection = new app.Lexemes();
 		this.collection.fetch({
 			reset: true,
-			success: function(collection) {
-				app.Router.lexiconLoaded = true;
+			success: function() {
+				app.Router.lexemesLoaded = true;
 			}
 		});
 	},

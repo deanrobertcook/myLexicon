@@ -1,6 +1,6 @@
 var app = app || {};
 var Router = Backbone.Router.extend({
-	lexiconLoaded: false,
+	lexemesLoaded: false,
 	
 	routes: {
 		'': "default",
@@ -13,8 +13,8 @@ var Router = Backbone.Router.extend({
 	},
 	
 	getAllLexemes: function () {
-		if(this.lexiconLoaded) {
-			app.lexiconView.render();
+		if(this.lexemesLoaded) {
+			app.lexemesView.render();
 		} else {
 			console.log("Lexicon not yet loaded");
 		}
@@ -25,7 +25,7 @@ var Router = Backbone.Router.extend({
 	}
 });
 
-app.lexiconView = new app.LexiconView();
+app.lexemesView = new app.LexemesView();
 app.meaningsView = new app.MeaningView();
 app.Router = new Router();
 Backbone.history.start();
