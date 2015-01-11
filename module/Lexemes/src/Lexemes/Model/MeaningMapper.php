@@ -21,18 +21,13 @@ class MeaningMapper {
 		$stmt->execute();
 		$meanings = array();
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$targetLexeme = (new Lexeme(
-					$row['target_language'],
-					$row['target_type'],
-					$row['target_entry']))->setID($row['targetid']);
-			$baseLexeme = (new Lexeme(
-					$row['base_language'],
-					$row['base_type'],
-					$row['base_entry']))->setID($row['baseid']);
-			$meaning = new Meaning($targetLexeme, $baseLexeme);
-			$meaning->setFrequency($row['frequency']);
-			$meaning->setId($row['meaningid']);
-			$meanings[] = $meaning;
+			$meanings[] = array(
+				'id' => $row['meaningid'],
+				'targetLexemeId' => $row['targetid'],
+				'baseLexemeId' => $row['baseid'],
+				'frequency' => $row['frequency'],
+				'dateEntered' => $row['date_entered']
+			);
 		}		
 		return $meanings;
 	}
