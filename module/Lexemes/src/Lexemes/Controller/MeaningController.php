@@ -17,7 +17,6 @@ class MeaningController extends AbstractRestfulController {
 		$meaningService = $this->serviceLocator->get('meaningService');
 		$meaning = $meaningService->getMeaning($id); //CHANGE WITH USER FNALITY
 		
-		
 		return new JsonModel($meaning);
 	}
 }

@@ -33,8 +33,8 @@ class MeaningMapper {
 	private function createMeaningsFromQueryRow($row) {
 		return array(
 			'id' => $row['meaningid'],
-			'targetLexemeId' => $row['targetid'],
-			'baseLexemeId' => $row['baseid'],
+			'targetid' => $row['targetid'],
+			'baseid' => $row['baseid'],
 			'frequency' => $row['frequency'],
 			'dateEntered' => $row['date_entered']
 		);
