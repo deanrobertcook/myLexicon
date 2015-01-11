@@ -16,7 +16,7 @@ use Zend\View\Model\JsonModel;
  *
  * @author dean
  */
-class RestfulLexemeController extends AbstractRestfulController
+class LexemeController extends AbstractRestfulController
 {
 	public function getList() {
 		$lexemeService = $this->serviceLocator->get("lexemeService");
