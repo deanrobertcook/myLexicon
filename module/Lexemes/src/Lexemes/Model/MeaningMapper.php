@@ -19,6 +19,10 @@ class MeaningMapper {
 		$stmt->bindValue(1, $targetLanguage);
 		$stmt->bindValue(2, $baseLanguage);
 		$stmt->execute();
+		return $this->createMeaningsArrayFromExecutedStatement($stmt);
+	}
+	
+	private function createMeaningsArrayFromExecutedStatement($stmt) {
 		$meanings = array();
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$meanings[] = array(
