@@ -50,4 +50,16 @@ class LexemeMapper {
 		$lexeme->setID($row['id']);
 		return $lexeme;
 	}
+	
+	public function findAllLexemes() {
+		$stmt = $this->pdo->prepare("SELECT * FROM lexemes");
+		$stmt->execute();
+		$lexemes = array();
+		while ($row = $stmt->fetch()) {
+			$lexeme = new Lexeme($row['language'], $row['type'], $row['entry']);
+			$lexeme->setID($row['id']);
+			$lexemes[] = $lexeme;
+		}
+		return $lexemes;
+	}
 }

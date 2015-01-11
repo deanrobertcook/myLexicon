@@ -3,6 +3,7 @@ return array(
 	'controllers' => array(
 		'invokables' => array(
 			'Lexemes\Controller\Restful' => 'Lexemes\Controller\RestfulController',
+			'Lexemes\Controller\RestfulLexeme' => 'Lexemes\Controller\RestfulLexemeController',
 			'Lexemes\Controller\Index' => 'Lexemes\Controller\IndexController',
 		),
 	),
@@ -30,6 +31,29 @@ return array(
 				'type' => 'Literal',
 				'options' => array(
 					'route' => '/lexemes',
+					'defaults' => array(
+                        'controller' => 'Lexemes\Controller\RestfulLexeme',
+                    ),
+				),
+				'may_terminate' => true,
+				'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:id]',
+                            'constraints' => array(
+								'id' => '[0-9]+',
+							),
+							'defaults' => array(
+                            ),
+                        ),
+                    ),
+                ),
+			),
+			'meanings' => array(
+				'type' => 'Literal',
+				'options' => array(
+					'route' => '/meanings',
 					'defaults' => array(
                         'controller' => 'Lexemes\Controller\Restful',
                     ),

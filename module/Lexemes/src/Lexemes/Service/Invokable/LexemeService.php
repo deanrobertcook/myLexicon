@@ -22,4 +22,8 @@ class LexemeService {
 	public function retrieveLexemeByID($id) {
 		return $this->lexemeMapper->findWithID($id);
 	}
+	
+	public function getAllLexemes() {
+		return $this->lexemeMapper->findAllLexemes();
+	}
 }
