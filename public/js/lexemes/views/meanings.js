@@ -19,9 +19,6 @@ app.MeaningsView = Backbone.View.extend({
 				app.Router.meaningsLoaded = true;
 			},
 		});
-		
-		this.listenTo(this.collection, 'add', this.renderLexeme);
-		this.listenTo(this.collection, 'reset', this.render);
 	},
 	
 	render: function() {
@@ -31,11 +28,6 @@ app.MeaningsView = Backbone.View.extend({
 			this.renderMeaning(meaning);
 		}, this);
 		$("#lexicon").html(this.$el);
-	},
-	
-	renderInfoBar: function() {
-		this.$el.append(this.infoTemplate({"meaningCount": this.collection.length}));
-		return this;
 	},
 	
 	renderMeaning: function(meaning) {
