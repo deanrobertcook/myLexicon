@@ -5,7 +5,7 @@ namespace Lexemes\Controller;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
 
-class RestfulController extends AbstractRestfulController {	
+class MeaningController extends AbstractRestfulController {	
 	public function getList() {
 		$meaningService = $this->serviceLocator->get('meaningService');
 		$meanings = $meaningService->findAllMeanings();

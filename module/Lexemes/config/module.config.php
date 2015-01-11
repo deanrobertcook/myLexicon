@@ -2,7 +2,7 @@
 return array(
 	'controllers' => array(
 		'invokables' => array(
-			'Lexemes\Controller\Restful' => 'Lexemes\Controller\RestfulController',
+			'Lexemes\Controller\Meaning' => 'Lexemes\Controller\MeaningController',
 			'Lexemes\Controller\RestfulLexeme' => 'Lexemes\Controller\RestfulLexemeController',
 			'Lexemes\Controller\Index' => 'Lexemes\Controller\IndexController',
 		),
@@ -55,7 +55,7 @@ return array(
 				'options' => array(
 					'route' => '/meanings',
 					'defaults' => array(
-                        'controller' => 'Lexemes\Controller\Restful',
+                        'controller' => 'Lexemes\Controller\Meaning',
                     ),
 				),
 				'may_terminate' => true,
