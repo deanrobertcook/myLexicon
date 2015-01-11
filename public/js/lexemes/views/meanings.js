@@ -61,8 +61,16 @@ app.MeaningsView = Backbone.View.extend({
 				"entry": formData.baseEntry,
 		};
 		
-		app.lexemesView.createNewLexeme(targetData);
-		app.lexemesView.createNewLexeme(baseData);
+		var targetId = app.lexemesView.createNewLexeme(targetData);
+		var baseId = app.lexemesView.createNewLexeme(baseData);
+		
+		var meaning = new app.Meaning({
+			"targetid": targetId,
+			"baseid": baseId,
+		});
+		meaning.set('id', meaning.cid);
+		
+		this.collection.add(meaning);
 	},
 
 

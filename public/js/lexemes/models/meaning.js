@@ -3,10 +3,6 @@ var app = app || {};
 app.Meaning = Backbone.Model.extend({
 	defaults: {
 		frequency: 1,
-		dateEntered: this.getDate(),
+		dateEntered: Date.now(),
 	},
-	
-	getDate: function() {
-		return Date.now();
-	}
 });

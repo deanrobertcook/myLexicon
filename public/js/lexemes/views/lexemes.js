@@ -37,6 +37,6 @@ app.LexemesView = Backbone.View.extend({
 		var lexeme = new app.Lexeme(data);
 		lexeme.set('id', lexeme.cid);
 		this.collection.add(lexeme);
-		
+		return lexeme.cid;
 	}
 });
