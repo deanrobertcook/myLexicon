@@ -3,6 +3,7 @@ var Router = Backbone.Router.extend({
 	routes: {
 		'': "default",
 		'lexemes': "getAllLexemes",
+		'lexemes/:id': "displayLexeme",
 		'meanings': "getAllMeanings",
 	},
 	
@@ -14,12 +15,18 @@ var Router = Backbone.Router.extend({
 		app.lexemesView.render();
 	},
 	
+	displayLexeme: function(id) {
+		var lexeme = app.lexemesView.findLexeme(id);
+		var lexemeView = new app.LexemeView({model: lexeme});
+		lexemeView.displayLexeme();
+	},
+	
 	getAllMeanings: function () {
 		app.meaningsView.render();
 	}
 });
 
-app.lexemesView = new app.LexemesView(lexemes);
-app.meaningsView = new app.MeaningsView(meanings);
+app.lexemesView = new app.LexemesView(allLexemes);
+app.meaningsView = new app.MeaningsView(allMeanings);
 app.Router = new Router();
 Backbone.history.start();

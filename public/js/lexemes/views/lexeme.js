@@ -16,9 +16,22 @@ app.LexemeView = Backbone.View.extend({
 	
 	selectLexeme: function() {
 		var id = this.model.get('id');
-		var meanings = app.meaningsView.findMeanings(this.model);
-		app.Router.navigate('lexeme/' + id);
-		app.meaningsView.remove();
-		app.meaningsView = new app.MeaningsView(meanings);
+		app.Router.navigate('lexemes/' + id, {trigger: true});
+	},
+	
+	displayLexeme: function() {
+		var meanings = [];
+		app.meaningsView.collection.forEach(function(meaning) {
+			if(meaning.get('targetid') === this.model.get('id') || 
+					meaning.get('baseid') === this.model.get('id')) {
+				meanings.push(meaning);
+			}
+		}, this);
+		
+		if (app.lexemeMeaningsView) {
+			app.lexemeMeaningsView.remove();
+		}
+		app.lexemeMeaningsView = new app.MeaningsView(meanings);
+		app.lexemeMeaningsView.render();
 	}
 });

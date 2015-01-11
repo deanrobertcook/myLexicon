@@ -3,7 +3,9 @@ var app = app || {};
 app.LexemesView = Backbone.View.extend({
 	tagName: 'div',
 	
-	events: {},
+	events: {
+		
+	},
 	
 	initialize: function(initialLexemes) {
 		this.collection = new app.Lexemes(initialLexemes);

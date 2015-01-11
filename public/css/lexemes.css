@@ -12,9 +12,17 @@
 }
 
 .lexemeContainer {
-	margin: 4px;
+	padding: 4px;
+	margin-right: 4px;
+	margin-bottom: 4px;
 	display: block;
 	float: left;
+	border: 1px solid black;
+	width: 49.5%;
+}
+
+.lexemeContainer:hover {
+	background-color: #dddddd;
 }
 
 .meaningInfo {
