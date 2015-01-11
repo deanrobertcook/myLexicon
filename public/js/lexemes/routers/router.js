@@ -1,6 +1,7 @@
 var app = app || {};
 var Router = Backbone.Router.extend({
 	lexemesLoaded: false,
+	meaningsLoaded: false,
 	
 	routes: {
 		'': "default",
@@ -9,7 +10,7 @@ var Router = Backbone.Router.extend({
 	},
 	
 	default: function () {
-		
+		this.getAllMeanings();
 	},
 	
 	getAllLexemes: function () {
@@ -21,7 +22,11 @@ var Router = Backbone.Router.extend({
 	},
 	
 	getAllMeanings: function () {
-
+		if(this.meaningsLoaded) {
+			app.meaningsView.render();
+		} else {
+			console.log("Meanings not yet loaded");
+		}
 	}
 });
 
