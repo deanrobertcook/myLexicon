@@ -20,10 +20,10 @@ class LexemeService {
 	}
 	
 	public function getLexeme($id) {
-		return $this->lexemeMapper->findWithID($id);
+		return $this->lexemeMapper->getLexemeById($id);
 	}
 	
 	public function getAllLexemes() {
-		return $this->lexemeMapper->findAllLexemes();
+		return $this->lexemeMapper->getAllLexemes();
 	}
 }

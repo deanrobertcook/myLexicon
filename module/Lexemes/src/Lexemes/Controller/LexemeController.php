@@ -18,19 +18,21 @@ use Zend\View\Model\JsonModel;
  */
 class LexemeController extends AbstractRestfulController
 {
-	public function getList() {
+
+	public function getList()
+	{
 		$lexemeService = $this->serviceLocator->get("lexemeService");
 		$lexemes = $lexemeService->getAllLexemes();
-		$output = array();
-		foreach($lexemes as $lexeme) {
-			$output[] = array(
-				"id" => $lexeme->getId(),
-				"language" => $lexeme->getLanguage(),
-				"type" => $lexeme->getType(),
-				"entry" => $lexeme->getEntry(),
-			);
-		}
-		
-		return new JsonModel($output);
+
+		return new JsonModel($lexemes);
 	}
+
+	public function get($id)
+	{
+		$lexemeService = $this->serviceLocator->get("lexemeService");
+		$lexeme = $lexemeService->getLexeme($id);
+
+		return new JsonModel($lexeme);
+	}
+
 }
