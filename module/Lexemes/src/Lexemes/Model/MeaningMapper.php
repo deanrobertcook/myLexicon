@@ -19,10 +19,17 @@ class MeaningMapper {
 		$stmt->bindValue(1, $targetLanguage);
 		$stmt->bindValue(2, $baseLanguage);
 		$stmt->execute();
-		return $this->createMeaningsArrayFromExecutedStatement($stmt);
+		return $this->createMeaningsFromExecutedStatement($stmt);
 	}
 	
-	private function createMeaningsArrayFromExecutedStatement($stmt) {
+	public function getMeaningById($id) {
+		$stmt = $this->pdo->prepare("SELECT * FROM word_list_verbose WHERE meaningid = ?");
+		$stmt->bindValue(1, $id);
+		$stmt->execute();
+		return $this->createMeaningsFromExecutedStatement($stmt);
+	}
+	
+	private function createMeaningsFromExecutedStatement($stmt) {
 		$meanings = array();
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$meanings[] = array(
@@ -44,25 +51,18 @@ class MeaningMapper {
 		$stmt->execute();
 	}
 	
-	public function getMeaningsForLexemeID($lexemeID) {
-		$stmt = $this->pdo->prepare("SELECT * FROM word_list_verbose WHERE targetid = ?");
-		$stmt->bindValue(1, $lexemeID);
+	public function getMeaningsForLexemeID($lexemeID, $isTarget) {
+		$target = null;
+		if ($isTarget) {
+			$target = "targetid";
+		} else {
+			$target = "baseid";
+		}
+	 
+		$stmt = $this->pdo->prepare("SELECT * FROM word_list_verbose WHERE ? = ?");
+		$stmt->bindValue(1, $target);
+		$stmt->bindValue(2, $lexemeID);
 		$stmt->execute();
-		$meanings = array();
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$targetLexeme = (new Lexeme(
-					$row['target_language'],
-					$row['target_type'],
-					$row['target_entry']))->setID($row['targetid']);
-			$baseLexeme = (new Lexeme(
-					$row['base_language'],
-					$row['base_type'],
-					$row['base_entry']))->setID($row['baseid']);
-			$meaning = new Meaning($targetLexeme, $baseLexeme);
-			$meaning->setFrequency($row['frequency']);
-			$meaning->setId($row['meaningid']);
-			$meanings[] = $meaning;
-		}		
-		return $meanings;
+		return $this->createMeaningsFromExecutedStatement($stmt);
 	}
 }
