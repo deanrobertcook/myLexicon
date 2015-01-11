@@ -31,6 +31,6 @@ var Router = Backbone.Router.extend({
 });
 
 app.lexemesView = new app.LexemesView();
-app.meaningsView = new app.MeaningView();
+app.meaningsView = new app.MeaningsView();
 app.Router = new Router();
 Backbone.history.start();

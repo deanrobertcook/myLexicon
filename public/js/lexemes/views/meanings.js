@@ -2,15 +2,7 @@ var app = app || {};
 
 app.MeaningsView = Backbone.View.extend({
 	tagName: 'div',
-	
-	infoTemplate: _.template($('#lexiconInfo').html()),
-	newMeaningTemplate: _.template($('#newMeaning').html()),
-	
-	events: {
-		"click #addMeaning": "renderNewMeaningForm",
-		"click #submitNewMeaning": "createNewMeaning",
-	},
-	
+
 	initialize: function() {
 		this.collection = new app.Meanings();
 		this.collection.fetch({
@@ -23,7 +15,6 @@ app.MeaningsView = Backbone.View.extend({
 	
 	render: function() {
 		this.$el.empty();
-		this.renderInfoBar();
 		this.collection.each(function(meaning) {
 			this.renderMeaning(meaning);
 		}, this);
