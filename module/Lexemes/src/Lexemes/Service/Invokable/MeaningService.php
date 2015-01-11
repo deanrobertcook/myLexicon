@@ -25,12 +25,12 @@ class MeaningService {
 		$this->meaningMapper->insertMeaning($targetID, $baseID);
 	}
 	
-	public function findMeaning($id) {
+	public function getMeaning($id) {
 		$meaning = $this->meaningMapper->getMeaningById($id);
 		return $meaning;
 	}
 	
-	public function findAllMeanings($targetLanguage, $baseLanguage) {
+	public function getAllMeanings($targetLanguage, $baseLanguage) {
 		$meanings = $this->meaningMapper->getAllMeanings($targetLanguage, $baseLanguage);
 		return $meanings;
 	}
