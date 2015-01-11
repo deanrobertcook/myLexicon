@@ -19,7 +19,7 @@ class LexemeService {
 		return $lexeme->getID();
 	}
 	
-	public function retrieveLexemeByID($id) {
+	public function getLexeme($id) {
 		return $this->lexemeMapper->findWithID($id);
 	}
 	
