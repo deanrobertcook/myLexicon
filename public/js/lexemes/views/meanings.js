@@ -3,14 +3,8 @@ var app = app || {};
 app.MeaningsView = Backbone.View.extend({
 	tagName: 'div',
 
-	initialize: function() {
-		this.collection = new app.Meanings();
-		this.collection.fetch({
-			reset: true,
-			success: function() {
-				app.Router.meaningsLoaded = true;
-			},
-		});
+	initialize: function(initialMeanings) {
+		this.collection = new app.Meanings(initialMeanings);
 	},
 	
 	render: function() {

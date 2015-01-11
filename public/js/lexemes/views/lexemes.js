@@ -5,14 +5,8 @@ app.LexemesView = Backbone.View.extend({
 	
 	events: {},
 	
-	initialize: function() {
-		this.collection = new app.Lexemes();
-		this.collection.fetch({
-			reset: true,
-			success: function() {
-				app.Router.lexemesLoaded = true;
-			}
-		});
+	initialize: function(initialLexemes) {
+		this.collection = new app.Lexemes(initialLexemes);
 	},
 	
 	render: function() {

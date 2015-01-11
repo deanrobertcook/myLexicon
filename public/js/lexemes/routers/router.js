@@ -1,8 +1,5 @@
 var app = app || {};
 var Router = Backbone.Router.extend({
-	lexemesLoaded: false,
-	meaningsLoaded: false,
-	
 	routes: {
 		'': "default",
 		'lexemes': "getAllLexemes",
@@ -14,23 +11,15 @@ var Router = Backbone.Router.extend({
 	},
 	
 	getAllLexemes: function () {
-		if(this.lexemesLoaded) {
-			app.lexemesView.render();
-		} else {
-			console.log("Lexicon not yet loaded");
-		}
+		app.lexemesView.render();
 	},
 	
 	getAllMeanings: function () {
-		if(this.meaningsLoaded) {
-			app.meaningsView.render();
-		} else {
-			console.log("Meanings not yet loaded");
-		}
+		app.meaningsView.render();
 	}
 });
 
-app.lexemesView = new app.LexemesView();
-app.meaningsView = new app.MeaningsView();
+app.lexemesView = new app.LexemesView(lexemes);
+app.meaningsView = new app.MeaningsView(meanings);
 app.Router = new Router();
 Backbone.history.start();
