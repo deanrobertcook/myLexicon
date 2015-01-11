@@ -3,24 +3,24 @@ var app = app || {};
 app.LexiconView = Backbone.View.extend({
 	tagName: 'div',
 	
-	infoTemplate: _.template($('#lexiconInfo').html()),
-	
 	events: {},
 	
 	initialize: function() {
 		this.collection = new app.Lexicon();
 		this.collection.fetch({
 			reset: true,
+			success: function(collection) {
+				app.Router.lexiconLoaded = true;
+			}
 		});
 	},
 	
 	render: function() {
-		$("#lexicon").empty();
 		this.$el.empty();
 		this.collection.each(function(lexeme) {
 			this.renderLexeme(lexeme);
 		}, this);
-		$("#lexicon").append(this.$el);
+		$("#lexicon").html(this.$el);
 	},
 	
 	renderLexeme: function(lexeme) {
@@ -29,4 +29,9 @@ app.LexiconView = Backbone.View.extend({
 		});
 		this.$el.append(lexemeView.render().el);
 	},
+	
+	findLexeme: function(id) {
+		var lexeme = this.collection.get(id);
+		return lexeme;
+	}
 });

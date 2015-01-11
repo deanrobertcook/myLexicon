@@ -1,24 +1,31 @@
 var app = app || {};
-
-var Workspace = Backbone.Router.extend({
+var Router = Backbone.Router.extend({
+	lexiconLoaded: false,
+	
 	routes: {
+		'': "default",
 		'lexemes': "getAllLexemes",
 		'meanings': "getAllMeanings",
-		'lexeme/:id': 'findLexeme',
-	},
-	findLexeme: function (id) {
-		console.log(id);
 	},
 	
-	getAllLexemes: function() {
-		app.lexiconView = new app.LexiconView();
-		app.lexiconView.render();
-	},
-	
-	getAllMeanings: function() {
+	default: function () {
 		
+	},
+	
+	getAllLexemes: function () {
+		if(this.lexiconLoaded) {
+			app.lexiconView.render();
+		} else {
+			console.log("Lexicon not yet loaded");
+		}
+	},
+	
+	getAllMeanings: function () {
+
 	}
 });
 
-app.Router = new Workspace();
+app.lexiconView = new app.LexiconView();
+app.meaningsView = new app.MeaningView();
+app.Router = new Router();
 Backbone.history.start();
