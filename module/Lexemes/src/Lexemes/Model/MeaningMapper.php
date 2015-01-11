@@ -2,10 +2,7 @@
 
 namespace Lexemes\Model;
 
-use Lexemes\Model\Entity\Lexeme;
-use Lexemes\Model\Entity\Meaning;
 use PDO;
-
 
 class MeaningMapper {
 	private $pdo = null;
@@ -49,20 +46,5 @@ class MeaningMapper {
 		$stmt->bindValue(2, $baseID);
 			
 		$stmt->execute();
-	}
-	
-	public function getMeaningsForLexemeID($lexemeID, $isTarget) {
-		$target = null;
-		if ($isTarget) {
-			$target = "targetid";
-		} else {
-			$target = "baseid";
-		}
-	 
-		$stmt = $this->pdo->prepare("SELECT * FROM word_list_verbose WHERE ? = ?");
-		$stmt->bindValue(1, $target);
-		$stmt->bindValue(2, $lexemeID);
-		$stmt->execute();
-		return $this->createMeaningsFromExecutedStatement($stmt);
 	}
 }

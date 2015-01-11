@@ -25,9 +25,9 @@ class MeaningService {
 		$this->meaningMapper->insertMeaning($targetID, $baseID);
 	}
 	
-	public function findMeaningsForLexeme($lexemeID) {
-		$meanings = $this->meaningMapper->getMeaningsForLexemeID($lexemeID);
-		return $meanings;
+	public function findMeaning($id) {
+		$meaning = $this->meaningMapper->getMeaningById($id);
+		return $meaning;
 	}
 	
 	public function findAllMeanings($targetLanguage, $baseLanguage) {
