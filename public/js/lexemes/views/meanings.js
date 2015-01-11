@@ -5,6 +5,12 @@ app.MeaningsView = Backbone.View.extend({
 	
 	newMeaningFormTemplate: _.template($('#newMeaning').html()),
 	infoTemplate: _.template($('#meaningsInfo').html()),
+	
+	events: {
+		"click #addMeaning": "renderNewMeaningForm",
+		"click #submitNewMeaning": "createNewMeaning",
+	},
+
 
 	initialize: function(initialMeanings) {
 		this.collection = new app.Meanings(initialMeanings);
