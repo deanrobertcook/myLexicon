@@ -30,8 +30,8 @@ class MeaningService {
 		return $meanings;
 	}
 	
-	public function findAllMeanings() {
-		$meanings = $this->meaningMapper->getAllMeanings();
+	public function findAllMeanings($targetLanguage, $baseLanguage) {
+		$meanings = $this->meaningMapper->getAllMeanings($targetLanguage, $baseLanguage);
 		return $meanings;
 	}
 }

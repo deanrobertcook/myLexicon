@@ -14,8 +14,10 @@ class MeaningMapper {
 		$this->pdo = $PDO;
 	}
 	
-	public function getAllMeanings() {
-		$stmt = $this->pdo->prepare("SELECT * FROM word_list_verbose ORDER BY frequency DESC, date_entered DESC");
+	public function getAllMeanings($targetLanguage, $baseLanguage) {
+		$stmt = $this->pdo->prepare("SELECT * FROM word_list_verbose WHERE target_language = ? AND base_language = ? ORDER BY frequency DESC, date_entered DESC");
+		$stmt->bindValue(1, $targetLanguage);
+		$stmt->bindValue(2, $baseLanguage);
 		$stmt->execute();
 		$meanings = array();
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
