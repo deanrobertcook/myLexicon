@@ -23,7 +23,7 @@ class LexemeService {
 		return $this->lexemeMapper->getLexemeById($id);
 	}
 	
-	public function getAllLexemes() {
-		return $this->lexemeMapper->getAllLexemes();
+	public function getAllLexemes($targetLanguage, $baseLanguage) {
+		return $this->lexemeMapper->getAllLexemes($targetLanguage, $baseLanguage);
 	}
 }

@@ -17,8 +17,10 @@ class LexemeMapper {
 		return $this->createLexemeFromQueryRow($row);
 	}
 	
-	public function getAllLexemes() {
-		$stmt = $this->pdo->prepare("SELECT * FROM lexemes");
+	public function getAllLexemes($targetLanguage, $baseLanguage) {
+		$stmt = $this->pdo->prepare("SELECT * FROM lexemes WHERE language = ? OR language = ?");
+		$stmt->bindValue(1, $targetLanguage);
+		$stmt->bindValue(2, $baseLanguage);
 		$stmt->execute();
 		$lexemes = array();
 		while ($row = $stmt->fetch()) {
