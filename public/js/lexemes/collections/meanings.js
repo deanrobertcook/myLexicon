@@ -25,7 +25,7 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 		var targetcid = myLexicon.Collections.lexemes.createNewLexeme(targetData);
 		var basecid = myLexicon.Collections.lexemes.createNewLexeme(baseData);
 
-		var meaning = new myLexicon.ModelClasses.Meaning({
+		var meaning = new this.model({
 			"targetid": targetcid,
 			"baseid": basecid
 		});

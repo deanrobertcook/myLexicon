@@ -3,7 +3,7 @@ myLexicon.CollectionClasses.Lexemes = Backbone.Collection.extend({
 	url: 'lexemes',
 	
 	createNewLexeme: function(data) {
-		var lexeme = new myLexicon.ModelClasses.Lexeme(data);
+		var lexeme = new this.model(data);
 		this.add(lexeme);
 		return lexeme.cid;
 	}
