@@ -2,6 +2,12 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 	model: myLexicon.ModelClasses.Meaning,
 	url: 'meanings',
 	
+	fullCollection: myLexicon.Collections.meanings,
+	mode: "client",
+	
+	state: {
+		pageSize: 6,
+	},
 	
 	createMeaning: function (formData) {
 		var targetData = {
@@ -24,7 +30,7 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 			"baseid": basecid
 		});
 
-		this.add(meaning);
+		this.fullCollection.add(meaning);
 		meaning.pushLexemes();
 	}
 });

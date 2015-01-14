@@ -3,11 +3,12 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		'': "default",
 		'lexemes': "getAllLexemes",
 		'lexemes/:id': "displayLexeme",
-		'meanings': "getAllMeanings",
+		'meanings': "meanings",
+		'meanings/:pageNo': "meaningsPage",
 	},
 	
 	default: function () {
-		this.getAllMeanings();
+		this.meanings();
 	},
 	
 	/**
@@ -30,12 +31,14 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		lexemeView.displayLexeme();
 	},
 	
-	/**
-	 * Shows all meanings (and their associated lexemes) that are stored in the 
-	 * user's main collection
-	 */
-	getAllMeanings: function () {
-		var meaningsView = new myLexicon.ViewClasses.MeaningsView(myLexicon.Collections.meanings);
+	meanings: function () {
+		this.meaningsPage(1);
+	},
+	
+	meaningsPage: function (pageNo) {
+		pageNo = parseInt(pageNo);
+		var page = myLexicon.Collections.meanings.getPage(pageNo);
+		var meaningsView = new myLexicon.ViewClasses.MeaningsView(page);
 		meaningsView.render();
 	}
 }); 
