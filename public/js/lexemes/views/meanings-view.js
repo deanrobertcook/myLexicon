@@ -1,7 +1,7 @@
 myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	tagName: 'div',
 	
-	newMeaningFormTemplate: _.template($('#newMeaning').html()),
+	newMeaningFormTemplate: _.template($('#newMeaningTemplate').html()),
 	infoTemplate: _.template($('#meaningsInfo').html()),
 	paginationTemplate: _.template($('#paginationTemplate').html()),
 	
