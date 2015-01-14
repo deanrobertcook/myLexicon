@@ -7,6 +7,12 @@ myLexicon.ModelClasses.Meaning = Backbone.Model.extend({
 		dateEntered: (new Date()).toMysqlFormat(),
 	},
 	
+	/**
+	 * The first step to persisting a meaning is to first persist it's lexemes,
+	 * since the concrete backend IDs are needed to save the meaning. The meaning
+	 * binds a listener, pushSelf on the sync status of each lexeme, which, when fired,
+	 * updates the IDs of the lexemes.
+	 */
 	pushLexemes: function() {
 		var targetLexeme = myLexicon.Collections.lexemes.get(this.get('targetid'));
 		var baseLexeme = myLexicon.Collections.lexemes.get(this.get('baseid'));
@@ -18,6 +24,11 @@ myLexicon.ModelClasses.Meaning = Backbone.Model.extend({
 		myLexicon.Collections.lexemes.create(baseLexeme);
 	},
 	
+	/**
+	 * As each of the two lexemes are pushed, the status of the other one is
+	 * checked. Once both have been synced (the second trigger to this listener)
+	 * then the meaning is permitted to persist itself. 
+	 */
 	pushSelf: function(lexemePushed) {
 		if (lexemePushed.cid === this.get('targetid')) {
 			this.targetLexemeSynced = true;
@@ -30,7 +41,7 @@ myLexicon.ModelClasses.Meaning = Backbone.Model.extend({
 		}
 		
 		if (this.targetLexemeSynced && this.baseLexemeSynced) {
-			this.collection.create(this);
+			this.save();
 		}
 	}
 });

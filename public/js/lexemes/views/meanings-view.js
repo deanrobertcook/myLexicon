@@ -9,10 +9,8 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 		"click #submitNewMeaning": "submitNewMeaning",
 	},
 
-
 	initialize: function(collection) {
 		this.collection = collection;
-		
 		this.listenTo(this.collection, 'add', this.renderMeaning);
 	},
 	

@@ -8,6 +8,10 @@ myLexicon.ModelClasses.Lexeme = Backbone.Model.extend({
 		this.set('id', response.id);
 	},
 	
+	/**
+	 * Finds all meanings associated with this lexeme. Might be better off putting
+	 * the inverse of this function into the meanings class
+	 */
 	findAllMeanings: function(meaningCollection) {
 		var meanings = [];
 		meaningCollection.forEach(function(meaning) {
