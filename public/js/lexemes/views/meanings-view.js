@@ -25,7 +25,7 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	
 	renderInfoBar: function() {
 		this.$el.remove("#meaningsInfo");
-		this.$el.prepend(this.infoTemplate({"meaningCount": this.collection.length}));
+		this.$el.prepend(this.infoTemplate({"meaningCount": this.collection.getLength()}));
 		return this;
 	},
 
