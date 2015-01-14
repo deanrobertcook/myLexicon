@@ -25,8 +25,29 @@
 
 <script type="text/template" id="meaningsInfo">
 	<div id="meaningsInfo">
-		Count: <%= meaningCount %>
+		#Meanings: <%= meaningCount %>
 		<button id="toggleMeaningForm">Add Meaning</button>
+	</div>
+</script>
+
+<script type="text/template" id="paginationTemplate">
+	<div class="mylexicon-pagination">
+		<a href="#meanings/1">First</a>
+		<% if (previous !== -1) { %>
+			<a href="#meanings/<%= previous %>">Previous</a>
+        <% } %>
+		<% if (next !== -1) { %>
+			<a href="#meanings/<%= next %>">Next</a>
+        <% } %>
+		<a href="#meanings/<%= last %>">Last</a>
+	</div>
+</script>
+
+<script type="text/template" id="lexemeTemplate">
+	<div class="lexemeInfo">
+		<div class="lexeme-language"><%= language %></div>
+		<div class="lexeme-type"><%= type %></div>
+		<div class="lexeme-entry"><%= entry %></div>
 	</div>
 </script>
 
@@ -37,13 +58,6 @@
 	</ul>
 </script>
 
-<script type="text/template" id="lexemeTemplate">
-	<ul class="lexemeInfo">
-		<li>Lexeme Language: <%= language %></li>
-		<li>Lexeme Type: <%= type %></li>
-		<li>Lexeme Entry: <%= entry %></li>
-	</ul>
-</script>
 
 <?php 
 echo $this->headLink()->prependStylesheet($this->basePath() . '/css/lexemes.css');
