@@ -78,7 +78,7 @@ app.MeaningsView = Backbone.View.extend({
 		});
 		
 		this.collection.add(meaning);
-		meaning.push();
+		meaning.pushLexemes();
 		this.toggleMeaningForm();
 	},
 });
