@@ -1,4 +1,13 @@
 myLexicon.ModelClasses.Lexeme = Backbone.Model.extend({
+	
+	initialize: function() {
+		this.listenTo(this, 'sync', this.lexemeSynced);
+	},
+	
+	lexemeSynced: function(lexeme, response) {
+		this.set('id', response.id);
+	},
+	
 	findAllMeanings: function(meaningCollection) {
 		var meanings = [];
 		meaningCollection.forEach(function(meaning) {

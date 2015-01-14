@@ -8,12 +8,7 @@ myLexicon.ViewClasses.LexemeView = Backbone.View.extend({
 	},
 	
 	initialize: function() {
-		this.listenTo(this.model, 'sync', this.lexemeSynced);
-	},
-	
-	lexemeSynced: function(lexeme, response) {
-		this.model.set('id', response.id);
-		this.render();
+		this.listenTo(this.model, 'change', this.render);
 	},
 	
 	render: function() {
@@ -22,6 +17,10 @@ myLexicon.ViewClasses.LexemeView = Backbone.View.extend({
 		return this;
 	},
 	
+	/**
+	 * When a user clicks on a lexeme, redirect them to a new page
+	 * which displays only meanings for that lexeme, at 'url/lexemes/id'
+	 */
 	selectLexeme: function() {
 		var id = this.model.get('id');
 		myLexicon.router.navigate('lexemes/' + id, {trigger: true});
@@ -29,7 +28,6 @@ myLexicon.ViewClasses.LexemeView = Backbone.View.extend({
 	
 	displayLexeme: function() {
 		var meanings = this.model.findAllMeanings(myLexicon.Collections.meanings);
-		
 		var lexemesMeaningsView = new myLexicon.ViewClasses.MeaningsView(meanings);
 		lexemesMeaningsView.render();
 	}
