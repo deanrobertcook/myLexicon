@@ -66,6 +66,7 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 		} else {
 			$("#toggleMeaningForm").text("Hide Form");
 			$("#meaningsInfo").after(this.newMeaningFormTemplate());
+			$("#newMeaning select").val(this.collection.getPreviouslyEnteredLexemeType());
 		}
 	},
 	
@@ -78,6 +79,6 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 		});
 		
 		this.collection.createMeaning(formData);
-		this.toggleMeaningForm();
+//		this.toggleMeaningForm();
 	},
 });

@@ -8,7 +8,7 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 	},
 	
 	default: function () {
-		this.meanings();
+		this.meaningsPage(1);
 	},
 	
 	/**
@@ -32,7 +32,8 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 	},
 	
 	meanings: function () {
-		this.meaningsPage(1);
+		var meaningsView = new myLexicon.ViewClasses.MeaningsView(myLexicon.Collections.meanings);
+		meaningsView.render();
 	},
 	
 	meaningsPage: function (pageNo) {

@@ -4,6 +4,8 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 	
 	mode: "client",
 	
+	previouslyEnteredLexemeType: "noun",
+	
 	state: {
 		pageSize: 25,
 	},
@@ -30,12 +32,25 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 		});
 
 		this.fullCollection.add(meaning);
+		this.setPreviouslyEnteredLexemeType(formData.targetType);
 		meaning.pushLexemes();
 	},
 	
 	getLength: function() {
 		return this.fullCollection.length;
 	},
+	
+	setPreviouslyEnteredLexemeType: function(type) {
+		this.fullCollection.previouslyEnteredLexemeType = type;
+	}, 
+	
+	getPreviouslyEnteredLexemeType: function() {
+		if (this.fullCollection.previouslyEnteredLexemeType) {
+			return this.fullCollection.previouslyEnteredLexemeType;
+		} else {
+			return "noun";
+		}
+	}
 });
 
 
