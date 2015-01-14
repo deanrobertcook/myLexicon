@@ -8,14 +8,14 @@ myLexicon.ModelClasses.Meaning = Backbone.Model.extend({
 	},
 	
 	pushLexemes: function() {
-		var targetLexeme = app.lexemesView.findLexeme(this.get('targetid'));
-		var baseLexeme = app.lexemesView.findLexeme(this.get('baseid'));
+		var targetLexeme = myLexicon.Collections.lexemes.findLexeme(this.get('targetid'));
+		var baseLexeme = myLexicon.Collections.lexemes.findLexeme(this.get('baseid'));
 		
 		this.listenTo(targetLexeme, "sync", this.pushSelf);
 		this.listenTo(baseLexeme, "sync", this.pushSelf);
 		
-		app.lexemesView.collection.create(targetLexeme);
-		app.lexemesView.collection.create(baseLexeme);
+		myLexicon.Collections.lexemes.create(targetLexeme);
+		myLexicon.Collections.lexemes.create(baseLexeme);
 	},
 	
 	pushSelf: function(lexemePushed) {

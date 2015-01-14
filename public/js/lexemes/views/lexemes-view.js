@@ -21,10 +21,4 @@ myLexicon.ViewClasses.LexemesView = Backbone.View.extend({
 		});
 		this.$el.append(lexemeView.render().el);
 	},
-	
-	createNewLexeme: function(data) {
-		var lexeme = new myLexicon.ModelClasses.Lexeme(data);
-		this.collection.add(lexeme);
-		return lexeme.cid;
-	}
 });

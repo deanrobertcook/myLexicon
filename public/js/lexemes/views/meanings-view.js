@@ -6,7 +6,7 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	
 	events: {
 		"click #toggleMeaningForm": "toggleMeaningForm",
-		"click #submitNewMeaning": "createNewMeaning",
+		"click #submitNewMeaning": "submitNewMeaning",
 	},
 
 
@@ -48,35 +48,15 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 		}
 	},
 	
-	createNewMeaning: function(e) {
+	submitNewMeaning: function(e) {
 		e.preventDefault();
+		var form = $(e.currentTarget).parents("form")[0];
 		var formData = {};
-		$('#newMeaning div').children("input").each(function(index, element) {
-				formData[element.id] = element.value; 
+		$(form).children("input").each(function(index, element) {
+			formData[element.id] = element.value; 
 		});
 		
-		var targetData = {
-				"language": "de", //Change this to default to user's selection
-				"type": formData.targetType,
-				"entry": formData.targetEntry,
-		};
-
-		var baseData = {
-				"language": "en", //Change this to default to user's selection
-				"type": formData.baseType,
-				"entry": formData.baseEntry,
-		};
-		
-		var targetcid = app.lexemesView.createNewLexeme(targetData);
-		var basecid = app.lexemesView.createNewLexeme(baseData);
-		
-		var meaning = new app.Meaning({
-			"targetid": targetcid,
-			"baseid": basecid
-		});
-		
-		this.collection.add(meaning);
-		meaning.pushLexemes();
+		this.collection.createMeaning(formData);
 		this.toggleMeaningForm();
 	},
 });
