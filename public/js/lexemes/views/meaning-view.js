@@ -3,6 +3,10 @@ myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 	className: 'meaningContainer',
 	template: _.template($('#meaningTemplate').html()),
 	
+	initialize: function() {
+		this.listenTo(this.model, 'change', this.render);
+	},
+	
 	render: function() {
 		this.$el.empty();
 		this.renderLexeme(this.model.get('targetid'));
