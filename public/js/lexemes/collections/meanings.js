@@ -2,11 +2,10 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 	model: myLexicon.ModelClasses.Meaning,
 	url: 'meanings',
 	
-	fullCollection: myLexicon.Collections.meanings,
 	mode: "client",
 	
 	state: {
-		pageSize: 25,
+		pageSize: 5,
 	},
 	
 	createMeaning: function (formData) {
