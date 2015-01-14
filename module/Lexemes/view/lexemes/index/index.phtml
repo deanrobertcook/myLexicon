@@ -14,10 +14,28 @@
 <script type="text/template" id="newMeaningTemplate">
 	<div id="newMeaning">
 		<form action="#">
-			<label for="targetType">Target Type: </label><input id="targetType" type="text" />
-			<label for="targetEntry">Target Entry: </label><input id="targetEntry" type="text" />
-			<label for="baseType">Base Type: </label><input id="baseType" type="text" />
-			<label for="baseEntry">Base Entry: </label><input id="baseEntry" type="text" />
+			<label for="targetType">Target Type: </label>
+			<select id="targetType" class="lexeme-input">
+				<option value="noun">Noun</option>
+				<option value="verb">Verb</option>
+				<option value="adjective/adverb">Adjective/Adverb</option>
+				<option value="preposition">Preposition</option>
+			</select>
+						
+			<label for="targetEntry">Target Entry: </label>
+			<input id="targetEntry" class="lexeme-input" type="text" />
+						
+			<label for="baseType">Base Type: </label>
+			<select id="baseType" class="lexeme-input">
+				<option value="noun">Noun</option>
+				<option value="verb">Verb</option>
+				<option value="adjective/adverb">Adjective/Adverb</option>
+				<option value="preposition">Preposition</option>
+			</select>
+						
+			<label for="baseEntry">Base Entry: </label>
+			<input id="baseEntry" class="lexeme-input" type="text" />
+						
 			<button id="submitNewMeaning">Add</button>
 		</form>
 	</div>

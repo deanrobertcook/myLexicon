@@ -73,7 +73,7 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 		e.preventDefault();
 		var form = $(e.currentTarget).parents("form")[0];
 		var formData = {};
-		$(form).children("input").each(function(index, element) {
+		$(form).children(".lexeme-input").each(function(index, element) {
 			formData[element.id] = element.value; 
 		});
 		
