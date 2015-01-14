@@ -5,7 +5,7 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 	mode: "client",
 	
 	state: {
-		pageSize: 5,
+		pageSize: 25,
 	},
 	
 	createMeaning: function (formData) {

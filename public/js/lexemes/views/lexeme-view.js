@@ -27,7 +27,8 @@ myLexicon.ViewClasses.LexemeView = Backbone.View.extend({
 	},
 	
 	displayLexeme: function() {
-		var meanings = this.model.findAllMeanings(myLexicon.Collections.meanings);
+		var allMeanings = myLexicon.Collections.meanings.fullCollection;
+		var meanings = this.model.findAllMeanings(allMeanings);
 		var lexemesMeaningsView = new myLexicon.ViewClasses.MeaningsView(meanings);
 		lexemesMeaningsView.render();
 	}

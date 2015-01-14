@@ -15,7 +15,7 @@ class PDOFactory implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-		$dbConfig = $serviceLocator->get('config')['db']['myLexiconTest'];
+		$dbConfig = $serviceLocator->get('config')['db']['myLexicon'];
         $PDO = new PDO($dbConfig['dsn'], $dbConfig['username'], $dbConfig['password']);
         return $PDO;
 	}
