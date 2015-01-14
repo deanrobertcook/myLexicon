@@ -1,6 +1,4 @@
-var app = app || {};
-
-app.Meaning = Backbone.Model.extend({
+myLexicon.ModelClasses.Meaning = Backbone.Model.extend({
 	targetLexemeSynced: false,
 	baseLexemeSynced: false,
 	

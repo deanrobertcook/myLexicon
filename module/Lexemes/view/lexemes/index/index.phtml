@@ -52,13 +52,14 @@ echo $this->headLink()->prependStylesheet($this->basePath() . '/css/lexemes.css'
 
 echo $this->headScript()
 	->appendFile($this->basePath() . '/js/lexemes/functions.js')
+	->appendFile($this->basePath() . '/js/lexemes/application.js')
 	->appendFile($this->basePath() . '/js/lexemes/models/lexeme.js')
 	->appendFile($this->basePath() . '/js/lexemes/models/meaning.js')
 	->appendFile($this->basePath() . '/js/lexemes/collections/lexemes.js')
 	->appendFile($this->basePath() . '/js/lexemes/collections/meanings.js')
-	->appendFile($this->basePath() . '/js/lexemes/views/lexeme.js')
-	->appendFile($this->basePath() . '/js/lexemes/views/meaning.js')
-	->appendFile($this->basePath() . '/js/lexemes/views/lexemes.js')
-	->appendFile($this->basePath() . '/js/lexemes/views/meanings.js')
+	->appendFile($this->basePath() . '/js/lexemes/views/lexeme-view.js')
+	->appendFile($this->basePath() . '/js/lexemes/views/meaning-view.js')
+	->appendFile($this->basePath() . '/js/lexemes/views/lexemes-view.js')
+	->appendFile($this->basePath() . '/js/lexemes/views/meanings-view.js')
 	->appendFile($this->basePath() . '/js/lexemes/routers/router.js')
 ; ?>

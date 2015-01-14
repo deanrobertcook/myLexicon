@@ -1,6 +1,4 @@
-var app = app || {};
-
-app.LexemeView = Backbone.View.extend({
+myLexicon.ViewClasses.LexemeView = Backbone.View.extend({
 	tagName: 'div',
 	className: 'lexemeContainer',
 	template: _.template($('#lexemeTemplate').html()),
@@ -26,22 +24,13 @@ app.LexemeView = Backbone.View.extend({
 	
 	selectLexeme: function() {
 		var id = this.model.get('id');
-		app.Router.navigate('lexemes/' + id, {trigger: true});
+		myLexicon.router.navigate('lexemes/' + id, {trigger: true});
 	},
 	
 	displayLexeme: function() {
-		var meanings = [];
-		app.meaningsView.collection.forEach(function(meaning) {
-			if(meaning.get('targetid') === this.model.get('id') || 
-					meaning.get('baseid') === this.model.get('id')) {
-				meanings.push(meaning);
-			}
-		}, this);
+		var meanings = this.model.findAllMeanings(myLexicon.Collections.meanings);
 		
-		if (app.lexemeMeaningsView) {
-			app.lexemeMeaningsView.remove();
-		}
-		app.lexemeMeaningsView = new app.MeaningsView(meanings);
-		app.lexemeMeaningsView.render();
+		var lexemesMeaningsView = new myLexicon.ViewClasses.MeaningsView(meanings);
+		lexemesMeaningsView.render();
 	}
 });

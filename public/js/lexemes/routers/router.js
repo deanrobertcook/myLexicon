@@ -1,5 +1,4 @@
-var app = app || {};
-var Router = Backbone.Router.extend({
+myLexicon.RouterClasses.Router = Backbone.Router.extend({
 	routes: {
 		'': "default",
 		'lexemes': "getAllLexemes",
@@ -12,21 +11,19 @@ var Router = Backbone.Router.extend({
 	},
 	
 	getAllLexemes: function () {
-		app.lexemesView.render();
+		var lexemesView = new myLexicon.ViewClasses.LexemesView(myLexicon.Collections.lexemes);
+		lexemesView.render();
 	},
 	
 	displayLexeme: function(id) {
-		var lexeme = app.lexemesView.findLexeme(id);
-		var lexemeView = new app.LexemeView({model: lexeme});
+		var lexeme = myLexicon.Collections.lexemes.findLexeme(id);
+		var lexemeView = new myLexicon.ViewClasses.LexemeView({model: lexeme});
 		lexemeView.displayLexeme();
 	},
 	
 	getAllMeanings: function () {
-		app.meaningsView.render();
+		var meaningsView = new myLexicon.ViewClasses.MeaningsView(myLexicon.Collections.meanings);
+		meaningsView.render();
 	}
-});
+}); 
 
-app.lexemesView = new app.LexemesView(allLexemes);
-app.meaningsView = new app.MeaningsView(allMeanings);
-app.Router = new Router();
-Backbone.history.start();

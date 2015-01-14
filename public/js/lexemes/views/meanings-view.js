@@ -1,6 +1,4 @@
-var app = app || {};
-
-app.MeaningsView = Backbone.View.extend({
+myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	tagName: 'div',
 	
 	newMeaningFormTemplate: _.template($('#newMeaning').html()),
@@ -12,8 +10,8 @@ app.MeaningsView = Backbone.View.extend({
 	},
 
 
-	initialize: function(initialMeanings) {
-		this.collection = new app.Meanings(initialMeanings);
+	initialize: function(collection) {
+		this.collection = collection;
 		
 		this.listenTo(this.collection, 'add', this.renderMeaning);
 	},
@@ -34,7 +32,7 @@ app.MeaningsView = Backbone.View.extend({
 	},
 
 	renderMeaning: function(meaning) {
-		var meaningView = new app.MeaningView({
+		var meaningView = new myLexicon.ViewClasses.MeaningView({
 			model: meaning,
 		});
 		this.$el.append(meaningView.render().el);

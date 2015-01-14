@@ -1,12 +1,10 @@
-var app = app || {};
-
-app.LexemesView = Backbone.View.extend({
+myLexicon.ViewClasses.LexemesView = Backbone.View.extend({
 	nextId: 0,
 	
 	tagName: 'div',
 	
-	initialize: function(initialLexemes) {
-		this.collection = new app.Lexemes(initialLexemes);
+	initialize: function(collection) {
+		this.collection = collection;
 	},
 	
 	render: function() {
@@ -18,19 +16,14 @@ app.LexemesView = Backbone.View.extend({
 	},
 	
 	renderLexeme: function(lexeme) {
-		var lexemeView = new app.LexemeView({
+		var lexemeView = new myLexicon.ViewClasses.LexemeView({
 			model: lexeme,
 		});
 		this.$el.append(lexemeView.render().el);
 	},
 	
-	findLexeme: function(id) {
-		var lexeme = this.collection.get(id);
-		return lexeme;
-	},
-	
 	createNewLexeme: function(data) {
-		var lexeme = new app.Lexeme(data);
+		var lexeme = new myLexicon.ModelClasses.Lexeme(data);
 		this.collection.add(lexeme);
 		return lexeme.cid;
 	}

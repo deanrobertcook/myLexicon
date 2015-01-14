@@ -1,7 +1,5 @@
-var app = app || {};
-
-app.Meanings = Backbone.Collection.extend({
-	model: app.Meaning,
+myLexicon.CollectionClasses.Meanings = Backbone.Collection.extend({
+	model: myLexicon.ModelClasses.Meaning,
 	url: 'meanings'
 });
 

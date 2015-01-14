@@ -1,13 +1,11 @@
-var app = app || {};
-
-app.MeaningView = Backbone.View.extend({
+myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 	tagName: 'div',
 	className: 'meaningContainer',
 	template: _.template($('#meaningTemplate').html()),
 	
 	initialize: function() {
-		var targetLexeme = app.lexemesView.findLexeme(this.model.get('targetid'));
-		var baseLexeme = app.lexemesView.findLexeme(this.model.get('baseid'));
+		var targetLexeme = myLexicon.Collections.lexemes.findLexeme(this.model.get('targetid'));
+		var baseLexeme = myLexicon.Collections.lexemes.findLexeme(this.model.get('baseid'));
 		
 		this.listenTo(targetLexeme, 'change:[id]', this.changedLexeme);
 		this.listenTo(baseLexeme, 'change:[id]', this.changedLexeme);
@@ -29,8 +27,8 @@ app.MeaningView = Backbone.View.extend({
 	},
 	
 	renderLexeme: function(lexemeId) {
-		var lexeme = app.lexemesView.findLexeme(lexemeId);
-		var lexemeView = new app.LexemeView({model: lexeme});
+		var lexeme = myLexicon.Collections.lexemes.findLexeme(lexemeId);
+		var lexemeView = new myLexicon.ViewClasses.LexemeView({model: lexeme});
 		this.$el.append(lexemeView.render().el);
 		return this;
 	},
