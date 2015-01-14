@@ -13,7 +13,7 @@ myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 	},
 	
 	renderLexeme: function(lexemeId) {
-		var lexeme = myLexicon.Collections.lexemes.findLexeme(lexemeId);
+		var lexeme = myLexicon.Collections.lexemes.get(lexemeId);
 		var lexemeView = new myLexicon.ViewClasses.LexemeView({model: lexeme});
 		this.$el.append(lexemeView.render().el);
 		return this;

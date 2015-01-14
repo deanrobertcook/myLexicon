@@ -25,7 +25,7 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 	 * @param {int} id
 	 */
 	displayLexeme: function(id) {
-		var lexeme = myLexicon.Collections.lexemes.findLexeme(id);
+		var lexeme = myLexicon.Collections.lexemes.get(id);
 		var lexemeView = new myLexicon.ViewClasses.LexemeView({model: lexeme});
 		lexemeView.displayLexeme();
 	},
