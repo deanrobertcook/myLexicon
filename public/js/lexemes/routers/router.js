@@ -32,8 +32,7 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 	},
 	
 	meanings: function () {
-		var meaningsView = new myLexicon.ViewClasses.MeaningsView(myLexicon.Collections.meanings);
-		meaningsView.render();
+		this.meaningsPage(1);
 	},
 	
 	meaningsPage: function (pageNo) {

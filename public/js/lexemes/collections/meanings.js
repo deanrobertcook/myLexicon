@@ -28,7 +28,8 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 
 		var meaning = new this.model({
 			"targetid": targetcid,
-			"baseid": basecid
+			"baseid": basecid,
+			"dateEntered" : (new Date()).toMysqlFormat(),
 		});
 
 		this.fullCollection.add(meaning);

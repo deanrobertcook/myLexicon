@@ -41,7 +41,9 @@ myLexicon.ModelClasses.Meaning = Backbone.Model.extend({
 		}
 		
 		if (this.targetLexemeSynced && this.baseLexemeSynced) {
-			this.save();
+			this.save(function() {
+				console.log("Meaning successfully saved");
+			});
 		}
 	},
 });

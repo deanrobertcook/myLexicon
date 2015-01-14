@@ -13,7 +13,7 @@ myLexicon.ViewClasses.LexemeView = Backbone.View.extend({
 	
 	render: function() {
 		this.$el.html(this.template(this.model.attributes));
-		this.$el.append("ID: " + this.model.get("id"));
+//		this.$el.append("ID: " + this.model.get("id"));
 		return this;
 	},
 	
