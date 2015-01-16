@@ -25,7 +25,7 @@ class LexemeController extends AbstractRestfulController
 		$lexemeService = $this->serviceLocator->get("lexemeService");
 		$lexemes = $lexemeService->getAllLexemes('de', 'en');
 
-		return new JsonModel($name);
+		return new JsonModel($lexemes);
 	}
 
 	public function get($id)

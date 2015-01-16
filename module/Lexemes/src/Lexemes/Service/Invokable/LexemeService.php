@@ -2,28 +2,44 @@
 
 namespace Lexemes\Service\Invokable;
 
-use Lexemes\Model\Entity\Lexeme;
-use Lexemes\Model\LexemeMapper;
+use Zend\Db\Sql\Predicate\Like;
+use Zend\Db\Sql\Predicate\PredicateSet;
+use Zend\Db\Sql\Where;
 
+class LexemeService
+{
 
-class LexemeService {
-	
-	private $lexemeMapper;
-	
-	public function __construct($PDO) {
-		$this->lexemeMapper = new LexemeMapper($PDO); 
+	private $lexemeTable;
+
+	public function __construct($lexemeTable)
+	{
+		$this->lexemeTable = $lexemeTable;
 	}
-	
-	public function saveLexeme($lexemeData) {
-		$lexemeId = $this->lexemeMapper->saveLexeme($lexemeData);
+
+	public function saveLexeme($lexemeData)
+	{
+		$this->lexemeTable->insert($lexemeData);
+		$lexemeId = $this->lexemeTable->lastInsertValue;
 		return $lexemeId;
 	}
-	
-	public function getLexeme($id) {
-		return $this->lexemeMapper->getLexemeById($id);
+
+	public function getLexeme($id)
+	{
+		$predicates = array(
+			new Like("id", $id),
+		);
+		$where = new Where($predicates);
+		return $this->lexemeTable->select($where);
 	}
-	
-	public function getAllLexemes($targetLanguage, $baseLanguage) {
-		return $this->lexemeMapper->getAllLexemes($targetLanguage, $baseLanguage);
+
+	public function getAllLexemes($targetLanguage, $baseLanguage)
+	{
+		$predicates = array(
+			new Like("language", $targetLanguage),
+			new Like("language", $baseLanguage)
+		);
+		$where = new Where($predicates, PredicateSet::COMBINED_BY_OR);
+		return $this->lexemeTable->select($where);
 	}
+
 }

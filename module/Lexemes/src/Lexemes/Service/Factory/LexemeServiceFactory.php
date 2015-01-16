@@ -2,6 +2,7 @@
 
 namespace Lexemes\Service\Factory;
 
+use Lexemes\Model\LexemeTable;
 use Lexemes\Service\Invokable\LexemeService;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -15,8 +16,8 @@ class LexemeServiceFactory implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-		$PDO = $serviceLocator->get('PDO');
-		$lexemeService = new LexemeService($PDO);
+		$lexemeGateway = new LexemeTable();
+		$lexemeService = new LexemeService($lexemeGateway);
 		return $lexemeService;
 	}
 }

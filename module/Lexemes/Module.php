@@ -32,7 +32,7 @@ class Module implements AutoloaderProviderInterface
     {
 		//Sets the default dbAdapter to use for myLexicon
 		$serviceManager = $e->getApplication()->getServiceManager();
-		$dbAdapter = $serviceManager->get('myLexicon');
+		$dbAdapter = $serviceManager->get('myLexiconTest');
 		GlobalAdapterFeature::setStaticAdapter($dbAdapter);
     }
 }
