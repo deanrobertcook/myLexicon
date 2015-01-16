@@ -2,8 +2,9 @@
 return array(
 	'controllers' => array(
 		'invokables' => array(
-			'Lexemes\Controller\Meaning' => 'Lexemes\Controller\MeaningController',
 			'Lexemes\Controller\Lexeme' => 'Lexemes\Controller\LexemeController',
+			'Lexemes\Controller\Meaning' => 'Lexemes\Controller\MeaningController',
+			'Lexemes\Controller\Example' => 'Lexemes\Controller\ExampleController',
 			'Lexemes\Controller\Index' => 'Lexemes\Controller\IndexController',
 		),
 	),
@@ -12,6 +13,7 @@ return array(
 			'PDO' => 'Lexemes\Service\Factory\PDOFactory',
 			'meaningService' => 'Lexemes\Service\Factory\MeaningServiceFactory',
 			'lexemeService' => 'Lexemes\Service\Factory\LexemeServiceFactory',
+			'exampleService' => 'Lexemes\Service\Factory\ExampleServiceFactory',
 		),
 		'invokables' => array()
 	),
@@ -56,6 +58,29 @@ return array(
 					'route' => '/meanings',
 					'defaults' => array(
                         'controller' => 'Lexemes\Controller\Meaning',
+                    ),
+				),
+				'may_terminate' => true,
+				'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:id]',
+                            'constraints' => array(
+								'id' => '[0-9]+',
+							),
+							'defaults' => array(
+                            ),
+                        ),
+                    ),
+                ),
+			),
+			'examples' => array(
+				'type' => 'Literal',
+				'options' => array(
+					'route' => '/examples',
+					'defaults' => array(
+                        'controller' => 'Lexemes\Controller\Example',
                     ),
 				),
 				'may_terminate' => true,
