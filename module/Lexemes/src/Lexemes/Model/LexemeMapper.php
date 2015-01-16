@@ -71,4 +71,19 @@ class LexemeMapper
 		return $row['id'];
 	}
 
+	public function updateLexeme($id, $lexemeData)
+	{
+		$oldData = $this->readLexeme($id);
+		$oldData['language'] = isset($lexemeData['language']) ? $lexemeData['language'] : $oldData['language'];
+		$oldData['type'] = isset($lexemeData['type']) ? $lexemeData['type'] : $oldData['type'];
+		$oldData['entry'] = isset($lexemeData['entry']) ? $lexemeData['entry'] : $oldData['entry'];
+		
+		$stmt = $this->pdo->prepare("UPDATE lexemes SET language = ?, type = ?, entry = ? WHERE id = ?");
+		$stmt->bindValue(1, $oldData['language']);
+		$stmt->bindValue(2, $oldData['type']);
+		$stmt->bindValue(3, $oldData['entry']);
+		$stmt->bindValue(4, $oldData['id']);
+		$stmt->execute();
+	}
+
 }

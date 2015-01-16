@@ -31,7 +31,7 @@ class LexemeService
 
 	public function updateLexeme($id, $lexemeData)
 	{
-		echo "LEXEME UPDATING";
+		$this->lexemeMapper->updateLexeme($id, $lexemeData);
 	}
 
 }
