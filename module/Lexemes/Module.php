@@ -2,8 +2,8 @@
 
 namespace Lexemes;
 
+use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
 class Module implements AutoloaderProviderInterface
@@ -30,10 +30,9 @@ class Module implements AutoloaderProviderInterface
 
     public function onBootstrap(MvcEvent $e)
     {
-        // You may not need to do this if you're doing it elsewhere in your
-        // application
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
+		//Sets the default dbAdapter to use for myLexicon
+		$serviceManager = $e->getApplication()->getServiceManager();
+		$dbAdapter = $serviceManager->get('myLexicon');
+		GlobalAdapterFeature::setStaticAdapter($dbAdapter);
     }
 }
