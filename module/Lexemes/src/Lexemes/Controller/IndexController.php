@@ -11,8 +11,8 @@ class IndexController extends AbstractActionController {
 		$meaningService = $this->serviceLocator->get('meaningService');
 		$lexemeService = $this->serviceLocator->get('lexemeService');
 		
-		$meanings = json_encode($meaningService->getAllMeanings('de', 'en'));
-		$lexemes = json_encode($lexemeService->getAllLexemes('de', 'en'));
+		$meanings = json_encode($meaningService->readAllMeanings('de', 'en'));
+		$lexemes = json_encode($lexemeService->readAllLexemes('de', 'en'));
 		
 		return array(
 			'meanings' => $meanings,

@@ -23,7 +23,7 @@ class LexemeController extends AbstractRestfulController
 	public function getList()
 	{
 		$lexemeService = $this->serviceLocator->get("lexemeService");
-		$lexemes = $lexemeService->getAllLexemes('de', 'en');
+		$lexemes = $lexemeService->readAllLexemes('de', 'en');
 
 		return new JsonModel($lexemes);
 	}
@@ -31,7 +31,7 @@ class LexemeController extends AbstractRestfulController
 	public function get($id)
 	{
 		$lexemeService = $this->serviceLocator->get("lexemeService");
-		$lexeme = $lexemeService->getLexeme($id);
+		$lexeme = $lexemeService->readLexeme($id);
 
 		return new JsonModel($lexeme);
 	}
@@ -39,7 +39,7 @@ class LexemeController extends AbstractRestfulController
 	public function create($data)
 	{
 		$lexemeService = $this->serviceLocator->get("lexemeService");
-		$id = $lexemeService->saveLexeme($data);
+		$id = $lexemeService->createLexeme($data);
 
 		return new JsonModel(array("id" => $id));
 	}

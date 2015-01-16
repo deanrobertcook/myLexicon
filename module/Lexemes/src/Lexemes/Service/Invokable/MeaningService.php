@@ -16,18 +16,18 @@ class MeaningService {
 		$this->lexemeService = new LexemeService($PDO);
 	}
 	
-	public function saveMeaning($meaningData) {
-		$meaningId = $this->meaningMapper->saveMeaning($meaningData);
+	public function createMeaning($meaningData) {
+		$meaningId = $this->meaningMapper->createMeaning($meaningData);
 		return $meaningId;
 	}
 	
-	public function getMeaning($id) {
-		$meaning = $this->meaningMapper->getMeaningById($id);
+	public function readMeaning($id) {
+		$meaning = $this->meaningMapper->readMeaning($id);
 		return $meaning;
 	}
 	
-	public function getAllMeanings($targetLanguage, $baseLanguage) {
-		$meanings = $this->meaningMapper->getAllMeanings($targetLanguage, $baseLanguage);
+	public function readAllMeanings($targetLanguage, $baseLanguage) {
+		$meanings = $this->meaningMapper->readAllMeanings($targetLanguage, $baseLanguage);
 		return $meanings;
 	}
 }

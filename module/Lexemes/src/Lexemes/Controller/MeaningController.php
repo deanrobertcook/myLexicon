@@ -11,7 +11,7 @@ class MeaningController extends AbstractRestfulController
 	public function getList()
 	{
 		$meaningService = $this->serviceLocator->get('meaningService');
-		$meanings = $meaningService->getAllMeanings('de', 'en'); //CHANGE WITH USER FNALITY
+		$meanings = $meaningService->readAllMeanings('de', 'en'); //CHANGE WITH USER FNALITY
 
 		return new JsonModel($meanings);
 	}
@@ -19,7 +19,7 @@ class MeaningController extends AbstractRestfulController
 	public function get($id)
 	{
 		$meaningService = $this->serviceLocator->get('meaningService');
-		$meaning = $meaningService->getMeaning($id); //CHANGE WITH USER FNALITY
+		$meaning = $meaningService->readMeaning($id); //CHANGE WITH USER FNALITY
 
 		return new JsonModel($meaning);
 	}
@@ -27,7 +27,7 @@ class MeaningController extends AbstractRestfulController
 	public function create($data)
 	{
 		$meaningService = $this->serviceLocator->get('meaningService');
-		$id = $meaningService->saveMeaning($data);
+		$id = $meaningService->createMeaning($data);
 
 		return new JsonModel(array("id" => $id));
 	}

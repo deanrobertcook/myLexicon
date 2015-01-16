@@ -11,7 +11,7 @@ class MeaningMapper {
 		$this->pdo = $PDO;
 	}
 	
-	public function getAllMeanings($targetLanguage, $baseLanguage) {
+	public function readAllMeanings($targetLanguage, $baseLanguage) {
 		$stmt = $this->pdo->prepare("SELECT * FROM word_list_verbose WHERE target_language = ? AND base_language = ? ORDER BY frequency DESC, date_entered DESC");
 		$stmt->bindValue(1, $targetLanguage);
 		$stmt->bindValue(2, $baseLanguage);
@@ -23,7 +23,7 @@ class MeaningMapper {
 		return $meanings;
 	}
 	
-	public function getMeaningById($id) {
+	public function readMeaning($id) {
 		$stmt = $this->pdo->prepare("SELECT * FROM word_list_verbose WHERE meaningid = ?");
 		$stmt->bindValue(1, $id);
 		$stmt->execute();
@@ -40,7 +40,7 @@ class MeaningMapper {
 		);
 	}
 	
-	public function saveMeaning($meaningData) {		
+	public function createMeaning($meaningData) {		
 		$stmt = $this->pdo->prepare("INSERT INTO meanings (userid, targetid, baseid, frequency, date_entered) VALUES (1, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE frequency = frequency + ?;");
 		$stmt->bindValue(1, $meaningData['targetid']);
 		$stmt->bindValue(2, $meaningData['baseid']);

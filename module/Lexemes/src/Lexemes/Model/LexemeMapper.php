@@ -12,16 +12,16 @@ class LexemeMapper
 		$this->pdo = $PDO;
 	}
 
-	public function getLexemeById($id)
+	public function readLexeme($id)
 	{
 		$stmt = $this->pdo->prepare("SELECT * FROM lexemes WHERE id = ?");
 		$stmt->bindValue(1, $id);
 		$stmt->execute();
 		$row = $stmt->fetch();
-		return $this->createLexemeFromQueryRow($row);
+		return $this->getLexemeDataFromRow($row);
 	}
 
-	public function getAllLexemes($targetLanguage, $baseLanguage)
+	public function readAllLexemes($targetLanguage, $baseLanguage)
 	{
 		$stmt = $this->pdo->prepare("SELECT * FROM lexemes WHERE language = ? OR language = ?");
 		$stmt->bindValue(1, $targetLanguage);
@@ -29,12 +29,12 @@ class LexemeMapper
 		$stmt->execute();
 		$lexemes = array();
 		while ($row = $stmt->fetch()) {
-			$lexemes[] = $this->createLexemeFromQueryRow($row);
+			$lexemes[] = $this->getLexemeDataFromRow($row);
 		}
 		return $lexemes;
 	}
 
-	private function createLexemeFromQueryRow($row)
+	private function getLexemeDataFromRow($row)
 	{
 		return array(
 			'id' => $row['id'],
@@ -44,7 +44,7 @@ class LexemeMapper
 		);
 	}
 
-	public function saveLexeme($lexemeData)
+	public function createLexeme($lexemeData)
 	{
 		
 		$id = $this->checkIfLexemeExists($lexemeData['language'], $lexemeData['type'], $lexemeData['entry']);
