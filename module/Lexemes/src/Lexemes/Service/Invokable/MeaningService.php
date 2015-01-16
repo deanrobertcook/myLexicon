@@ -9,11 +9,9 @@ use Lexemes\Model\MeaningMapper;
 class MeaningService {
 	
 	private $meaningMapper;
-	private $lexemeService;
 	
 	public function __construct($PDO) {
 		$this->meaningMapper = new MeaningMapper($PDO);
-		$this->lexemeService = new LexemeService($PDO);
 	}
 	
 	public function createMeaning($meaningData) {
@@ -29,5 +27,9 @@ class MeaningService {
 	public function readAllMeanings($targetLanguage, $baseLanguage) {
 		$meanings = $this->meaningMapper->readAllMeanings($targetLanguage, $baseLanguage);
 		return $meanings;
+	}
+	
+	public function updateMeaning($id, $meaningData) {
+		
 	}
 }

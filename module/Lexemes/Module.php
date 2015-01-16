@@ -30,9 +30,5 @@ class Module implements AutoloaderProviderInterface
 
     public function onBootstrap(MvcEvent $e)
     {
-		//Sets the default dbAdapter to use for myLexicon
-		$serviceManager = $e->getApplication()->getServiceManager();
-		$dbAdapter = $serviceManager->get('myLexiconTest');
-		GlobalAdapterFeature::setStaticAdapter($dbAdapter);
     }
 }

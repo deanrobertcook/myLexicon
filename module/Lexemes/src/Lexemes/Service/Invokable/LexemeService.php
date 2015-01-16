@@ -2,27 +2,36 @@
 
 namespace Lexemes\Service\Invokable;
 
+use Lexemes\Model\LexemeMapper;
+
 class LexemeService
 {
-
-	private $lexemeTable;
-
-	public function __construct($lexemeTable)
-	{
-		$this->lexemeTable = $lexemeTable;
-	}
+	private $lexemeMapper;
 	
-	public function createLexeme($lexemeData) {
+	public function __construct($PDO)
+	{
+		$this->lexemeMapper = new LexemeMapper($PDO);
+	}
+
+	public function createLexeme($lexemeData)
+	{
 		$lexemeId = $this->lexemeMapper->createLexeme($lexemeData);
 		return $lexemeId;
 	}
-	
-	public function readLexeme($id) {
+
+	public function readLexeme($id)
+	{
 		return $this->lexemeMapper->readLexeme($id);
 	}
-	
-	public function readAllLexemes($targetLanguage, $baseLanguage) {
+
+	public function readAllLexemes($targetLanguage, $baseLanguage)
+	{
 		return $this->lexemeMapper->readAllLexemes($targetLanguage, $baseLanguage);
+	}
+
+	public function updateLexeme($id, $lexemeData)
+	{
+		echo "LEXEME UPDATING";
 	}
 
 }

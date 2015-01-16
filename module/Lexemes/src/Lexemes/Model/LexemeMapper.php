@@ -46,7 +46,7 @@ class LexemeMapper
 
 	public function createLexeme($lexemeData)
 	{
-		
+
 		$id = $this->checkIfLexemeExists($lexemeData['language'], $lexemeData['type'], $lexemeData['entry']);
 		if ($id == NULL) {
 			$stmt = $this->pdo->prepare("INSERT INTO lexemes (language, type, entry) VALUES (?, ?, ?)");
