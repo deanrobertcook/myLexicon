@@ -12,7 +12,8 @@ myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 		this.renderLexeme(this.model.get('targetid'));
 		this.renderLexeme(this.model.get('baseid'));
 		this.$el.append(this.template(this.model.attributes));
-//		this.$el.append("ID: " + this.model.get('id'));
+		this.$el.append("ID: " + this.model.get('id'));
+		this.renderExamples();
 		return this;
 	},
 	
@@ -22,4 +23,12 @@ myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 		this.$el.append(lexemeView.render().el);
 		return this;
 	},
+	
+	renderExamples: function() {
+		var examples = this.model.findExamples();
+		examples.forEach(function(example) {
+			var exampleView = new myLexicon.ViewClasses.ExampleView({model: example});
+			this.$el.append(exampleView.render().el);
+		}, this);
+	}
 });

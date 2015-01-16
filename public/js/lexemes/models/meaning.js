@@ -46,4 +46,14 @@ myLexicon.ModelClasses.Meaning = Backbone.Model.extend({
 			});
 		}
 	},
+	
+	findExamples: function() {
+		var examples = [];
+		myLexicon.Collections.examples.forEach(function(example) {
+			if (example.get('meaningId') === this.get('id')) {
+				examples.push(example);
+			}
+		}, this);
+		return examples;
+	}
 });

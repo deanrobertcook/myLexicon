@@ -15,6 +15,7 @@ var myLexicon = {
 	main: function() {
 		this.Collections.lexemes = new this.CollectionClasses.Lexemes(allLexemes);
 		this.Collections.meanings = new this.CollectionClasses.Meanings(allMeanings);
+		this.Collections.examples = new this.CollectionClasses.Examples(allExamples);
 		
 		this.router = new this.RouterClasses.Router();
 		Backbone.history.start();

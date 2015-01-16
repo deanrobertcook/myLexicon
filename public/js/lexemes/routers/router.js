@@ -40,6 +40,6 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		var page = myLexicon.Collections.meanings.getPage(pageNo);
 		var meaningsView = new myLexicon.ViewClasses.MeaningsView(page);
 		meaningsView.render();
-	}
+	},
 }); 
 

@@ -9,6 +9,7 @@
 <script type="text/javascript">
 	var allLexemes = <?php echo $this->lexemes; ?>;
 	var allMeanings = <?php echo $this->meanings; ?>;
+	var allExamples = <?php echo $this->examples; ?>;
 </script>
 
 <script type="text/template" id="newMeaningTemplate">
@@ -76,6 +77,14 @@
 	</ul>
 </script>
 
+<script type="text/template" id="exampleTemplate">
+	<ul>
+		<li>Example Target: <%= exampleTarget %></li>
+		<li>Example Base: <%= exampleBase %></li>
+	</ul>
+</script>
+
+
 
 <?php 
 echo $this->headLink()->prependStylesheet($this->basePath() . '/css/lexemes.css');
@@ -85,9 +94,12 @@ echo $this->headScript()
 	->appendFile($this->basePath() . '/js/lexemes/application.js')
 	->appendFile($this->basePath() . '/js/lexemes/models/lexeme.js')
 	->appendFile($this->basePath() . '/js/lexemes/models/meaning.js')
+	->appendFile($this->basePath() . '/js/lexemes/models/example.js')
 	->appendFile($this->basePath() . '/js/lexemes/collections/lexemes.js')
 	->appendFile($this->basePath() . '/js/lexemes/collections/meanings.js')
+	->appendFile($this->basePath() . '/js/lexemes/collections/examples.js')
 	->appendFile($this->basePath() . '/js/lexemes/views/lexeme-view.js')
+	->appendFile($this->basePath() . '/js/lexemes/views/example-view.js')
 	->appendFile($this->basePath() . '/js/lexemes/views/meaning-view.js')
 	->appendFile($this->basePath() . '/js/lexemes/views/lexemes-view.js')
 	->appendFile($this->basePath() . '/js/lexemes/views/meanings-view.js')
