@@ -8,7 +8,7 @@
 
 namespace Lexemes\Controller;
 
-use Lexemes\Model\Lexeme;
+use Lexemes\Model\LexemeTable;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
 
@@ -22,11 +22,8 @@ class LexemeController extends AbstractRestfulController
 
 	public function getList()
 	{
-//		var_dump($this->serviceLocator->get('myLexicon'));
-		$model = new Lexeme();
-		$name = $model->select("id");
-//		$lexemeService = $this->serviceLocator->get("lexemeService");
-//		$lexemes = $lexemeService->getAllLexemes('de', 'en');
+		$lexemeService = $this->serviceLocator->get("lexemeService");
+		$lexemes = $lexemeService->getAllLexemes('de', 'en');
 
 		return new JsonModel($name);
 	}
