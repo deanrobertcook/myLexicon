@@ -2,8 +2,6 @@
 
 namespace LexemesTest;
 
-use PDO;
-
 abstract class AbstractDatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
 {
     // only instantiate pdo once for test clean-up/fixture load
@@ -28,8 +26,13 @@ abstract class AbstractDatabaseTestCase extends \PHPUnit_Extensions_Database_Tes
 	
 	private function getTestPDO() {
 		$serviceManager = Bootstrap::getServiceManager();
-		$dbConfig = $serviceManager->get('config')['db'][$this->testDbName];
-        $PDO = new PDO($dbConfig['dsn'], $dbConfig['username'], $dbConfig['password']);
+		$PDO = $serviceManager->get('PDO');
+		$databaseName = $PDO->query('select database()')->fetchColumn();
+		if ($databaseName != "myLexiconTest") {
+			throw new \Exception(
+				"Ensure that the PDO is set to use the an empty test database called myLexiconTest"
+			);
+		}
 		return $PDO;
 	}
 	

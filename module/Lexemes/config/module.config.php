@@ -1,5 +1,6 @@
 <?php
 return array(
+	"url" => "http://localhost/myLexicon/public",	
 	'controllers' => array(
 		'invokables' => array(
 			'Lexemes\Controller\Lexeme' => 'Lexemes\Controller\LexemeController',
