@@ -90,6 +90,7 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 			formData[element.id] = element.value; 
 		});
 		this.collection.createMeaning(formData);
+		$("#newMeaning").find(".example-input").val(null);
 //		this.toggleMeaningForm();
 	},
 });
