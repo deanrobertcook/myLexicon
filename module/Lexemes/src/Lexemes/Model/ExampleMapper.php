@@ -2,12 +2,14 @@
 
 namespace Lexemes\Model;
 
+use PDO;
+
 class ExampleMapper
 {
 
 	private $pdo = null;
 
-	public function __construct($PDO)
+	public function __construct(PDO $PDO)
 	{
 		$this->pdo = $PDO;
 	}

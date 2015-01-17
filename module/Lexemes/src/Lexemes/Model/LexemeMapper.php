@@ -2,12 +2,14 @@
 
 namespace Lexemes\Model;
 
+use PDO;
+
 class LexemeMapper
 {
 
 	private $pdo = null;
 
-	public function __construct($PDO)
+	public function __construct(PDO $PDO)
 	{
 		$this->pdo = $PDO;
 	}
@@ -46,7 +48,6 @@ class LexemeMapper
 
 	public function createLexeme($lexemeData)
 	{
-
 		$id = $this->checkIfLexemeExists($lexemeData['language'], $lexemeData['type'], $lexemeData['entry']);
 		if ($id == NULL) {
 			$stmt = $this->pdo->prepare("INSERT INTO lexemes (language, type, entry) VALUES (?, ?, ?)");

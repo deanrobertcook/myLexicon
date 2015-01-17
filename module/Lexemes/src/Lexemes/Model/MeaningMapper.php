@@ -9,7 +9,7 @@ class MeaningMapper
 
 	private $pdo = null;
 
-	public function __construct($PDO)
+	public function __construct(PDO $PDO)
 	{
 		$this->pdo = $PDO;
 	}
