@@ -10,11 +10,7 @@ namespace LexemesTest\Controller;
 use LexemesTest\AbstractDatabaseTestCase;
 
 class lexemeControllerTest extends AbstractDatabaseTestCase
-{
-	public function getDataSet() {
-		
-	}
-	
+{	
 	public function testTest() {
 		$this->getDataSet();
 	}

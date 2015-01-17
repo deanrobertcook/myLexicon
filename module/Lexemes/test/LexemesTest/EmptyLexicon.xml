@@ -1,0 +1,573 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="myLexiconTest">
+	<table_data name="examples">
+	</table_data>
+	<table_data name="languages">
+	<row>
+		<field name="name">Afar</field>
+		<field name="iso_639">aa</field>
+	</row>
+	<row>
+		<field name="name">Abkhazian</field>
+		<field name="iso_639">ab</field>
+	</row>
+	<row>
+		<field name="name">Afrikaans</field>
+		<field name="iso_639">af</field>
+	</row>
+	<row>
+		<field name="name">Amharic</field>
+		<field name="iso_639">am</field>
+	</row>
+	<row>
+		<field name="name">Arabic</field>
+		<field name="iso_639">ar</field>
+	</row>
+	<row>
+		<field name="name">Assamese</field>
+		<field name="iso_639">as</field>
+	</row>
+	<row>
+		<field name="name">Aymara</field>
+		<field name="iso_639">ay</field>
+	</row>
+	<row>
+		<field name="name">Azerbaijani</field>
+		<field name="iso_639">az</field>
+	</row>
+	<row>
+		<field name="name">Bashkir</field>
+		<field name="iso_639">ba</field>
+	</row>
+	<row>
+		<field name="name">Byelorussian</field>
+		<field name="iso_639">be</field>
+	</row>
+	<row>
+		<field name="name">Bulgarian</field>
+		<field name="iso_639">bg</field>
+	</row>
+	<row>
+		<field name="name">Bihari</field>
+		<field name="iso_639">bh</field>
+	</row>
+	<row>
+		<field name="name">Bislama</field>
+		<field name="iso_639">bi</field>
+	</row>
+	<row>
+		<field name="name">Bengali/Bangla</field>
+		<field name="iso_639">bn</field>
+	</row>
+	<row>
+		<field name="name">Tibetan</field>
+		<field name="iso_639">bo</field>
+	</row>
+	<row>
+		<field name="name">Breton</field>
+		<field name="iso_639">br</field>
+	</row>
+	<row>
+		<field name="name">Catalan</field>
+		<field name="iso_639">ca</field>
+	</row>
+	<row>
+		<field name="name">Corsican</field>
+		<field name="iso_639">co</field>
+	</row>
+	<row>
+		<field name="name">Czech</field>
+		<field name="iso_639">cs</field>
+	</row>
+	<row>
+		<field name="name">Welsh</field>
+		<field name="iso_639">cy</field>
+	</row>
+	<row>
+		<field name="name">Danish</field>
+		<field name="iso_639">da</field>
+	</row>
+	<row>
+		<field name="name">German</field>
+		<field name="iso_639">de</field>
+	</row>
+	<row>
+		<field name="name">Bhutani</field>
+		<field name="iso_639">dz</field>
+	</row>
+	<row>
+		<field name="name">Greek</field>
+		<field name="iso_639">el</field>
+	</row>
+	<row>
+		<field name="name">English</field>
+		<field name="iso_639">en</field>
+	</row>
+	<row>
+		<field name="name">Esperanto</field>
+		<field name="iso_639">eo</field>
+	</row>
+	<row>
+		<field name="name">Spanish</field>
+		<field name="iso_639">es</field>
+	</row>
+	<row>
+		<field name="name">Estonian</field>
+		<field name="iso_639">et</field>
+	</row>
+	<row>
+		<field name="name">Basque</field>
+		<field name="iso_639">eu</field>
+	</row>
+	<row>
+		<field name="name">Persian</field>
+		<field name="iso_639">fa</field>
+	</row>
+	<row>
+		<field name="name">Finnish</field>
+		<field name="iso_639">fi</field>
+	</row>
+	<row>
+		<field name="name">Fiji</field>
+		<field name="iso_639">fj</field>
+	</row>
+	<row>
+		<field name="name">Faeroese</field>
+		<field name="iso_639">fo</field>
+	</row>
+	<row>
+		<field name="name">French</field>
+		<field name="iso_639">fr</field>
+	</row>
+	<row>
+		<field name="name">Frisian</field>
+		<field name="iso_639">fy</field>
+	</row>
+	<row>
+		<field name="name">Irish</field>
+		<field name="iso_639">ga</field>
+	</row>
+	<row>
+		<field name="name">Scots/Gaelic</field>
+		<field name="iso_639">gd</field>
+	</row>
+	<row>
+		<field name="name">Galician</field>
+		<field name="iso_639">gl</field>
+	</row>
+	<row>
+		<field name="name">Guarani</field>
+		<field name="iso_639">gn</field>
+	</row>
+	<row>
+		<field name="name">Gujarati</field>
+		<field name="iso_639">gu</field>
+	</row>
+	<row>
+		<field name="name">Hausa</field>
+		<field name="iso_639">ha</field>
+	</row>
+	<row>
+		<field name="name">Hindi</field>
+		<field name="iso_639">hi</field>
+	</row>
+	<row>
+		<field name="name">Croatian</field>
+		<field name="iso_639">hr</field>
+	</row>
+	<row>
+		<field name="name">Hungarian</field>
+		<field name="iso_639">hu</field>
+	</row>
+	<row>
+		<field name="name">Armenian</field>
+		<field name="iso_639">hy</field>
+	</row>
+	<row>
+		<field name="name">Interlingua</field>
+		<field name="iso_639">ia</field>
+	</row>
+	<row>
+		<field name="name">Interlingue</field>
+		<field name="iso_639">ie</field>
+	</row>
+	<row>
+		<field name="name">Inupiak</field>
+		<field name="iso_639">ik</field>
+	</row>
+	<row>
+		<field name="name">Indonesian</field>
+		<field name="iso_639">in</field>
+	</row>
+	<row>
+		<field name="name">Icelandic</field>
+		<field name="iso_639">is</field>
+	</row>
+	<row>
+		<field name="name">Italian</field>
+		<field name="iso_639">it</field>
+	</row>
+	<row>
+		<field name="name">Hebrew</field>
+		<field name="iso_639">iw</field>
+	</row>
+	<row>
+		<field name="name">Japanese</field>
+		<field name="iso_639">ja</field>
+	</row>
+	<row>
+		<field name="name">Yiddish</field>
+		<field name="iso_639">ji</field>
+	</row>
+	<row>
+		<field name="name">Javanese</field>
+		<field name="iso_639">jw</field>
+	</row>
+	<row>
+		<field name="name">Georgian</field>
+		<field name="iso_639">ka</field>
+	</row>
+	<row>
+		<field name="name">Kazakh</field>
+		<field name="iso_639">kk</field>
+	</row>
+	<row>
+		<field name="name">Greenlandic</field>
+		<field name="iso_639">kl</field>
+	</row>
+	<row>
+		<field name="name">Cambodian</field>
+		<field name="iso_639">km</field>
+	</row>
+	<row>
+		<field name="name">Kannada</field>
+		<field name="iso_639">kn</field>
+	</row>
+	<row>
+		<field name="name">Korean</field>
+		<field name="iso_639">ko</field>
+	</row>
+	<row>
+		<field name="name">Kashmiri</field>
+		<field name="iso_639">ks</field>
+	</row>
+	<row>
+		<field name="name">Kurdish</field>
+		<field name="iso_639">ku</field>
+	</row>
+	<row>
+		<field name="name">Kirghiz</field>
+		<field name="iso_639">ky</field>
+	</row>
+	<row>
+		<field name="name">Latin</field>
+		<field name="iso_639">la</field>
+	</row>
+	<row>
+		<field name="name">Lingala</field>
+		<field name="iso_639">ln</field>
+	</row>
+	<row>
+		<field name="name">Laothian</field>
+		<field name="iso_639">lo</field>
+	</row>
+	<row>
+		<field name="name">Lithuanian</field>
+		<field name="iso_639">lt</field>
+	</row>
+	<row>
+		<field name="name">Latvian/Lettish</field>
+		<field name="iso_639">lv</field>
+	</row>
+	<row>
+		<field name="name">Malagasy</field>
+		<field name="iso_639">mg</field>
+	</row>
+	<row>
+		<field name="name">Maori</field>
+		<field name="iso_639">mi</field>
+	</row>
+	<row>
+		<field name="name">Macedonian</field>
+		<field name="iso_639">mk</field>
+	</row>
+	<row>
+		<field name="name">Malayalam</field>
+		<field name="iso_639">ml</field>
+	</row>
+	<row>
+		<field name="name">Mongolian</field>
+		<field name="iso_639">mn</field>
+	</row>
+	<row>
+		<field name="name">Moldavian</field>
+		<field name="iso_639">mo</field>
+	</row>
+	<row>
+		<field name="name">Marathi</field>
+		<field name="iso_639">mr</field>
+	</row>
+	<row>
+		<field name="name">Malay</field>
+		<field name="iso_639">ms</field>
+	</row>
+	<row>
+		<field name="name">Maltese</field>
+		<field name="iso_639">mt</field>
+	</row>
+	<row>
+		<field name="name">Burmese</field>
+		<field name="iso_639">my</field>
+	</row>
+	<row>
+		<field name="name">Nauru</field>
+		<field name="iso_639">na</field>
+	</row>
+	<row>
+		<field name="name">Nepali</field>
+		<field name="iso_639">ne</field>
+	</row>
+	<row>
+		<field name="name">Dutch</field>
+		<field name="iso_639">nl</field>
+	</row>
+	<row>
+		<field name="name">Norwegian</field>
+		<field name="iso_639">no</field>
+	</row>
+	<row>
+		<field name="name">Occitan</field>
+		<field name="iso_639">oc</field>
+	</row>
+	<row>
+		<field name="name">(Afan)/Oromoor/Oriya</field>
+		<field name="iso_639">om</field>
+	</row>
+	<row>
+		<field name="name">Punjabi</field>
+		<field name="iso_639">pa</field>
+	</row>
+	<row>
+		<field name="name">Polish</field>
+		<field name="iso_639">pl</field>
+	</row>
+	<row>
+		<field name="name">Pashto/Pushto</field>
+		<field name="iso_639">ps</field>
+	</row>
+	<row>
+		<field name="name">Portuguese</field>
+		<field name="iso_639">pt</field>
+	</row>
+	<row>
+		<field name="name">Quechua</field>
+		<field name="iso_639">qu</field>
+	</row>
+	<row>
+		<field name="name">Rhaeto-Romance</field>
+		<field name="iso_639">rm</field>
+	</row>
+	<row>
+		<field name="name">Kirundi</field>
+		<field name="iso_639">rn</field>
+	</row>
+	<row>
+		<field name="name">Romanian</field>
+		<field name="iso_639">ro</field>
+	</row>
+	<row>
+		<field name="name">Russian</field>
+		<field name="iso_639">ru</field>
+	</row>
+	<row>
+		<field name="name">Kinyarwanda</field>
+		<field name="iso_639">rw</field>
+	</row>
+	<row>
+		<field name="name">Sanskrit</field>
+		<field name="iso_639">sa</field>
+	</row>
+	<row>
+		<field name="name">Sindhi</field>
+		<field name="iso_639">sd</field>
+	</row>
+	<row>
+		<field name="name">Sangro</field>
+		<field name="iso_639">sg</field>
+	</row>
+	<row>
+		<field name="name">Serbo-Croatian</field>
+		<field name="iso_639">sh</field>
+	</row>
+	<row>
+		<field name="name">Singhalese</field>
+		<field name="iso_639">si</field>
+	</row>
+	<row>
+		<field name="name">Slovak</field>
+		<field name="iso_639">sk</field>
+	</row>
+	<row>
+		<field name="name">Slovenian</field>
+		<field name="iso_639">sl</field>
+	</row>
+	<row>
+		<field name="name">Samoan</field>
+		<field name="iso_639">sm</field>
+	</row>
+	<row>
+		<field name="name">Shona</field>
+		<field name="iso_639">sn</field>
+	</row>
+	<row>
+		<field name="name">Somali</field>
+		<field name="iso_639">so</field>
+	</row>
+	<row>
+		<field name="name">Albanian</field>
+		<field name="iso_639">sq</field>
+	</row>
+	<row>
+		<field name="name">Serbian</field>
+		<field name="iso_639">sr</field>
+	</row>
+	<row>
+		<field name="name">Siswati</field>
+		<field name="iso_639">ss</field>
+	</row>
+	<row>
+		<field name="name">Sesotho</field>
+		<field name="iso_639">st</field>
+	</row>
+	<row>
+		<field name="name">Sundanese</field>
+		<field name="iso_639">su</field>
+	</row>
+	<row>
+		<field name="name">Swedish</field>
+		<field name="iso_639">sv</field>
+	</row>
+	<row>
+		<field name="name">Swahili</field>
+		<field name="iso_639">sw</field>
+	</row>
+	<row>
+		<field name="name">Tamil</field>
+		<field name="iso_639">ta</field>
+	</row>
+	<row>
+		<field name="name">Tegulu</field>
+		<field name="iso_639">te</field>
+	</row>
+	<row>
+		<field name="name">Tajik</field>
+		<field name="iso_639">tg</field>
+	</row>
+	<row>
+		<field name="name">Thai</field>
+		<field name="iso_639">th</field>
+	</row>
+	<row>
+		<field name="name">Tigrinya</field>
+		<field name="iso_639">ti</field>
+	</row>
+	<row>
+		<field name="name">Turkmen</field>
+		<field name="iso_639">tk</field>
+	</row>
+	<row>
+		<field name="name">Tagalog</field>
+		<field name="iso_639">tl</field>
+	</row>
+	<row>
+		<field name="name">Setswana</field>
+		<field name="iso_639">tn</field>
+	</row>
+	<row>
+		<field name="name">Tonga</field>
+		<field name="iso_639">to</field>
+	</row>
+	<row>
+		<field name="name">Turkish</field>
+		<field name="iso_639">tr</field>
+	</row>
+	<row>
+		<field name="name">Tsonga</field>
+		<field name="iso_639">ts</field>
+	</row>
+	<row>
+		<field name="name">Tatar</field>
+		<field name="iso_639">tt</field>
+	</row>
+	<row>
+		<field name="name">Twi</field>
+		<field name="iso_639">tw</field>
+	</row>
+	<row>
+		<field name="name">Ukrainian</field>
+		<field name="iso_639">uk</field>
+	</row>
+	<row>
+		<field name="name">Urdu</field>
+		<field name="iso_639">ur</field>
+	</row>
+	<row>
+		<field name="name">Uzbek</field>
+		<field name="iso_639">uz</field>
+	</row>
+	<row>
+		<field name="name">Vietnamese</field>
+		<field name="iso_639">vi</field>
+	</row>
+	<row>
+		<field name="name">Volapuk</field>
+		<field name="iso_639">vo</field>
+	</row>
+	<row>
+		<field name="name">Wolof</field>
+		<field name="iso_639">wo</field>
+	</row>
+	<row>
+		<field name="name">Xhosa</field>
+		<field name="iso_639">xh</field>
+	</row>
+	<row>
+		<field name="name">Yoruba</field>
+		<field name="iso_639">yo</field>
+	</row>
+	<row>
+		<field name="name">Chinese</field>
+		<field name="iso_639">zh</field>
+	</row>
+	<row>
+		<field name="name">Zulu</field>
+		<field name="iso_639">zu</field>
+	</row>
+	</table_data>
+	<table_data name="lexemes">
+	</table_data>
+	<table_data name="meanings">
+	</table_data>
+	<table_data name="users">
+	<row>
+		<field name="id">1</field>
+		<field name="username">deanrobertcook</field>
+		<field name="email">deanrobertcook@gmail.com</field>
+		<field name="password">password</field>
+		<field name="targetLanguage">de</field>
+		<field name="baseLanguage">en</field>
+		<field name="dateJoined">2014-11-17 07:35:16</field>
+	</row>
+	<row>
+		<field name="id">2</field>
+		<field name="username">testUser</field>
+		<field name="email">test@test.com</field>
+		<field name="password">password</field>
+		<field name="targetLanguage">de</field>
+		<field name="baseLanguage">en</field>
+		<field name="dateJoined">2014-11-20 11:46:42</field>
+	</row>
+	</table_data>
+</database>
+</mysqldump>

@@ -32,4 +32,8 @@ abstract class AbstractDatabaseTestCase extends \PHPUnit_Extensions_Database_Tes
         $PDO = new PDO($dbConfig['dsn'], $dbConfig['username'], $dbConfig['password']);
 		return $PDO;
 	}
+	
+	public function getDataSet() {
+		return $this->createMySQLXMLDataSet(__DIR__ . "/EmptyLexicon.xml");
+	}
 }
