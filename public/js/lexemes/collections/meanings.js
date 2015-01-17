@@ -11,12 +11,12 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 	},
 	
 	createMeaning: function (formData) {	
-		var targetcid = this.createLexeme(formData, true);
-		var basecid = this.createLexeme(formData, false);
+		var targetCid = this.createLexeme(formData, true);
+		var baseCid = this.createLexeme(formData, false);
 		
 		var meaning = new this.model({
-			"targetid": targetcid,
-			"baseid": basecid,
+			"targetId": targetCid,
+			"baseId": baseCid,
 			"dateEntered" : (new Date()).toMysqlFormat(),
 		});
 		

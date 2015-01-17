@@ -15,8 +15,8 @@ myLexicon.ModelClasses.Lexeme = Backbone.Model.extend({
 	findAllMeanings: function(meaningCollection) {
 		var meanings = [];
 		meaningCollection.forEach(function(meaning) {
-			if(meaning.get('targetid') === this.get('id') || 
-					meaning.get('baseid') === this.get('id')) {
+			if(meaning.get('targetId') === this.get('id') || 
+					meaning.get('baseId') === this.get('id')) {
 				meanings.push(meaning);
 			}
 		}, this);

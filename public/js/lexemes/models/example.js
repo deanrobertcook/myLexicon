@@ -6,7 +6,6 @@ myLexicon.ModelClasses.Example = Backbone.Model.extend({
 	
 	updateMeaningId: function(meaning, response) {
 		this.set("meaningId", response.id);
-		console.log(this);
 		this.save();
 	}
 });

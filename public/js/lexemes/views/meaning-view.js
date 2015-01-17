@@ -9,8 +9,8 @@ myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 	
 	render: function() {
 		this.$el.empty();
-		this.renderLexeme(this.model.get('targetid'));
-		this.renderLexeme(this.model.get('baseid'));
+		this.renderLexeme(this.model.get('targetId'));
+		this.renderLexeme(this.model.get('baseId'));
 		this.$el.append(this.template(this.model.attributes));
 		this.$el.append("ID: " + this.model.get('id'));
 		this.renderExamples();

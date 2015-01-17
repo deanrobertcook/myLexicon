@@ -14,8 +14,8 @@ myLexicon.ModelClasses.Meaning = Backbone.Model.extend({
 	 * updates the IDs of the lexemes.
 	 */
 	pushLexemes: function() {
-		var targetLexeme = myLexicon.Collections.lexemes.get(this.get('targetid'));
-		var baseLexeme = myLexicon.Collections.lexemes.get(this.get('baseid'));
+		var targetLexeme = myLexicon.Collections.lexemes.get(this.get('targetId'));
+		var baseLexeme = myLexicon.Collections.lexemes.get(this.get('baseId'));
 		
 		this.listenTo(targetLexeme, "sync", this.pushSelf);
 		this.listenTo(baseLexeme, "sync", this.pushSelf);
@@ -30,14 +30,14 @@ myLexicon.ModelClasses.Meaning = Backbone.Model.extend({
 	 * then the meaning is permitted to persist itself. 
 	 */
 	pushSelf: function(lexemePushed) {
-		if (lexemePushed.cid === this.get('targetid')) {
+		if (lexemePushed.cid === this.get('targetId')) {
 			this.targetLexemeSynced = true;
-			this.set('targetid', lexemePushed.get('id'));
+			this.set('targetId', lexemePushed.get('id'));
 		}
 		
-		if (lexemePushed.cid === this.get('baseid')) {
+		if (lexemePushed.cid === this.get('baseId')) {
 			this.baseLexemeSynced = true;
-			this.set('baseid', lexemePushed.get('id'));
+			this.set('baseId', lexemePushed.get('id'));
 		}
 		
 		if (this.targetLexemeSynced && this.baseLexemeSynced) {
