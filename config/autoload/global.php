@@ -14,18 +14,10 @@
 return array(
 	'db' => array(
 		'myLexicon' => array(
-			'driver' => 'Pdo',
-			'dsn' => 'mysql:dbname=myLexicon;host=localhost;',
-			'driver_options' => array(
-				\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-			),
+			'dsn' => 'mysql:dbname=myLexicon;host=localhost;charset=UTF8',
 		),
 		'myLexiconTest' => array(
-			'driver' => 'Pdo',
-			'dsn' => 'mysql:dbname=myLexiconTest;host=localhost;',
-			'driver_options' => array(
-				\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
-			),
+			'dsn' => 'mysql:dbname=myLexiconTest;host=localhost;charset=UTF8',
 		)
 	),
 	'service_manager' => array(

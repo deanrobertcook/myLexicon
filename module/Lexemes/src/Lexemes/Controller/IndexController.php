@@ -9,7 +9,7 @@ class IndexController extends AbstractActionController {
 
 	public function indexAction() {
 		$meaningService = $this->serviceLocator->get('meaningService');
-		$lexemeService = $this->serviceLocator->get('lexemeService');
+		$lexemeService = $this->serviceLocator->get("lexemeService");
 		$exampleService = $this->serviceLocator->get('exampleService');
 		
 		$meanings = json_encode($meaningService->readAllMeanings('de', 'en'));
