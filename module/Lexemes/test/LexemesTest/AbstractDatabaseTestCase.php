@@ -2,6 +2,9 @@
 
 namespace LexemesTest;
 
+use Exception;
+use Zend\Http\Client;
+
 abstract class AbstractDatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
 {
     // only instantiate pdo once for test clean-up/fixture load
@@ -29,7 +32,7 @@ abstract class AbstractDatabaseTestCase extends \PHPUnit_Extensions_Database_Tes
 		$PDO = $serviceManager->get('PDO');
 		$databaseName = $PDO->query('select database()')->fetchColumn();
 		if ($databaseName != "myLexiconTest") {
-			throw new \Exception(
+			throw new Exception(
 				"Ensure that the PDO is set to use the an empty test database called myLexiconTest"
 			);
 		}
@@ -38,5 +41,20 @@ abstract class AbstractDatabaseTestCase extends \PHPUnit_Extensions_Database_Tes
 	
 	public function getDataSet() {
 		return $this->createMySQLXMLDataSet(__DIR__ . "/EmptyLexicon.xml");
+	}
+	
+	private function getURI($resource) {
+		$serviceManager = Bootstrap::getServiceManager();
+		$domain = $serviceManager->get('config')["url"];
+		$uri = $domain . "/" . $resource;
+		return $uri;
+	}
+	
+	protected function getClient($resource, $method, $data = array()) {
+		$uri = $this->getURI($resource);
+		$client = new Client($uri);
+		$client->setAdapter('Zend\Http\Client\Adapter\Curl');
+		$client->setMethod($method);
+		return $client;
 	}
 }
