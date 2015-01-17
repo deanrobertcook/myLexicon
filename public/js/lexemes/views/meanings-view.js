@@ -1,13 +1,17 @@
 myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	tagName: 'div',
 	
-	newMeaningFormTemplate: _.template($('#newMeaningTemplate').html()),
+	newMeaningTemplate: _.template($('#newMeaningTemplate').html()),
+	newExampleTemplate: _.template($('#newExampleTemplate').html()),
 	infoTemplate: _.template($('#meaningsInfo').html()),
 	paginationTemplate: _.template($('#paginationTemplate').html()),
+	
+	exampleId: 1,
 	
 	events: {
 		"click #toggleMeaningForm": "toggleMeaningForm",
 		"click #submitNewMeaning": "submitNewMeaning",
+		"click #anotherExample": "anotherExample",
 	},
 
 	initialize: function(collection) {
@@ -65,19 +69,26 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 			$("#toggleMeaningForm").text("Add Meaning");
 		} else {
 			$("#toggleMeaningForm").text("Hide Form");
-			$("#meaningsInfo").after(this.newMeaningFormTemplate());
+			$("#meaningsInfo").after(this.newMeaningTemplate());
+			$("#anotherExample").before(this.newExampleTemplate({exampleId: this.exampleId}));
+			this.exampleId++;
 			$("#newMeaning select").val(this.collection.getPreviouslyEnteredLexemeType());
 		}
+	},
+	
+	anotherExample: function(e) {
+		e.preventDefault();
+		$("#anotherExample").before(this.newExampleTemplate({exampleId: this.exampleId}));
+		this.exampleId++;
 	},
 	
 	submitNewMeaning: function(e) {
 		e.preventDefault();
 		var form = $(e.currentTarget).parents("form")[0];
 		var formData = {};
-		$(form).children(".lexeme-input").each(function(index, element) {
+		$(form).find(".lexeme-input").each(function(index, element) {
 			formData[element.id] = element.value; 
 		});
-		
 		this.collection.createMeaning(formData);
 //		this.toggleMeaningForm();
 	},

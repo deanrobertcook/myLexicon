@@ -3,6 +3,12 @@
 	padding: 4px;
 }
 
+.newExample {
+	padding: 4px;
+	margin: 4px 0;
+	border: 1px solid black;
+}
+
 .mylexicon-pagination {
 	float: right;
 	display: block;

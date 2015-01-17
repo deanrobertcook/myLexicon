@@ -10,31 +10,50 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 		pageSize: 25,
 	},
 	
-	createMeaning: function (formData) {
-		var targetData = {
-			"language": "de", //Change this to default to user's selection
-			"type": formData.targetType,
-			"entry": formData.targetEntry,
-		};
-
-		var baseData = {
-			"language": "en", //Change this to default to user's selection
-			"type": formData.baseType,
-			"entry": formData.baseEntry,
-		};
-
-		var targetcid = myLexicon.Collections.lexemes.createNewLexeme(targetData);
-		var basecid = myLexicon.Collections.lexemes.createNewLexeme(baseData);
-
+	createMeaning: function (formData) {	
+		var targetcid = this.createLexeme(formData, true);
+		var basecid = this.createLexeme(formData, false);
+		
 		var meaning = new this.model({
 			"targetid": targetcid,
 			"baseid": basecid,
 			"dateEntered" : (new Date()).toMysqlFormat(),
 		});
+		
+		this.createExample(formData, meaning);
 
 		this.fullCollection.add(meaning);
 		this.setPreviouslyEnteredLexemeType(formData.targetType);
 		meaning.pushLexemes();
+	},
+	
+	createLexeme: function(formData, isTarget) {
+		var type = isTarget ? "target" : "base";
+		var language = isTarget ? "de" : "en"; //Change this to default to user's selection
+		var lexemeData = {
+			"language": language, 
+			"type": formData[type + "Type"],
+			"entry": formData[type + "Entry"],
+		};
+		var lexemecid = myLexicon.Collections.lexemes.createNewLexeme(lexemeData);
+		return lexemecid;
+	},
+	
+	createExample: function(formData, meaning) {
+		var exampleId = 1;
+		var examplesData = [];
+		var formKeys = Object.keys(formData);
+		
+		while (formData["exampleTarget" + exampleId]) {
+			var exampleDatum = {
+				exampleTarget: formData["exampleTarget" + exampleId],
+				exampleBase: formData["exampleBase" + exampleId],
+			};
+			examplesData.push(exampleDatum);
+			exampleId++;
+		}
+		
+		myLexicon.Collections.examples.createNewExamples(examplesData, meaning);
 	},
 	
 	getLength: function() {

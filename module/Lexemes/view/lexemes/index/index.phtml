@@ -35,10 +35,20 @@
 			</select>
 						
 			<label for="baseEntry">Base Entry: </label>
-			<input id="baseEntry" class="lexeme-input" type="text" />
-						
-			<button id="submitNewMeaning">Add</button>
+			<input id="baseEntry" class="lexeme-input" type="text" />	
+			<button id="anotherExample">Another Example</button>
+			<button id="submitNewMeaning">Submit Meaning</button>
 		</form>
+	</div>
+</script>			
+
+<script type="text/template" id="newExampleTemplate">		
+	<div class="newExample">
+		<label for="exampleTarget<%= exampleId %>">Example Target: </label>
+		<input id="exampleTarget<%= exampleId %>" class="lexeme-input" type="text" />
+
+		<label for="exampleBase<%= exampleId %>">Example Target: </label>
+		<input id="exampleBase<%= exampleId %>" class="lexeme-input" type="text" />
 	</div>
 </script>
 

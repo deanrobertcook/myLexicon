@@ -1,8 +1,5 @@
 <?php
 
-use Zend\Mvc\Controller\AbstractRestfulController;
-use Zend\View\Model\JsonModel;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +7,9 @@ use Zend\View\Model\JsonModel;
  */
 
 namespace Lexemes\Controller;
+
+use Zend\Mvc\Controller\AbstractRestfulController;
+use Zend\View\Model\JsonModel;
 
 /**
  * Description of RestfulLexemeController
