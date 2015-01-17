@@ -36,9 +36,9 @@ class ExampleMapper
 	{
 		return array(
 			'id' => $row['id'],
-			'meaningId' => $row['meaningid'],
-			'exampleTarget' => $row['example_target'],
-			'exampleBase' => $row['example_base'],
+			'meaningId' => $row['meaningId'],
+			'exampleTarget' => $row['exampleTarget'],
+			'exampleBase' => $row['exampleBase'],
 		);
 	}
 
@@ -46,7 +46,7 @@ class ExampleMapper
 	{
 		$id = $this->checkIfExampleExists($exampleData['meaningId'], $exampleData['exampleTarget'], $exampleData['exampleBase']);
 		if ($id == NULL) {
-			$stmt = $this->pdo->prepare("INSERT INTO examples (meaningid, example_target, example_base) VALUES (?, ?, ?)");
+			$stmt = $this->pdo->prepare("INSERT INTO examples (meaningId, exampleTarget, exampleBase) VALUES (?, ?, ?)");
 			$stmt->bindValue(1, $exampleData['meaningId']);
 			$stmt->bindValue(2, $exampleData['exampleTarget']);
 			$stmt->bindValue(3, $exampleData['exampleBase']);
@@ -59,7 +59,7 @@ class ExampleMapper
 
 	public function checkIfExampleExists($meaningId, $exampleTarget, $exampleBase)
 	{
-		$stmt = $this->pdo->prepare("SELECT * FROM examples WHERE meaningid = ? AND example_target = ? AND example_base = ?");
+		$stmt = $this->pdo->prepare("SELECT * FROM examples WHERE meaningId = ? AND exampleTarget = ? AND exampleBase = ?");
 		$stmt->bindValue(1, $meaningId);
 		$stmt->bindValue(2, $exampleTarget);
 		$stmt->bindValue(3, $exampleBase);

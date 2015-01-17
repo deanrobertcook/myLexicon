@@ -11,22 +11,8 @@ class MeaningForm extends Form {
 			'name' => 'id',
 			'type' => 'hidden',
 		));
-//		$this->add(array(
-//			'name' => 'target_language',
-//			'type' => 'text',
-//			'options' => array(
-//				'label' => 'Target Language',
-//			),
-//		));
 		$this->add(array(
-			'name' => 'target_type',
-			'type' => 'text',
-			'options' => array(
-				'label' => 'Target Type',
-			),
-		));
-		$this->add(array(
-			'name' => 'target_entry',
+			'name' => 'targeid',
 			'type' => 'text',
 			'options' => array(
 				'label' => 'Target Entry',
