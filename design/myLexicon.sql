@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 17. Jan 2015 um 17:46
+-- Erstellungszeit: 17. Jan 2015 um 18:50
 -- Server Version: 5.5.40-0ubuntu0.14.04.1
 -- PHP-Version: 5.5.9-1ubuntu4.5
 
@@ -23,41 +23,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Stellvertreter-Struktur des Views `base_lexemes`
+-- Stellvertreter-Struktur des Views `baseLexemes`
 --
-CREATE TABLE IF NOT EXISTS `base_lexemes` (
-`meaningid` int(10)
-,`targetid` int(10)
-,`userid` int(10)
-,`frequency` int(10)
+CREATE TABLE IF NOT EXISTS `baseLexemes` (
+`meaningId` int(10)
+,`targetId` int(10)
+,`userId` int(10)
 ,`id` int(10)
 ,`language` char(2)
-,`type` varchar(30)
 ,`entry` varchar(255)
-,`date_entered` timestamp
+,`dateEntered` timestamp
 );
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `clarifications`
---
-
-CREATE TABLE IF NOT EXISTS `clarifications` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `meaningid` int(10) NOT NULL,
-  `clarification` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `meaning_clarifications` (`meaningid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Daten für Tabelle `clarifications`
---
-
-INSERT INTO `clarifications` (`id`, `meaningid`, `clarification`) VALUES
-(1, 73, 'music'),
-(2, 243, 'wine tasting');
-
 -- --------------------------------------------------------
 
 --
@@ -66,18 +42,18 @@ INSERT INTO `clarifications` (`id`, `meaningid`, `clarification`) VALUES
 
 CREATE TABLE IF NOT EXISTS `examples` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `meaningid` int(10) NOT NULL,
-  `example_target` varchar(255) DEFAULT NULL,
-  `example_base` varchar(255) NOT NULL,
+  `meaningId` int(10) NOT NULL,
+  `exampleTarget` varchar(255) DEFAULT NULL,
+  `exampleBase` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `meaning_examples` (`meaningid`)
+  KEY `meaning_examples` (`meaningId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Daten für Tabelle `examples`
 --
 
-INSERT INTO `examples` (`id`, `meaningid`, `example_target`, `example_base`) VALUES
+INSERT INTO `examples` (`id`, `meaningId`, `exampleTarget`, `exampleBase`) VALUES
 (1, 243, 'fruchtiger Abgang', 'fruity finish'),
 (2, 419, 'eine Tafel Schokolade', 'a chocolate bar'),
 (3, 3101, 'Wie wirkt Ihre Ausstrahlung auf andere?', 'How does your charisma come across to others?'),
@@ -4407,28 +4383,46 @@ INSERT INTO `lexemes` (`id`, `language`, `type`, `entry`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Stellvertreter-Struktur des Views `lexicon`
+--
+CREATE TABLE IF NOT EXISTS `lexicon` (
+`userId` int(10)
+,`meaningId` int(10)
+,`frequency` int(10)
+,`targetId` int(10)
+,`targetLanguage` char(2)
+,`targetEntryType` varchar(30)
+,`targetEntry` varchar(255)
+,`baseId` int(10)
+,`baseLanguage` char(2)
+,`baseEntry` varchar(255)
+,`dateEntered` timestamp
+);
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `meanings`
 --
 
 CREATE TABLE IF NOT EXISTS `meanings` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `userid` int(10) DEFAULT NULL,
-  `targetid` int(10) NOT NULL,
-  `baseid` int(10) NOT NULL,
+  `userId` int(10) DEFAULT NULL,
+  `targetId` int(10) NOT NULL,
+  `baseId` int(10) NOT NULL,
   `frequency` int(10) NOT NULL DEFAULT '1',
-  `date_entered` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `dateEntered` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_meaning_per_user_constraint` (`targetid`,`baseid`,`userid`),
-  KEY `base` (`targetid`),
-  KEY `target` (`baseid`),
-  KEY `user_meaning` (`userid`)
+  UNIQUE KEY `unique_meaning_per_user_constraint` (`targetId`,`baseId`,`userId`),
+  KEY `base` (`targetId`),
+  KEY `target` (`baseId`),
+  KEY `user_meaning` (`userId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3206 ;
 
 --
 -- Daten für Tabelle `meanings`
 --
 
-INSERT INTO `meanings` (`id`, `userid`, `targetid`, `baseid`, `frequency`, `date_entered`) VALUES
+INSERT INTO `meanings` (`id`, `userId`, `targetId`, `baseId`, `frequency`, `dateEntered`) VALUES
 (1, 1, 1, 2, 1, '2014-11-17 07:37:55'),
 (2, 1, 1, 3, 1, '2014-11-17 08:09:21'),
 (3, 1, 1, 4, 1, '2014-11-17 08:42:13'),
@@ -5542,7 +5536,7 @@ INSERT INTO `meanings` (`id`, `userid`, `targetid`, `baseid`, `frequency`, `date
 (1195, 1, 1743, 27, 1, '2014-12-14 17:15:52'),
 (1196, 1, 1746, 1747, 1, '2014-12-14 17:16:35'),
 (1197, 1, 1748, 1749, 1, '2014-12-14 17:16:54');
-INSERT INTO `meanings` (`id`, `userid`, `targetid`, `baseid`, `frequency`, `date_entered`) VALUES
+INSERT INTO `meanings` (`id`, `userId`, `targetId`, `baseId`, `frequency`, `dateEntered`) VALUES
 (1198, 1, 1750, 1751, 1, '2014-12-14 17:17:08'),
 (1199, 1, 1750, 8, 1, '2014-12-14 17:17:10'),
 (1200, 1, 1750, 1752, 1, '2014-12-14 17:17:19'),
@@ -6607,7 +6601,7 @@ INSERT INTO `meanings` (`id`, `userid`, `targetid`, `baseid`, `frequency`, `date
 (2374, 1, 3299, 1665, 1, '2015-01-03 19:55:26'),
 (2375, 1, 3299, 3300, 1, '2015-01-03 19:55:28'),
 (2376, 1, 3301, 3302, 1, '2015-01-03 19:55:45');
-INSERT INTO `meanings` (`id`, `userid`, `targetid`, `baseid`, `frequency`, `date_entered`) VALUES
+INSERT INTO `meanings` (`id`, `userId`, `targetId`, `baseId`, `frequency`, `dateEntered`) VALUES
 (2377, 1, 3301, 3303, 1, '2015-01-03 19:55:48'),
 (2378, 1, 3304, 3305, 1, '2015-01-03 19:56:09'),
 (2379, 1, 3304, 3306, 1, '2015-01-03 19:56:13'),
@@ -7321,13 +7315,14 @@ INSERT INTO `meanings` (`id`, `userid`, `targetid`, `baseid`, `frequency`, `date
 -- --------------------------------------------------------
 
 --
--- Stellvertreter-Struktur des Views `target_lexemes`
+-- Stellvertreter-Struktur des Views `targetLexemes`
 --
-CREATE TABLE IF NOT EXISTS `target_lexemes` (
+CREATE TABLE IF NOT EXISTS `targetLexemes` (
 `id` int(10)
 ,`language` char(2)
 ,`type` varchar(30)
 ,`entry` varchar(255)
+,`frequency` int(10)
 );
 -- --------------------------------------------------------
 
@@ -7340,101 +7335,53 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `target_language` char(2) NOT NULL,
-  `base_language` char(2) NOT NULL,
-  `date_joined` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `targetLanguage` char(2) NOT NULL,
+  `baseLanguage` char(2) NOT NULL,
+  `dateJoined` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
-  KEY `user_base_language` (`base_language`),
-  KEY `user_target_language` (`target_language`)
+  KEY `user_base_language` (`baseLanguage`),
+  KEY `user_target_language` (`targetLanguage`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `target_language`, `base_language`, `date_joined`) VALUES
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `targetLanguage`, `baseLanguage`, `dateJoined`) VALUES
 (1, 'deanrobertcook', 'deanrobertcook@gmail.com', 'password', 'de', 'en', '2014-11-17 07:35:16'),
 (2, 'testUser', 'test@test.com', 'password', 'de', 'en', '2014-11-20 11:46:42');
 
 -- --------------------------------------------------------
 
 --
--- Stellvertreter-Struktur des Views `word_list`
+-- Struktur des Views `baseLexemes`
 --
-CREATE TABLE IF NOT EXISTS `word_list` (
-`meaningid` int(10)
-,`frequency` int(10)
-,`targetid` int(10)
-,`target_type` varchar(30)
-,`target_entry` varchar(255)
-,`baseid` int(10)
-,`base_entry` varchar(255)
-);
--- --------------------------------------------------------
+DROP TABLE IF EXISTS `baseLexemes`;
 
---
--- Stellvertreter-Struktur des Views `word_list_verbose`
---
-CREATE TABLE IF NOT EXISTS `word_list_verbose` (
-`userid` int(10)
-,`meaningid` int(10)
-,`frequency` int(10)
-,`targetid` int(10)
-,`target_language` char(2)
-,`target_type` varchar(30)
-,`target_entry` varchar(255)
-,`baseid` int(10)
-,`base_language` char(2)
-,`base_type` varchar(30)
-,`base_entry` varchar(255)
-,`date_entered` timestamp
-);
--- --------------------------------------------------------
-
---
--- Struktur des Views `base_lexemes`
---
-DROP TABLE IF EXISTS `base_lexemes`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `base_lexemes` AS select distinct `meanings`.`id` AS `meaningid`,`meanings`.`targetid` AS `targetid`,`meanings`.`userid` AS `userid`,`meanings`.`frequency` AS `frequency`,`lexemes`.`id` AS `id`,`lexemes`.`language` AS `language`,`lexemes`.`type` AS `type`,`lexemes`.`entry` AS `entry`,`meanings`.`date_entered` AS `date_entered` from (`lexemes` join `meanings` on((`lexemes`.`id` = `meanings`.`baseid`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `baseLexemes` AS select distinct `meanings`.`id` AS `meaningId`,`meanings`.`targetId` AS `targetId`,`meanings`.`userId` AS `userId`,`lexemes`.`id` AS `id`,`lexemes`.`language` AS `language`,`lexemes`.`entry` AS `entry`,`meanings`.`dateEntered` AS `dateEntered` from (`lexemes` join `meanings` on((`lexemes`.`id` = `meanings`.`baseId`)));
 
 -- --------------------------------------------------------
 
 --
--- Struktur des Views `target_lexemes`
+-- Struktur des Views `lexicon`
 --
-DROP TABLE IF EXISTS `target_lexemes`;
+DROP TABLE IF EXISTS `lexicon`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `target_lexemes` AS select distinct `lexemes`.`id` AS `id`,`lexemes`.`language` AS `language`,`lexemes`.`type` AS `type`,`lexemes`.`entry` AS `entry` from (`lexemes` join `meanings` on((`lexemes`.`id` = `meanings`.`targetid`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `lexicon` AS select `baseLexemes`.`userId` AS `userId`,`baseLexemes`.`meaningId` AS `meaningId`,`targetLexemes`.`frequency` AS `frequency`,`targetLexemes`.`id` AS `targetId`,`targetLexemes`.`language` AS `targetLanguage`,`targetLexemes`.`type` AS `targetEntryType`,`targetLexemes`.`entry` AS `targetEntry`,`baseLexemes`.`id` AS `baseId`,`baseLexemes`.`language` AS `baseLanguage`,`baseLexemes`.`entry` AS `baseEntry`,`baseLexemes`.`dateEntered` AS `dateEntered` from (`targetLexemes` join `baseLexemes` on((`baseLexemes`.`targetId` = `targetLexemes`.`id`)));
 
 -- --------------------------------------------------------
 
 --
--- Struktur des Views `word_list`
+-- Struktur des Views `targetLexemes`
 --
-DROP TABLE IF EXISTS `word_list`;
+DROP TABLE IF EXISTS `targetLexemes`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `word_list` AS select `word_list_verbose`.`meaningid` AS `meaningid`,`word_list_verbose`.`frequency` AS `frequency`,`word_list_verbose`.`targetid` AS `targetid`,`word_list_verbose`.`target_type` AS `target_type`,`word_list_verbose`.`target_entry` AS `target_entry`,`word_list_verbose`.`baseid` AS `baseid`,`word_list_verbose`.`base_entry` AS `base_entry` from `word_list_verbose`;
-
--- --------------------------------------------------------
-
---
--- Struktur des Views `word_list_verbose`
---
-DROP TABLE IF EXISTS `word_list_verbose`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `word_list_verbose` AS select `base_lexemes`.`userid` AS `userid`,`base_lexemes`.`meaningid` AS `meaningid`,`base_lexemes`.`frequency` AS `frequency`,`target_lexemes`.`id` AS `targetid`,`target_lexemes`.`language` AS `target_language`,`target_lexemes`.`type` AS `target_type`,`target_lexemes`.`entry` AS `target_entry`,`base_lexemes`.`id` AS `baseid`,`base_lexemes`.`language` AS `base_language`,`base_lexemes`.`type` AS `base_type`,`base_lexemes`.`entry` AS `base_entry`,`base_lexemes`.`date_entered` AS `date_entered` from (`target_lexemes` join `base_lexemes` on((`base_lexemes`.`targetid` = `target_lexemes`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `targetLexemes` AS select distinct `lexemes`.`id` AS `id`,`lexemes`.`language` AS `language`,`lexemes`.`type` AS `type`,`lexemes`.`entry` AS `entry`,`meanings`.`frequency` AS `frequency` from (`lexemes` join `meanings` on((`lexemes`.`id` = `meanings`.`targetId`)));
 
 --
 -- Constraints der exportierten Tabellen
 --
-
---
--- Constraints der Tabelle `clarifications`
---
-ALTER TABLE `clarifications`
-  ADD CONSTRAINT `meaning_clarifications` FOREIGN KEY (`meaningid`) REFERENCES `meanings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints der Tabelle `examples`
@@ -7454,14 +7401,14 @@ ALTER TABLE `lexemes`
 ALTER TABLE `meanings`
   ADD CONSTRAINT `base` FOREIGN KEY (`targetid`) REFERENCES `lexemes` (`id`),
   ADD CONSTRAINT `target` FOREIGN KEY (`baseid`) REFERENCES `lexemes` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_meaning` FOREIGN KEY (`userid`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `user_meaning` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
 
 --
 -- Constraints der Tabelle `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `user_base_language` FOREIGN KEY (`base_language`) REFERENCES `languages` (`iso_639`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_target_language` FOREIGN KEY (`target_language`) REFERENCES `languages` (`iso_639`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_base_language` FOREIGN KEY (`baseLanguage`) REFERENCES `languages` (`iso_639`),
+  ADD CONSTRAINT `user_target_language` FOREIGN KEY (`targetLanguage`) REFERENCES `languages` (`iso_639`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
