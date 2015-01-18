@@ -9,58 +9,31 @@ use LexemesTest\Controller\AbstractRestControllerTestCase;
  *
  * @author dean
  */
-class lexemeControllerTest extends AbstractRestControllerTestCase
+class MeaningControllerTest extends AbstractRestControllerTestCase
 {
 
-	public function testAddLexeme()
+	private $resourceName = "meanings";
+	
+	public function testAddMeaning()
 	{
 		$postData = array(
-			"id" => "6",
-			"language" => "en",
-			"type" => "noun",
-			"entry" => "direction"
+			"id" => "3",
+			//This should be determined by back end, not through API?
+			//"userid" => "1"
+			"targetId" => "4",
+			"baseId" => "5",
+			"frequency" => "1",
+			"dateEntered" => "0000-00-00 00:00:00"
 		);
 		
-		$client = $this->getClient("lexemes", "POST");
-		$client->setParameterPost($postData);
-		$client->send();
-
-		$queryTable = $this->getConnection()->createQueryTable(
-			"lexemes", "SELECT * FROM lexemes ORDER BY id"
-		);
-		$expectedTable = $this
-			->createMySQLXMLDataSet(__DIR__ . "/resources/testAddLexeme.xml")
-			->getTable("lexemes");
-
-		$this->assertTablesEqual($expectedTable, $queryTable);
+		$this->addResourceTest("meanings", $postData);
 	}
 	
-	public function testGetLexeme() {
-		$client = $this->getClient("lexemes/1", "GET");
-		$client->send();
-		$actualResponse = $client->getResponse()->getBody();
-		
-		$expectedRow = $this
-			->createMySQLXMLDataSet(__DIR__ . "/resources/testGetLexeme.xml")
-			->getTable("lexemes")
-			->getRow(0);
-		$expectedResponse = json_encode($expectedRow);
-		$this->assertEquals($expectedResponse, $actualResponse);
+	public function testGetMeaning() {
+		$this->getResourceTest($this->resourceName);
 	}
 	
-	public function testGetAllLexemes() {
-		$client = $this->getClient("lexemes", "GET");
-		$client->send();
-		$actualData = $client->getResponse()->getBody();
-		$actualData = $this->prepareJSONResponse($actualData);
-		$actualData = $this->sortArraysById($actualData);
-		
-		$expectedTable = $this
-			->createMySQLXMLDataSet(__DIR__ . "/resources/testGetAllLexemes.xml")
-			->getTable("lexemes");
-		$expectedData = $this->extractDataFromTableResult($expectedTable);
-		$expectedData = $this->sortArraysById($expectedData);
-	
-		$this->assertEquals($expectedData, $actualData);
+	public function testGetAllMeanings() {
+		$this->getAllTest($this->resourceName);
 	}
 }
