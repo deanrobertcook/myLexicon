@@ -15,9 +15,15 @@ return array(
 	'db' => array(
 		'myLexicon' => array(
 			'dsn' => 'mysql:dbname=myLexicon;host=localhost;charset=UTF8',
+			'driver' => 'PdoMysql',
+			'hostname' => 'localhost',
+			'database' => 'myLexicon',
 		),
 		'myLexiconTest' => array(
 			'dsn' => 'mysql:dbname=myLexiconTest;host=localhost;charset=UTF8',
+			'driver' => 'PdoMysql',
+			'hostname' => 'localhost',
+			'database' => 'myLexiconTest',
 		)
 	),
 	'service_manager' => array(
