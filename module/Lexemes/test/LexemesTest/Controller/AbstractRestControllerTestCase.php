@@ -58,4 +58,31 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 		$client->setMethod($method);
 		return $client;
 	}
+	
+	protected function extractDataFromTableResult($tableResult) {
+		$arrayData = array();
+		$rows = $tableResult->getRowCount();
+		for ($i = 0; $i < $rows; $i++) {
+			$arrayData[] = $tableResult->getRow($i);
+		}
+		return $arrayData;
+	}
+	
+	protected function prepareJSONResponse($jsonData) {
+		$jsonData = json_decode($jsonData);
+		$preparedData = array();
+		foreach ($jsonData as $object) {
+			$preparedData[] = (array)$object;
+		}
+		return $preparedData;
+	}
+	
+	protected function sortArraysById($dataSet) {
+		$ids = array();
+		foreach ($dataSet as $key => $row) {
+			$ids[$key] = $row['id'];
+		}
+		array_multisort($ids, SORT_DESC, $dataSet);
+		return $dataSet;
+	}
 }
