@@ -2,6 +2,7 @@
 
 namespace Lexemes\Service\Factory;
 
+use Lexemes\Model\ExampleMapper;
 use Lexemes\Service\Invokable\ExampleService;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -16,7 +17,8 @@ class ExampleServiceFactory implements FactoryInterface
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 		$PDO = $serviceLocator->get('PDO');
-		$exampleService = new ExampleService($PDO);
+		$exampleMapper = new ExampleMapper($PDO);
+		$exampleService = new ExampleService($exampleMapper);
 		return $exampleService;
 	}
 }

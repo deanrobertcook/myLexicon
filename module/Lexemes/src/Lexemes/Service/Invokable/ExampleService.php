@@ -8,9 +8,9 @@ class ExampleService
 {
 	private $exampleMapper;
 	
-	public function __construct($PDO)
+	public function __construct(ExampleMapper $exampleMapper)
 	{
-		$this->exampleMapper = new ExampleMapper($PDO);
+		$this->exampleMapper = $exampleMapper;
 	}
 
 	public function createExample($exampleData)
