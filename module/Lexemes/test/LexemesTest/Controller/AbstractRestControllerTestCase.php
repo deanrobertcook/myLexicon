@@ -77,7 +77,7 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 		$actualResponse = $this->prepareJSONResponse($actualResponse);
 
 		$expectedResponse = array(
-			"id" => 3
+			"id" => $expectedTable->getRow($expectedTable->getRowCount() - 1)['id']
 		);
 		$this->assertEquals($expectedResponse, $actualResponse);
 	}
@@ -114,10 +114,10 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 	}
 	
 	protected function updateResourceTest($resourceName, $putData) {
-		$client = $this->getClient($resourceName. "/1", "PUT");
+		$resourceId = 1;
+		$client = $this->getClient($resourceName. "/" . $resourceId, "PUT");
 		$client->setParameterPost($putData);
 		$client->send();
-
 		$queryTable = $this->getConnection()->createQueryTable(
 			$resourceName, "SELECT * FROM " . $resourceName . " ORDER BY id"
 		);
@@ -131,7 +131,7 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 		$actualResponse = $this->prepareJSONResponse($actualResponse);
 
 		$expectedResponse = array(
-			"id" => 1
+			"id" => $resourceId
 		);
 		$this->assertEquals($expectedResponse, $actualResponse);
 	}

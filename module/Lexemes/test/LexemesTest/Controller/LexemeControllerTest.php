@@ -32,4 +32,11 @@ class LexemeControllerTest extends AbstractRestControllerTestCase
 	public function testGetAllLexemes() {
 		$this->getAllTest($this->resourceName);
 	}
+	
+	public function testUpdateLexeme() {
+		$putData = array(
+			"entry" => "verabschieden"
+		);
+		$this->updateResourceTest($this->resourceName, $putData);
+	}
 }

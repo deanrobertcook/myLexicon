@@ -34,7 +34,7 @@ class ExampleMapper extends AbstractMapper
 		return $id;
 	}
 	
-	private function checkIfExampleExists($params)
+	protected function checkIfExampleExists($params)
 	{
 		$sql = "SELECT id FROM examples WHERE meaningId = ? AND exampleTarget = ? AND exampleBase = ?";
 		return parent::checkIfExists($sql, $params);
