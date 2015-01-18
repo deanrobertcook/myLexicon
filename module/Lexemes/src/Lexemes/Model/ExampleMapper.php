@@ -2,46 +2,20 @@
 
 namespace Lexemes\Model;
 
-use Zend\Db\Adapter\Adapter;
-
-class ExampleMapper
+class ExampleMapper extends AbstractMapper
 {
-
-	private $adapter = null;
-
-	public function __construct(Adapter $adapter)
-	{
-		$this->adapter = $adapter;
-	}
-
 	public function readExample($id)
 	{
-		$stmt = $this->pdo->prepare("SELECT * FROM examples WHERE id = ?");
-		$stmt->bindValue(1, $id);
-		$stmt->execute();
-		$row = $stmt->fetch();
-		return $this->getExampleDataFromRow($row);
+		$sql = "SELECT * FROM examples WHERE id = ?";
+		$params = array($id);
+		return $this->select($sql, $params);
 	}
 
 	public function readAllExamples()
 	{
-		$stmt = $this->pdo->prepare("SELECT * FROM examples");
-		$stmt->execute();
-		$examples = array();
-		while ($row = $stmt->fetch()) {
-			$examples[] = $this->getExampleDataFromRow($row);
-		}
-		return $examples;
-	}
-
-	private function getExampleDataFromRow($row)
-	{
-		return array(
-			'id' => $row['id'],
-			'meaningId' => $row['meaningId'],
-			'exampleTarget' => $row['exampleTarget'],
-			'exampleBase' => $row['exampleBase'],
-		);
+		$sql = "SELECT * FROM examples";
+		$params = array();
+		return $this->select($sql, $params);
 	}
 
 	public function createExample($exampleData)
