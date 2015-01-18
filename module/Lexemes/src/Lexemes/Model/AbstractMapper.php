@@ -31,7 +31,7 @@ class AbstractMapper
 		$count = $resultSet->count();
 		$results = array();
 		for ($i = 0; $i < $count; $i++) {
-			$results[] = $resultSet->current();
+			$results[] = $resultSet->next();
 		}
 		return $results;
 	}
@@ -51,5 +51,4 @@ class AbstractMapper
 		$id = $resultSet->getGeneratedValue();
 		return $id;
 	}
-
 }

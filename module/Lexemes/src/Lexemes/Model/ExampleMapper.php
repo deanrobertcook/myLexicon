@@ -15,7 +15,8 @@ class ExampleMapper extends AbstractMapper
 	{
 		$sql = "SELECT * FROM examples";
 		$params = array();
-		return $this->select($sql, $params);
+		$results = $this->select($sql, $params);
+		return $results;
 	}
 
 	public function createExample($exampleData)

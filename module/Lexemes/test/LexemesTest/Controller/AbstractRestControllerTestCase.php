@@ -152,7 +152,7 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 		foreach ($dataSet as $key => $row) {
 			$ids[$key] = $row['id'];
 		}
-		array_multisort($ids, SORT_DESC, $dataSet);
+		array_multisort($ids, SORT_ASC, $dataSet);
 		return $dataSet;
 	}
 
