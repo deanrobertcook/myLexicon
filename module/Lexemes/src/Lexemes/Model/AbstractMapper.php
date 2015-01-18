@@ -22,16 +22,16 @@ class AbstractMapper
 		if ($resultSet->count() == 1) {
 			$results = $resultSet->current();
 		} else {
-			$results = $this->getAllResults($resultSet);
+			$results = $this->resultsAsArray($resultSet);
 		}
 		return $results;
 	}
 	
-	private function getAllResults($resultSet) {
-		$count = $resultSet->count();
+	private function resultsAsArray($resultSet) {
+		
 		$results = array();
-		for ($i = 0; $i < $count; $i++) {
-			$results[] = $resultSet->next();
+		while ($row = $resultSet->next()) {
+			$results[] = $row;
 		}
 		return $results;
 	}
