@@ -112,6 +112,21 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 
 		$this->assertEquals($expectedData, $actualData);
 	}
+	
+	protected function updateResourceTest($resourceName, $putData) {
+		$client = $this->getClient($resourceName. "/1", "PUT");
+		$client->setParameterPost($putData);
+		$client->send();
+
+		$queryTable = $this->getConnection()->createQueryTable(
+			$resourceName, "SELECT * FROM " . $resourceName . " ORDER BY id"
+		);
+		$expectedTable = $this
+			->createMySQLXMLDataSet(__DIR__ . "/resources/test" . ucfirst($resourceName) . "Update.xml")
+			->getTable($resourceName);
+
+		$this->assertTablesEqual($expectedTable, $queryTable);
+	}
 
 	protected function getClient($resource, $method, $data = array())
 	{

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<database name="myLexiconTest">
+		<table_data name="examples">
+			<row>
+				<field name="id">1</field>
+				<field name="meaningId">1</field>
+				<field name="exampleTarget">fruchtiger Abgang</field>
+				<field name="exampleBase">fruity finish is delicious</field>
+			</row>
+			<row>
+				<field name="id">2</field>
+				<field name="meaningId">1</field>
+				<field name="exampleTarget">eine Tafel Schokolade</field>
+				<field name="exampleBase">a chocolate bar</field>
+			</row>
+		</table_data>
+	</database>
+</mysqldump>

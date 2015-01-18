@@ -32,4 +32,11 @@ class ExampleControllerTest extends AbstractRestControllerTestCase
 	public function testGetAllExamples() {
 		$this->getAllTest($this->resourceName);
 	}
+	
+	public function testUpdateExample() {
+		$putData = array(
+			"exampleBase" => "fruity finish is delicious"
+		);
+		$this->updateResourceTest($this->resourceName, $putData);
+	}
 }
