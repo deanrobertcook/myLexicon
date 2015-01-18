@@ -42,7 +42,16 @@ class ExampleMapper extends AbstractMapper
 
 	public function updateExample($id, $exampleData)
 	{
+		$oldData = $this->readExample($id);
+		$sql = "UPDATE examples SET meaningId = ?, exampleTarget = ?, exampleBase = ? WHERE id = ?";
+		$params = array(
+			isset($exampleData['meaningId']) ? $exampleData['meaningId'] : $oldData['meaningId'],
+			isset($exampleData['exampleTarget']) ? $exampleData['exampleTarget'] : $oldData['exampleTarget'],
+			isset($exampleData['exampleBase']) ? $exampleData['exampleBase'] : $oldData['exampleBase'],
+			$id,
+		);
 		
+		return $this->update($sql, $params);
 	}
 
 }

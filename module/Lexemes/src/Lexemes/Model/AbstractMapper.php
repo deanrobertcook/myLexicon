@@ -51,4 +51,11 @@ class AbstractMapper
 		$id = $resultSet->getGeneratedValue();
 		return $id;
 	}
+	
+	public function update($sql, $params) {
+		$statement = $this->adapter->createStatement($sql);
+		$resultSet = $statement->execute($params);
+		$id = $resultSet->getGeneratedValue();
+		return $id;
+	}
 }
