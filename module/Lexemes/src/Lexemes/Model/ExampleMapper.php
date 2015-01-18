@@ -20,28 +20,23 @@ class ExampleMapper extends AbstractMapper
 
 	public function createExample($exampleData)
 	{
-		$id = $this->checkIfExampleExists($exampleData['meaningId'], $exampleData['exampleTarget'], $exampleData['exampleBase']);
-		if ($id == NULL) {
-			$stmt = $this->pdo->prepare("INSERT INTO examples (meaningId, exampleTarget, exampleBase) VALUES (?, ?, ?)");
-			$stmt->bindValue(1, $exampleData['meaningId']);
-			$stmt->bindValue(2, $exampleData['exampleTarget']);
-			$stmt->bindValue(3, $exampleData['exampleBase']);
-
-			$stmt->execute();
-			$id = $this->pdo->lastInsertId("id");
+		$sql = "INSERT INTO examples (meaningId, exampleTarget, exampleBase) VALUES (?, ?, ?)";
+		$params = array(
+			$exampleData['meaningId'],
+			$exampleData['exampleTarget'],
+			$exampleData['exampleBase'],
+		);
+		$id = $this->checkIfExampleExists($params);
+		if (!$id) {
+			$id = $this->insert($sql, $params);
 		}
 		return $id;
 	}
-
-	public function checkIfExampleExists($meaningId, $exampleTarget, $exampleBase)
+	
+	private function checkIfExampleExists($params)
 	{
-		$stmt = $this->pdo->prepare("SELECT * FROM examples WHERE meaningId = ? AND exampleTarget = ? AND exampleBase = ?");
-		$stmt->bindValue(1, $meaningId);
-		$stmt->bindValue(2, $exampleTarget);
-		$stmt->bindValue(3, $exampleBase);
-		$stmt->execute();
-		$row = $stmt->fetch();
-		return $row['id'];
+		$sql = "SELECT id FROM examples WHERE meaningId = ? AND exampleTarget = ? AND exampleBase = ?";
+		return parent::checkIfExists($sql, $params);
 	}
 
 	public function updateExample($id, $exampleData)
