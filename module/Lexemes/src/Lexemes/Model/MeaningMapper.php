@@ -2,8 +2,6 @@
 
 namespace Lexemes\Model;
 
-use PDO;
-
 class MeaningMapper extends AbstractMapper
 {
 
@@ -14,7 +12,7 @@ class MeaningMapper extends AbstractMapper
 			$id
 		);
 		$row = $this->select($sql, $params);
-		$meaning = $this->createMeaningsFromQueryRow($row);
+		$meaning = $this->mapMeaningFromLexiconView($row);
 		return $meaning;
 		
 	}
@@ -29,12 +27,12 @@ class MeaningMapper extends AbstractMapper
 		$rows = $this->select($sql, $params);
 		$meanings = [];
 		foreach ($rows as $row) {
-			$meanings[] = $this->createMeaningsFromQueryRow($row);
+			$meanings[] = $this->mapMeaningFromLexiconView($row);
 		}
 		return $meanings;
 	}
 
-	private function createMeaningsFromQueryRow($row)
+	private function mapMeaningFromLexiconView($row)
 	{
 		return array(
 			'id' => $row['meaningId'],
@@ -47,16 +45,17 @@ class MeaningMapper extends AbstractMapper
 
 	public function createMeaning($meaningData)
 	{
-		$stmt = $this->pdo->prepare("INSERT INTO meanings (userId, targetId, baseId, frequency, dateEntered) VALUES (1, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE frequency = frequency + ?;");
-		$stmt->bindValue(1, $meaningData['targetId']);
-		$stmt->bindValue(2, $meaningData['baseId']);
-		$stmt->bindValue(3, $meaningData['frequency']);
-		$stmt->bindValue(4, $meaningData['dateEntered']);
-		$stmt->bindValue(5, $meaningData['frequency']);
-
-		$stmt->execute();
-		$id = $this->pdo->lastInsertId("id"); //DOES THIS WORK IF ONLY FREQUENCY IS UPDATED???
-		//Yes, yes it does
+		$sql = "INSERT INTO meanings (userId, targetId, baseId, frequency, dateEntered)" . 
+			"VALUES (1, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE frequency = frequency + ?";
+		$params = array(
+			$meaningData['targetId'],
+			$meaningData['baseId'],
+			$meaningData['frequency'],
+			$meaningData['dateEntered'],
+			$meaningData['frequency'],
+		);
+		
+		$id = $this->insert($sql, $params);
 		return $id;
 	}
 
