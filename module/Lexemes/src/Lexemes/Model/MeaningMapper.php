@@ -3,37 +3,35 @@
 namespace Lexemes\Model;
 
 use PDO;
-use Zend\Db\Adapter\Adapter;
 
-class MeaningMapper
+class MeaningMapper extends AbstractMapper
 {
 
-	private $adapter = null;
-
-	public function __construct(Adapter $adapter)
+	public function readMeaning($id)
 	{
-		$this->adapter = $adapter;
+		$sql = "SELECT * FROM lexicon WHERE meaningId = ?";
+		$params = array(
+			$id
+		);
+		$row = $this->select($sql, $params);
+		$meaning = $this->createMeaningsFromQueryRow($row);
+		return $meaning;
+		
 	}
 
 	public function readAllMeanings($targetLanguage, $baseLanguage)
 	{
-		$stmt = $this->pdo->prepare("SELECT * FROM lexicon WHERE targetLanguage = ? AND baseLanguage = ? ORDER BY frequency DESC, dateEntered DESC");
-		$stmt->bindValue(1, $targetLanguage);
-		$stmt->bindValue(2, $baseLanguage);
-		$stmt->execute();
-		$meanings = array();
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		$sql = "SELECT * FROM lexicon WHERE targetLanguage = ? AND baseLanguage = ? ORDER BY frequency DESC, dateEntered DESC";
+		$params = array(
+			$targetLanguage,
+			$baseLanguage
+		);
+		$rows = $this->select($sql, $params);
+		$meanings = [];
+		foreach ($rows as $row) {
 			$meanings[] = $this->createMeaningsFromQueryRow($row);
 		}
 		return $meanings;
-	}
-
-	public function readMeaning($id)
-	{
-		$stmt = $this->pdo->prepare("SELECT * FROM lexicon WHERE meaningId = ?");
-		$stmt->bindValue(1, $id);
-		$stmt->execute();
-		return $this->createMeaningsFromQueryRow($stmt->fetch(PDO::FETCH_ASSOC));
 	}
 
 	private function createMeaningsFromQueryRow($row)

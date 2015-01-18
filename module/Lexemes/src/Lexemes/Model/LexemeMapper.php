@@ -2,50 +2,25 @@
 
 namespace Lexemes\Model;
 
-use Zend\Db\Adapter\Adapter;
-
-class LexemeMapper
+class LexemeMapper extends AbstractMapper
 {
-
-	private $adapter = null;
-
-	public function __construct(Adapter $adapter)
-	{
-		$this->adapter = $adapter;
-	}
-
 	public function readLexeme($id)
 	{
-		$stmt = $this->pdo->prepare("SELECT * FROM lexemes WHERE id = ?");
-		$stmt->bindValue(1, $id);
-		$stmt->execute();
-		$row = $stmt->fetch();
-		return $this->getLexemeDataFromRow($row);
+		$sql = "SELECT * FROM lexemes WHERE id = ?";
+		$params = array($id);
+		return $this->select($sql, $params);
 	}
 
 	public function readAllLexemes($targetLanguage, $baseLanguage)
 	{
-		$stmt = $this->pdo->prepare("SELECT * FROM lexemes WHERE language = ? OR language = ?");
-		$stmt->bindValue(1, $targetLanguage);
-		$stmt->bindValue(2, $baseLanguage);
-		$stmt->execute();
-		$lexemes = array();
-		while ($row = $stmt->fetch()) {
-			$lexemes[] = $this->getLexemeDataFromRow($row);
-		}
-		return $lexemes;
-	}
-
-	private function getLexemeDataFromRow($row)
-	{
-		return array(
-			'id' => $row['id'],
-			'language' => $row['language'],
-			'type' => $row['type'],
-			'entry' => $row['entry'],
+		$sql = "SELECT * FROM lexemes WHERE language = ? OR language = ?";
+		$params = array(
+			$targetLanguage,
+			$baseLanguage
 		);
+		return $this->select($sql, $params);
 	}
-
+	
 	public function createLexeme($lexemeData)
 	{
 		$id = $this->checkIfLexemeExists($lexemeData['language'], $lexemeData['type'], $lexemeData['entry']);
