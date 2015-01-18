@@ -13,22 +13,13 @@
  */
 return array(
 	'db' => array(
-		'myLexicon' => array(
-			'dsn' => 'mysql:dbname=myLexicon;host=localhost;charset=UTF8',
-			'driver' => 'PdoMysql',
-			'hostname' => 'localhost',
-			'database' => 'myLexicon',
-		),
-		'myLexiconTest' => array(
-			'dsn' => 'mysql:dbname=myLexiconTest;host=localhost;charset=UTF8',
-			'driver' => 'PdoMysql',
-			'hostname' => 'localhost',
-			'database' => 'myLexiconTest',
-		)
+		'driver' => 'PdoMysql',
+		'hostname' => 'localhost',
+		'database' => 'myLexicon',
 	),
 	'service_manager' => array(
-		'abstract_factories' => array(
-			'Zend\Db\Adapter\AdapterAbstractServiceFactory',
+		'factories' => array(
+			'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
 		),
 	),
 );

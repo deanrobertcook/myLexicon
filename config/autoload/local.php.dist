@@ -13,13 +13,7 @@
  */
 return array(
 	'db' => array(
-		'myLexicon' => array(
-			'username' => 'USERNAME_HERE', //edit this
-			'password' => 'PASSWORD_HERE', //edit this
-		),
-		'myLexiconTest' => array(
-			'username' => 'USERNAME_HERE', //edit this
-			'password' => 'PASSWORD_HERE', //edit this
-		),
+		'username' => 'USERNAME_HERE', //edit this
+		'password' => 'PASSWORD_HERE', //edit this
 	),
 );
