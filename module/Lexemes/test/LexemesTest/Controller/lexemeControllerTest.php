@@ -36,7 +36,15 @@ class lexemeControllerTest extends AbstractRestControllerTestCase
 	}
 	
 	public function testGetLexeme() {
+		$client = $this->getClient("lexemes/1", "GET");
+		$client->send();
+		$actualResponse = $client->getResponse()->getBody();
 		
+		$expectedRow = $this
+			->createMySQLXMLDataSet(__DIR__ . "/resources/testGetLexeme.xml")
+			->getTable("lexemes")
+			->getRow(0);
+		$expectedResponse = json_encode($expectedRow);
+		$this->assertEquals($expectedResponse, $actualResponse);
 	}
-
 }
