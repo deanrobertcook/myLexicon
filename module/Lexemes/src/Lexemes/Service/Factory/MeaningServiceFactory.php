@@ -17,8 +17,8 @@ class MeaningServiceFactory implements FactoryInterface
 
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-		$PDO = $serviceLocator->get('PDO');
-		$meaningMapper = new MeaningMapper($PDO);
+		$adapter = $serviceLocator->get('dbAdapter');
+		$meaningMapper = new MeaningMapper($adapter);
 		$meaningService = new MeaningService($meaningMapper);
 		return $meaningService;
 	}

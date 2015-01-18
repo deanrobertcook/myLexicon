@@ -3,15 +3,16 @@
 namespace Lexemes\Model;
 
 use PDO;
+use Zend\Db\Adapter\Adapter;
 
 class MeaningMapper
 {
 
-	private $pdo = null;
+	private $adapter = null;
 
-	public function __construct(PDO $PDO)
+	public function __construct(Adapter $adapter)
 	{
-		$this->pdo = $PDO;
+		$this->adapter = $adapter;
 	}
 
 	public function readAllMeanings($targetLanguage, $baseLanguage)

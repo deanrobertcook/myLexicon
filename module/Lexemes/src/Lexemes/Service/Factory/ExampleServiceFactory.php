@@ -17,7 +17,7 @@ class ExampleServiceFactory implements FactoryInterface
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 		$adapter = $serviceLocator->get('dbAdapter');
-		$exampleMapper = new ExampleMapper($PDO);
+		$exampleMapper = new ExampleMapper($adapter);
 		$exampleService = new ExampleService($exampleMapper);
 		return $exampleService;
 	}

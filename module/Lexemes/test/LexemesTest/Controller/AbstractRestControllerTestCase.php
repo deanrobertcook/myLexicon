@@ -32,7 +32,9 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 	{
 		$serviceManager = Bootstrap::getServiceManager();
 		$adapter = $serviceManager->get('dbAdapter');
+		//DBUnit test cases need raw PDO object
 		$PDO = $adapter->getDriver()->getConnection()->getResource();
+		
 		$databaseName = $PDO->query('select database()')->fetchColumn();
 		if ($databaseName != "myLexiconTest") {
 			throw new Exception(
