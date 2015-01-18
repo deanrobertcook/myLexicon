@@ -607,9 +607,9 @@
 				<field name="dateEntered">2015-01-18 00:06:55</field>
 			</row>
 		</table_data>
-		<table_data name="users">
+		<table_data name="user">
 			<row>
-				<field name="id">1</field>
+				<field name="user_id">1</field>
 				<field name="username">deanrobertcook</field>
 				<field name="email">deanrobertcook@gmail.com</field>
 				<field name="password">password</field>
@@ -618,7 +618,7 @@
 				<field name="dateJoined">2014-11-17 06:35:16</field>
 			</row>
 			<row>
-				<field name="id">2</field>
+				<field name="user_id">2</field>
 				<field name="username">testUser</field>
 				<field name="email">test@test.com</field>
 				<field name="password">password</field>
