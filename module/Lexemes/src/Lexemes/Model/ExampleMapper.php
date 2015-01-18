@@ -42,17 +42,7 @@ class ExampleMapper extends AbstractMapper
 
 	public function updateExample($id, $exampleData)
 	{
-		$oldData = $this->readExample($id);
-		$oldData['meaningId'] = isset($exampleData['meaningId']) ? $exampleData['meaningId'] : $oldData['meaningId'];
-		$oldData['exampleTarget'] = isset($exampleData['exampleTarget']) ? $exampleData['exampleTarget'] : $oldData['exampleTarget'];
-		$oldData['exampleBase'] = isset($exampleData['exampleBase']) ? $exampleData['exampleBase'] : $oldData['exampleBase'];
 		
-		$stmt = $this->pdo->prepare("UPDATE examples SET meaningId = ?, exampleTarget = ?, exampleBase = ? WHERE id = ?");
-		$stmt->bindValue(1, $oldData['meaningId']);
-		$stmt->bindValue(2, $oldData['exampleTarget']);
-		$stmt->bindValue(3, $oldData['exampleBase']);
-		$stmt->bindValue(4, $oldData['id']);
-		$stmt->execute();
 	}
 
 }
