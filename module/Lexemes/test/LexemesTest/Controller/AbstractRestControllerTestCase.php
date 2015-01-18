@@ -126,6 +126,14 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 			->getTable($resourceName);
 
 		$this->assertTablesEqual($expectedTable, $queryTable);
+		
+		$actualResponse = $client->getResponse()->getBody();
+		$actualResponse = $this->prepareJSONResponse($actualResponse);
+
+		$expectedResponse = array(
+			"id" => 1
+		);
+		$this->assertEquals($expectedResponse, $actualResponse);
 	}
 
 	protected function getClient($resource, $method, $data = array())
