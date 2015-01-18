@@ -25,7 +25,7 @@ class LexemeMapper
 
 	public function readAllLexemes($targetLanguage, $baseLanguage)
 	{
-		$stmt = $this->pdo->prepare("SELECT * FROM lexemes WHERE language = ? OR language = ?");
+		$stmt = $this->pdo->prepare("SELECT * FROM lexemes WHERE language = ? OR language = ? ORDER BY id");
 		$stmt->bindValue(1, $targetLanguage);
 		$stmt->bindValue(2, $baseLanguage);
 		$stmt->execute();

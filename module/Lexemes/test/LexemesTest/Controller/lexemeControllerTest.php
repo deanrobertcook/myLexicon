@@ -47,4 +47,28 @@ class lexemeControllerTest extends AbstractRestControllerTestCase
 		$expectedResponse = json_encode($expectedRow);
 		$this->assertEquals($expectedResponse, $actualResponse);
 	}
+	
+	public function testGetAllLexemes() {
+		$client = $this->getClient("lexemes", "GET");
+		$client->send();
+		$actualData = $client->getResponse()->getBody();
+		
+		$expectedTable = $this
+			->createMySQLXMLDataSet(__DIR__ . "/resources/testGetAllLexemes.xml")
+			->getTable("lexemes");
+		
+		$expectedResponse = array();
+		$rows = $expectedTable->getRowCount();
+		for ($i = 0; $i < $rows; $i++) {
+			$expectedResponse[] = $expectedTable->getRow($i);
+		}
+		
+		$actualData = json_decode($actualData);
+		$actualResponse = array();
+		foreach ($actualData as $datum) {
+			$actualResponse[] = (array)$datum;
+		}
+	
+		$this->assertEquals($expectedResponse, $actualResponse);
+	}
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<database name="myLexiconTest">
+		<table_data name="lexemes">
+			<row>
+				<field name="id">1</field>
+				<field name="language">de</field>
+				<field name="type">verb</field>
+				<field name="entry">sich von jmdm. verabschieden</field>
+			</row>
+			<row>
+				<field name="id">2</field>
+				<field name="language">en</field>
+				<field name="type">verb</field>
+				<field name="entry">to say goodbye</field>
+			</row>
+			<row>
+				<field name="id">3</field>
+				<field name="language">en</field>
+				<field name="type">verb</field>
+				<field name="entry">to take one's leave of so.</field>
+			</row>
+			<row>
+				<field name="id">4</field>
+				<field name="language">de</field>
+				<field name="type">noun</field>
+				<field name="entry">die Anleitung</field>
+			</row>
+			<row>
+				<field name="id">5</field>
+				<field name="language">en</field>
+				<field name="type">noun</field>
+				<field name="entry">guidance</field>
+			</row>
+		</table_data>
+	</database>
+</mysqldump>
