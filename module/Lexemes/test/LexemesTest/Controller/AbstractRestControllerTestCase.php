@@ -34,7 +34,7 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 		$adapter = $serviceManager->get('dbAdapter');
 		//DBUnit test cases need raw PDO object
 		$PDO = $adapter->getDriver()->getConnection()->getResource();
-		
+
 		$databaseName = $PDO->query('select database()')->fetchColumn();
 		if ($databaseName != "myLexiconTest") {
 			throw new Exception(
@@ -71,13 +71,23 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 			->getTable($resourceName);
 
 		$this->assertTablesEqual($expectedTable, $queryTable);
+
+
+		$actualResponse = $client->getResponse()->getBody();
+		$actualResponse = $this->prepareJSONResponse($actualResponse);
+
+		$expectedResponse = array(
+			"id" => 3
+		);
+		$this->assertEquals($expectedResponse, $actualResponse);
 	}
-	
-	protected function getResourceTest($resourceName) {
+
+	protected function getResourceTest($resourceName)
+	{
 		$client = $this->getClient($resourceName . "/1", "GET");
 		$client->send();
 		$actualResponse = $client->getResponse()->getBody();
-		
+
 		$expectedRow = $this
 			->createMySQLXMLDataSet(__DIR__ . "/resources/test" . ucfirst($resourceName) . "Get.xml")
 			->getTable($resourceName)
@@ -85,20 +95,21 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 		$expectedResponse = json_encode($expectedRow);
 		$this->assertEquals($expectedResponse, $actualResponse);
 	}
-	
-	protected function getAllTest($resourceName) {
+
+	protected function getAllTest($resourceName)
+	{
 		$client = $this->getClient($resourceName, "GET");
 		$client->send();
 		$actualData = $client->getResponse()->getBody();
 		$actualData = $this->prepareJSONResponse($actualData);
 		$actualData = $this->sortArraysById($actualData);
-		
+
 		$expectedTable = $this
 			->createMySQLXMLDataSet(__DIR__ . "/resources/test" . ucfirst($resourceName) . "GetAll.xml")
 			->getTable($resourceName);
 		$expectedData = $this->extractDataFromTableResult($expectedTable);
 		$expectedData = $this->sortArraysById($expectedData);
-	
+
 		$this->assertEquals($expectedData, $actualData);
 	}
 
@@ -124,11 +135,15 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 	protected function prepareJSONResponse($jsonData)
 	{
 		$jsonData = json_decode($jsonData);
-		$preparedData = array();
-		foreach ($jsonData as $object) {
-			$preparedData[] = (array) $object;
+		if (!is_array($jsonData)) {
+			return (array) $jsonData;
+		} else {
+			$preparedData = array();
+			foreach ($jsonData as $object) {
+				$preparedData[] = (array) $object;
+			}
+			return $preparedData;
 		}
-		return $preparedData;
 	}
 
 	protected function sortArraysById($dataSet)

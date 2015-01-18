@@ -25,11 +25,11 @@ class ExampleControllerTest extends AbstractRestControllerTestCase
 		$this->addResourceTest($this->resourceName, $postData);
 	}
 	
-	public function testGetExample() {
-		$this->getResourceTest($this->resourceName);
-	}
-	
-	public function testGetAllExamples() {
-		$this->getAllTest($this->resourceName);
-	}
+//	public function testGetExample() {
+//		$this->getResourceTest($this->resourceName);
+//	}
+//	
+//	public function testGetAllExamples() {
+//		$this->getAllTest($this->resourceName);
+//	}
 }
