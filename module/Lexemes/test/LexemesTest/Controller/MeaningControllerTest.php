@@ -17,7 +17,6 @@ class MeaningControllerTest extends AbstractRestControllerTestCase
 	public function testAddMeaning()
 	{
 		$postData = array(
-			"id" => "3",
 			//This should be determined by back end, not through API?
 			//"userid" => "1"
 			"targetId" => "4",

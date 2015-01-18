@@ -17,7 +17,6 @@ class LexemeControllerTest extends AbstractRestControllerTestCase
 	public function testAddLexeme()
 	{
 		$postData = array(
-			"id" => "6",
 			"language" => "en",
 			"type" => "noun",
 			"entry" => "direction"
