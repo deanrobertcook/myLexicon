@@ -15,7 +15,7 @@ class LexemeServiceFactory implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-		$PDO = $serviceLocator->get('PDO');
+		$adapter = $serviceLocator->get('Zend\Db\Adapter\Adapter');
 		$lexemeService = new LexemeService($PDO);
 		return $lexemeService;
 	}
