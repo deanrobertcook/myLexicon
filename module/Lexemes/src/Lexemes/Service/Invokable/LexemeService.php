@@ -8,9 +8,9 @@ class LexemeService
 {
 	private $lexemeMapper;
 	
-	public function __construct($PDO)
+	public function __construct(LexemeMapper $lexemeMapper)
 	{
-		$this->lexemeMapper = new LexemeMapper($PDO);
+		$this->lexemeMapper = $lexemeMapper;
 	}
 
 	public function createLexeme($lexemeData)

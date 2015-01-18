@@ -2,6 +2,7 @@
 
 namespace Lexemes\Service\Factory;
 
+use Lexemes\Model\MeaningMapper;
 use Lexemes\Service\Invokable\MeaningService;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -13,10 +14,13 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class MeaningServiceFactory implements FactoryInterface
 {
+
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
 		$PDO = $serviceLocator->get('PDO');
-		$meaningService = new MeaningService($PDO);
+		$meaningMapper = new MeaningMapper($PDO);
+		$meaningService = new MeaningService($meaningMapper);
 		return $meaningService;
 	}
+
 }
