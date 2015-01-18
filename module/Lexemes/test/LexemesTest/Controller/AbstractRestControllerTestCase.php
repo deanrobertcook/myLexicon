@@ -31,7 +31,7 @@ abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Databa
 	private function getTestPDO()
 	{
 		$serviceManager = Bootstrap::getServiceManager();
-		$adapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
+		$adapter = $serviceManager->get('dbAdapter');
 		$PDO = $adapter->getDriver()->getConnection()->getResource();
 		$databaseName = $PDO->query('select database()')->fetchColumn();
 		if ($databaseName != "myLexiconTest") {
