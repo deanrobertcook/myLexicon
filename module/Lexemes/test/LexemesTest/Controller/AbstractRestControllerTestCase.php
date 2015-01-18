@@ -1,11 +1,12 @@
 <?php
 
-namespace LexemesTest;
+namespace LexemesTest\Controller;
 
 use Exception;
+use LexemesTest\Bootstrap;
 use Zend\Http\Client;
 
-abstract class AbstractDatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
+abstract class AbstractRestControllerTestCase extends \PHPUnit_Extensions_Database_TestCase
 {
     // only instantiate pdo once for test clean-up/fixture load
     static private $pdo = null;
@@ -40,7 +41,7 @@ abstract class AbstractDatabaseTestCase extends \PHPUnit_Extensions_Database_Tes
 	}
 	
 	public function getDataSet() {
-		return $this->createMySQLXMLDataSet(__DIR__ . "/EmptyLexicon.xml");
+		return $this->createMySQLXMLDataSet(__DIR__ . "/resources/OriginalLexicon.xml");
 	}
 	
 	private function getURI($resource) {

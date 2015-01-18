@@ -2,23 +2,23 @@
 
 namespace LexemesTest\Controller;
 
-use LexemesTest\AbstractDatabaseTestCase;
+use LexemesTest\Controller\AbstractRestControllerTestCase;
 
 /**
  * Description of lexemeControllerTest
  *
  * @author dean
  */
-class lexemeControllerTest extends AbstractDatabaseTestCase
+class lexemeControllerTest extends AbstractRestControllerTestCase
 {
 
 	public function testAddLexeme()
 	{
 		$postData = array(
-			"id" => "1",
-			"language" => "de",
-			"type" => "verb",
-			"entry" => "sich von jmdm. verabschieden"
+			"id" => "6",
+			"language" => "en",
+			"type" => "noun",
+			"entry" => "direction"
 		);
 		
 		$client = $this->getClient("lexemes", "POST");
@@ -26,10 +26,10 @@ class lexemeControllerTest extends AbstractDatabaseTestCase
 		$client->send();
 
 		$queryTable = $this->getConnection()->createQueryTable(
-			"lexemes", "SELECT * FROM lexemes"
+			"lexemes", "SELECT * FROM lexemes ORDER BY id"
 		);
 		$expectedTable = $this
-			->createFlatXmlDataSet(__DIR__ . "/resources/testAddLexeme.xml")
+			->createMySQLXMLDataSet(__DIR__ . "/resources/testAddLexeme.xml")
 			->getTable("lexemes");
 
 		$this->assertTablesEqual($expectedTable, $queryTable);
