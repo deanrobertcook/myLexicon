@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 21. Jan 2015 um 09:54
+-- Erstellungszeit: 21. Jan 2015 um 10:19
 -- Server Version: 5.5.40-0ubuntu0.14.04.1
 -- PHP-Version: 5.5.9-1ubuntu4.5
 
@@ -42,31 +42,66 @@ CREATE TABLE IF NOT EXISTS `baseLexemes` (
 
 CREATE TABLE IF NOT EXISTS `examples` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `meaningId` int(10) NOT NULL,
   `exampleTarget` varchar(255) DEFAULT NULL,
-  `exampleBase` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `meaning_examples` (`meaningId`)
+  `exampleBase` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Daten für Tabelle `examples`
 --
 
-INSERT INTO `examples` (`id`, `meaningId`, `exampleTarget`, `exampleBase`) VALUES
-(1, 243, 'fruchtiger Abgang', 'fruity finish'),
-(2, 419, 'eine Tafel Schokolade', 'a chocolate bar'),
-(3, 3101, 'Wie wirkt Ihre Ausstrahlung auf andere?', 'How does your charisma come across to others?'),
-(4, 3108, 'Ich bin an dem Laden vorbeigelaufen ohne ihn zu bemerken', 'I passed the shop without noticing it'),
-(5, 3113, 'der Sturm hat Fenster und Türen aufgeweht.', 'The storm blew open the doors and windows.'),
-(6, 3195, 'eine schwere Entscheidung zu treffen', 'to make a tough decision'),
-(7, 3277, 'Frauen ziehen ihr Selbstwertgefühl mehr aus Sympathien und Bewertungen anderer and daher empfinden Trennung und Zurückweisung als stärker belastend.', 'Women base their feeling of self worth more heavily on the attraction and evaluation of others and therefore receive separation and rejection more strongly damaging.'),
-(8, 3278, 'Frauen ziehen ihr Selbstwertgefühl mehr aus Sympathien und Bewertungen anderer and daher empfinden Trennung und Zurückweisung als stärker belastend.', 'Women base their feeling of self worth more heavily on the attraction and evaluation of others and therefore receive separation and rejection more strongly damaging.'),
-(9, 3334, 'Süßigkeiten können verzehrt werden', ''),
-(10, 3354, 'in diesem modernen Zeitalter...', ''),
-(11, 3357, 'Deshalb könnten diesen Ideen schlecht formuliert sein', ''),
-(12, 3376, 'Das Niveau der Zugangsvoraussetzungen sollte angehoben werden.', ''),
-(13, 3377, 'ich kann mir vorstellen, dass...', '');
+INSERT INTO `examples` (`id`, `exampleTarget`, `exampleBase`) VALUES
+(1, 'fruchtiger Abgang', NULL),
+(2, 'eine Tafel Schokolade', NULL),
+(3, 'Wie wirkt Ihre Ausstrahlung auf andere?', NULL),
+(4, 'Ich bin an dem Laden vorbeigelaufen ohne ihn zu bemerken', NULL),
+(5, 'der Sturm hat Fenster und Türen aufgeweht.', NULL),
+(6, 'eine schwere Entscheidung zu treffen', NULL),
+(7, 'Frauen ziehen ihr Selbstwertgefühl mehr aus Sympathien und Bewertungen anderer and daher empfinden Trennung und Zurückweisung als stärker belastend.', NULL),
+(8, 'Frauen ziehen ihr Selbstwertgefühl mehr aus Sympathien und Bewertungen anderer and daher empfinden Trennung und Zurückweisung als stärker belastend.', NULL),
+(9, 'Süßigkeiten können verzehrt werden', NULL),
+(10, 'in diesem modernen Zeitalter...', NULL),
+(11, 'Deshalb könnten diesen Ideen schlecht formuliert sein', NULL),
+(12, 'Das Niveau der Zugangsvoraussetzungen sollte angehoben werden.', NULL),
+(13, 'ich kann mir vorstellen, dass...', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `examplesToMeanings`
+--
+
+CREATE TABLE IF NOT EXISTS `examplesToMeanings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `meaningId` int(11) NOT NULL,
+  `exampleId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `meaning_examples` (`meaningId`),
+  KEY `examples` (`exampleId`),
+  KEY `meanings` (`meaningId`),
+  KEY `meaning_exampleIds` (`meaningId`),
+  KEY `exampleIds_examples` (`exampleId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+
+--
+-- Daten für Tabelle `examplesToMeanings`
+--
+
+INSERT INTO `examplesToMeanings` (`id`, `meaningId`, `exampleId`) VALUES
+(17, 243, 1),
+(18, 419, 2),
+(19, 3101, 3),
+(20, 3108, 4),
+(21, 3113, 5),
+(22, 3195, 6),
+(23, 3277, 7),
+(24, 3278, 8),
+(25, 3334, 9),
+(26, 3354, 10),
+(27, 3357, 11),
+(28, 3376, 12),
+(29, 3377, 13);
 
 -- --------------------------------------------------------
 
@@ -7812,10 +7847,11 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
--- Constraints der Tabelle `examples`
+-- Constraints der Tabelle `examplesToMeanings`
 --
-ALTER TABLE `examples`
-  ADD CONSTRAINT `meaning_examples` FOREIGN KEY (`meaningid`) REFERENCES `meanings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `examplesToMeanings`
+  ADD CONSTRAINT `exampleIds_examples` FOREIGN KEY (`exampleId`) REFERENCES `examples` (`id`),
+  ADD CONSTRAINT `meaning_exampleIds` FOREIGN KEY (`meaningId`) REFERENCES `meanings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints der Tabelle `lexemes`
