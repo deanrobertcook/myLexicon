@@ -12,6 +12,7 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 		"click #toggleMeaningForm": "toggleMeaningForm",
 		"click #submitNewMeaning": "submitNewMeaning",
 		"click #anotherExample": "anotherExample",
+		"click .clearExample": "clearExample",
 	},
 
 	initialize: function(collection) {
@@ -82,6 +83,11 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 		this.exampleId++;
 	},
 	
+	clearExample: function(e) {
+		e.preventDefault();
+		$("#newMeaning").find(".example-input").val(null);
+	},
+	
 	submitNewMeaning: function(e) {
 		e.preventDefault();
 		var form = $(e.currentTarget).parents("form")[0];
@@ -90,7 +96,7 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 			formData[element.id] = element.value; 
 		});
 		this.collection.createMeaning(formData);
-		$("#newMeaning").find(".example-input").val(null);
+//		$("#newMeaning").find(".example-input").val(null);
 //		this.toggleMeaningForm();
 	},
 });
