@@ -16,9 +16,34 @@ class ExampleMapper extends AbstractMapper
 		$sql = "SELECT * FROM examples";
 		$params = array();
 		$results = $this->select($sql, $params);
-		return $results;
+		return $this->injectMeaningsIntoExamples($results);
 	}
-
+	
+	private function injectMeaningsIntoExamples($results) {
+		$examples = array();
+		foreach ($results as $example) {
+			$meanings = $this->findAssociatedMeanings($example['id']);
+			$meaningIds = array();
+			foreach($meanings as $meaning) {
+				$meaningIds[] = ($meaning['id']);
+			}
+			$example['meanings'] = $meaningIds;
+			$examples[] = $example;
+		}
+		
+		return $examples;
+	}
+	
+	private function findAssociatedMeanings($exampleId) {
+		$sql = "SELECT * FROM examplesToMeanings WHERE id = ?";
+		$params = array($exampleId);
+		$examplesToMeaningMap = $this->select($sql, $params);
+		if (isset($examplesToMeaningMap['id'])) {
+			$examplesToMeaningMap = array($examplesToMeaningMap);
+		}
+		return $examplesToMeaningMap;
+	}
+	
 	public function createExample($exampleData)
 	{
 		$sql = "INSERT INTO examples (meaningId, exampleTarget, exampleBase) VALUES (?, ?, ?)";
