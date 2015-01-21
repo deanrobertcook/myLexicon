@@ -47,22 +47,40 @@ class ExampleMapper extends AbstractMapper
 	
 	public function createExample($exampleData)
 	{
-		$sql = "INSERT INTO examples (meaningId, exampleTarget, exampleBase) VALUES (?, ?, ?)";
+		$sql = "INSERT INTO examples (exampleTarget, exampleBase) VALUES (?, ?)";
 		$params = array(
-			$exampleData['meaningId'],
 			$exampleData['exampleTarget'],
-			$exampleData['exampleBase'],
+			isset($exampleData['exampleBase']) ? $exampleData['exampleBase'] : NULL,
 		);
-		$id = $this->checkIfExampleExists($params);
+		$id = $this->checkIfExampleExists($exampleData['exampleTarget']);
 		if (!$id) {
 			$id = $this->insert($sql, $params);
 		}
+		$this->linkExampleToMeaning($exampleData['meaningId'], $id);
 		return $id;
 	}
 	
-	protected function checkIfExampleExists($params)
+	protected function checkIfExampleExists($exampleTarget)
 	{
-		$sql = "SELECT id FROM examples WHERE meaningId = ? AND exampleTarget = ? AND exampleBase = ?";
+		$sql = "SELECT id FROM examples WHERE exampleTarget = ?";
+		return parent::checkIfExists($sql, array($exampleTarget));
+	}
+	
+	private function linkExampleToMeaning($meaningId, $exampleId) {
+		$sql = "INSERT INTO examplesToMeanings (meaningId, exampleId) VALUES (?, ?)";
+		$params = array(
+			$meaningId,
+			$exampleId,
+		);
+		$id = $this->checkIfLinkExists($params);
+		if (!$id) {
+			$this->insert($sql, $params);
+		}
+		//else nothing
+	}
+	
+	private function checkIfLinkExists($params) {
+		$sql = "SELECT id FROM examplesToMeanings WHERE meaningId = ? AND exampleId = ?";
 		return parent::checkIfExists($sql, $params);
 	}
 
