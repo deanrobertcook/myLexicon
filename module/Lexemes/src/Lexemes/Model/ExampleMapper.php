@@ -8,7 +8,9 @@ class ExampleMapper extends AbstractMapper
 	{
 		$sql = "SELECT * FROM examples WHERE id = ?";
 		$params = array($id);
-		return $this->select($sql, $params);
+		$example = $this->select($sql, $params);
+		$example = $this->injectMeaningIntoExample($example);
+		return $example;
 	}
 
 	public function readAllExamples()
@@ -16,22 +18,21 @@ class ExampleMapper extends AbstractMapper
 		$sql = "SELECT * FROM examples";
 		$params = array();
 		$results = $this->select($sql, $params);
-		return $this->injectMeaningsIntoExamples($results);
-	}
-	
-	private function injectMeaningsIntoExamples($results) {
 		$examples = array();
 		foreach ($results as $example) {
-			$meanings = $this->findAssociatedMeanings($example['id']);
-			$meaningIds = array();
-			foreach($meanings as $meaning) {
-				$meaningIds[] = ($meaning['id']);
-			}
-			$example['meanings'] = $meaningIds;
-			$examples[] = $example;
+			$examples[] = $this->injectMeaningIntoExample($example);
 		}
-		
 		return $examples;
+	}
+	
+	private function injectMeaningIntoExample($example) {
+		$meanings = $this->findAssociatedMeanings($example['id']);
+		$meaningIds = array();
+		foreach($meanings as $meaning) {
+			$meaningIds[] = ($meaning['id']);
+		}
+		$example['meaningIds'] = $meaningIds;
+		return $example;
 	}
 	
 	private function findAssociatedMeanings($exampleId) {
