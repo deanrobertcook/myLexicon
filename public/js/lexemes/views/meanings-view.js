@@ -5,10 +5,6 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	paginationTemplate: _.template($('#paginationTemplate').html()),
 	
 	exampleId: 1,
-	
-	events: {
-		"click #toggleMeaningForm": "newMeaning",
-	},
 
 	initialize: function(collection) {
 		this.collection = collection;
@@ -58,8 +54,4 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 		});
 		this.$el.append(meaningView.render().el);
 	},
-	
-	newMeaning: function() {
-		myLexicon.router.navigate('new-meaning', {trigger: true});
-	}
 });
