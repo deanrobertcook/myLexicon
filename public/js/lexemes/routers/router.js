@@ -3,7 +3,6 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 	
 	routes: {
 		'': "default",
-		'lexemes': "getAllLexemes",
 		'lexemes/:id': "displayLexeme",
 		'meanings': "meanings",
 		'meanings/:pageNo': "meaningsPage",
@@ -12,15 +11,6 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 	
 	default: function () {
 		this.meaningsPage(1);
-	},
-	
-	/**
-	 * Shows all bare lexemes within the users main collection without any links
-	 * to any meanings
-	 */
-	getAllLexemes: function () {
-		var lexemesView = new myLexicon.ViewClasses.LexemesView(myLexicon.Collections.lexemes);
-		lexemesView.render();
 	},
 	
 	/**
