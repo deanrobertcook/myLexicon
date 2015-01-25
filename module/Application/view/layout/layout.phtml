@@ -39,10 +39,6 @@ echo $this->headMeta()->setCharset('UTF-8');
             </div>
         </nav>
         <div class="container">
-			<?php echo $this->navigation('navigation')
-					->breadcrumbs()
-					->setMinDepth(0)
-					->setPartial('partial/breadcrumb.phtml');?>
             <?php echo $this->content; ?>
             <hr>
             <footer>
