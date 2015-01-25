@@ -10,17 +10,6 @@
 	var allLexemes = <?php echo $this->lexemes; ?>;
 	var allMeanings = <?php echo $this->meanings; ?>;
 	var allExamples = <?php echo $this->examples; ?>;
-</script>			
-
-<script type="text/template" id="newExampleTemplate">		
-	<div class="newExample">
-		<label for="exampleTarget<%= exampleId %>">Example Target: </label>
-		<input id="exampleTarget<%= exampleId %>" class="lexeme-input example-input" type="text" />
-
-		<label for="exampleBase<%= exampleId %>">Example Base: </label>
-		<input id="exampleBase<%= exampleId %>" class="lexeme-input example-input" type="text" />
-		<button class="clearExample">Clear Example</button>
-	</div>
 </script>
 
 <script type="text/template" id="meaningsInfo">

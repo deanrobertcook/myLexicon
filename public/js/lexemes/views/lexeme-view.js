@@ -25,11 +25,4 @@ myLexicon.ViewClasses.LexemeView = Backbone.View.extend({
 		var id = this.model.get('id');
 		myLexicon.router.navigate('lexemes/' + id, {trigger: true});
 	},
-	
-	displayLexeme: function() {
-		var allMeanings = myLexicon.Collections.meanings.fullCollection;
-		var meanings = this.model.findAllMeanings(allMeanings);
-		var lexemesMeaningsView = new myLexicon.ViewClasses.MeaningsView(meanings);
-		lexemesMeaningsView.render();
-	}
 });

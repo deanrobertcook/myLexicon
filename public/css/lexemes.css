@@ -62,8 +62,9 @@
 	display: block;
 	float: left;
 	width: 100%;
-	padding: 4px;
-	background-color: #dedede
+	padding: 4px 0;
+	background-color: #dedede;
+	border: 1px solid black;
 }
 
 
