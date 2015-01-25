@@ -21,7 +21,6 @@ myLexicon.ViewClasses.NewMeaningView = Backbone.View.extend({
 		this.$el.css({width: this.elementWidth});
 		this.$el.find("#anotherExample").before(this.exampleSubForm({exampleId: this.exampleId}));
 		this.exampleId++;
-		$("#lexicon").html(this.$el);
 		return this;
 	},
 	

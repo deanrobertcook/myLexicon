@@ -1,4 +1,6 @@
 myLexicon.RouterClasses.Router = Backbone.Router.extend({
+	applicationAnchor: $("#lexicon"),
+	
 	routes: {
 		'': "default",
 		'lexemes': "getAllLexemes",
@@ -45,8 +47,11 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 	},
 	
 	newMeaning: function() {
+		var navigationBar = new myLexicon.ViewClasses.NavigationBar();
+		this.applicationAnchor.html(navigationBar.render().el)
+		
 		var newMeaningView = new myLexicon.ViewClasses.NewMeaningView();
-		newMeaningView.render();
+		this.applicationAnchor.append(newMeaningView.render().el)
 	}
 }); 
 

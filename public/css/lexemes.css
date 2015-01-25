@@ -57,6 +57,16 @@
 	width: 100%;
 }
 
+/*NAVIGATION STYLES*/
+#lexicon #navigationBar {
+	display: block;
+	float: left;
+	width: 100%;
+	padding: 4px;
+	background-color: #dedede
+}
+
+
 /*FORM STYLES */
 #lexicon #newMeaning {
 	float: left;
