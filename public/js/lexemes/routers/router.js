@@ -33,15 +33,15 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		pageNo = parseInt(pageNo);
 		var page = myLexicon.Collections.meanings.getPage(pageNo);
 		var meaningsView = new myLexicon.ViewClasses.MeaningsView(page);
-		meaningsView.render();
+		this.applicationAnchor.html(meaningsView.render().el);
 	},
 	
 	newMeaning: function() {
 		var navigationBar = new myLexicon.ViewClasses.NavigationBar();
-		this.applicationAnchor.html(navigationBar.render().el)
+		this.applicationAnchor.html(navigationBar.render().el);
 		
 		var newMeaningView = new myLexicon.ViewClasses.NewMeaningView();
-		this.applicationAnchor.append(newMeaningView.render().el)
+		this.applicationAnchor.append(newMeaningView.render().el);
 	}
 }); 
 

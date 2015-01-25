@@ -22,7 +22,7 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 			this.renderMeaning(meaning);
 		}, this);
 		this.renderPaginationBar();
-		$("#lexicon").html(this.$el);
+		return this;
 	},
 	
 	renderInfoBar: function() {
