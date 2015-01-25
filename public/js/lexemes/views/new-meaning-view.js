@@ -1,5 +1,6 @@
 myLexicon.ViewClasses.NewMeaningView = Backbone.View.extend({
 	tagName: "div",
+	elementWidth: "40%",
 	id: "newMeaning",
 	exampleId: 1,
 	
@@ -9,12 +10,23 @@ myLexicon.ViewClasses.NewMeaningView = Backbone.View.extend({
 		"click .clearExample": "clearExample",
 	},
 	
+	initialize: function(elementWidth) {
+		if (elementWidth) {
+			this.elementWidth = elementWidth;
+		}
+	},
+	
 	render: function() {
 		this.$el.html(this.meaningForm());
+		this.$el.css({width: this.elementWidth});
 		this.$el.find("#anotherExample").before(this.exampleSubForm({exampleId: this.exampleId}));
 		this.exampleId++;
 		$("#lexicon").html(this.$el);
 		return this;
+	},
+	
+	setWidth: function(elementWidth) {
+		this.$el.css({width: elementWidth});
 	},
 	
 	anotherExample: function(e) {
@@ -37,8 +49,6 @@ myLexicon.ViewClasses.NewMeaningView = Backbone.View.extend({
 		});
 		console.log(formData);
 		myLexicon.Collections.meanings.createMeaning(formData);
-//		$("#newMeaning").find(".example-input").val(null);
-//		this.toggleMeaningForm();
 	},
 	
 	meaningForm: _.template(
