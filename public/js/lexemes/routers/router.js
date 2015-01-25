@@ -5,6 +5,7 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		'lexemes/:id': "displayLexeme",
 		'meanings': "meanings",
 		'meanings/:pageNo': "meaningsPage",
+		'new-meaning': "newMeaning",
 	},
 	
 	default: function () {
@@ -32,6 +33,7 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 	},
 	
 	meanings: function () {
+		console.log("made it here");
 		this.meaningsPage(1);
 	},
 	
@@ -41,5 +43,10 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		var meaningsView = new myLexicon.ViewClasses.MeaningsView(page);
 		meaningsView.render();
 	},
+	
+	newMeaning: function() {
+		var newMeaningView = new myLexicon.ViewClasses.NewMeaningView();
+		newMeaningView.render();
+	}
 }); 
 
