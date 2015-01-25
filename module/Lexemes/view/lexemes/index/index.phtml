@@ -10,36 +10,6 @@
 	var allLexemes = <?php echo $this->lexemes; ?>;
 	var allMeanings = <?php echo $this->meanings; ?>;
 	var allExamples = <?php echo $this->examples; ?>;
-</script>
-
-<script type="text/template" id="newMeaningTemplate">
-	<div id="newMeaning">
-		<form action="#">
-			<label for="targetType">Target Type: </label>
-			<select id="targetType" class="lexeme-input">
-				<option value="noun">Noun</option>
-				<option value="verb">Verb</option>
-				<option value="adjective/adverb">Adjective/Adverb</option>
-				<option value="preposition">Preposition</option>
-			</select>
-						
-			<label for="targetEntry">Target Entry: </label>
-			<input id="targetEntry" class="lexeme-input" type="text" />
-						
-			<label for="baseType">Base Type: </label>
-			<select id="baseType" class="lexeme-input">
-				<option value="noun">Noun</option>
-				<option value="verb">Verb</option>
-				<option value="adjective/adverb">Adjective/Adverb</option>
-				<option value="preposition">Preposition</option>
-			</select>
-						
-			<label for="baseEntry">Base Entry: </label>
-			<input id="baseEntry" class="lexeme-input" type="text" />	
-			<button id="submitNewMeaning">Submit Meaning</button>
-			<button id="anotherExample">Another Example</button>
-		</form>
-	</div>
 </script>			
 
 <script type="text/template" id="newExampleTemplate">		
@@ -114,6 +84,7 @@ echo $this->headScript()
 	->appendFile($this->basePath() . '/js/lexemes/views/meaning-view.js')
 	->appendFile($this->basePath() . '/js/lexemes/views/lexemes-view.js')
 	->appendFile($this->basePath() . '/js/lexemes/views/meanings-view.js')
-	->appendFile($this->basePath() . '/js/lexemes/views/new-meaning-view.js')
+	->appendFile($this->basePath() . '/js/lexemes/views/navigation-bar.js')
+	->appendFile($this->basePath() . '/js/lexemes/views/new-meaning.js')
 	->appendFile($this->basePath() . '/js/lexemes/routers/router.js')
 ; ?>
