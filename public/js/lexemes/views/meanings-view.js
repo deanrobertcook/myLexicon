@@ -1,7 +1,6 @@
 myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	tagName: 'div',
 	
-	infoTemplate: _.template($('#meaningsInfo').html()),
 	paginationTemplate: _.template($('#paginationTemplate').html()),
 	
 	exampleId: 1,
@@ -54,4 +53,10 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 		});
 		this.$el.append(meaningView.render().el);
 	},
+	
+	infoTemplate: _.template(
+		'<div id="meaningsInfo">' +
+			'#Meanings: <%= meaningCount %>' +
+		'</div>'
+	), 
 });
