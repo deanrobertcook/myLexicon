@@ -43,32 +43,37 @@ myLexicon.ViewClasses.NewMeaningView = Backbone.View.extend({
 	
 	meaningForm: _.template(
 		'<form action="#">' +
-			'<div>' +
-				'<label for="targetType">Target Type: </label>' +
-				'<select id="targetType" class="lexeme-input">' +
-					'<option value="noun">Noun</option>' +
-					'<option value="verb">Verb</option>' +
-					'<option value="adjective/adverb">Adjective/Adverb</option>' +
-					'<option value="preposition">Preposition</option>' +
-				'</select>' +
-				
-				'<label for="baseType">Base Type: </label>' +
-				'<select id="baseType" class="lexeme-input">' +
-					'<option value="noun">Noun</option>' +
-					'<option value="verb">Verb</option>' +
-					'<option value="adjective/adverb">Adjective/Adverb</option>' +
-					'<option value="preposition">Preposition</option>' +
-				'</select>' +
+			'<div id="meaningForm">' +
+				'<div id="types">' +
+					'<label for="targetType">Target Type: </label>' +
+					'<select id="targetType" class="lexeme-input">' +
+						'<option value="noun">Noun</option>' +
+						'<option value="verb">Verb</option>' +
+						'<option value="adjective/adverb">Adjective/Adverb</option>' +
+						'<option value="preposition">Preposition</option>' +
+					'</select>' +
 
-				'<label for="targetEntry">Target Entry: </label>' +
-				'<input id="targetEntry" class="lexeme-input" type="text" />' +
+					'<label for="baseType">Base Type: </label>' +
+					'<select id="baseType" class="lexeme-input">' +
+						'<option value="noun">Noun</option>' +
+						'<option value="verb">Verb</option>' +
+						'<option value="adjective/adverb">Adjective/Adverb</option>' +
+						'<option value="preposition">Preposition</option>' +
+					'</select>' +
+				'</div>' +
+		
+				'<div id="entries">' +
+					'<label for="targetEntry">Target Entry: </label>' +
+					'<input id="targetEntry" class="lexeme-input" type="text" />' +
 
-				'<label for="baseEntry">Base Entry: </label>' +
-				'<input id="baseEntry" class="lexeme-input" type="text" />' +	
+					'<label for="baseEntry">Base Entry: </label>' +
+					'<input id="baseEntry" class="lexeme-input" type="text" />' +	
+				'</div>' +
+				'<button id="submitNewMeaning">Submit Meaning</button>' +
 			'</div>' +
 			
-			'<button id="submitNewMeaning">Submit Meaning</button>' +
-			'<button id="anotherExample">Another Example</button>' +
+			'<button id="anotherExample" class="exampleButtons">Another Example</button>' +
+			'<button class="clearExample exampleButtons">Clear Examples</button>' +
 		'</form>'
 	),
 	
@@ -79,7 +84,6 @@ myLexicon.ViewClasses.NewMeaningView = Backbone.View.extend({
 
 			'<label for="exampleBase<%= exampleId %>">Example Base: </label>' +
 			'<input id="exampleBase<%= exampleId %>" class="lexeme-input example-input" type="text" />' +
-			'<button class="clearExample">Clear Example</button>' +
 		'</div>'
 	),
 });

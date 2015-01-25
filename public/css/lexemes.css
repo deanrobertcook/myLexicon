@@ -3,12 +3,6 @@
 	padding: 4px;
 }
 
-.newExample {
-	padding: 4px;
-	margin: 4px 0;
-	border: 1px solid black;
-}
-
 .mylexicon-pagination {
 	float: right;
 	display: block;
@@ -61,4 +55,54 @@
 	display: block;
 	float: left;
 	width: 100%;
+}
+
+/*FORM STYLES */
+#lexicon #newMeaning {
+	float: left;
+	display: block;
+	width: 50%;
+}
+
+#lexicon #types, #lexicon #entries, #lexicon .newExample {
+	float: left;
+	display: block;
+	padding: 0 0 2% 0;
+}
+
+#lexicon #meaningForm {
+	padding-bottom: 2%;  
+	border-bottom: 1px solid black; 
+}
+
+#lexicon .lexeme-input {
+	height: 25px;
+	margin: 0 0 2% 0;
+}
+
+#lexicon #types {
+	width: 33.5%;
+}
+
+#lexicon #entries {
+	width: 66.5%;
+}
+
+#lexicon #entries .lexeme-input{
+	width: 100%;
+}
+
+#lexicon .newExample .lexeme-input{
+	width: 100%;
+}
+
+#lexicon .newExample {
+	width: 100%;
+	margin: 4px 0;
+}
+
+#lexicon .exampleButtons {
+	display: block;
+	float: left;
+	margin: 0 2% 0 0;
 }
