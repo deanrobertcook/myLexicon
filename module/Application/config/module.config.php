@@ -102,10 +102,6 @@ return array(
 				'label' => 'Home',
 				'route' => 'home',
 			),
-			array(
-				'label' => 'Lexemes',
-				'route' => 'lexemes',
-			),
 		)
 	)
 );
