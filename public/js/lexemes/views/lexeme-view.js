@@ -1,7 +1,6 @@
 myLexicon.ViewClasses.LexemeView = Backbone.View.extend({
 	tagName: 'div',
-	className: 'lexemeContainer',
-	template: _.template($('#lexemeTemplate').html()),
+	className: 'lexemeInfo',
 	
 	events: {
 		'click' : 'selectLexeme',
@@ -17,12 +16,14 @@ myLexicon.ViewClasses.LexemeView = Backbone.View.extend({
 		return this;
 	},
 	
-	/**
-	 * When a user clicks on a lexeme, redirect them to a new page
-	 * which displays only meanings for that lexeme, at 'url/lexemes/id'
-	 */
 	selectLexeme: function() {
 		var id = this.model.get('id');
 		myLexicon.router.navigate('lexemes/' + id, {trigger: true});
 	},
+	
+	template: _.template(
+		'<div class="lexeme-language"><%= language %></div>' +
+		'<div class="lexeme-type"><%= type %></div>' +
+		'<div class="lexeme-entry"><%= entry %></div>'
+	),
 });

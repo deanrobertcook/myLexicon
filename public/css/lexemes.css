@@ -1,3 +1,14 @@
+/*NAVIGATION STYLES*************************************/
+#lexicon #navigationBar {
+	display: block;
+	float: left;
+	width: 100%;
+	padding: 4px 0;
+	background-color: #dedede;
+	border: 1px solid black;
+}
+
+/*MEANING STYLES **************************************/
 #meaningsInfo {
 	border: 1px solid black;
 	padding: 4px;
@@ -22,38 +33,6 @@
 	overflow: hidden;
 }
 
-.lexemeContainer {
-	padding: 4px;
-	margin-right: 4px;
-	margin-bottom: 4px;
-	display: block;
-	float: left;
-	width: 49.5%;
-}
-
-.lexemeContainer:hover {
-	background-color: #dddddd;
-}
-
-.lexeme-language, .lexeme-type, .lexeme-entry {
-	display: block;
-	padding: 4px 4px;
-	float: left;
-}
-
-.lexeme-language, .lexeme-type {
-	
-}
-
-.lexeme-entry {
-	width: 100%;
-	font-weight: bold;
-}
-
-.lexeme-language:after {
-	content: ".";
-}
-
 .meaningInfo {
 	margin: 4px;
 	display: block;
@@ -61,18 +40,45 @@
 	width: 100%;
 }
 
-/*NAVIGATION STYLES*/
-#lexicon #navigationBar {
+/*LEXEME STYLES**************************************/
+#lexicon .lexemeInfo {
 	display: block;
 	float: left;
-	width: 100%;
-	padding: 4px 0;
-	background-color: #dedede;
-	border: 1px solid black;
+	width: 32%;
+	padding: 1%;
 }
 
+#lexicon .lexemeInfo:hover {
+	background-color: #dddddd;
+}
 
-/*FORM STYLES */
+#lexicon .lexeme-language, #lexicon .lexeme-type, #lexicon .lexeme-entry {
+	display: block;
+	float: left;
+}
+
+#lexicon .lexeme-language, #lexicon .lexeme-type {
+	color: #777777;
+}
+
+#lexicon .lexeme-language {
+	width: 10%;
+}
+
+#lexicon .lexeme-type {
+	width: 45%;
+}
+
+#lexicon .lexeme-entry {
+	font-weight: bold;
+	width: 45%;
+}
+
+#lexicon .lexeme-language:after {
+	content: ".";
+}
+
+/*FORM STYLES **************************************/
 #lexicon #newMeaning {
 	float: left;
 	display: block;

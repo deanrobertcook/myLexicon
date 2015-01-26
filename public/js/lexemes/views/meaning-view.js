@@ -1,7 +1,6 @@
 myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 	tagName: 'div',
 	className: 'meaningContainer',
-	template: _.template($('#meaningTemplate').html()),
 	
 	initialize: function() {
 		this.listenTo(this.model, 'change', this.render);
@@ -30,5 +29,7 @@ myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 			var exampleView = new myLexicon.ViewClasses.ExampleView({model: example});
 			this.$el.append(exampleView.render().el);
 		}, this);
-	}
+	},
+	
+	template: _.template($('#meaningTemplate').html()),
 });
