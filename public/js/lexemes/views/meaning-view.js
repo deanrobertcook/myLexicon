@@ -1,6 +1,6 @@
 myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 	tagName: 'div',
-	className: 'meaningContainer',
+	className: 'meaningInfo',
 	
 	initialize: function() {
 		this.listenTo(this.model, 'change', this.render);
@@ -8,10 +8,12 @@ myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 	
 	render: function() {
 		this.$el.empty();
+		this.$el.append(this.template({
+			frequency: this.model.get('frequency'),
+			dateEntered: formatDateTime(this.model.get('dateEntered')),
+		}));
 		this.renderLexeme(this.model.get('targetId'));
 		this.renderLexeme(this.model.get('baseId'));
-		this.$el.append(this.template(this.model.attributes));
-		this.$el.append("ID: " + this.model.get('id'));
 		this.renderExamples();
 		return this;
 	},
@@ -31,5 +33,8 @@ myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 		}, this);
 	},
 	
-	template: _.template($('#meaningTemplate').html()),
+	template: _.template(
+		'<div class="frequency"><%= frequency %></div>' +
+		'<div class="created"><%= dateEntered %></div>'
+	),
 });

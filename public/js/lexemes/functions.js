@@ -14,3 +14,14 @@ Date.prototype.toMysqlFormat = function() {
 		twoDigits(this.getUTCMinutes()) + ":" + 
 		twoDigits(this.getUTCSeconds());
 };
+
+function formatDateTime(dateTime) {
+	console.log(dateTime);
+	var year = dateTime.substring(0, 4);
+	var month = dateTime.substring(5, 7);
+	var day = dateTime.substring(8, 10);
+	
+	var time = dateTime.substring(11);
+	
+	return day + "/" + month + "/" + year + ", " + time;
+}
