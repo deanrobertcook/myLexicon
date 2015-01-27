@@ -12,8 +12,16 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 		this.$el.empty();
 		this.renderInfoBar();
 		this.renderPaginationBar();
+		this.renderMeanings();
+		return this;
+	},
+	
+	renderMeanings: function() {
 		this.collection.each(function(meaning) {
-			this.renderMeaning(meaning);
+			var meaningView = new myLexicon.ViewClasses.MeaningView({
+				model: meaning,
+			});
+			this.$el.append(meaningView.render().el);
 		}, this);
 		return this;
 	},
@@ -41,13 +49,6 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 			next: nextPage,
 			last: lastPage,
 		}));
-	},
-
-	renderMeaning: function(meaning) {
-		var meaningView = new myLexicon.ViewClasses.MeaningView({
-			model: meaning,
-		});
-		this.$el.append(meaningView.render().el);
 	},
 	
 	infoTemplate: _.template(

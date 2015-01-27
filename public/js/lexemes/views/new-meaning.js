@@ -51,6 +51,7 @@ myLexicon.ViewClasses.NewMeaningView = Backbone.View.extend({
 	},
 	
 	meaningForm: _.template(
+		'<h4>New Meaning</h4>' +
 		'<form action="#">' +
 			'<div id="meaningForm">' +
 				'<div id="types">' +

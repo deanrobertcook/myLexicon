@@ -70,6 +70,19 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 		} else {
 			return "noun";
 		}
+	},
+	
+	getRecentlyCreatedMeanings: function(numberOfMeanings) {
+		var meanings = myLexicon.Collections.meanings.fullCollection;
+		var sortedMeanings = meanings.clone();
+		
+		sortedMeanings.comparator = function(meaning) {
+			return -meaning.get("id");
+		}
+		sortedMeanings.sort();
+		
+		sortedMeanings = sortedMeanings.slice(0, numberOfMeanings);
+		return new myLexicon.CollectionClasses.Meanings(sortedMeanings);
 	}
 });
 
