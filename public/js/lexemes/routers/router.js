@@ -50,10 +50,6 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		
 		var newMeaningView = new myLexicon.ViewClasses.NewMeaningView();
 		this.applicationAnchor.append(newMeaningView.render().el);
-		
-		var recentMeanings = myLexicon.Collections.meanings.getRecentlyCreatedMeanings(5);
-		var recentMeaningsView = new myLexicon.ViewClasses.MeaningsView(recentMeanings);
-		this.applicationAnchor.append(recentMeaningsView.renderMeanings().el);
 	}
 }); 
 

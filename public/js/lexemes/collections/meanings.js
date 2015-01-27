@@ -25,6 +25,7 @@ myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
 		this.fullCollection.add(meaning);
 		this.setPreviouslyEnteredLexemeType(formData.targetType);
 		meaning.pushLexemes();
+		return meaning;
 	},
 	
 	createLexeme: function(formData, isTarget) {

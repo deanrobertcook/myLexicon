@@ -20,7 +20,7 @@ function formatDateTime(dateTime) {
 	var month = dateTime.substring(5, 7);
 	var day = dateTime.substring(8, 10);
 	
-	var time = dateTime.substring(11);
+	var time = dateTime.substring(11, 16);
 	
-	return day + "/" + month + "/" + year + ", " + time;
+	return day + "/" + month + ", " + time;
 }

@@ -43,7 +43,7 @@
 #lexicon .lexemeInfo {
 	display: block;
 	float: right;
-	width: 35%;
+	width: 40%;
 	padding: 1%;
 }
 
@@ -82,6 +82,7 @@
 	float: left;
 	display: block;
 	margin: 0 2% 2% 0;
+	width: 35%;
 }
 
 #lexicon #types, #lexicon #entries, #lexicon .newExample {

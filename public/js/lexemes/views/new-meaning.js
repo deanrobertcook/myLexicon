@@ -1,8 +1,7 @@
 myLexicon.ViewClasses.NewMeaningView = Backbone.View.extend({
 	tagName: "div",
-	elementWidth: "40%",
-	id: "newMeaning",
 	exampleId: 1,
+	recentMeanings: null,
 	
 	events: {
 		"click #submitNewMeaning": "submitNewMeaning",
@@ -10,18 +9,24 @@ myLexicon.ViewClasses.NewMeaningView = Backbone.View.extend({
 		"click .clearExample": "clearExample",
 	},
 	
-	initialize: function(elementWidth) {
-		if (elementWidth) {
-			this.elementWidth = elementWidth;
-		}
+	initialize: function() {
+		this.recentMeanings = myLexicon.Collections.meanings.getRecentlyCreatedMeanings(5);
 	},
 	
 	render: function() {
 		this.$el.html(this.meaningForm());
-		this.$el.css({width: this.elementWidth});
 		this.$el.find("#anotherExample").before(this.exampleSubForm({exampleId: this.exampleId}));
 		this.exampleId++;
+		this.renderRecentMeanings();
+		$("#targetEntry").focus();
 		return this;
+	},
+	
+	renderRecentMeanings: function() {
+		this.$el.find(".meaningInfo").parent().empty();
+		var recentMeaningsView = new myLexicon.ViewClasses.MeaningsView(this.recentMeanings);
+		this.$el.append(recentMeaningsView.renderMeanings().el);
+		this.$el.find(".meaningInfo").first().before("<h4>Recently Added Meanings</h4>");
 	},
 	
 	setWidth: function(elementWidth) {
@@ -47,10 +52,18 @@ myLexicon.ViewClasses.NewMeaningView = Backbone.View.extend({
 			formData[element.id] = element.value; 
 		});
 		console.log(formData);
-		myLexicon.Collections.meanings.createMeaning(formData);
+		var meaning = myLexicon.Collections.meanings.createMeaning(formData);
+		this.updateRecentMeanings(meaning);
+	},
+	
+	updateRecentMeanings: function(meaning) {
+		this.recentMeanings.unshift(meaning);
+		this.recentMeanings.pop();
+		this.renderRecentMeanings();
 	},
 	
 	meaningForm: _.template(
+		'<div id="newMeaning">' +
 		'<h4>New Meaning</h4>' +
 		'<form action="#">' +
 			'<div id="meaningForm">' +
@@ -84,7 +97,8 @@ myLexicon.ViewClasses.NewMeaningView = Backbone.View.extend({
 			
 			'<button id="anotherExample" class="exampleButtons">Another Example</button>' +
 			'<button class="clearExample exampleButtons">Clear Examples</button>' +
-		'</form>'
+		'</form>' +
+		'</div>'
 	),
 	
 	exampleSubForm: _.template(

@@ -1,6 +1,5 @@
 myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	tagName: 'div',
-		
 	exampleId: 1,
 
 	initialize: function(collection) {
