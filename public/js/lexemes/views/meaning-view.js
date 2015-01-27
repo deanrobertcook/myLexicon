@@ -12,8 +12,8 @@ myLexicon.ViewClasses.MeaningView = Backbone.View.extend({
 			frequency: this.model.get('frequency'),
 			dateEntered: formatDateTime(this.model.get('dateEntered')),
 		}));
-		this.renderLexeme(this.model.get('targetId'));
 		this.renderLexeme(this.model.get('baseId'));
+		this.renderLexeme(this.model.get('targetId'));
 		this.renderExamples();
 		return this;
 	},

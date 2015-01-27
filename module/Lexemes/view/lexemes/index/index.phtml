@@ -12,20 +12,6 @@
 	var allExamples = <?php echo $this->examples; ?>;
 </script>
 
-<script type="text/template" id="paginationTemplate">
-	<div class="mylexicon-pagination">
-		<a href="#meanings/1">First</a>
-		<% if (previous !== -1) { %>
-			<a href="#meanings/<%= previous %>">Previous</a>
-        <% } %>
-		<% if (next !== -1) { %>
-			<a href="#meanings/<%= next %>">Next</a>
-        <% } %>
-		<a href="#meanings/<%= last %>">Last</a>
-	</div>
-</script>
-
-
 <script type="text/template" id="exampleTemplate">
 	<ul>
 		<li>Example Target: <%= exampleTarget %></li>

@@ -1,8 +1,6 @@
 myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	tagName: 'div',
-	
-	paginationTemplate: _.template($('#paginationTemplate').html()),
-	
+		
 	exampleId: 1,
 
 	initialize: function(collection) {
@@ -13,17 +11,16 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	render: function() {
 		this.$el.empty();
 		this.renderInfoBar();
+		this.renderPaginationBar();
 		this.collection.each(function(meaning) {
 			this.renderMeaning(meaning);
 		}, this);
-		this.renderPaginationBar();
 		return this;
 	},
 	
 	renderInfoBar: function() {
 		this.$el.remove("#meaningsInfo");
 		this.$el.prepend(this.infoTemplate({"meaningCount": this.collection.getLength()}));
-		return this;
 	},
 	
 	renderPaginationBar: function() {
@@ -39,12 +36,11 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 			nextPage = currentPage + 1;
 		}
 		
-		this.$el.prepend(this.paginationTemplate({
+		this.$el.find("#meaningsInfo").append(this.paginationTemplate({
 			previous: previousPage,
 			next: nextPage,
 			last: lastPage,
 		}));
-		return this;
 	},
 
 	renderMeaning: function(meaning) {
@@ -59,4 +55,18 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 			'#Meanings: <%= meaningCount %>' +
 		'</div>'
 	), 
+	
+	paginationTemplate: _.template(
+		'<div class="mylexicon-pagination">' +
+			'<a href="#meanings/1">First</a>' +
+			'<% if (previous !== -1) { %>' +
+				'<a href="#meanings/<%= previous %>">Previous</a>' +
+			'<% } %>' +
+			'<% if (next !== -1) { %>' +
+				'<a href="#meanings/<%= next %>">Next</a>' +
+			'<% } %>' +
+			'<a href="#meanings/<%= last %>">Last</a>' +
+		'</div>'
+	),
+	
 });

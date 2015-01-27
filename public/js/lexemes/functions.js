@@ -16,7 +16,6 @@ Date.prototype.toMysqlFormat = function() {
 };
 
 function formatDateTime(dateTime) {
-	console.log(dateTime);
 	var year = dateTime.substring(0, 4);
 	var month = dateTime.substring(5, 7);
 	var day = dateTime.substring(8, 10);

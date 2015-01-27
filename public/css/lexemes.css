@@ -10,7 +10,8 @@
 	display: block;
 	float: left;
 	width: 100%;
-	padding: 4px 0;
+	padding: 1% 0;
+	margin: 0 0 1% 0;
 	background-color: #dedede;
 	border: 1px solid black;
 }
@@ -18,7 +19,7 @@
 /*MEANINGS STYLES **************************************/
 #lexicon #meaningsInfo {
 	border: 1px solid black;
-	padding: 4px;
+	padding: 1%;
 	margin: 0 0 1% 0;
 	display: block;
 	float: left;
@@ -41,8 +42,8 @@
 /*LEXEME STYLES**************************************/
 #lexicon .lexemeInfo {
 	display: block;
-	float: left;
-	width: 32%;
+	float: right;
+	width: 35%;
 	padding: 1%;
 }
 
