@@ -13,9 +13,7 @@ myLexicon.CollectionClasses.Meanings = Backbone.Collection.extend({
 		});
 		
 		this.createExample(formData, meaning);
-
-		this.fullCollection.add(meaning);
-		this.setPreviouslyEnteredLexemeType(formData.targetType);
+		this.add(meaning);
 		meaning.pushLexemes();
 		return meaning;
 	},
