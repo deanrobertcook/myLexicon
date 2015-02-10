@@ -10,7 +10,6 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	render: function() {
 		this.$el.empty();
 		this.renderInfoBar();
-		this.renderPaginationBar();
 		this.renderMeanings();
 		return this;
 	},
@@ -28,26 +27,6 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	renderInfoBar: function() {
 		this.$el.remove("#meaningsInfo");
 		this.$el.prepend(this.infoTemplate({"meaningCount": this.collection.getLength()}));
-	},
-	
-	renderPaginationBar: function() {
-		var currentPage = this.collection.state.currentPage;
-		var previousPage = -1;
-		if (this.collection.hasPreviousPage()) {
-			previousPage = currentPage - 1;
-		}
-		
-		var lastPage = this.collection.state.lastPage;
-		var nextPage = -1;
-		if (this.collection.hasNextPage()) {
-			nextPage = currentPage + 1;
-		}
-		
-		this.$el.find("#meaningsInfo").append(this.paginationTemplate({
-			previous: previousPage,
-			next: nextPage,
-			last: lastPage,
-		}));
 	},
 	
 	infoTemplate: _.template(

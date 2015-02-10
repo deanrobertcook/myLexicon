@@ -22,7 +22,7 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		this.applicationAnchor.html(navigationBar.render().el);
 		
 		var lexeme = myLexicon.Collections.lexemes.get(id);
-		var allMeanings = myLexicon.Collections.meanings.fullCollection;
+		var allMeanings = myLexicon.Collections.meanings;
 		var meanings = lexeme.findAllMeanings(allMeanings);
 		var lexemesMeaningsView = new myLexicon.ViewClasses.MeaningsView(meanings);
 		this.applicationAnchor.append(lexemesMeaningsView.render().el);
@@ -36,14 +36,12 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		this.applicationAnchor.append(newMeaningView.render().el);
 	},
 	
-	
-	/**
-	 * Shows all meanings (and their associated lexemes) that are stored in the 
-	 * user's main collection
-	 */
 	getAllMeanings: function () {
+		var navigationBar = new myLexicon.ViewClasses.NavigationBar();
+		this.applicationAnchor.html(navigationBar.render().el);
+		
 		var meaningsView = new myLexicon.ViewClasses.MeaningsView(myLexicon.Collections.meanings);
-		meaningsView.render();
+		this.applicationAnchor.append(meaningsView.render().el);
 	}
 }); 
 

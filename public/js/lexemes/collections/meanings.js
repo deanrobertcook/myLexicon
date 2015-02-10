@@ -48,7 +48,7 @@ myLexicon.CollectionClasses.Meanings = Backbone.Collection.extend({
 	},
 	
 	getLength: function() {
-		return this.fullCollection.length;
+		return 0;
 	},
 	
 	setPreviouslyEnteredLexemeType: function(type) {
@@ -64,7 +64,7 @@ myLexicon.CollectionClasses.Meanings = Backbone.Collection.extend({
 	},
 	
 	getRecentlyCreatedMeanings: function(numberOfMeanings) {
-		var meanings = myLexicon.Collections.meanings.fullCollection;
+		var meanings = myLexicon.Collections.meanings;
 		var sortedMeanings = meanings.clone();
 		
 		sortedMeanings.comparator = function(meaning) {
