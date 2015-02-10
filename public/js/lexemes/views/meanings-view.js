@@ -7,26 +7,33 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 		this.listenTo(this.collection, 'add', this.renderMeaning);
 	},
 	
-	render: function() {
+	renderPage: function(pageNo, pageSize) {
 		this.$el.empty();
 		this.renderInfoBar();
-		this.renderMeanings();
+		this.renderMeanings(pageNo, pageSize);
 		return this;
 	},
 	
-	renderMeanings: function() {
-		this.collection.each(function(meaning) {
-			var meaningView = new myLexicon.ViewClasses.MeaningView({
-				model: meaning,
-			});
+	renderMeanings: function(pageNo, pageSize) {
+		var firstModel = pageNo * pageSize;
+		
+		for (var i = 0; i < pageSize; i++) {
+			if (this.collection.at(i + firstModel)) {
+				var meaningView = new myLexicon.ViewClasses.MeaningView({
+				model: this.collection.at(i + firstModel),
+				});
+			} else {
+				break;
+			}
 			this.$el.append(meaningView.render().el);
-		}, this);
+		}
+		
 		return this;
 	},
 	
 	renderInfoBar: function() {
 		this.$el.remove("#meaningsInfo");
-		this.$el.prepend(this.infoTemplate({"meaningCount": this.collection.getLength()}));
+		this.$el.prepend(this.infoTemplate({"meaningCount": this.collection.length}));
 	},
 	
 	infoTemplate: _.template(

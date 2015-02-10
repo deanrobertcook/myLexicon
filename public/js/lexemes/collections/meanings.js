@@ -2,6 +2,10 @@ myLexicon.CollectionClasses.Meanings = Backbone.Collection.extend({
 	model: myLexicon.ModelClasses.Meaning,
 	url: 'meanings',
 	
+	initialize: function(meanings) {
+		console.log(meanings.length);
+	},
+	
 	createMeaning: function (formData) {	
 		var targetCid = this.createLexeme(formData, true);
 		var baseCid = this.createLexeme(formData, false);
@@ -45,10 +49,6 @@ myLexicon.CollectionClasses.Meanings = Backbone.Collection.extend({
 		}
 		
 		myLexicon.Collections.examples.createNewExamples(examplesData, meaning);
-	},
-	
-	getLength: function() {
-		return 0;
 	},
 	
 	setPreviouslyEnteredLexemeType: function(type) {

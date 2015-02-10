@@ -4,7 +4,8 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 	routes: {
 		'': "default",
 		'lexemes/:id': "displayLexeme",
-		'meanings': "getAllMeanings",
+		'meanings': "meanings",
+		'meanings/:pageNo': "meaningsPage",
 		'new-meaning': "newMeaning",
 	},
 	
@@ -36,12 +37,16 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		this.applicationAnchor.append(newMeaningView.render().el);
 	},
 	
-	getAllMeanings: function () {
+	meanings: function () {
+		this.meaningsPage(0);
+	},
+	
+	meaningsPage: function(pageNo) {
 		var navigationBar = new myLexicon.ViewClasses.NavigationBar();
 		this.applicationAnchor.html(navigationBar.render().el);
 		
 		var meaningsView = new myLexicon.ViewClasses.MeaningsView(myLexicon.Collections.meanings);
-		this.applicationAnchor.append(meaningsView.render().el);
+		this.applicationAnchor.append(meaningsView.renderPage(pageNo, 5).el);
 	}
 }); 
 
