@@ -1,14 +1,6 @@
-myLexicon.CollectionClasses.Meanings = Backbone.PageableCollection.extend({
+myLexicon.CollectionClasses.Meanings = Backbone.Collection.extend({
 	model: myLexicon.ModelClasses.Meaning,
 	url: 'meanings',
-	
-	mode: "client",
-	
-	previouslyEnteredLexemeType: "noun",
-	
-	state: {
-		pageSize: 25,
-	},
 	
 	createMeaning: function (formData) {	
 		var targetCid = this.createLexeme(formData, true);
