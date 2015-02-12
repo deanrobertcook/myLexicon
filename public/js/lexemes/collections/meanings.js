@@ -2,10 +2,6 @@ myLexicon.CollectionClasses.Meanings = Backbone.Collection.extend({
 	model: myLexicon.ModelClasses.Meaning,
 	url: 'meanings',
 	
-	initialize: function(meanings) {
-		
-	},
-	
 	createMeaning: function (formData) {	
 		var targetCid = this.createLexeme(formData, true);
 		var baseCid = this.createLexeme(formData, false);

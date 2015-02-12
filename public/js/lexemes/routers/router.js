@@ -26,7 +26,7 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		var allMeanings = myLexicon.Collections.meanings;
 		var meanings = lexeme.findAllMeanings(allMeanings);
 		var lexemesMeaningsView = new myLexicon.ViewClasses.MeaningsView(meanings);
-		this.applicationAnchor.append(lexemesMeaningsView.render().el);
+		this.applicationAnchor.append(lexemesMeaningsView.renderPage(0, meanings.length).el);
 	},
 	
 	newMeaning: function() {
@@ -46,7 +46,7 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 		this.applicationAnchor.html(navigationBar.render().el);
 		
 		var meaningsView = new myLexicon.ViewClasses.MeaningsView(myLexicon.Collections.meanings);
-		this.applicationAnchor.append(meaningsView.renderPage(pageNo, 5).el);
+		this.applicationAnchor.append(meaningsView.renderPage(pageNo, 25).el);
 	}
 }); 
 
