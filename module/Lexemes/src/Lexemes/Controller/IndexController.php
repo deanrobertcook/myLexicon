@@ -7,7 +7,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController {
 
-	public function indexAction() {
+	public function indexAction() {		
 		$meaningService = $this->serviceLocator->get('meaningService');
 		$lexemeService = $this->serviceLocator->get("lexemeService");
 		$exampleService = $this->serviceLocator->get('exampleService');

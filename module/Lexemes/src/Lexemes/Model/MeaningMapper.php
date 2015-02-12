@@ -17,12 +17,13 @@ class MeaningMapper extends AbstractMapper
 		
 	}
 
-	public function readAllMeanings($targetLanguage, $baseLanguage)
+	public function readAllMeanings($targetLanguage, $baseLanguage, $userId)
 	{
-		$sql = "SELECT * FROM lexicon WHERE targetLanguage = ? AND baseLanguage = ? ORDER BY frequency DESC, dateEntered DESC";
+		$sql = "SELECT * FROM lexicon WHERE targetLanguage = ? AND baseLanguage = ? AND userid = ? ORDER BY frequency DESC, dateEntered DESC";
 		$params = array(
 			$targetLanguage,
-			$baseLanguage
+			$baseLanguage,
+			$userId,
 		);
 		$rows = $this->select($sql, $params);
 		$meanings = [];
@@ -43,11 +44,12 @@ class MeaningMapper extends AbstractMapper
 		);
 	}
 
-	public function createMeaning($meaningData)
+	public function createMeaning($meaningData, $userId)
 	{
 		$sql = "INSERT INTO meanings (userId, targetId, baseId, frequency, dateEntered)" . 
-			"VALUES (1, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE frequency = frequency + ?";
+			"VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE frequency = frequency + ?";
 		$params = array(
+			$userId,
 			$meaningData['targetId'],
 			$meaningData['baseId'],
 			$meaningData['frequency'],

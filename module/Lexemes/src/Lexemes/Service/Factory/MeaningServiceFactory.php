@@ -17,10 +17,14 @@ class MeaningServiceFactory implements FactoryInterface
 
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-		$adapter = $serviceLocator->get('dbAdapter');
-		$meaningMapper = new MeaningMapper($adapter);
-		$meaningService = new MeaningService($meaningMapper);
-		return $meaningService;
+		
+		$auth = $serviceLocator->get('zfcuser_auth_service');
+		if ($auth->hasIdentity()) {
+			$adapter = $serviceLocator->get('dbAdapter');
+			$meaningMapper = new MeaningMapper($adapter);
+			$meaningService = new MeaningService($meaningMapper, $auth->getIdentity()->getId());
+			return $meaningService;
+		}
 	}
 
 }

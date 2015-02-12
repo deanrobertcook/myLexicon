@@ -8,13 +8,15 @@ use Lexemes\Model\MeaningMapper;
 class MeaningService {
 	
 	private $meaningMapper;
+	private $userId;
 	
-	public function __construct(MeaningMapper $meaningMapper) {
+	public function __construct(MeaningMapper $meaningMapper, $userId) {
 		$this->meaningMapper = $meaningMapper;
+		$this->userId = $userId;
 	}
 	
 	public function createMeaning($meaningData) {
-		$meaningId = $this->meaningMapper->createMeaning($meaningData);
+		$meaningId = $this->meaningMapper->createMeaning($meaningData, $this->userId);
 		return $meaningId;
 	}
 	
@@ -24,7 +26,7 @@ class MeaningService {
 	}
 	
 	public function readAllMeanings($targetLanguage, $baseLanguage) {
-		$meanings = $this->meaningMapper->readAllMeanings($targetLanguage, $baseLanguage);
+		$meanings = $this->meaningMapper->readAllMeanings($targetLanguage, $baseLanguage, $this->userId);
 		return $meanings;
 	}
 	

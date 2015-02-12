@@ -13,6 +13,12 @@ return array(
                     ),
                 ),
             ),
+			'user' => array(
+				'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/user',
+                ),
+			),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -101,6 +107,10 @@ return array(
 			array(
 				'label' => 'Home',
 				'route' => 'home',
+			),
+			array(
+				'label' => 'Profile',
+				'route' => 'user',
 			),
 		)
 	)
