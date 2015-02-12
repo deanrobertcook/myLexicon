@@ -30,7 +30,12 @@ class AbstractMapper
 	private function resultsAsArray($resultSet) {
 		
 		$results = array();
-		while ($row = $resultSet->next()) {
+		while ($row = $resultSet->next()) {			
+			foreach ($row as $index=>$column) {
+				if (is_numeric($column)) {
+					$row[$index] = intval($column);
+				}
+			}
 			$results[] = $row;
 		}
 		return $results;

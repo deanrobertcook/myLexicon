@@ -35,10 +35,10 @@ class MeaningMapper extends AbstractMapper
 	private function mapMeaningFromLexiconView($row)
 	{
 		return array(
-			'id' => $row['meaningId'],
-			'targetId' => $row['targetId'],
-			'baseId' => $row['baseId'],
-			'frequency' => $row['frequency'],
+			'id' => intval($row['meaningId']),
+			'targetId' => intval($row['targetId']),
+			'baseId' => intval($row['baseId']),
+			'frequency' => intval($row['frequency']),
 			'dateEntered' => $row['dateEntered']
 		);
 	}
