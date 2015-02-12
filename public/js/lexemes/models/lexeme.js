@@ -21,5 +21,20 @@ myLexicon.ModelClasses.Lexeme = Backbone.Model.extend({
 			}
 		}, this);
 		return new myLexicon.CollectionClasses.Meanings(meanings);
+	},
+	
+	edit: function(newEntry) {
+		var lexemeExists = myLexicon.Collections.lexemes.lexemeExists(
+			this.get("language"),
+			this.get("type"),
+			newEntry
+		);
+		if (!lexemeExists) {
+			this.set("entry", newEntry);
+			this.save();
+			return true;
+		} else {
+			return false;
+		}
 	}
 });

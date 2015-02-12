@@ -3,7 +3,8 @@ myLexicon.ViewClasses.LexemeView = Backbone.View.extend({
 	className: 'lexemeInfo',
 	
 	events: {
-		'click' : 'selectLexeme',
+		'dblclick' : 'selectLexeme',
+		'click' : 'editLexeme',
 	},
 	
 	initialize: function() {
@@ -19,6 +20,26 @@ myLexicon.ViewClasses.LexemeView = Backbone.View.extend({
 	selectLexeme: function() {
 		var id = this.model.get('id');
 		myLexicon.router.navigate('lexemes/' + id, {trigger: true});
+	},
+	
+	editLexeme: function() {
+		var $entryElement = this.$el.find(".lexeme-entry");
+		var originalValue = $entryElement.html();
+		$entryElement.attr("contenteditable", true); 
+		$entryElement.focus();
+		
+		$entryElement.off("focusout");
+		var instance = this;
+		$entryElement.focusout(function() {
+			var newValue = $entryElement.html();
+			if (newValue !== originalValue) {
+				var editSuccessful = instance.model.edit(newValue);
+				if (!editSuccessful) {
+					alert("That lexeme already exists")
+					$entryElement.html(originalValue);
+				}
+			}
+		});	
 	},
 	
 	template: _.template(
