@@ -15,6 +15,14 @@ myLexicon.ViewClasses.MeaningsView = Backbone.View.extend({
 	},
 	
 	renderMeanings: function(pageNo, pageSize) {
+		if (!pageNo) {
+			pageNo = 0;
+		}
+		
+		if (!pageSize) {
+			pageSize = 5;
+		}
+		
 		var firstModel = pageNo * pageSize;
 		
 		for (var i = 0; i < pageSize; i++) {
