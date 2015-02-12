@@ -3,7 +3,7 @@ myLexicon.CollectionClasses.Meanings = Backbone.Collection.extend({
 	url: 'meanings',
 	
 	initialize: function(meanings) {
-		console.log(meanings.length);
+		
 	},
 	
 	createMeaning: function (formData) {	

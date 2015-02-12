@@ -10,7 +10,33 @@ myLexicon.RouterClasses.Router = Backbone.Router.extend({
 	},
 	
 	default: function () {
-		this.getAllMeanings();
+		var collection = myLexicon.Collections.meanings;
+		collection.comparator = 'id';
+		collection.sort();
+		
+//		console.log(collection.length);
+		
+		var meanings = allMeanings;
+		meanings.sort(function(a, b) {
+			if (a.id > b.id) {
+				return 1;
+			}
+			if (a.id < b.id) {
+				return -1;
+			}
+			
+			return 0;
+		});
+//		console.log(meanings);
+		var numberDupped = 0;
+		for (var i = 0; i < meanings.length; i++) {
+			if (i > 0) {
+				if (meanings[i].id === meanings[i-1].id) {
+					numberDupped++;
+				}
+			}
+		}
+		console.log(numberDupped);
 	},
 	
 	/**
